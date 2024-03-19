@@ -1,9 +1,17 @@
-﻿namespace SchoolManagement.Shell.ViewModels
+﻿using Avalonia.Controls;
+using Prism.Mvvm;
+using SchoolManagement.Auth;
+
+namespace SchoolManagement.Shell.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BindableBase
     {
-#pragma warning disable CA1822 // Mark members as static
-        public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+        private UserControl view;
+
+        public UserControl View { get => view; set { SetProperty(ref view, value); } }
+        public MainViewModel()
+        {
+            View = new LoginView();
+        }
     }
 }

@@ -72,7 +72,7 @@ namespace SchoolManagement.Shell.Services
             var filePath = Path.Combine(Environment.CurrentDirectory, dllName);
             if (!File.Exists(filePath))
             {
-                throw new Exception($"DLL {dllName} is not exit");
+                return;
             }
             if (RootContext.Modules.ContainsKey(dllName))
             {

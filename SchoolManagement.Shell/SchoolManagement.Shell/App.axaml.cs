@@ -1,24 +1,48 @@
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
 using Prism.DryIoc;
 using Prism.Ioc;
+using SchoolManagement.Auth;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
+using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
 using System;
 using System.Diagnostics;
+using System.Linq;
 
 namespace SchoolManagement.Shell
 {
     public partial class App : PrismApplication
     {
-        protected override Window CreateShell()
+        public static bool IsSingleViewLifetime =>
+       Environment.GetCommandLineArgs()
+           .Any(a => a == "--fbdev" || a == "--drm");
+
+        public static AppBuilder BuildAvaloniaApp() =>
+            AppBuilder
+                .Configure<App>();
+
+        public override void Initialize()
+        {
+            AvaloniaXamlLoader.Load(this);
+            base.Initialize();
+        }
+
+        protected override AvaloniaObject CreateShell()
         {
             try
             {
                 var startup = Ioc.Resolve<IStartUp>();
                 startup.UseProject().StartUp();
-                return Ioc.ContainerProvider.Resolve<MainWindow>();
+                if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    return Ioc.Resolve<MainWindow>();
+                }
+                return Ioc.Resolve<MainView>();
             }
             catch (Exception e)
             {
@@ -35,7 +59,7 @@ namespace SchoolManagement.Shell
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
-
+            containerRegistry.Register<MainWindow>();
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;
             Ioc.ContainerProvider = Container;
