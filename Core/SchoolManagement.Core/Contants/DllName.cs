@@ -3,5 +3,6 @@
     public class DllName
     {
         public static string AuthModule = "SchoolManagement.Auth.dll";
+        public static string DatabaseModule = "SchoolManagement.Database.dll";
     }
 }
