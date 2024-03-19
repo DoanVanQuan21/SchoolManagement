@@ -17,5 +17,6 @@
         <vm:MainViewModel />
 
     </Design.DataContext>
-    <TextBlock>Hello Đoàn Văn Quân</TextBlock>
+
+    <ContentControl Content="{Binding View}" />
 </UserControl>
