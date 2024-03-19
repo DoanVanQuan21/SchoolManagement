@@ -1,14 +1,11 @@
 using Avalonia;
-using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Prism.DryIoc;
 using Prism.Ioc;
-using SchoolManagement.Auth;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
-using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
 using System;
 using System.Diagnostics;
