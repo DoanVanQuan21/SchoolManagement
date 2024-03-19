@@ -15,11 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Shell.Brow
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{51FEB137-21F5-4AE5-BA27-42F508A67187}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.Core", "Core\SchoolManagement.Core\SchoolManagement.Core.csproj", "{644DA95B-3661-4500-B4B9-544740603AE4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Core", "Core\SchoolManagement.Core\SchoolManagement.Core.csproj", "{644DA95B-3661-4500-B4B9-544740603AE4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C776C926-99EB-4B8F-BC30-849FF7B18661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.Auth", "Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj", "{19F07314-CA95-4E33-8BE9-879B1BC14FB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Auth", "Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj", "{19F07314-CA95-4E33-8BE9-879B1BC14FB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
