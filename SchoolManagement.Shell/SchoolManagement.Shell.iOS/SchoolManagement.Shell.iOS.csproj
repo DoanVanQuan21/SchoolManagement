@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\SchoolManagement.Core\SchoolManagement.Core.csproj" />
+    <ProjectReference Include="..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
+    <ProjectReference Include="..\..\Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj" />
+    <ProjectReference Include="..\..\Modules\SchoolManagement.Database\SchoolManagement.Database.csproj" />
     <ProjectReference Include="..\SchoolManagement.Shell\SchoolManagement.Shell.csproj" />
   </ItemGroup>
 </Project>

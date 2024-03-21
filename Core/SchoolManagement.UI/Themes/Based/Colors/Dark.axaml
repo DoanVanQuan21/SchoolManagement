@@ -1,0 +1,23 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:o="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
+    <!--  Add Resources Here  -->
+    <!--  Custom color  -->
+    <Color x:Key="DefaultTextColor">#FEFD6E</Color>
+
+    <Color x:Key="DefaultIconColor">#FEFD6E</Color>
+    <Color x:Key="DefaultBorderColor">#FEFD6E</Color>
+    <Color x:Key="DefaultBackgroundColor">#282D33</Color>
+    <Color x:Key="DefaultRegionColor">#3A4149</Color>
+
+    <SolidColorBrush x:Key="DefaultIconBrush" Color="{StaticResource DefaultIconColor}" />
+    <SolidColorBrush x:Key="DefaultBorderBrush" Color="{StaticResource DefaultBorderColor}" />
+    <SolidColorBrush x:Key="DefaultBackgroundBrush" Color="{StaticResource DefaultBackgroundColor}" />
+    <SolidColorBrush x:Key="DefaultRegionBrush" Color="{StaticResource DefaultRegionColor}" />
+    <SolidColorBrush x:Key="DefaultTextBrush" Color="{StaticResource DefaultTextColor}" />
+
+    <Design.PreviewWith>
+        <Border Padding="20" />
+    </Design.PreviewWith>
+</ResourceDictionary>
