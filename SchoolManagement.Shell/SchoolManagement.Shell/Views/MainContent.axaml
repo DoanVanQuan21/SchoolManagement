@@ -3,6 +3,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SchoolManagement.Shell.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
     d:DesignHeight="450"
@@ -16,34 +17,55 @@
         CompactPaneLength="48"
         DisplayMode="CompactInline"
         IsPaneOpen="{Binding IsOpenPane}"
-        OpenPaneLength="250"
+        OpenPaneLength="200"
         PaneBackground="{DynamicResource DefaultRegionBrush}">
         <SplitView.Pane>
             <StackPanel Margin="0" Spacing="0">
-                <ToggleButton
+                <StackPanel.Styles>
+                    <Style Selector="Button:pressed">
+                        <Setter Property="Background" Value="Transparent" />
+                    </Style>
+                </StackPanel.Styles>
+                <Button
+                    Margin="10"
                     HorizontalAlignment="Left"
                     Background="Transparent"
                     Command="{Binding ClickNavigationCommand}">
                     <Panel>
                         <PathIcon Data="{StaticResource navigation_regular}" />
                     </Panel>
-                </ToggleButton>
-                <ListBox Background="Transparent" ItemsSource="{Binding AppMenus}">
+                </Button>
+                <ListBox
+                    Padding="-5,0,0,-10"
+                    Background="Transparent"
+                    ItemsSource="{Binding AppMenus}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <ToggleButton VerticalContentAlignment="Center" Background="Transparent">
+                            <StackPanel Margin="5" Orientation="Horizontal">
+                                <Button Padding="0" Background="Transparent">
                                     <Panel>
                                         <PathIcon Width="25" Data="{Binding Geometry}" />
                                     </Panel>
-                                </ToggleButton>
-                                <TextBlock VerticalAlignment="Center" Text="{Binding Label}" />
+                                </Button>
+                                <TextBlock
+                                    Padding="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding Label}" />
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </SplitView.Pane>
-        <SplitView.Content />
+        <SplitView.Content>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <local:CommonMenuView Grid.Row="0" />
+                <ContentControl Content="{Binding AppRegion.MainPage}" />
+            </Grid>
+        </SplitView.Content>
     </SplitView>
 </UserControl>

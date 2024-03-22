@@ -1,4 +1,4 @@
-﻿using SchoolManagement.Core.Models;
+﻿using SchoolManagement.Core.Models.Common;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.Core.Context

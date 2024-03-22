@@ -8,10 +8,11 @@ namespace SchoolManagement.Core.PrismAvalonia
     public abstract class BasePrismModule : ICustomModule
     {
         protected readonly IEventAggregator _eventAggregator;
-
+        protected readonly IAppManager _appManager;
         public BasePrismModule()
         {
             _eventAggregator = Ioc.Resolve<IEventAggregator>();
+            _appManager = Ioc.Resolve<IAppManager>();
         }
 
         public abstract string ModuleName { get; }

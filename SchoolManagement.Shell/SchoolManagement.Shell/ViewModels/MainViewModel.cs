@@ -1,19 +1,27 @@
-﻿using Avalonia.Controls;
-using Prism.Mvvm;
+﻿using SchoolManagement.Auth;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Shell.Views;
 
 namespace SchoolManagement.Shell.ViewModels
 {
-    public class MainViewModel : BindableBase
+    public class MainViewModel : BaseRegionViewModel
     {
-        private UserControl view;
-
-        public UserControl View
-        { get => view; set { SetProperty(ref view, value); } }
+        public override string Title => "Main View";
 
         public MainViewModel()
         {
-            View = new MainContent();
+            //InitView();
+            AppRegion.MainView = new MainContent();
+        }
+
+        protected override void InitView()
+        {
+            if (IsLogin)
+            {
+                AppRegion.MainView = new MainContent();
+                return;
+            }
+            AppRegion.MainView = new LoginView();
         }
     }
 }

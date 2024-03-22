@@ -18,5 +18,5 @@
 
     </Design.DataContext>
 
-    <ContentControl Content="{Binding View}" />
+    <ContentControl Content="{Binding AppRegion.MainView}" />
 </UserControl>

@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 
-namespace SchoolManagement.Core.Models
+namespace SchoolManagement.Core.Models.Common
 {
     public class AppMenu
     {

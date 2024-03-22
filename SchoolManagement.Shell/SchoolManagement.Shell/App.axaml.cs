@@ -4,6 +4,8 @@ using Avalonia.Markup.Xaml;
 using Prism.DryIoc;
 using Prism.Ioc;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
 using SchoolManagement.Shell.Views;
@@ -56,6 +58,7 @@ namespace SchoolManagement.Shell
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
+            containerRegistry.RegisterSingleton<IAppManager, AppManager>();
             containerRegistry.Register<MainWindow>();
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;

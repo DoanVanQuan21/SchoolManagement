@@ -1,0 +1,42 @@
+<UserControl
+    x:Class="SchoolManagement.UI.Themes.Styles.SearchBar"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <UserControl.Styles>
+        <Style Selector="TextBox:focus-within">
+            <Setter Property="BorderBrush" Value="Transparent" />
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        <Style Selector="Button:pressed">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </UserControl.Styles>
+    <Border
+        BorderBrush="{DynamicResource DefaultBorderBrush}"
+        BorderThickness="1"
+        CornerRadius="10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Margin="5" />
+            <Button
+                Grid.Column="1"
+                Margin="5"
+                Background="Transparent">
+                <Panel>
+                    <PathIcon Data="{StaticResource user_search_regular}" />
+                </Panel>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

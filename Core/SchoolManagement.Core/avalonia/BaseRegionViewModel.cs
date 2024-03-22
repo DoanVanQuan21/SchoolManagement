@@ -5,7 +5,6 @@ using Prism.Services.Dialogs;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
-using System.Windows.Input;
 
 namespace SchoolManagement.Core.avalonia
 {
@@ -20,32 +19,30 @@ namespace SchoolManagement.Core.avalonia
 
         public BootSetting BootSetting { get => _appManager.BootSetting; }
         public AppRegion AppRegion { get => _appManager.AppRegion; }
-        public ICommand? LoginCommand { get; set; }
-        public ICommand? KeyUpCommand { get; set; }
 
         public event Action<IDialogResult>? RequestClose;
 
-        protected abstract void RegisterCommand();
+        protected virtual void RegisterCommand()
+        { }
 
-        protected abstract void RegisterEvent();
+        protected virtual void RegisterEvent()
+        { }
 
         protected readonly IEventAggregator EventAggregator;
-        protected readonly IWindowService WindowService;
         protected IDialogService DialogService { get; private set; }
 
         public BaseRegionViewModel()
         {
-            //_appManager = Ioc.Resolve<IAppManager>();
-            //EventAggregator = Ioc.Resolve<IEventAggregator>();
-            //WindowService = Ioc.Resolve<IWindowService>();
-            //DialogService = Ioc.Resolve<IDialogService>();
+            _appManager = Ioc.Resolve<IAppManager>();
+            EventAggregator = Ioc.Resolve<IEventAggregator>();
+            DialogService = Ioc.Resolve<IDialogService>();
             RegisterCommand();
             RegisterEvent();
         }
 
         protected void DefaultView()
         {
-            AppRegion.RegionPage = null;
+            //TODO
         }
 
         private void OnLogginSuccess(bool isLoginSucess)
@@ -108,6 +105,10 @@ namespace SchoolManagement.Core.avalonia
             }
             res = ButtonResult.Cancel;
             RaiseRequestClose(new DialogResult(res));
+        }
+
+        protected virtual void InitView()
+        {
         }
     }
 }

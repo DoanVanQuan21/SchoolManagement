@@ -1,0 +1,26 @@
+<UserControl
+    x:Class="SchoolManagement.Shell.Views.CommonMenuView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Themes.Styles;assembly=SchoolManagement.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <cc:SearchBar Grid.Column="0" />
+        <StackPanel Grid.Column="2" Margin="5">
+            <SplitButton Background="Transparent">
+                <SplitButton.Content>
+                    <Panel>
+                        <PathIcon Data="{StaticResource settings_regular}" />
+                    </Panel>
+                </SplitButton.Content>
+            </SplitButton>
+        </StackPanel>
+    </Grid>
+</UserControl>
