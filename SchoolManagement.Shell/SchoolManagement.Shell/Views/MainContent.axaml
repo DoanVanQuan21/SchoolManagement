@@ -34,7 +34,7 @@
                             <StackPanel Orientation="Horizontal">
                                 <ToggleButton VerticalContentAlignment="Center" Background="Transparent">
                                     <Panel>
-                                        <PathIcon Width="30" Data="{StaticResource home_regular}" />
+                                        <PathIcon Width="25" Data="{Binding Geometry}" />
                                     </Panel>
                                 </ToggleButton>
                                 <TextBlock VerticalAlignment="Center" Text="{Binding Label}" />

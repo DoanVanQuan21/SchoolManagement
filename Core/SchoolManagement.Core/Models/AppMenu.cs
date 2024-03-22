@@ -8,6 +8,6 @@ namespace SchoolManagement.Core.Models
         public string? ViewName { get; set; }
         public Type? Type { get; set; }
         public UserControl? View => (UserControl)Activator.CreateInstance(Type);
-        public string? IconPath { get; set; }
+        public string? Geometry { get; set; }
     }
 }

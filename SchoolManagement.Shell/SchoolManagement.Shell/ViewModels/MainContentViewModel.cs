@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models;
+using SchoolManagement.UI.Geometry;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -15,7 +16,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         public MainContentViewModel()
         {
-            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ" });
+            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry });
         }
 
         public bool IsOpenPane
