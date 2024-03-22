@@ -7,12 +7,14 @@
 
     <Application.Styles>
         <FluentTheme />
+		
     </Application.Styles>
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://SchoolManagement.UI/Themes/Based/Colors/Dark.axaml" />
                 <ResourceInclude Source="avares://SchoolManagement.UI/Themes/Based/Colors/Light.axaml" />
+                <ResourceInclude Source="avares://SchoolManagement.UI/Geometry/Geometry.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

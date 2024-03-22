@@ -2,7 +2,7 @@
 
 namespace SchoolManagement.Core.Models
 {
-    public class MenuSetting
+    public class AppMenu
     {
         public string? Label { get; set; }
         public string? ViewName { get; set; }

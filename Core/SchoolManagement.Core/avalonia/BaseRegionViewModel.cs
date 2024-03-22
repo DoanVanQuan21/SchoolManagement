@@ -35,10 +35,10 @@ namespace SchoolManagement.Core.avalonia
 
         public BaseRegionViewModel()
         {
-            _appManager = Ioc.Resolve<IAppManager>();
-            EventAggregator = Ioc.Resolve<IEventAggregator>();
-            WindowService = Ioc.Resolve<IWindowService>();
-            DialogService = Ioc.Resolve<IDialogService>();
+            //_appManager = Ioc.Resolve<IAppManager>();
+            //EventAggregator = Ioc.Resolve<IEventAggregator>();
+            //WindowService = Ioc.Resolve<IWindowService>();
+            //DialogService = Ioc.Resolve<IDialogService>();
             RegisterCommand();
             RegisterEvent();
         }

@@ -1,0 +1,49 @@
+<UserControl
+    x:Class="SchoolManagement.Shell.Views.MainContent"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:MainContentViewModel"
+    mc:Ignorable="d">
+
+    <SplitView
+        Name="SplitView"
+        Background="{DynamicResource DefaultBackgroundBrush}"
+        CompactPaneLength="48"
+        DisplayMode="CompactInline"
+        IsPaneOpen="{Binding IsOpenPane}"
+        OpenPaneLength="250"
+        PaneBackground="{DynamicResource DefaultRegionBrush}">
+        <SplitView.Pane>
+            <StackPanel Margin="0" Spacing="0">
+                <ToggleButton
+                    HorizontalAlignment="Left"
+                    Background="Transparent"
+                    Command="{Binding ClickNavigationCommand}">
+                    <Panel>
+                        <PathIcon Data="{StaticResource navigation_regular}" />
+                    </Panel>
+                </ToggleButton>
+                <ListBox Background="Transparent" ItemsSource="{Binding AppMenus}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton VerticalContentAlignment="Center" Background="Transparent">
+                                    <Panel>
+                                        <PathIcon Width="30" Data="{StaticResource home_regular}" />
+                                    </Panel>
+                                </ToggleButton>
+                                <TextBlock VerticalAlignment="Center" Text="{Binding Label}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </SplitView.Pane>
+        <SplitView.Content />
+    </SplitView>
+</UserControl>

@@ -15,6 +15,7 @@
     <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.10.1" />
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.10.1" />
+    <PackageReference Include="Material.Icons.Avalonia" Version="2.1.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Prism.Avalonia" Version="8.1.97.11072" />
     <PackageReference Include="Prism.Core" Version="8.1.97" />
