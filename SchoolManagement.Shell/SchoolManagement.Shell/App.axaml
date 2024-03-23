@@ -11,11 +11,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="avares://SchoolManagement.UI/Themes/Based/Colors/Dark.axaml" />
-                <ResourceInclude Source="avares://SchoolManagement.UI/Themes/Based/Colors/Light.axaml" />
-                <ResourceInclude Source="avares://SchoolManagement.UI/Themes/Styles/SearchBar.axaml" />
-
-                <ResourceInclude Source="avares://SchoolManagement.UI/Geometry/Geometry.axaml" />
+                <ResourceInclude Source="avares://SchoolManagement.UI/CommonResources.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
