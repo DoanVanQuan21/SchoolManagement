@@ -1,42 +1,30 @@
-<UserControl
-    x:Class="SchoolManagement.UI.Themes.Styles.SearchBar"
+<ResourceDictionary
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    Background="Transparent"
-    mc:Ignorable="d">
-    <UserControl.Styles>
-        <Style Selector="TextBox:focus-within">
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
-        <Style Selector="TextBox">
-            <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-        <Style Selector="Button:pressed">
-            <Setter Property="Background" Value="Transparent" />
-        </Style>
-    </UserControl.Styles>
-    <Border
-        BorderBrush="{DynamicResource DefaultBorderBrush}"
-        BorderThickness="1"
-        CornerRadius="10">
-        <Grid>
+    xmlns:local="clr-namespace:SchoolManagement.UI.Controls.SearchBar;assembly=SchoolManagement.UI">
+    <!--  Add Resources Here  -->
+    <ControlTemplate x:Key="SearchBarTemplate" TargetType="{x:Type local:SearchBar}">
+
+        <Grid Margin="10" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" Margin="5" />
+            <TextBox
+                x:Name="PART_TextBox"
+                Grid.Column="0"
+                Padding="{TemplateBinding Padding}"
+                VerticalContentAlignment="Center" />
+
             <Button
-                Grid.Column="1"
-                Margin="5"
-                Background="Transparent">
+                x:Name="PART_ClearButton"
+                Grid.Column="0"
+                Padding="{TemplateBinding Padding}"
+                HorizontalAlignment="Right"
+                Background="{TemplateBinding Background}">
                 <Panel>
                     <PathIcon Data="{StaticResource user_search_regular}" />
                 </Panel>
             </Button>
         </Grid>
-    </Border>
-</UserControl>
+    </ControlTemplate>
+</ResourceDictionary>

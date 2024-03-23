@@ -2,9 +2,11 @@
     x:Class="SchoolManagement.Shell.Views.CommonMenuView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:cc="clr-namespace:SchoolManagement.UI.Themes.Styles;assembly=SchoolManagement.UI"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.SearchBar;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
+    x:DataType="vm:CommonMenuViewModel"
     mc:Ignorable="d">
     <Grid Margin="5">
         <Grid.ColumnDefinitions>
@@ -12,7 +14,12 @@
             <ColumnDefinition Width="3*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <cc:SearchBar Grid.Column="0" />
+
+        <cc:SearchBar
+            Grid.Column="0"
+            Padding="5"
+            SearchCommand="{Binding SearchTextCommand, ConverterParameter={Binding}}"
+            Template="{StaticResource SearchBarTemplate}" />
         <StackPanel Grid.Column="2" Margin="5">
             <SplitButton Background="Transparent">
                 <SplitButton.Content>
