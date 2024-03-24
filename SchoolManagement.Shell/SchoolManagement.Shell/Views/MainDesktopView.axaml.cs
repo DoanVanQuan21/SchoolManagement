@@ -4,9 +4,9 @@ using SchoolManagement.Shell.ViewModels;
 
 namespace SchoolManagement.Shell.Views
 {
-    public partial class MainWindow : Window
+    public partial class MainDesktopView : Window
     {
-        public MainWindow()
+        public MainDesktopView()
         {
             InitializeComponent();
             DataContext = Ioc.Resolve<MainViewModel>();

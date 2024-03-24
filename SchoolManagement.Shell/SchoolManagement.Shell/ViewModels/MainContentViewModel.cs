@@ -16,7 +16,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         public MainContentViewModel()
         {
-            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ",Geometry = GeometryString.HomeGeometry });
+            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry });
         }
 
         public bool IsOpenPane

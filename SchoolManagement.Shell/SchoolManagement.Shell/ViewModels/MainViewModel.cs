@@ -1,6 +1,8 @@
 ﻿using SchoolManagement.Auth;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Shell.Views;
+using SchoolManagement.Shell.Views.DesktopViews;
+using System;
 
 namespace SchoolManagement.Shell.ViewModels
 {
@@ -10,18 +12,23 @@ namespace SchoolManagement.Shell.ViewModels
 
         public MainViewModel()
         {
-            //InitView();
-            AppRegion.MainView = new MainContent();
+            InitViewFollowPlatform();
         }
 
-        protected override void InitView()
+        protected override void InitViewFollowPlatform()
         {
-            if (IsLogin)
+            if (!IsLogin)
             {
-                AppRegion.MainView = new MainContent();
+                AppRegion.MainView = new LoginView();
                 return;
             }
-            AppRegion.MainView = new LoginView();
+
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            {
+                AppRegion.MainView = new MainMobileView();
+                return;
+            }
+            AppRegion.MainView = new DesktopContentView();
         }
     }
 }
