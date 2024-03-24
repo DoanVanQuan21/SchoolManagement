@@ -11,7 +11,7 @@ namespace SchoolManagement.Core.avalonia
     public abstract class BaseRegionViewModel : BindableBase, INavigationAware, IConfirmNavigationRequest, IDialogAware
     {
         private readonly IAppManager _appManager;
-        private bool isLogin = false;
+        private bool isLogin = true;
         public abstract string Title { get; }
 
         public bool IsLogin
@@ -107,8 +107,9 @@ namespace SchoolManagement.Core.avalonia
             RaiseRequestClose(new DialogResult(res));
         }
 
-        protected virtual void InitView()
+        protected virtual void InitViewFollowPlatform()
         {
+            
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using SchoolManagement.Core.Models;
+﻿using SchoolManagement.Core.Models.SchoolManagement;
 
 namespace SchoolManagement.Auth.Contracts
 {

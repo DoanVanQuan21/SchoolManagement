@@ -1,6 +1,5 @@
-﻿using SchoolManagement.Auth.Contracts;
-using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagement;
 
 namespace SchoolManagement.Auth.ViewModels
 {

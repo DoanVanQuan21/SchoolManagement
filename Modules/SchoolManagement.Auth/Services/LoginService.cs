@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models;
+using SchoolManagement.Core.Models.SchoolManagement;
 
 namespace SchoolManagement.Auth.Services
 {
