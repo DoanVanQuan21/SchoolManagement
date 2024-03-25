@@ -22,7 +22,7 @@
                 HorizontalAlignment="Right"
                 Background="{TemplateBinding Background}">
                 <Panel>
-                    <PathIcon Data="{StaticResource user_search_regular}" />
+                    <PathIcon Data="{StaticResource UserSearchGeometry}" />
                 </Panel>
             </Button>
         </Grid>

@@ -29,7 +29,7 @@
             <SplitButton Background="Transparent">
                 <SplitButton.Content>
                     <Panel>
-                        <PathIcon Data="{StaticResource settings_regular}" />
+                        <PathIcon Data="{StaticResource SettingGeometry}" />
                     </Panel>
                 </SplitButton.Content>
             </SplitButton>

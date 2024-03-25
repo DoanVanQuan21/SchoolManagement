@@ -5,6 +5,7 @@
         public static readonly string DESKTOP_0SMVJQ6 = "Data Source=DESKTOP-0SMVJQ6;Initial Catalog=SchoolManager;Integrated Security=True;Trust Server Certificate=True";
         public static readonly string DESKTOP_NS7SDSM = "Data Source=DESKTOP-NS7SDSM\\SQLEXPRESS;Initial Catalog=SchoolManager;Integrated Security=True";
         public static readonly string DESKTOP_Q183429 = "Data Source=DESKTOP-Q183429\\SQLEXPRESS;Initial Catalog=SchoolManager;Integrated Security=True";
+        public static readonly string ADMIN = "Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Trust Server Certificate=True";
     }
 
     public class IconPath
@@ -85,6 +86,7 @@
         Light = 0,
         Dark = 1
     }
+
     public enum ModeWrite
     {
         STRING,

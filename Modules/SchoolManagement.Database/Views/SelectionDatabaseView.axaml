@@ -8,6 +8,55 @@
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:SelectionDatabaseViewModel"
+    Background="{DynamicResource DefaultBackgrounBrush}"
     mc:Ignorable="d">
-    Welcome to Avalonia!
+    <UserControl.Styles>
+        <Style Selector="Border">
+            <Setter Property="Background" Value="{DynamicResource DefaultRegionBrush}" />
+            <Setter Property="Margin" Value="10" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderBrush}" />
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Margin" Value="2" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource DefaultBorderBrush}" />
+        </Style>
+        <Style Selector="Button:focus">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    </UserControl.Styles>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+        <Border>
+            <StackPanel
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="10"
+                Orientation="Horizontal">
+                <Button>
+                    <PathIcon Data="{StaticResource AddGeometry}" />
+                </Button>
+                <Button>
+                    <PathIcon Data="{StaticResource EditGeometry}" />
+                </Button>
+                <Button>
+                    <PathIcon Data="{StaticResource DeleteGeometry}" />
+                </Button>
+                <Button>
+                    <PathIcon Data="{StaticResource DatabasePlugConnectGeometry}" />
+                </Button>
+            </StackPanel>
+        </Border>
+
+    </Grid>
 </UserControl>

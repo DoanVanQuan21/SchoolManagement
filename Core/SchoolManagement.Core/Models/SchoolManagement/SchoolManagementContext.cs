@@ -6,10 +6,15 @@ namespace SchoolManagement.Core.Models.SchoolManagement;
 
 public partial class SchoolManagementContext : DbContext
 {
+    private readonly string _connectionString;
     public SchoolManagementContext()
     {
+        _connectionString = "";
     }
-
+    public SchoolManagementContext(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
     public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options)
         : base(options)
     {
@@ -27,7 +32,7 @@ public partial class SchoolManagementContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Trust Server Certificate=True");
+        => optionsBuilder.UseSqlServer(_connectionString);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

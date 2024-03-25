@@ -39,7 +39,7 @@
                         Background="Transparent"
                         Command="{Binding ClickNavigationCommand}">
                         <Panel>
-                            <PathIcon Data="{StaticResource navigation_regular}" />
+                            <PathIcon Data="{StaticResource NavigationGeometry}" />
                         </Panel>
                     </Button>
                     <ListBox
