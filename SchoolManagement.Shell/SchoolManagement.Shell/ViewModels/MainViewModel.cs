@@ -36,14 +36,13 @@ namespace SchoolManagement.Shell.ViewModels
 
         private void OnLogin()
         {
-            //if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
-            //{
-            //    SetMainView(new MainMobileView());
-            //    NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công");
-
-            //    return;
-            //}
-            //SetMainView(new DesktopContentView());
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            {
+                SetMainView(new MainMobileView());
+                NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công");
+                return;
+            }
+            SetMainView(new DesktopContentView());
             NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công");
         }
 

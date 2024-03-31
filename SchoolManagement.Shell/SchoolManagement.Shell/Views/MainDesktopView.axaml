@@ -17,9 +17,13 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Border
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            ZIndex="100">
             <notifiControls:NotificationMessageContainer Manager="{Binding NotificationMessageManager}" />
         </Border>
-        <ContentControl Content="{Binding AppRegion.MainView}" />
+        <ContentControl Grid.Row="0" Content="{Binding AppRegion.MainView}" />
     </Grid>
 </Window>

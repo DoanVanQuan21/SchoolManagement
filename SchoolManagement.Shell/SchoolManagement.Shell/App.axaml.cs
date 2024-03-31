@@ -60,10 +60,6 @@ namespace SchoolManagement.Shell
                 
                 return Ioc.Resolve<MainDesktopView>();
             }
-            if (OperatingSystem.IsBrowser())
-            {
-                return Ioc.Resolve<MainMobileView>();
-            }
             return Ioc.Resolve<MainMobileView>();
         }
 
