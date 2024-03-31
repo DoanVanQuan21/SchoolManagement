@@ -40,7 +40,7 @@ namespace SchoolManagement.Shell.ViewModels
             IsOpenPane = true;
         }
 
-        protected override void RegisterEvent()
+        protected override void SubcribeEvent()
         {
         }
     }

@@ -27,7 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Database",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{61B80E90-E89F-4012-8CFD-F9B956BCAC0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.EntityFramework", "Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj", "{5AB106DF-B15F-4535-8A41-C89D70D99FD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.EntityFramework", "Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj", "{5AB106DF-B15F-4535-8A41-C89D70D99FD0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Avalonia", "Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj", "{BFE205A3-514F-4422-9DDC-72CA59D9C444}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +83,10 @@ Global
 		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +97,8 @@ Global
 		{134ACBD1-B6F2-4D1A-B72D-B52717582958} = {51FEB137-21F5-4AE5-BA27-42F508A67187}
 		{D76AA488-4D41-4D3D-8BE3-8A97D593B2D2} = {C776C926-99EB-4B8F-BC30-849FF7B18661}
 		{5AB106DF-B15F-4535-8A41-C89D70D99FD0} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
+		{5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
+		{BFE205A3-514F-4422-9DDC-72CA59D9C444} = {5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}

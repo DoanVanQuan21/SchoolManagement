@@ -1,20 +1,22 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Platform;
+using Avalonia.Notification;
 using Prism.DryIoc;
 using Prism.Ioc;
+using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
+using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
+using SchoolManagement.Shell.Views.SplashScreen;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.InteropServices;
 
 namespace SchoolManagement.Shell
 {
@@ -41,7 +43,7 @@ namespace SchoolManagement.Shell
                 var startup = Ioc.Resolve<IStartUp>();
                 startup.UseProject().StartUp();
 
-                return InitViewFollowPlatform();
+                return InitViewFollowPlatformAsync();
             }
             catch (Exception e)
             {
@@ -50,16 +52,17 @@ namespace SchoolManagement.Shell
             }
         }
 
-        private AvaloniaObject InitViewFollowPlatform()
+        private AvaloniaObject InitViewFollowPlatformAsync()
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 RootContext.ApplicationLifetime = ApplicationLifetime;
+                
                 return Ioc.Resolve<MainDesktopView>();
             }
             if (OperatingSystem.IsBrowser())
             {
-                return Ioc.Resolve<MainDesktopView>();
+                return Ioc.Resolve<MainMobileView>();
             }
             return Ioc.Resolve<MainMobileView>();
         }
@@ -73,6 +76,8 @@ namespace SchoolManagement.Shell
         {
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
+            containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
+            containerRegistry.RegisterDialog<SplashScreen,SplashScreenViewModel>();
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;
             Ioc.ContainerProvider = Container;

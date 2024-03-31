@@ -1,0 +1,28 @@
+<UserControl
+    x:Class="SchoolManagement.Shell.Views.SplashScreen.SplashScreen"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
+    x:DataType="vm:SplashScreenViewModel"
+    mc:Ignorable="d">
+    <Panel Background="{DynamicResource DefaultBackgroundBrush}">
+        <StackPanel VerticalAlignment="Center">
+            <Viewbox Width="250">
+                <Image Source="avares://SchoolManagement.UI/Assets/Images/logo/logo.png" Stretch="Uniform" />
+            </Viewbox>
+            <ProgressBar
+                Name="ProcessBar"
+                MaxWidth="200"
+                Margin="10"
+                Value="{Binding ProcessValue}" />
+            <TextBlock
+                Name="LoadingText"
+                HorizontalAlignment="Center"
+                FontSize="20"
+                Foreground="{DynamicResource DefaultTextBrush}"
+                Text="{Binding LoadingText}" />
+        </StackPanel>
+    </Panel>
+</UserControl>

@@ -4,13 +4,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notifiControls="clr-namespace:Avalonia.Notification.Controls;assembly=Notification.Avalonia"
     xmlns:views="clr-namespace:SchoolManagement.Shell.Views"
     xmlns:vm="using:SchoolManagement.Shell.ViewModels"
     Title="SchoolManagement.Shell"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:MainViewModel"
-    Icon="/Assets/avalonia-logo.ico"
+    Background="{DynamicResource DefaultBackgroundBrush}"
     mc:Ignorable="d">
-    <ContentControl Content="{Binding AppRegion.MainView}" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Border HorizontalAlignment="Center" VerticalAlignment="Center">
+            <notifiControls:NotificationMessageContainer Manager="{Binding NotificationMessageManager}" />
+        </Border>
+        <ContentControl Content="{Binding AppRegion.MainView}" />
+    </Grid>
 </Window>

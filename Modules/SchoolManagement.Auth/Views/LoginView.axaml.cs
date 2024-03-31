@@ -1,6 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using SchoolManagement.Auth.ViewModels;
+using SchoolManagement.Core.avalonia;
 
 namespace SchoolManagement.Auth;
 
@@ -9,5 +9,6 @@ public partial class LoginView : UserControl
     public LoginView()
     {
         InitializeComponent();
+        DataContext = Ioc.Resolve<LoginViewModel>();
     }
 }

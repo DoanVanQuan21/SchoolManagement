@@ -22,4 +22,12 @@
     <PackageReference Include="System.Management" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj" />
+  </ItemGroup>
+
 </Project>

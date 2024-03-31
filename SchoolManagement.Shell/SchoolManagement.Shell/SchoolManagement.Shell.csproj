@@ -5,10 +5,6 @@
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
-  
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
@@ -31,5 +27,6 @@
     <ProjectReference Include="..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
     <ProjectReference Include="..\..\Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj" />
     <ProjectReference Include="..\..\Modules\SchoolManagement.Database\SchoolManagement.Database.csproj" />
+    <ProjectReference Include="..\..\Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj" />
   </ItemGroup>
 </Project>

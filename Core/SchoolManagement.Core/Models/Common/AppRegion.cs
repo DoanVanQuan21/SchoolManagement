@@ -14,7 +14,6 @@ namespace SchoolManagement.Core.Models.Common
         public UserControl MainPage { get => regionPage; set { SetProperty(ref regionPage,value); } }
         public AppRegion()
         {
-            MainView = new UserControl();
         }
     }
 }

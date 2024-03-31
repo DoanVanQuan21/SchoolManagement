@@ -1,4 +1,6 @@
-﻿using Prism.Events;
+﻿using Avalonia.Controls;
+using Avalonia.Notification;
+using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
@@ -11,7 +13,7 @@ namespace SchoolManagement.Core.avalonia
     public abstract class BaseRegionViewModel : BindableBase, INavigationAware, IConfirmNavigationRequest, IDialogAware
     {
         private readonly IAppManager _appManager;
-        private bool isLogin = true;
+        private bool isLogin = false;
         public abstract string Title { get; }
 
         public bool IsLogin
@@ -25,19 +27,21 @@ namespace SchoolManagement.Core.avalonia
         protected virtual void RegisterCommand()
         { }
 
-        protected virtual void RegisterEvent()
+        protected virtual void SubcribeEvent()
         { }
 
         protected readonly IEventAggregator EventAggregator;
+        public INotificationMessageManager NotificationMessageManager { get; private set; }
         protected IDialogService DialogService { get; private set; }
 
         public BaseRegionViewModel()
         {
             _appManager = Ioc.Resolve<IAppManager>();
+            NotificationMessageManager = Ioc.Resolve<INotificationMessageManager>();
             EventAggregator = Ioc.Resolve<IEventAggregator>();
             DialogService = Ioc.Resolve<IDialogService>();
             RegisterCommand();
-            RegisterEvent();
+            SubcribeEvent();
         }
 
         protected void DefaultView()
@@ -45,6 +49,15 @@ namespace SchoolManagement.Core.avalonia
             //TODO
         }
 
+        public virtual void SetMainView(UserControl mainView)
+        {
+            AppRegion.MainView = mainView;
+        }
+
+        public virtual void SetMainPage(UserControl mainPage)
+        {
+            AppRegion.MainPage = mainPage;
+        }
         private void OnLogginSuccess(bool isLoginSucess)
         {
             if (!isLoginSucess)
@@ -107,9 +120,9 @@ namespace SchoolManagement.Core.avalonia
             RaiseRequestClose(new DialogResult(res));
         }
 
-        protected virtual void InitViewFollowPlatform()
+        protected virtual Task InitViewFollowPlatformAsync()
         {
-            
+            return Task.CompletedTask;
         }
     }
 }
