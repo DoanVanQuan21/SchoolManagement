@@ -19,6 +19,7 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Viewbox Grid.Row="0" Width="150">
             <Image Source="avares://SchoolManagement.UI/Assets/Images/logo/logo.png" Stretch="Uniform" />
@@ -58,16 +59,27 @@
             HorizontalAlignment="Left"
             Background="Transparent"
             Content="Quên mật khẩu ?" />
-        <Button
-            Grid.Row="5"
-            Margin="0,20,0,0"
-            HorizontalAlignment="Right"
-            BorderBrush="{DynamicResource DefaultBorderBrush}"
-            Command="{Binding ClickedLoginCommand}">
-            <StackPanel Orientation="Horizontal">
-                <PathIcon Data="{StaticResource LoginGeometry}" />
-                <Label>Đăng nhập</Label>
-            </StackPanel>
-        </Button>
+        <DockPanel Grid.Row="6">
+            <Button
+                Margin="0,20,10,0"
+                HorizontalAlignment="Right"
+                BorderBrush="{DynamicResource DefaultBorderBrush}"
+                Command="{Binding ClickedRegisterCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource UserAddGeometry}" />
+                    <Label>Đăng ký</Label>
+                </StackPanel>
+            </Button>
+            <Button
+                Margin="10,20,0,0"
+                HorizontalAlignment="Right"
+                BorderBrush="{DynamicResource DefaultBorderBrush}"
+                Command="{Binding ClickedLoginCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource LoginGeometry}" />
+                    <Label>Đăng nhập</Label>
+                </StackPanel>
+            </Button>
+        </DockPanel>
     </Grid>
 </UserControl>

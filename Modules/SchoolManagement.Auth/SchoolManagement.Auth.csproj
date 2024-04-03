@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\RegisterAccountView.axaml" />
+  </ItemGroup>
+
 </Project>

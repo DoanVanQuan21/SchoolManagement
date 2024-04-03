@@ -1,7 +1,7 @@
 ﻿using Prism.Commands;
+using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Events;
-using SchoolManagement.Core.Managers;
 using SchoolManagement.Core.Models.SchoolManagement;
 using System.Windows.Input;
 
@@ -24,11 +24,18 @@ namespace SchoolManagement.Auth.ViewModels
         { get => logoPath; set { SetProperty(ref logoPath, value); } }
 
         public ICommand ClickedLoginCommand { get; set; }
+        public ICommand ClickedRegisterCommand { get; set; }
 
         protected override void RegisterCommand()
         {
             ClickedLoginCommand = new DelegateCommand(OnLogin);
+            ClickedRegisterCommand = new DelegateCommand(OnRegister);
             base.RegisterCommand();
+        }
+
+        private void OnRegister()
+        {
+            SetMainView(new RegisterAccountView());
         }
 
         private void OnLogin()

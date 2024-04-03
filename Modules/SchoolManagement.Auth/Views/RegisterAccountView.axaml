@@ -1,0 +1,82 @@
+<UserControl
+    x:Class="SchoolManagement.Auth.Views.RegisterAccountView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.Auth.ViewModels"
+    x:DataType="vm:RegisterAccountViewModel"
+    mc:Ignorable="d">
+    <Grid
+        MaxWidth="500"
+        Margin="10"
+        VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Viewbox Grid.Row="0" Width="100">
+            <Image Source="avares://SchoolManagement.UI/Assets/Images/logo/logo.png" Stretch="Uniform" />
+        </Viewbox>
+        <ScrollViewer Grid.Row="1" MaxHeight="550">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Margin="0,20,0,5"
+                    Content="Họ đệm" />
+                <TextBox Grid.Row="1" />
+                <Label
+                    Grid.Row="2"
+                    Margin="0,20,0,5"
+                    Content="Tên" />
+                <TextBox Grid.Row="3" />
+                <Label
+                    Grid.Row="4"
+                    Margin="0,20,0,5"
+                    Content="Căn cước công dân" />
+                <TextBox Grid.Row="5" />
+                <Label
+                    Grid.Row="6"
+                    Margin="0,20,0,5"
+                    Content="Số điện thoại" />
+                <TextBox Grid.Row="7" />
+                <Label
+                    Grid.Row="8"
+                    Margin="0,20,0,5"
+                    Content="Mật khẩu" />
+                <TextBox Grid.Row="9" PasswordChar="*" />
+                <Label
+                    Grid.Row="10"
+                    Margin="0,20,0,5"
+                    Content="Xác nhận mật khẩu" />
+                <TextBox Grid.Row="11" PasswordChar="*" />
+            </Grid>
+        </ScrollViewer>
+
+        <Button
+            Grid.Row="3"
+            Margin="10,20,0,0"
+            HorizontalAlignment="Right"
+            BorderBrush="{DynamicResource DefaultBorderBrush}">
+            <StackPanel Orientation="Horizontal">
+                <PathIcon Data="{StaticResource CheckMarkCircleGeometry}" />
+                <Label>Đăng ký</Label>
+            </StackPanel>
+        </Button>
+    </Grid>
+</UserControl>
