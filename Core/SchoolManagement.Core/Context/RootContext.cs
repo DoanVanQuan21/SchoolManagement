@@ -9,5 +9,6 @@ namespace SchoolManagement.Core.Context
         public static Dictionary<string, bool> Modules = new();
         public static ObservableCollection<AppMenu> AppMenus = new();
         public static IApplicationLifetime ApplicationLifetime { get; set; }
+        public static Stack<Type> PreviewMainViews = new();
     }
 }

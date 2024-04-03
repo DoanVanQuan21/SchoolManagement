@@ -4,6 +4,7 @@ using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Services.Dialogs;
+using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
@@ -49,15 +50,46 @@ namespace SchoolManagement.Core.avalonia
             //TODO
         }
 
-        public virtual void SetMainView(UserControl mainView)
+        public void PushMainView(Type mainView)
         {
+            RootContext.PreviewMainViews.Push(mainView);
+        }
+
+        public UserControl PopMainView()
+        {
+            RootContext.PreviewMainViews.TryPop(out var mainView);
+            try
+            {
+                return (UserControl)Activator.CreateInstance(mainView);
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+        public void PreviewMainView()
+        {
+            var mainView = PopMainView();
+            if(mainView == null || mainView == default)
+            {
+                return;
+            }
+            SetMainView(mainView);
+        }
+        public void SetMainView(UserControl mainView)
+        {
+            if(AppRegion.MainView != null)
+            {
+                PushMainView(AppRegion.MainView.GetType());
+            }
             AppRegion.MainView = mainView;
         }
 
-        public virtual void SetMainPage(UserControl mainPage)
+        public void SetMainPage(UserControl mainPage)
         {
             AppRegion.MainPage = mainPage;
         }
+
         private void OnLogginSuccess(bool isLoginSucess)
         {
             if (!isLoginSucess)
