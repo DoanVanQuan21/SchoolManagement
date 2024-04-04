@@ -1,9 +1,9 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagement;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.Core.Contracts;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
 
-namespace SchoolManagement.EntityFramework.Repositories
+namespace SchoolManagement.Core.Repositories
 {
     public abstract class GenerateRepository<T> : IGenerateRepository<T> where T : class
     {

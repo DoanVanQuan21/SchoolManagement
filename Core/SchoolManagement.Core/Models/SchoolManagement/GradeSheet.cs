@@ -1,22 +1,29 @@
-﻿namespace SchoolManagement.Core.Models.SchoolManagement;
+﻿using System;
+using System.Collections.Generic;
+
+namespace SchoolManagement.Core.Models.SchoolManagement;
 
 public partial class GradeSheet
 {
     public int GradeSheetId { get; set; }
 
-    public string? GradeSheetCode { get; set; }
+    public decimal? FirstRegularScore { get; set; }
 
-    public double? FirstScore { get; set; }
+    public decimal? SecondRegularScore { get; set; }
 
-    public double? SecondScore { get; set; }
+    public decimal? ThirdRegularScore { get; set; }
 
-    public double? ThirdScore { get; set; }
+    public decimal? FourRegularScore { get; set; }
 
-    public double? FinalScore { get; set; }
+    public decimal? MidtermScore { get; set; }
 
-    public double? AverageScore { get; set; }
+    public decimal? FinalScore { get; set; }
+
+    public decimal? SemesterAverage { get; set; }
+
+    public int ClassId { get; set; }
 
     public int SubjectId { get; set; }
 
-    public int UserId { get; set; }
+    public int StudentId { get; set; }
 }

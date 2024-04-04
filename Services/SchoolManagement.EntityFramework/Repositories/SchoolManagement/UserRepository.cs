@@ -1,7 +1,7 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagement;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.Core.Contracts;
 
-namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
+namespace SchoolManagement.Core.Repositories.SchoolManagement
 {
     public class UserRepository : GenerateRepository<User>, IUserRepository<User>
     {
@@ -33,7 +33,8 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             {
                 return false;
             }
-            user.Name = entity.Name;
+            user.FirstName = entity.FirstName;
+            user.LastName = entity.LastName;
             user.Email = entity.Email;
             user.PhoneNumber = entity.PhoneNumber;
             user.DateOfBirth = entity.DateOfBirth;

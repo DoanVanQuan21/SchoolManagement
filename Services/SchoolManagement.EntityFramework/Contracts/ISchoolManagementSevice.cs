@@ -1,6 +1,6 @@
-﻿using SchoolManagement.EntityFramework.Repositories.SchoolManagement;
+﻿using SchoolManagement.Core.Repositories.SchoolManagement;
 
-namespace SchoolManagement.EntityFramework.Contracts
+namespace SchoolManagement.Core.Contracts
 {
     public interface ISchoolManagementSevice
     {

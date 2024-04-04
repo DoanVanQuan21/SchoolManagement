@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace SchoolManagement.EntityFramework.Contracts
+namespace SchoolManagement.Core.Contracts
 {
     public interface IGenerateRepository<T> where T : class
     {

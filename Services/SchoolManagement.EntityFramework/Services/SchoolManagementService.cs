@@ -1,10 +1,10 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagement;
-using SchoolManagement.EntityFramework.Contracts;
-using SchoolManagement.EntityFramework.Repositories.SchoolManagement;
+using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Repositories.SchoolManagement;
 
-namespace SchoolManagement.EntityFramework.Services
+namespace SchoolManagement.Core.Services
 {
     public class SchoolManagementService : ISchoolManagementSevice
     {

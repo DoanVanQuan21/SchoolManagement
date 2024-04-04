@@ -1,14 +1,15 @@
-﻿namespace SchoolManagement.Core.Models.SchoolManagement;
+﻿using System;
+using System.Collections.Generic;
+
+namespace SchoolManagement.Core.Models.SchoolManagement;
 
 public partial class User
 {
     public int UserId { get; set; }
 
-    public string? UserCode { get; set; }
+    public string? FirstName { get; set; }
 
-    public string? Surname { get; set; }
-
-    public string? Name { get; set; }
+    public string? LastName { get; set; }
 
     public string? Gender { get; set; }
 
@@ -25,6 +26,8 @@ public partial class User
     public string? Username { get; set; }
 
     public string? Password { get; set; }
+
+    public string? Role { get; set; }
 
     public bool? ActiveStatus { get; set; }
 
