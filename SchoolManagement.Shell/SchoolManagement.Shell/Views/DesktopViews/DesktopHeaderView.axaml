@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
     x:DataType="vm:CommonMenuViewModel"
+    Background="Transparent"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -32,6 +33,13 @@
                         <PathIcon Data="{StaticResource SettingGeometry}" />
                     </Panel>
                 </SplitButton.Content>
+                <SplitButton.Flyout>
+                    <Flyout>
+                        <MenuFlyout Placement="Bottom">
+                            <MenuItem Header="Đăng xuất" />
+                        </MenuFlyout>
+                    </Flyout>
+                </SplitButton.Flyout>
             </SplitButton>
         </StackPanel>
     </Grid>

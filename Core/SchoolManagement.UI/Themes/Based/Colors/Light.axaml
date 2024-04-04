@@ -7,7 +7,7 @@
 
     <Color x:Key="DefaultIconColor">#ffffff</Color>
     <Color x:Key="DefaultBorderColor">#212121</Color>
-    <Color x:Key="DefaultBackgroundColor">#E1D7C6</Color>
+    <Color x:Key="DefaultBackgroundColor">#e6e6e6</Color>
     <Color x:Key="DefaultRegionColor">#ffffff</Color>
     <Color x:Key="DefaultRegionControlColor">#ffffff</Color>
     <Color x:Key="DefaultButtonColor">#6d5fb4</Color>
