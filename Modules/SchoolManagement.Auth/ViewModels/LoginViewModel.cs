@@ -25,12 +25,18 @@ namespace SchoolManagement.Auth.ViewModels
 
         public ICommand ClickedLoginCommand { get; set; }
         public ICommand ClickedRegisterCommand { get; set; }
-
+        public ICommand ClickedForgotPasswordCommand{get;set;}
         protected override void RegisterCommand()
         {
             ClickedLoginCommand = new DelegateCommand(OnLogin);
             ClickedRegisterCommand = new DelegateCommand(OnRegister);
+            ClickedForgotPasswordCommand = new DelegateCommand(OnForgotPassword);
             base.RegisterCommand();
+        }
+
+        private void OnForgotPassword()
+        {
+            SetMainView(new ForgotPasswordView());
         }
 
         private void OnRegister()

@@ -19,7 +19,7 @@
         <Viewbox Grid.Row="0" Width="100">
             <Image Source="avares://SchoolManagement.UI/Assets/Images/logo/logo.png" Stretch="Uniform" />
         </Viewbox>
-        <ScrollViewer Grid.Row="1" MaxHeight="550">
+        <ScrollViewer Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto" />
@@ -68,7 +68,7 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal">
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
             <Button
                 Margin="0,20,10,0"
                 HorizontalContentAlignment="Center"
