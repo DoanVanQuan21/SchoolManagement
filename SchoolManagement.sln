@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notificati
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Avalonia", "Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj", "{BFE205A3-514F-4422-9DDC-72CA59D9C444}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{104D96B7-9183-4C6C-9E55-17877D7415CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.MainProject", "Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj", "{E9F2A1FF-BE33-4D00-90C7-27179C9C0265}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,7 @@ Global
 		{5AB106DF-B15F-4535-8A41-C89D70D99FD0} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444} = {5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A}
+		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}

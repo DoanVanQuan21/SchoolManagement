@@ -97,6 +97,7 @@ namespace SchoolManagement.Shell.Services
 
         public IStartUp UseProject()
         {
+            AddModule(DllName.MainProjectModule);
             return this;
         }
     }

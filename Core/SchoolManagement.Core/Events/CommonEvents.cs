@@ -2,7 +2,7 @@
 
 namespace SchoolManagement.Core.Events
 {
-    public class LoginSuccessEvent : PubSubEvent
+    public class LoginSuccessEvent : PubSubEvent<bool>
     {
 
     }

@@ -6,7 +6,7 @@ namespace SchoolManagement.Core.Models.Common
     public class ServerInfor : BindableBase
     {
         private string? name;
-        private string? connectionString;
+        private string? connectionString = "Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
         private string? state;
 
         [DisplayName("Tên server")]

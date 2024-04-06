@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Core.Models.SchoolManagement;
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class Department
 {
@@ -12,4 +12,8 @@ public partial class Department
     public string? DepartmentName { get; set; }
 
     public string? Image { get; set; }
+
+    public DateTime? FoundingDate { get; set; }
+
+    public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

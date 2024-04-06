@@ -4,7 +4,6 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Notification;
 using Prism.DryIoc;
 using Prism.Ioc;
-using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
@@ -57,7 +56,7 @@ namespace SchoolManagement.Shell
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 RootContext.ApplicationLifetime = ApplicationLifetime;
-                
+
                 return Ioc.Resolve<MainDesktopView>();
             }
             return Ioc.Resolve<MainMobileView>();
@@ -73,7 +72,7 @@ namespace SchoolManagement.Shell
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
             containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
-            containerRegistry.RegisterDialog<SplashScreen,SplashScreenViewModel>();
+            containerRegistry.RegisterDialog<SplashScreen, SplashScreenViewModel>();
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;
             Ioc.ContainerProvider = Container;

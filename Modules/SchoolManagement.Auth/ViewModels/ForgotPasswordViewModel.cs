@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagement;
+using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
 namespace SchoolManagement.Auth.ViewModels

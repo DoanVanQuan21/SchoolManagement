@@ -1,7 +1,5 @@
 ﻿using SchoolManagement.Auth;
 using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Events;
-using SchoolManagement.Core.Managers;
 using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
@@ -28,22 +26,10 @@ namespace SchoolManagement.Shell.ViewModels
                 await Task.Delay(500);
             }
         }
+
         protected override void SubcribeEvent()
         {
-            EventAggregator.GetEvent<LoginSuccessEvent>().Subscribe(OnLogin);
             base.SubcribeEvent();
-        }
-
-        private void OnLogin()
-        {
-            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
-            {
-                SetMainView(new MainMobileView());
-                NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công");
-                return;
-            }
-            SetMainView(new DesktopContentView());
-            NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công");
         }
 
         protected override async Task InitViewFollowPlatformAsync()

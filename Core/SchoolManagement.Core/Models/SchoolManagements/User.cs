@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Core.Models.SchoolManagement;
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class User
 {
@@ -29,9 +29,13 @@ public partial class User
 
     public string? Role { get; set; }
 
-    public bool? ActiveStatus { get; set; }
+    public byte? ActiveStatus { get; set; }
 
     public DateTime? StartDate { get; set; }
 
     public DateTime? EndDate { get; set; }
+
+    public virtual ICollection<Student> Students { get; set; } = new List<Student>();
+
+    public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

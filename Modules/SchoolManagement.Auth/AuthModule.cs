@@ -1,11 +1,12 @@
 ﻿using Prism.Ioc;
+using SchoolManagement.Core.Contants;
 using SchoolManagement.Core.PrismAvalonia;
 
 namespace SchoolManagement.Auth
 {
     public class AuthModule : BasePrismModule
     {
-        public override string ModuleName => throw new NotImplementedException();
+        public override string ModuleName => DllName.AuthModule;
 
         public override void Dispose()
         {
@@ -20,7 +21,8 @@ namespace SchoolManagement.Auth
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
-            var t = 0;
+            //TODO
+
         }
 
         public override void Register()

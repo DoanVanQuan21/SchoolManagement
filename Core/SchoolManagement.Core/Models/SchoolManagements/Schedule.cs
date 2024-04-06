@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Core.Models.SchoolManagement;
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class Schedule
 {
     public int ScheduleId { get; set; }
+
+    public int ClassId { get; set; }
+
+    public int SubjectId { get; set; }
 
     public string? ScheduleCode { get; set; }
 
@@ -15,7 +19,7 @@ public partial class Schedule
 
     public DateTime? End { get; set; }
 
-    public int ClassId { get; set; }
+    public virtual Class Class { get; set; } = null!;
 
-    public int SubjectId { get; set; }
+    public virtual Subject Subject { get; set; } = null!;
 }

@@ -6,6 +6,7 @@ using Prism.Regions;
 using Prism.Services.Dialogs;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 
@@ -26,7 +27,10 @@ namespace SchoolManagement.Core.avalonia
         public event Action<IDialogResult>? RequestClose;
 
         protected virtual void RegisterCommand()
-        { }
+        {
+            EventAggregator.GetEvent<LoginSuccessEvent>().Subscribe(OnLogginSuccess);
+            
+        }
 
         protected virtual void SubcribeEvent()
         { }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Core.Models.SchoolManagement;
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class Lesson
 {
     public int LessonId { get; set; }
+
+    public int EducationProgramId { get; set; }
 
     public string? LessonCode { get; set; }
 
@@ -17,5 +19,5 @@ public partial class Lesson
 
     public string? Status { get; set; }
 
-    public int EducationProgramId { get; set; }
+    public virtual EducationProgram EducationProgram { get; set; } = null!;
 }

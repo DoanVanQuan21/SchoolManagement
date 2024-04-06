@@ -1,7 +1,7 @@
-﻿using SchoolManagement.Core.Models.SchoolManagement;
-using SchoolManagement.Core.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 
-namespace SchoolManagement.Core.Repositories.SchoolManagement
+namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class UserRepository : GenerateRepository<User>, IUserRepository<User>
     {

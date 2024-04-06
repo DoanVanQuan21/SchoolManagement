@@ -1,4 +1,4 @@
-﻿namespace SchoolManagement.Core.Contracts
+﻿namespace SchoolManagement.EntityFramework.Contracts
 {
     public interface IUserRepository<T> 
     {

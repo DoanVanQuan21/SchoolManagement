@@ -1,11 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace SchoolManagement.Core.Models.SchoolManagement;
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class GradeSheet
 {
     public int GradeSheetId { get; set; }
+
+    public int ClassId { get; set; }
+
+    public int SubjectId { get; set; }
+
+    public int StudentId { get; set; }
 
     public decimal? FirstRegularScore { get; set; }
 
@@ -21,9 +27,9 @@ public partial class GradeSheet
 
     public decimal? SemesterAverage { get; set; }
 
-    public int ClassId { get; set; }
+    public virtual Class Class { get; set; } = null!;
 
-    public int SubjectId { get; set; }
+    public virtual Student Student { get; set; } = null!;
 
-    public int StudentId { get; set; }
+    public virtual Subject Subject { get; set; } = null!;
 }

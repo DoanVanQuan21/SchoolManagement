@@ -1,12 +1,14 @@
 ﻿using Prism.Ioc;
 using SchoolManagement.Core.Contants;
 using SchoolManagement.Core.PrismAvalonia;
+using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Services;
 
-namespace SchoolManagement.Database
+namespace SchoolManagement.MainProject
 {
-    public class DatabaseModule : BasePrismModule
+    public class MainProjectModule : BasePrismModule
     {
-        public override string ModuleName => DllName.DatabaseModule;
+        public override string ModuleName => DllName.MainProjectModule;
 
         public override void Dispose()
         {
@@ -16,25 +18,23 @@ namespace SchoolManagement.Database
         public override void Init()
         {
             //TODO
-
         }
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             //TODO
-
         }
 
         public override void Register()
         {
             //TODO
-
         }
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //TODO
-
+            containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
+            containerRegistry.RegisterSingleton<IUserService, UserService>();
         }
     }
 }
