@@ -6,7 +6,6 @@ using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
 using System;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace SchoolManagement.Shell.ViewModels
 {
@@ -25,7 +24,7 @@ namespace SchoolManagement.Shell.ViewModels
             var dataContext = AppRegion.MainView.DataContext as SplashScreenViewModel;
             while (!dataContext.IsLoaded)
             {
-                await Task.Delay(500);
+                await Task.Delay(100);
             }
         }
 

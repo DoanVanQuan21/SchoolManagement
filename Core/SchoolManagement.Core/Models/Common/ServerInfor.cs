@@ -5,21 +5,35 @@ namespace SchoolManagement.Core.Models.Common
 {
     public class ServerInfor : BindableBase
     {
-        private string? name;
-        private string? connectionString = "Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
+        private string? serverName;
+        //private string? connectionString = "Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Encrypt=True;Trust Server Certificate=True";
         private string? state;
+        private string user;
+        private string password;
+        private string ipV4Address;
 
         [DisplayName("Tên server")]
-        public string? Name
-        { get => name; set { SetProperty(ref name, value); } }
+        public string? ServerName
+        { get => serverName; set { SetProperty(ref serverName, value); } }
 
-        [DisplayName("Chuỗi kết nối")]
-        public string? ConnectionString
-        { get => connectionString; set { SetProperty(ref connectionString, value); } }
+        [Browsable(false)]
+        public string? ConnectionString => $"Data Source={ServerName};User ID={User};Password={password};Connect Timeout=5;Initial Catalog=SchoolManagement;TrustServerCertificate=True;";
 
         [Browsable(false)]
         public string? State
         { get => state; set { SetProperty(ref state, value); } }
+
+        [DisplayName("Tên tài khoản")]
+        [Browsable(false)]
+        public string User
+        { get => user; set { SetProperty(ref user, value); } }
+
+        [DisplayName("Mật khẩu")]
+        public string Password
+        { get => password; set { SetProperty(ref password, value); } }
+
+        public string IpV4Address
+        { get => ipV4Address; set { SetProperty(ref ipV4Address, value); } }
 
         [Browsable(false)]
         public Guid ID { get; set; }

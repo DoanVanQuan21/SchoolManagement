@@ -15,8 +15,13 @@ namespace SchoolManagement.Core.Models
         {
             ID = Guid.NewGuid();
             Version = "SOFT_VER_1";
-            ServerInfors = new();
-            CurrentServerInfor = new();
+            ServerInfors = new() { new() };
+            CurrentServerInfor = new()
+            {
+                ServerName = "192.168.1.100",
+                User = "schoolmanagement",
+                Password = "123",
+            };
         }
 
         public Guid ID { get; set; }
@@ -35,6 +40,7 @@ namespace SchoolManagement.Core.Models
             get => isSelectedDatabase;
             set { SetProperty(ref isSelectedDatabase, value); }
         }
+
         public ObservableCollection<ServerInfor> ServerInfors { get; set; }
         public ServerInfor CurrentServerInfor { get; set; }
     }
