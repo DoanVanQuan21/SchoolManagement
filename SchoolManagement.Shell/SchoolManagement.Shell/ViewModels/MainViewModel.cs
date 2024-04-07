@@ -1,10 +1,12 @@
 ﻿using SchoolManagement.Auth;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Managers;
 using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace SchoolManagement.Shell.ViewModels
 {
@@ -32,6 +34,18 @@ namespace SchoolManagement.Shell.ViewModels
             base.SubcribeEvent();
         }
 
+        protected override void OnLogginSuccess(bool isLoginSucess)
+        {
+            if (!isLoginSucess)
+            {
+                NotificationManager.ShowWarn(NotificationMessageManager, "Tên đăng nhập hoặc mật khẩu không đúng!");
+                return;
+            }
+            SetStateLogin(true);
+            NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công!");
+            SetMainViewFromPlatform();
+        }
+
         protected override async Task InitViewFollowPlatformAsync()
         {
             await InitSplashScreen();
@@ -41,6 +55,11 @@ namespace SchoolManagement.Shell.ViewModels
                 return;
             }
 
+            SetMainViewFromPlatform();
+        }
+
+        private void SetMainViewFromPlatform()
+        {
             if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
             {
                 SetMainView(new MainMobileView());

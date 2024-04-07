@@ -42,5 +42,10 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             _context.SaveChanges();
             return true;
         }
+
+        public bool UpdateStatus(User entity)
+        {
+            return Update(entity);
+        }
     }
 }

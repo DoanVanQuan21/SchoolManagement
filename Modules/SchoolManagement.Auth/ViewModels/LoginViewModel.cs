@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
@@ -12,13 +13,11 @@ namespace SchoolManagement.Auth.ViewModels
     {
         private readonly IUserService _userService;
         private string logoPath;
-        public User User { get; set; }
         public override string Title => "Đăng nhập";
 
         public LoginViewModel() : base()
         {
             _userService = Ioc.Resolve<IUserService>();
-            User = new();
             LogoPath = "avares://SchoolManagement.UI/Assets/Images/logo/logo.png";
         }
 
@@ -55,7 +54,10 @@ namespace SchoolManagement.Auth.ViewModels
                 return;
             }
             var (isLogin, user) = _userService.Login(User);
-
+            if (user != null)
+            {
+                RootContext.CurrentUser = user;
+            }
             EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
     }

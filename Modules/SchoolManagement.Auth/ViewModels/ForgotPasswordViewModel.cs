@@ -12,8 +12,6 @@ namespace SchoolManagement.Auth.ViewModels
         public ForgotPasswordViewModel()
         {
         }
-
-        public User? User { get; set; }
         public ICommand SendRequestChangePasswordCommand { get; set; }
         public ICommand ClickedPreviewMainViewCommand { get; set; }
 

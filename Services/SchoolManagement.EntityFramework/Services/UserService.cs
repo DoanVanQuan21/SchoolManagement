@@ -1,7 +1,7 @@
 ﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
+using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
@@ -14,6 +14,25 @@ namespace SchoolManagement.EntityFramework.Services
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
+        public ObservableCollection<User> GetAllAccounts()
+        {
+            //TODO
+            return _schoolManagementSevice.UserRepository.GetAll();
+        }
+
+        public ObservableCollection<User> GetAllStudentsByCourse(int classID, int subjectID)
+        {
+            //TODO
+            var users = new ObservableCollection<User>();
+            return users;
+        }
+
+        public ObservableCollection<User> GetTeacherByDepartment(int departmentID)
+        {
+            //TODO
+            return new();
+        }
+
         public (bool, User) Login(User user)
         {
             var currentUser = _schoolManagementSevice.UserRepository.FirstOrDefault(r => r.Username == user.Username && r.Password == user.Password);
@@ -22,6 +41,17 @@ namespace SchoolManagement.EntityFramework.Services
                 return (false, currentUser);
             }
             return (true, currentUser);
+        }
+
+        public bool RegisterAccount(User user)
+        {
+            var account = _schoolManagementSevice.UserRepository.FirstOrDefault(u => u.PhoneNumber == user.PhoneNumber);
+            if (account != null)
+            {
+                return false;
+            }
+            _schoolManagementSevice.UserRepository.Add(user);
+            return true;
         }
     }
 }

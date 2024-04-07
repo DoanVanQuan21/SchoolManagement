@@ -26,7 +26,12 @@
             Grid.Column="2"
             Margin="5"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center">
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center">
+                <Run Text="{Binding User.FirstName}" />
+                <Run Text="{Binding User.LastName}" />
+            </TextBlock>
             <SplitButton Background="Transparent">
                 <SplitButton.Content>
                     <Panel>
@@ -34,11 +39,23 @@
                     </Panel>
                 </SplitButton.Content>
                 <SplitButton.Flyout>
-                    <Flyout>
-                        <MenuFlyout Placement="Bottom">
-                            <MenuItem Header="Đăng xuất" />
-                        </MenuFlyout>
-                    </Flyout>
+                    <MenuFlyout Placement="RightEdgeAlignedTop">
+                        <MenuItem Command="{Binding LogoutCommand}" Header="Đăng xuất">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource LogoutGeometry}" DockPanel.Dock="Left" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="{Binding ChangeThemeCommand}" Header="Màu giao diện">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource ThemeDarkLightGeometry}" DockPanel.Dock="Left" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Command="{Binding SettingAccountCommand}" Header="Cài đặt">
+                            <MenuItem.Icon>
+                                <PathIcon Data="{StaticResource SettingGeometry}" DockPanel.Dock="Left" />
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuFlyout>
                 </SplitButton.Flyout>
             </SplitButton>
         </StackPanel>

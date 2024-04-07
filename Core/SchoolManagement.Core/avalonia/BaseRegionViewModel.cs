@@ -9,6 +9,7 @@ using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
+using SchoolManagement.Core.Models.SchoolManagements;
 
 namespace SchoolManagement.Core.avalonia
 {
@@ -16,6 +17,7 @@ namespace SchoolManagement.Core.avalonia
     {
         private readonly IAppManager _appManager;
         private bool isLogin = false;
+
         public abstract string Title { get; }
 
         public bool IsLogin
@@ -29,7 +31,6 @@ namespace SchoolManagement.Core.avalonia
         protected virtual void RegisterCommand()
         {
             EventAggregator.GetEvent<LoginSuccessEvent>().Subscribe(OnLogginSuccess);
-            
         }
 
         protected virtual void SubcribeEvent()
@@ -38,6 +39,7 @@ namespace SchoolManagement.Core.avalonia
         protected readonly IEventAggregator EventAggregator;
         public INotificationMessageManager NotificationMessageManager { get; private set; }
         protected IDialogService DialogService { get; private set; }
+        public User User => RootContext.CurrentUser;
 
         public BaseRegionViewModel()
         {
@@ -71,18 +73,20 @@ namespace SchoolManagement.Core.avalonia
                 return default;
             }
         }
+
         public void PreviewMainView()
         {
             var mainView = PopMainView();
-            if(mainView == null || mainView == default)
+            if (mainView == null || mainView == default)
             {
                 return;
             }
             SetMainView(mainView);
         }
+
         public void SetMainView(UserControl mainView)
         {
-            if(AppRegion.MainView != null)
+            if (AppRegion.MainView != null)
             {
                 PushMainView(AppRegion.MainView.GetType());
             }
@@ -94,16 +98,11 @@ namespace SchoolManagement.Core.avalonia
             AppRegion.MainPage = mainPage;
         }
 
-        private void OnLogginSuccess(bool isLoginSucess)
+        protected virtual void OnLogginSuccess(bool isLoginSucess)
         {
-            if (!isLoginSucess)
-            {
-                return;
-            }
-            SetStateLogin(true);
         }
 
-        private void SetStateLogin(bool isLogin)
+        protected void SetStateLogin(bool isLogin)
         {
             IsLogin = isLogin;
         }
