@@ -65,6 +65,7 @@ namespace SchoolManagement.Shell.ViewModels
 
                 return;
             }
+
             SetMainView(new DesktopContentView());
         }
     }

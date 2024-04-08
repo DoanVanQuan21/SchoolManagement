@@ -35,7 +35,7 @@ namespace SchoolManagement.Shell.ViewModels
             {
                 ProcessValue ++;
                 LoadingText = $"Initializing the application {ProcessValue}%...";
-                await Task.Delay(50);
+                await Task.Delay(5);
 
             }
             IsLoaded = true;

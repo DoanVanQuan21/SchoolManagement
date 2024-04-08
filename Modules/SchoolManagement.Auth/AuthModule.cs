@@ -1,5 +1,7 @@
 ﻿using Prism.Ioc;
 using SchoolManagement.Core.Contants;
+using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Models;
 using SchoolManagement.Core.PrismAvalonia;
 
 namespace SchoolManagement.Auth
@@ -34,7 +36,6 @@ namespace SchoolManagement.Auth
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //TODO
-
         }
     }
 }

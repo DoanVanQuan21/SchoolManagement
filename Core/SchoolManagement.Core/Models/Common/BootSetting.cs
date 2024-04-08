@@ -1,7 +1,5 @@
-﻿using SchoolManagement.Core.Constants;
-using SchoolManagement.Core.Models.Common;
-using Prism.Mvvm;
-using System.Collections.ObjectModel;
+﻿using Prism.Mvvm;
+using SchoolManagement.Core.Constants;
 
 namespace SchoolManagement.Core.Models
 {
@@ -9,19 +7,11 @@ namespace SchoolManagement.Core.Models
     {
         private string? version;
         private Theme currentTheme = Theme.Dark;
-        private bool isSelectedDatabase = false;
 
         public BootSetting()
         {
             ID = Guid.NewGuid();
             Version = "SOFT_VER_1";
-            ServerInfors = new() { new() };
-            CurrentServerInfor = new()
-            {
-                ServerName = "192.168.1.100",
-                User = "schoolmanagement",
-                Password = "123",
-            };
         }
 
         public Guid ID { get; set; }
@@ -34,14 +24,5 @@ namespace SchoolManagement.Core.Models
             get { return version; }
             set { SetProperty(ref version, value); }
         }
-
-        public bool IsSelectedDatabase
-        {
-            get => isSelectedDatabase;
-            set { SetProperty(ref isSelectedDatabase, value); }
-        }
-
-        public ObservableCollection<ServerInfor> ServerInfors { get; set; }
-        public ServerInfor CurrentServerInfor { get; set; }
     }
 }

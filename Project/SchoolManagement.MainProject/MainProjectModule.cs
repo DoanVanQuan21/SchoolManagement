@@ -33,8 +33,7 @@ namespace SchoolManagement.MainProject
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //TODO
-            containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
-            containerRegistry.RegisterSingleton<IUserService, UserService>();
+            
         }
     }
 }

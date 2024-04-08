@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Core.avalonia;
+﻿using Microsoft.IdentityModel.Tokens;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
@@ -9,11 +10,13 @@ namespace SchoolManagement.EntityFramework.Services
     public class SchoolManagementService : ISchoolManagementSevice
     {
         private readonly IAppManager _appManager;
+        private readonly IDatabaseInfoProvider _databaseInfoProvider;
         private SchoolManagementContext schoolManagementContext;
-
+        
         public SchoolManagementService()
         {
             _appManager = Ioc.Resolve<IAppManager>();
+            _databaseInfoProvider = Ioc.Resolve<IDatabaseInfoProvider>();
             InitConnectionDatabase();
         }
 
@@ -21,12 +24,12 @@ namespace SchoolManagement.EntityFramework.Services
 
         private void InitConnectionDatabase()
         {
-            if (string.IsNullOrEmpty(_appManager.BootSetting.CurrentServerInfor.ConnectionString))
+            if (string.IsNullOrEmpty(_databaseInfoProvider.ServerInfor.ConnectionString))
             {
                 //TODO
                 return;
             }
-            schoolManagementContext = new SchoolManagementContext(_appManager.BootSetting.CurrentServerInfor.ConnectionString);
+            schoolManagementContext = new SchoolManagementContext(_databaseInfoProvider.ServerInfor.ConnectionString);
             UserRepository = new UserRepository(schoolManagementContext);
         }
     }
