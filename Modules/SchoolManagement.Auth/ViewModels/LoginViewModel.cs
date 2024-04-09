@@ -1,9 +1,11 @@
-﻿using Prism.Commands;
+﻿using Avalonia.Controls;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
+using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
-using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using System.Windows.Input;
 
@@ -13,6 +15,7 @@ namespace SchoolManagement.Auth.ViewModels
     {
         private readonly IUserService _userService;
         private string logoPath;
+        public ContentControl Container { get; set; }
         public override string Title => "Đăng nhập";
 
         public LoginViewModel() : base()
@@ -46,7 +49,7 @@ namespace SchoolManagement.Auth.ViewModels
             SetMainView(new RegisterAccountView());
         }
 
-        private void OnLogin()
+        private async void OnLogin()
         {
             if (User == null)
             {
@@ -58,7 +61,9 @@ namespace SchoolManagement.Auth.ViewModels
             {
                 RootContext.CurrentUser = user;
             }
-            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
+            var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
+            await box.ShowAsPopupAsync(Container);
+            //EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
     }
 }

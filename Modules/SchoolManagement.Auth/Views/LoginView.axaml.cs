@@ -9,6 +9,8 @@ public partial class LoginView : UserControl
     public LoginView()
     {
         InitializeComponent();
-        DataContext = Ioc.Resolve<LoginViewModel>();
+        var vm = Ioc.Resolve<LoginViewModel>();
+        vm.Container = this;
+        DataContext = vm;
     }
 }

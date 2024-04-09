@@ -28,7 +28,7 @@ namespace SchoolManagement.Core.Services
             }
             ServerInfor = new()
             {
-                ServerName = ipV4Address,
+                ServerName = "192.168.1.103",
                 User = "schoolmanagement",
                 Password = "123",
             };
