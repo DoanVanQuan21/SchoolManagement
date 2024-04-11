@@ -1,0 +1,36 @@
+﻿using Prism.Ioc;
+using SchoolManagement.Core.Contants;
+using SchoolManagement.Core.PrismAvalonia;
+
+namespace SchoolManagement.SettingAccount
+{
+    public class SettingAccountModule : BasePrismModule
+    {
+        public override string ModuleName => DllName.SettingAccountModule;
+
+        public override void Dispose()
+        {
+            //TODO
+        }
+
+        public override void Init()
+        {
+            //TODO
+        }
+
+        public override void OnInitialized(IContainerProvider containerProvider)
+        {
+            //TODO
+        }
+
+        public override void Register()
+        {
+            //TODO
+        }
+
+        public override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            //TODO
+        }
+    }
+}
