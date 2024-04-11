@@ -1,5 +1,5 @@
 ﻿using Prism.Commands;
-using SchoolManagement.Auth;
+using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using System.Windows.Input;

@@ -1,4 +1,6 @@
-﻿using SchoolManagement.Auth;
+﻿using Avalonia.Controls.Notifications;
+using SchoolManagement.Auth;
+using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Managers;
 using SchoolManagement.Shell.Views;
@@ -35,14 +37,15 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
-            if (!isLoginSucess)
-            {
-                NotificationManager.ShowWarn(NotificationMessageManager, "Tên đăng nhập hoặc mật khẩu không đúng!");
-                return;
-            }
-            SetStateLogin(true);
-            NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công!");
-            SetMainViewFromPlatform();
+            //WindowNotificationManager.Show(new Notification("Success", "Đăng nhập thành công"));
+            //if (!isLoginSucess)
+            //{
+            //    NotificationManager.ShowWarn(NotificationMessageManager, "Tên đăng nhập hoặc mật khẩu không đúng!");
+            //    return;
+            //}
+            //SetStateLogin(true);
+            //NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công!");
+            //SetMainViewFromPlatform();
         }
 
         protected override async Task InitViewFollowPlatformAsync()

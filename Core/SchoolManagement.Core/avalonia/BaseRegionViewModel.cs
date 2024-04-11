@@ -1,5 +1,5 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Notification;
+using Avalonia.Controls.Notifications;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -10,6 +10,7 @@ using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
+using INotificationManager = SchoolManagement.Core.Contracts.INotificationManager;
 
 namespace SchoolManagement.Core.avalonia
 {
@@ -37,16 +38,16 @@ namespace SchoolManagement.Core.avalonia
         { }
 
         protected readonly IEventAggregator EventAggregator;
-        public INotificationMessageManager NotificationMessageManager { get; private set; }
         protected IDialogService DialogService { get; private set; }
         public User User => RootContext.CurrentUser;
+        public INotificationManager NotificationManager { get; private set; }
 
         public BaseRegionViewModel()
         {
             _appManager = Ioc.Resolve<IAppManager>();
-            NotificationMessageManager = Ioc.Resolve<INotificationMessageManager>();
             EventAggregator = Ioc.Resolve<IEventAggregator>();
             DialogService = Ioc.Resolve<IDialogService>();
+            NotificationManager = Ioc.Resolve<INotificationManager>();
             RegisterCommand();
             SubcribeEvent();
         }

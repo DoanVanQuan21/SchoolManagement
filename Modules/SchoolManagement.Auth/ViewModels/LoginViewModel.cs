@@ -1,6 +1,4 @@
 ﻿using Avalonia.Controls;
-using MsBox.Avalonia;
-using MsBox.Avalonia.Enums;
 using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
@@ -50,6 +48,7 @@ namespace SchoolManagement.Auth.ViewModels
         }
 
         private void OnLogin()
+
         {
             if (User == null)
             {
