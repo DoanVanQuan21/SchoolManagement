@@ -16,6 +16,8 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using Avalonia.Styling;
+using SchoolManagement.Core.Contracts;
 
 namespace SchoolManagement.Shell
 {
@@ -37,8 +39,7 @@ namespace SchoolManagement.Shell
             if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is not null))
             {
                 modernTheme.Definition.UseAccentedSwitches = true;
-
-                // Must manually refresh resources after changing definition properties
+                modernTheme.Definition.AccentColorRampName = Hue.Sky.ToString();
                 modernTheme.RefreshResources();
             }
             base.Initialize();

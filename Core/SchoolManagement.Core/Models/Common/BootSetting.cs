@@ -1,12 +1,14 @@
-﻿using Prism.Mvvm;
-using SchoolManagement.Core.Constants;
+﻿using Avalonia.Styling;
+using Prism.Mvvm;
+using SchoolManagement.Core.Models.Common;
 
 namespace SchoolManagement.Core.Models
 {
     public class BootSetting : BindableBase
     {
         private string? version;
-        private Theme currentTheme = Theme.Dark;
+        private ThemeVariant currentTheme = ThemeVariant.Light;
+        private ServerInfor serverInfor;
 
         public BootSetting()
         {
@@ -16,7 +18,7 @@ namespace SchoolManagement.Core.Models
 
         public Guid ID { get; set; }
 
-        public Theme CurrentTheme
+        public ThemeVariant CurrentTheme
         { get => currentTheme; set { SetProperty(ref currentTheme, value); } }
 
         public string? Version
@@ -24,5 +26,8 @@ namespace SchoolManagement.Core.Models
             get { return version; }
             set { SetProperty(ref version, value); }
         }
+
+        public ServerInfor ServerInfor
+        { get => serverInfor; set { SetProperty(ref serverInfor, value); } }
     }
 }

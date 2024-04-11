@@ -1,5 +1,7 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
+using Avalonia.Styling;
 using Prism.Events;
 using Prism.Mvvm;
 using Prism.Regions;
@@ -50,6 +52,19 @@ namespace SchoolManagement.Core.avalonia
             NotificationManager = Ioc.Resolve<INotificationManager>();
             RegisterCommand();
             SubcribeEvent();
+        }
+
+        protected void ChangeTheme(ThemeVariant theme)
+        {
+            try
+            {
+                BootSetting.CurrentTheme = theme;
+                Application.Current.RequestedThemeVariant = theme;
+            }
+            catch (Exception)
+            {
+                NotificationManager.ShowError("Có lỗi khi đổi màu giao diện", TimeSpan.FromSeconds(3));
+            }
         }
 
         protected void DefaultView()

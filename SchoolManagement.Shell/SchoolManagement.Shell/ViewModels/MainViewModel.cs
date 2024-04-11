@@ -37,15 +37,14 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
-            //WindowNotificationManager.Show(new Notification("Success", "Đăng nhập thành công"));
-            //if (!isLoginSucess)
-            //{
-            //    NotificationManager.ShowWarn(NotificationMessageManager, "Tên đăng nhập hoặc mật khẩu không đúng!");
-            //    return;
-            //}
-            //SetStateLogin(true);
-            //NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công!");
-            //SetMainViewFromPlatform();
+            if (!isLoginSucess)
+            {
+                NotificationManager.ShowWarning("Tên đăng nhập hoặc mật khẩu không đúng!");
+                return;
+            }
+            SetStateLogin(true);
+            NotificationManager.ShowSuccess("Đăng nhập thành công!");
+            SetMainViewFromPlatform();
         }
 
         protected override async Task InitViewFollowPlatformAsync()

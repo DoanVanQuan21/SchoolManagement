@@ -1,7 +1,9 @@
-﻿using Prism.Modularity;
+﻿using Avalonia;
+using Prism.Modularity;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contants;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Contracts;
 using SchoolManagement.Shell.Services.Contracts;
 using System;
 using System.IO;
@@ -14,9 +16,11 @@ namespace SchoolManagement.Shell.Services
     {
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IModuleManager _moduleManager;
+        private readonly IAppManager _appManager;
 
         public StartUp()
         {
+            _appManager = Ioc.Resolve<IAppManager>();
             _moduleManager = Ioc.Resolve<IModuleManager>();
             _moduleCatalog = Ioc.Resolve<IModuleCatalog>();
         }
@@ -91,6 +95,9 @@ namespace SchoolManagement.Shell.Services
 
         void IStartUp.StartUp()
         {
+            _appManager.Load();
+            Application.Current.RequestedThemeVariant = _appManager.BootSetting.CurrentTheme;
+
             AddModule(DllName.AuthModule);
             LoadModule();
         }

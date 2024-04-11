@@ -2,7 +2,10 @@
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using System;
 using System.Windows.Input;
+using Avalonia.Styling;
+using Avalonia;
 
 namespace SchoolManagement.Shell.ViewModels
 {
@@ -21,8 +24,19 @@ namespace SchoolManagement.Shell.ViewModels
         protected override void RegisterCommand()
         {
             SearchTextCommand = new DelegateCommand<object>(OnSearch);
+            ChangeThemeCommand = new DelegateCommand<object>(OnChangeTheme);
             LogoutCommand = new DelegateCommand(OnLogout);
             base.RegisterCommand();
+        }
+
+        private void OnChangeTheme(object obj)
+        {
+            if (BootSetting.CurrentTheme == ThemeVariant.Light)
+            {
+                ChangeTheme(ThemeVariant.Dark);
+                return;
+            }
+            ChangeTheme(ThemeVariant.Light);
         }
 
         private void OnLogout()

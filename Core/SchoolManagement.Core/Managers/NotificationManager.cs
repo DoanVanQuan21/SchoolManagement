@@ -24,7 +24,9 @@ namespace SchoolManagement.Core.Managers
 
         public void ShowInfor(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            var notifi = new Notification("Infor", message, NotificationType.Information, timeout, onClick, onClose);
+            var notifi = new Notification("Infor", message, NotificationType.Information, timeout, onClick, onClose)
+            {
+            };
             _notificationManager?.Show(notifi);
         }
 
@@ -35,13 +37,13 @@ namespace SchoolManagement.Core.Managers
 
         public void ShowSuccess(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            var notifi = new Notification("Success", message, NotificationType.Information, timeout, onClick, onClose);
+            var notifi = new Notification("Success", message, NotificationType.Success, timeout, onClick, onClose);
             _notificationManager?.Show(notifi);
         }
 
         public void ShowWarning(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            var notifi = new Notification("Warning", message, NotificationType.Information, timeout, onClick, onClose);
+            var notifi = new Notification("Warning", message, NotificationType.Warning, timeout, onClick, onClose);
             _notificationManager?.Show(notifi);
         }
     }
