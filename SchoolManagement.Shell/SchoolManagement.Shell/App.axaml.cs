@@ -61,17 +61,6 @@ namespace SchoolManagement.Shell
             }
         }
 
-        private AvaloniaObject InitViewFollowPlatformAsync()
-        {
-            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-            {
-                RootContext.ApplicationLifetime = ApplicationLifetime;
-
-                return Ioc.Resolve<MainDesktopView>();
-            }
-            return Ioc.Resolve<MainMobileView>();
-        }
-
         protected override void OnInitialized()
         {
             base.OnInitialized();
@@ -84,6 +73,17 @@ namespace SchoolManagement.Shell
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;
             Ioc.ContainerProvider = Container;
+        }
+
+        private AvaloniaObject InitViewFollowPlatformAsync()
+        {
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                RootContext.ApplicationLifetime = ApplicationLifetime;
+
+                return Ioc.Resolve<MainDesktopView>();
+            }
+            return Ioc.Resolve<MainMobileView>();
         }
     }
 }

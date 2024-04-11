@@ -6,9 +6,9 @@ namespace SchoolManagement.Core.Models
 {
     public class BootSetting : BindableBase
     {
-        private string? version;
         private ThemeVariant currentTheme = ThemeVariant.Light;
         private ServerInfor serverInfor;
+        private string? version;
 
         public BootSetting()
         {
@@ -16,18 +16,18 @@ namespace SchoolManagement.Core.Models
             Version = "SOFT_VER_1";
         }
 
-        public Guid ID { get; set; }
-
         public ThemeVariant CurrentTheme
         { get => currentTheme; set { SetProperty(ref currentTheme, value); } }
+
+        public Guid ID { get; set; }
+
+        public ServerInfor ServerInfor
+        { get => serverInfor; set { SetProperty(ref serverInfor, value); } }
 
         public string? Version
         {
             get { return version; }
             set { SetProperty(ref version, value); }
         }
-
-        public ServerInfor ServerInfor
-        { get => serverInfor; set { SetProperty(ref serverInfor, value); } }
     }
 }

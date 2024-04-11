@@ -7,8 +7,8 @@ namespace SchoolManagement.EntityFramework.Repositories
 {
     public abstract class GenerateRepository<T> : IGenerateRepository<T> where T : class
     {
-        protected readonly SchoolManagementContext _context;
         protected readonly ObservableCollection<T> _allItems;
+        protected readonly SchoolManagementContext _context;
 
         protected GenerateRepository(SchoolManagementContext context)
         {

@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Notifications;
 using Avalonia.Styling;
 using Prism.Events;
 using Prism.Mvvm;
@@ -18,31 +17,9 @@ namespace SchoolManagement.Core.avalonia
 {
     public abstract class BaseRegionViewModel : BindableBase, INavigationAware, IConfirmNavigationRequest, IDialogAware
     {
+        protected readonly IEventAggregator EventAggregator;
         private readonly IAppManager _appManager;
         private bool isLogin = false;
-
-        public abstract string Title { get; }
-
-        public bool IsLogin
-        { get => isLogin; set { SetProperty(ref isLogin, value); } }
-
-        public BootSetting BootSetting { get => _appManager.BootSetting; }
-        public AppRegion AppRegion { get => _appManager.AppRegion; }
-
-        public event Action<IDialogResult>? RequestClose;
-
-        protected virtual void RegisterCommand()
-        {
-            EventAggregator.GetEvent<LoginSuccessEvent>().Subscribe(OnLogginSuccess);
-        }
-
-        protected virtual void SubcribeEvent()
-        { }
-
-        protected readonly IEventAggregator EventAggregator;
-        protected IDialogService DialogService { get; private set; }
-        public User User => RootContext.CurrentUser;
-        public INotificationManager NotificationManager { get; private set; }
 
         public BaseRegionViewModel()
         {
@@ -54,74 +31,19 @@ namespace SchoolManagement.Core.avalonia
             SubcribeEvent();
         }
 
-        protected void ChangeTheme(ThemeVariant theme)
-        {
-            try
-            {
-                BootSetting.CurrentTheme = theme;
-                Application.Current.RequestedThemeVariant = theme;
-            }
-            catch (Exception)
-            {
-                NotificationManager.ShowError("Có lỗi khi đổi màu giao diện", TimeSpan.FromSeconds(3));
-            }
-        }
+        public event Action<IDialogResult>? RequestClose;
 
-        protected void DefaultView()
-        {
-            //TODO
-        }
+        public AppRegion AppRegion { get => _appManager.AppRegion; }
+        public BootSetting BootSetting { get => _appManager.BootSetting; }
 
-        public void PushMainView(Type mainView)
-        {
-            RootContext.PreviewMainViews.Push(mainView);
-        }
+        public bool IsLogin
+        { get => isLogin; set { SetProperty(ref isLogin, value); } }
 
-        public UserControl PopMainView()
-        {
-            RootContext.PreviewMainViews.TryPop(out var mainView);
-            try
-            {
-                return (UserControl)Activator.CreateInstance(mainView);
-            }
-            catch (Exception)
-            {
-                return default;
-            }
-        }
+        public INotificationManager NotificationManager { get; private set; }
+        public abstract string Title { get; }
+        public User User => RootContext.CurrentUser;
 
-        public void PreviewMainView()
-        {
-            var mainView = PopMainView();
-            if (mainView == null || mainView == default)
-            {
-                return;
-            }
-            SetMainView(mainView);
-        }
-
-        public void SetMainView(UserControl mainView)
-        {
-            if (AppRegion.MainView != null)
-            {
-                PushMainView(AppRegion.MainView.GetType());
-            }
-            AppRegion.MainView = mainView;
-        }
-
-        public void SetMainPage(UserControl mainPage)
-        {
-            AppRegion.MainPage = mainPage;
-        }
-
-        protected virtual void OnLogginSuccess(bool isLoginSucess)
-        {
-        }
-
-        protected void SetStateLogin(bool isLogin)
-        {
-            IsLogin = isLogin;
-        }
+        protected IDialogService DialogService { get; private set; }
 
         public virtual bool CanCloseDialog()
         {
@@ -153,9 +75,64 @@ namespace SchoolManagement.Core.avalonia
         {
         }
 
+        public UserControl PopMainView()
+        {
+            RootContext.PreviewMainViews.TryPop(out var mainView);
+            try
+            {
+                return (UserControl)Activator.CreateInstance(mainView);
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+
+        public void PreviewMainView()
+        {
+            var mainView = PopMainView();
+            if (mainView == null || mainView == default)
+            {
+                return;
+            }
+            SetMainView(mainView);
+        }
+
+        public void PushMainView(Type mainView)
+        {
+            RootContext.PreviewMainViews.Push(mainView);
+        }
+
         public virtual void RaiseRequestClose(IDialogResult dialogResult)
         {
             RequestClose?.Invoke(dialogResult);
+        }
+
+        public void SetMainPage(UserControl mainPage)
+        {
+            AppRegion.MainPage = mainPage;
+        }
+
+        public void SetMainView(UserControl mainView)
+        {
+            if (AppRegion.MainView != null)
+            {
+                PushMainView(AppRegion.MainView.GetType());
+            }
+            AppRegion.MainView = mainView;
+        }
+
+        protected void ChangeTheme(ThemeVariant theme)
+        {
+            try
+            {
+                BootSetting.CurrentTheme = theme;
+                Application.Current.RequestedThemeVariant = theme;
+            }
+            catch (Exception)
+            {
+                NotificationManager.ShowError("Có lỗi khi đổi màu giao diện", TimeSpan.FromSeconds(3));
+            }
         }
 
         protected virtual void CloseDialog(string parameter = "")
@@ -171,9 +148,31 @@ namespace SchoolManagement.Core.avalonia
             RaiseRequestClose(new DialogResult(res));
         }
 
+        protected void DefaultView()
+        {
+            //TODO
+        }
+
         protected virtual Task InitViewFollowPlatformAsync()
         {
             return Task.CompletedTask;
         }
+
+        protected virtual void OnLogginSuccess(bool isLoginSucess)
+        {
+        }
+
+        protected virtual void RegisterCommand()
+        {
+            EventAggregator.GetEvent<LoginSuccessEvent>().Subscribe(OnLogginSuccess);
+        }
+
+        protected void SetStateLogin(bool isLogin)
+        {
+            IsLogin = isLogin;
+        }
+
+        protected virtual void SubcribeEvent()
+        { }
     }
 }

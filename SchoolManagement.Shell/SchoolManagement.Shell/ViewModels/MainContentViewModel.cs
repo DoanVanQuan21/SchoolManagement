@@ -12,22 +12,26 @@ namespace SchoolManagement.Shell.ViewModels
     {
         private bool isOpenPane = true;
 
-        public override string Title => "Main Content";
-
         public MainContentViewModel()
         {
             RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry });
         }
 
+        public ObservableCollection<AppMenu> AppMenus => RootContext.AppMenus;
+        public ICommand ClickNavigationCommand { get; set; }
+
         public bool IsOpenPane
         { get => isOpenPane; set { SetProperty(ref isOpenPane, value); } }
 
-        public ICommand ClickNavigationCommand { get; set; }
-        public ObservableCollection<AppMenu> AppMenus => RootContext.AppMenus;
+        public override string Title => "Main Content";
 
         protected override void RegisterCommand()
         {
             ClickNavigationCommand = new DelegateCommand(OnClickNavigation);
+        }
+
+        protected override void SubcribeEvent()
+        {
         }
 
         private void OnClickNavigation()
@@ -38,10 +42,6 @@ namespace SchoolManagement.Shell.ViewModels
                 return;
             }
             IsOpenPane = true;
-        }
-
-        protected override void SubcribeEvent()
-        {
         }
     }
 }

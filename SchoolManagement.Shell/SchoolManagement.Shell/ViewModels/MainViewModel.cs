@@ -13,26 +13,23 @@ namespace SchoolManagement.Shell.ViewModels
 {
     public class MainViewModel : BaseRegionViewModel
     {
-        public override string Title => "Main View";
-
         public MainViewModel()
         {
             InitViewFollowPlatformAsync().GetAwaiter();
         }
 
-        private async Task InitSplashScreen()
-        {
-            SetMainView(new SplashScreen());
-            var dataContext = AppRegion.MainView.DataContext as SplashScreenViewModel;
-            while (!dataContext.IsLoaded)
-            {
-                await Task.Delay(100);
-            }
-        }
+        public override string Title => "Main View";
 
-        protected override void SubcribeEvent()
+        protected override async Task InitViewFollowPlatformAsync()
         {
-            base.SubcribeEvent();
+            await InitSplashScreen();
+            if (!IsLogin)
+            {
+                SetMainView(new LoginView());
+                return;
+            }
+
+            SetMainViewFromPlatform();
         }
 
         protected override void OnLogginSuccess(bool isLoginSucess)
@@ -47,16 +44,19 @@ namespace SchoolManagement.Shell.ViewModels
             SetMainViewFromPlatform();
         }
 
-        protected override async Task InitViewFollowPlatformAsync()
+        protected override void SubcribeEvent()
         {
-            await InitSplashScreen();
-            if (!IsLogin)
-            {
-                SetMainView(new LoginView());
-                return;
-            }
+            base.SubcribeEvent();
+        }
 
-            SetMainViewFromPlatform();
+        private async Task InitSplashScreen()
+        {
+            SetMainView(new SplashScreen());
+            var dataContext = AppRegion.MainView.DataContext as SplashScreenViewModel;
+            while (!dataContext.IsLoaded)
+            {
+                await Task.Delay(100);
+            }
         }
 
         private void SetMainViewFromPlatform()

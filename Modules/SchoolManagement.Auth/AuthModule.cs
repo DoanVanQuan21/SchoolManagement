@@ -18,19 +18,17 @@ namespace SchoolManagement.Auth
         public override void Init()
         {
             //TODO
-
         }
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             //TODO
-            var t= 0;
+            var t = 0;
         }
 
         public override void Register()
         {
             //TODO
-
         }
 
         public override void RegisterTypes(IContainerRegistry containerRegistry)

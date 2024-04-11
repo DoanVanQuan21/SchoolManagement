@@ -6,14 +6,13 @@ namespace SchoolManagement.Auth.ViewModels
 {
     internal class RegisterAccountViewModel : BaseRegionViewModel
     {
-        public override string Title => "Register Account";
-
         public RegisterAccountViewModel() : base()
         {
         }
 
         public ICommand ClickedPreviewMainViewCommand { get; set; }
         public ICommand ClickedRegisterAccountCommand { get; set; }
+        public override string Title => "Register Account";
 
         protected override void RegisterCommand()
         {
@@ -22,13 +21,13 @@ namespace SchoolManagement.Auth.ViewModels
             base.RegisterCommand();
         }
 
-        private void OnRegisterAccount()
-        {
-        }
-
         private void OnPreviewMainView()
         {
             PreviewMainView();
+        }
+
+        private void OnRegisterAccount()
+        {
         }
     }
 }

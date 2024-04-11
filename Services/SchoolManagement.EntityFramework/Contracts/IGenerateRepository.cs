@@ -8,11 +8,11 @@ namespace SchoolManagement.EntityFramework.Contracts
 
         void AddRange(IEnumerable<T> entities);
 
-        ObservableCollection<T> GetAll();
-
         T? Find(Func<T, bool> predicate);
 
         T? FirstOrDefault(Func<T, bool> predicate);
+
+        ObservableCollection<T> GetAll();
 
         IEnumerable<T> Where(Func<T, bool> predicate);
     }

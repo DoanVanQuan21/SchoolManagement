@@ -14,9 +14,9 @@ namespace SchoolManagement.Shell.Services
 {
     internal class StartUp : IStartUp
     {
+        private readonly IAppManager _appManager;
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IModuleManager _moduleManager;
-        private readonly IAppManager _appManager;
 
         public StartUp()
         {
@@ -25,22 +25,19 @@ namespace SchoolManagement.Shell.Services
             _moduleCatalog = Ioc.Resolve<IModuleCatalog>();
         }
 
-        private void LoadModule()
+        void IStartUp.StartUp()
         {
-            foreach (var module in _moduleCatalog.Modules)
-            {
-                try
-                {
-                    _moduleManager.LoadModule(module.ModuleName);
-                }
-                catch (Exception e)
-                {
-                }
-                finally
-                {
-                    //RootContext.Modules[module.ModuleName] = true;
-                }
-            }
+            _appManager.Load();
+            Application.Current.RequestedThemeVariant = _appManager.BootSetting.CurrentTheme;
+
+            AddModule(DllName.AuthModule);
+            LoadModule();
+        }
+
+        public IStartUp UseProject()
+        {
+            AddModule(DllName.MainProjectModule);
+            return this;
         }
 
         private static ModuleInfo CreateModuleInfo(Type type, string name)
@@ -93,19 +90,22 @@ namespace SchoolManagement.Shell.Services
             }
         }
 
-        void IStartUp.StartUp()
+        private void LoadModule()
         {
-            _appManager.Load();
-            Application.Current.RequestedThemeVariant = _appManager.BootSetting.CurrentTheme;
-
-            AddModule(DllName.AuthModule);
-            LoadModule();
-        }
-
-        public IStartUp UseProject()
-        {
-            AddModule(DllName.MainProjectModule);
-            return this;
+            foreach (var module in _moduleCatalog.Modules)
+            {
+                try
+                {
+                    _moduleManager.LoadModule(module.ModuleName);
+                }
+                catch (Exception e)
+                {
+                }
+                finally
+                {
+                    //RootContext.Modules[module.ModuleName] = true;
+                }
+            }
         }
     }
 }

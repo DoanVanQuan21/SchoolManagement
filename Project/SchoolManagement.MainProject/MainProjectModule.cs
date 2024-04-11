@@ -1,8 +1,6 @@
 ﻿using Prism.Ioc;
 using SchoolManagement.Core.Contants;
 using SchoolManagement.Core.PrismAvalonia;
-using SchoolManagement.EntityFramework.Contracts;
-using SchoolManagement.EntityFramework.Services;
 
 namespace SchoolManagement.MainProject
 {
@@ -33,7 +31,6 @@ namespace SchoolManagement.MainProject
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             //TODO
-            
         }
     }
 }

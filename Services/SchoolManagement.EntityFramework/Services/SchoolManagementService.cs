@@ -1,5 +1,4 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using SchoolManagement.Core.avalonia;
+﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
@@ -12,7 +11,7 @@ namespace SchoolManagement.EntityFramework.Services
         private readonly IAppManager _appManager;
         private readonly IDatabaseInfoProvider _databaseInfoProvider;
         private SchoolManagementContext schoolManagementContext;
-        
+
         public SchoolManagementService()
         {
             _appManager = Ioc.Resolve<IAppManager>();

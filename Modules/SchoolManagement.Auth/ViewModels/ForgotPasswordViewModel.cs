@@ -7,13 +7,13 @@ namespace SchoolManagement.Auth.ViewModels
 {
     internal class ForgotPasswordViewModel : BaseRegionViewModel
     {
-        public override string Title => "Forgot password";
-
         public ForgotPasswordViewModel()
         {
         }
-        public ICommand SendRequestChangePasswordCommand { get; set; }
+
         public ICommand ClickedPreviewMainViewCommand { get; set; }
+        public ICommand SendRequestChangePasswordCommand { get; set; }
+        public override string Title => "Forgot password";
 
         protected override void RegisterCommand()
         {
