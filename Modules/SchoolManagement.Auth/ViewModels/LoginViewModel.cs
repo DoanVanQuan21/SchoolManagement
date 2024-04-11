@@ -49,7 +49,7 @@ namespace SchoolManagement.Auth.ViewModels
             SetMainView(new RegisterAccountView());
         }
 
-        private async void OnLogin()
+        private void OnLogin()
         {
             if (User == null)
             {
@@ -61,9 +61,9 @@ namespace SchoolManagement.Auth.ViewModels
             {
                 RootContext.CurrentUser = user;
             }
-            var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
-            await box.ShowAsPopupAsync(Container);
-            //EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
+            //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
+            //await box.ShowAsPopupAsync(Container);
+            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
     }
 }

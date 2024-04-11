@@ -1,3 +1,5 @@
+using ActiproSoftware.UI.Avalonia.Themes.Generation;
+using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -30,6 +32,15 @@ namespace SchoolManagement.Shell
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            // Customize the theme definition
+            if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is not null))
+            {
+                modernTheme.Definition.UseAccentedSwitches = true;
+
+                // Must manually refresh resources after changing definition properties
+                modernTheme.RefreshResources();
+            }
             base.Initialize();
         }
 

@@ -20,7 +20,8 @@
                 Grid.Column="0"
                 Padding="{TemplateBinding Padding}"
                 HorizontalAlignment="Right"
-                Background="{TemplateBinding Background}">
+                Background="{TemplateBinding Background}"
+                Classes="theme-subtle">
                 <Panel>
                     <PathIcon Data="{StaticResource UserSearchGeometry}" />
                 </Panel>

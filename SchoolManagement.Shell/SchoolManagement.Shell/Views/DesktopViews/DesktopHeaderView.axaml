@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.Shell.Views.DesktopViews.DesktopHeaderView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.SearchBar;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,18 +13,19 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-
+        <actipro:ToggleThemeButton Grid.Column="1" />
         <cc:SearchBar
             Grid.Column="0"
-            Padding="5"
-            VerticalAlignment="Center"
+            Padding="5,0,0,0"
+            VerticalAlignment="Stretch"
             SearchCommand="{Binding SearchTextCommand, ConverterParameter={Binding}}"
             Template="{StaticResource SearchBarTemplate}" />
         <StackPanel
-            Grid.Column="2"
+            Grid.Column="3"
             Margin="5"
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
@@ -32,13 +34,13 @@
                 <Run Text="{Binding User.FirstName}" />
                 <Run Text="{Binding User.LastName}" />
             </TextBlock>
-            <SplitButton Background="Transparent">
-                <SplitButton.Content>
+            <DropDownButton Classes="theme-subtle accent">
+                <DropDownButton.Content>
                     <Panel>
                         <PathIcon Data="{StaticResource SettingGeometry}" />
                     </Panel>
-                </SplitButton.Content>
-                <SplitButton.Flyout>
+                </DropDownButton.Content>
+                <DropDownButton.Flyout>
                     <MenuFlyout Placement="RightEdgeAlignedTop">
                         <MenuItem Command="{Binding LogoutCommand}" Header="Đăng xuất">
                             <MenuItem.Icon>
@@ -56,8 +58,8 @@
                             </MenuItem.Icon>
                         </MenuItem>
                     </MenuFlyout>
-                </SplitButton.Flyout>
-            </SplitButton>
+                </DropDownButton.Flyout>
+            </DropDownButton>
         </StackPanel>
     </Grid>
 </UserControl>

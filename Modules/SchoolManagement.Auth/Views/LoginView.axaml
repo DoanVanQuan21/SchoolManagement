@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.Auth.LoginView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Auth.ViewModels"
@@ -32,11 +33,14 @@
                 Width="15"
                 HorizontalAlignment="Left"
                 Data="{StaticResource UserGeometry}" />
-            <Label>
+            <Label Margin="5">
                 Tên đăng nhập
             </Label>
         </StackPanel>
-        <TextBox Grid.Row="2" Text="{Binding User.Username}" />
+        <TextBox
+            Grid.Row="2"
+            Text="{Binding User.Username}"
+            Watermark="Tên đăng nhập" />
         <StackPanel
             Grid.Row="3"
             Margin="0,20,0,5"
@@ -45,40 +49,44 @@
                 Width="15"
                 HorizontalAlignment="Left"
                 Data="{StaticResource UserKeyGeometry}" />
-            <Label>
+            <Label Margin="5">
                 Mật khẩu
             </Label>
         </StackPanel>
         <TextBox
             Grid.Row="4"
-            PasswordChar="*"
-            Text="{Binding User.Password}" />
+            Classes="has-reveal-password-button"
+            PasswordChar="{actipro:ThemeResource EditPasswordChar}"
+            Text="{Binding User.Password}"
+            Watermark="Mật khẩu" />
+
         <Button
             Grid.Row="5"
             Margin="0,20,0,0"
             HorizontalAlignment="Left"
             Background="Transparent"
+            Classes="theme-subtle"
             Command="{Binding ClickedForgotPasswordCommand}"
             Content="Quên mật khẩu ?" />
         <DockPanel Grid.Row="6">
             <Button
                 Margin="0,20,10,0"
                 HorizontalAlignment="Right"
-                BorderBrush="{DynamicResource DefaultBorderBrush}"
+                Classes="theme-solid accent"
                 Command="{Binding ClickedRegisterCommand}">
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource UserAddGeometry}" />
-                    <Label>Đăng ký</Label>
+                    <Label Margin="5">Đăng ký</Label>
                 </StackPanel>
             </Button>
             <Button
                 Margin="10,20,0,0"
                 HorizontalAlignment="Right"
-                BorderBrush="{DynamicResource DefaultBorderBrush}"
+                Classes="theme-solid accent"
                 Command="{Binding ClickedLoginCommand}">
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource LoginGeometry}" />
-                    <Label>Đăng nhập</Label>
+                    <Label Margin="3">Đăng nhập</Label>
                 </StackPanel>
             </Button>
         </DockPanel>

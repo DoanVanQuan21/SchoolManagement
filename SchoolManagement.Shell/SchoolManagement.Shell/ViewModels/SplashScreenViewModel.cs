@@ -39,6 +39,7 @@ namespace SchoolManagement.Shell.ViewModels
 
             }
             IsLoaded = true;
+            
         }
 
     }
