@@ -2,29 +2,31 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SchoolManagement.UI.Controls.SearchBar;assembly=SchoolManagement.UI">
-    <!--  Add Resources Here  -->
-    <ControlTemplate x:Key="SearchBarTemplate" TargetType="{x:Type local:SearchBar}">
+	<!--  Add Resources Here  -->
+	<ControlTemplate x:Key="SearchBarTemplate" TargetType="{x:Type local:SearchBar}">
 
-        <Grid Margin="10" Background="Transparent">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <TextBox
+		<Grid Margin="10" Background="Transparent">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<TextBox
                 x:Name="PART_TextBox"
                 Grid.Column="0"
                 Padding="{TemplateBinding Padding}"
-                VerticalContentAlignment="Center" />
+                VerticalContentAlignment="Center"
+                Classes="accent" />
 
-            <Button
+			<Button
                 x:Name="PART_ClearButton"
                 Grid.Column="0"
                 Padding="{TemplateBinding Padding}"
                 HorizontalAlignment="Right"
-                Background="{TemplateBinding Background}">
-                <Panel>
-                    <PathIcon Data="{StaticResource UserSearchGeometry}" />
-                </Panel>
-            </Button>
-        </Grid>
-    </ControlTemplate>
+                Background="{TemplateBinding Background}"
+                Classes="theme-subtle">
+				<Panel>
+					<PathIcon Data="{StaticResource UserSearchGeometry}" />
+				</Panel>
+			</Button>
+		</Grid>
+	</ControlTemplate>
 </ResourceDictionary>

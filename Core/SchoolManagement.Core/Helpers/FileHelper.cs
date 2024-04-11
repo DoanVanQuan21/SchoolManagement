@@ -19,12 +19,11 @@ namespace SchoolManagement.Core.Helpers
             {
                 return;
             }
-            var subDirs = path.Split('\\');
-            var root = $"{subDirs[0]}\\";
-            if (!Directory.Exists(root))
-            {
-                root = "E:";
-            }
+            char sperator = default;
+            var isSperator = path.Contains("/");
+            sperator = isSperator ? '/' : '\\';
+            var subDirs = path.Split(sperator);
+            var root = $"{subDirs[0]}{sperator}";
             for (int i = 1; i < subDirs.Length; i++)
             {
                 root = Path.Combine(root, subDirs[i]);
@@ -39,7 +38,7 @@ namespace SchoolManagement.Core.Helpers
         public static void Save(string path, string filename, string content)
         {
             var filepath = Path.Combine(path, filename);
-            CreateSubDir(path); 
+            CreateSubDir(path);
             var subDirs = path.Split('\\');
             var root = $"{subDirs[0]}\\";
             if (!Directory.Exists(root))
@@ -58,12 +57,6 @@ namespace SchoolManagement.Core.Helpers
         {
             var filepath = Path.Combine(path, filename);
             CreateSubDir(path);
-            var subDirs = filepath.Split('\\');
-            var root = $"{subDirs[0]}\\";
-            if (!Directory.Exists(root))
-            {
-                filepath = filepath.Replace("D", "E");
-            }
             if (!File.Exists(filepath))
             {
                 using var _ = File.Create(filepath);
@@ -77,12 +70,6 @@ namespace SchoolManagement.Core.Helpers
         {
             var jsonString = JsonConvert.SerializeObject(content);
             CreateSubDir(path);
-            var subDirs = path.Split('\\');
-            var root = $"{subDirs[0]}\\";
-            if (!Directory.Exists(root))
-            {
-                path = path.Replace("D", "E");
-            }
             DirectoryInfo dir = new(path);
             if (!dir.Exists)
             {
@@ -98,12 +85,6 @@ namespace SchoolManagement.Core.Helpers
         public static T Read<T>(string path, string filename)
         {
             var filepath = Path.Combine(path, filename);
-            var subDirs = filepath.Split('\\');
-            var root = $"{subDirs[0]}\\";
-            if (!Directory.Exists(root))
-            {
-                filepath = filepath.Replace("D", "E");
-            }
             if (!File.Exists(filepath))
             {
                 return Activator.CreateInstance<T>();

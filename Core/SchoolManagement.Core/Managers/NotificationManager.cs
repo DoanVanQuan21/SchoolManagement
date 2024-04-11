@@ -1,70 +1,50 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Layout;
-using Avalonia.Media;
-using Avalonia.Notification;
+﻿using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
 
 namespace SchoolManagement.Core.Managers
 {
-    public class NotificationManager
+    public class NotificationManager : Contracts.INotificationManager
     {
-        public static void ShowError(INotificationMessageManager notification, string header, string message)
+        private WindowNotificationManager? _notificationManager;
+
+        public void InitNotification(ContentControl container, NotificationPosition position, int maxItems)
         {
-            notification
-                .CreateMessage()
-                .Accent("#F15B19")
-                .Background("#F15B19")
-                .HasHeader(header)
-                .HasMessage(message)
-                .Dismiss().WithButton("X", button => { })
-                .Dismiss().WithDelay(TimeSpan.FromSeconds(3))
-                .Queue();
+            _notificationManager ??= new(TopLevel.GetTopLevel(container))
+            {
+                Position = position,
+                MaxItems = maxItems
+            };
         }
 
-        public static void ShowWarn(INotificationMessageManager messageManager, string message)
+        public void ShowError(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            messageManager.CreateMessage()
-                .Accent("#E0A030")
-                .Background("#333")
-                .HasBadge("Warn")
-                .HasHeader("Error")
-                .HasMessage(message)
-                .WithButton("Try again", async button => { })
-                .Dismiss().WithButton("Ignore", button => { })
-                .Dismiss().WithDelay(TimeSpan.FromSeconds(3))
-                .Queue();
+            var notifi = new Notification("Error", message, NotificationType.Error, timeout, onClick, onClose);
+            _notificationManager?.Show(notifi);
         }
 
-        public static void ShowInfo(INotificationMessageManager manager, string message)
+        public void ShowInfor(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            manager
-                   .CreateMessage()
-                   .Accent("#1751C3")
-                   .Animates(true)
-                   .Background("#333")
-                   .HasBadge("Info")
-                   .HasMessage(
-                       message)
-                   .Dismiss().WithButton("Update now", button => { })
-                   .Dismiss().WithButton("Release notes", button => { })
-                   .Dismiss().WithDelay(TimeSpan.FromSeconds(3))
-                   .Queue();
+            var notifi = new Notification("Infor", message, NotificationType.Information, timeout, onClick, onClose)
+            {
+            };
+            _notificationManager?.Show(notifi);
         }
 
-        public static void ShowSuccess(INotificationMessageManager manager, string message)
+        public void ShowSimpleText(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
         {
-            manager
-                    .CreateMessage()
-                    .Accent("#1751C3")
-                    .Animates(true)
-                    .Background("#333")
-                    .HasBadge("Info")
-                    .HasMessage(
-                        message)
-                    .Dismiss().WithButton("Update now", button => { })
-                    .Dismiss().WithButton("Release notes", button => { })
-                    .Dismiss().WithDelay(TimeSpan.FromSeconds(3))
-                    .Queue();
+            _notificationManager?.Show(message);
+        }
+
+        public void ShowSuccess(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
+        {
+            var notifi = new Notification("Success", message, NotificationType.Success, timeout, onClick, onClose);
+            _notificationManager?.Show(notifi);
+        }
+
+        public void ShowWarning(string message, TimeSpan? timeout = null, Action? onClick = null, Action? onClose = null)
+        {
+            var notifi = new Notification("Warning", message, NotificationType.Warning, timeout, onClick, onClose);
+            _notificationManager?.Show(notifi);
         }
     }
 }

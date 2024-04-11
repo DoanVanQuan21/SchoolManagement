@@ -7,6 +7,7 @@ using SchoolManagement.EntityFramework.Services;
 using SchoolManagement.Shell.Services.Contracts;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Core.Services;
+using SchoolManagement.Core.Managers;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -28,6 +29,7 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
             containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
+            containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
         }
 
         public static void RegisterTypesModuleAuth(IContainerRegistry containerRegistry)

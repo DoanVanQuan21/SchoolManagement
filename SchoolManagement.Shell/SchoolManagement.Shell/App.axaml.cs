@@ -1,3 +1,5 @@
+using ActiproSoftware.UI.Avalonia.Themes.Generation;
+using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -14,6 +16,8 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using Avalonia.Styling;
+using SchoolManagement.Core.Contracts;
 
 namespace SchoolManagement.Shell
 {
@@ -30,6 +34,14 @@ namespace SchoolManagement.Shell
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+
+            // Customize the theme definition
+            if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is not null))
+            {
+                modernTheme.Definition.UseAccentedSwitches = true;
+                modernTheme.Definition.AccentColorRampName = Hue.Sky.ToString();
+                modernTheme.RefreshResources();
+            }
             base.Initialize();
         }
 

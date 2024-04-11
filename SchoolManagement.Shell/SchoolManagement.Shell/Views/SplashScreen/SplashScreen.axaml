@@ -2,12 +2,13 @@
     x:Class="SchoolManagement.Shell.Views.SplashScreen.SplashScreen"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
     x:DataType="vm:SplashScreenViewModel"
     mc:Ignorable="d">
-    <Panel Background="{DynamicResource DefaultBackgroundBrush}">
+    <Panel Background="{actipro:ThemeResource Container1BackgroundBrush}">
         <StackPanel VerticalAlignment="Center">
             <Viewbox Width="250">
                 <Image Source="avares://SchoolManagement.UI/Assets/Images/logo/logo.png" Stretch="Uniform" />
@@ -16,6 +17,7 @@
                 Name="ProcessBar"
                 MaxWidth="200"
                 Margin="10"
+                Classes="accent"
                 Value="{Binding ProcessValue}" />
             <TextBlock
                 Name="LoadingText"

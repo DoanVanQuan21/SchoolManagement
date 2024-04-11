@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Core.Contracts;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.Common;
 using System.Diagnostics;
 using System.Net;
@@ -7,17 +8,34 @@ namespace SchoolManagement.Core.Services
 {
     public class DatabaseInfoProvider : IDatabaseInfoProvider
     {
+        private readonly IAppManager _appManager;
+        private readonly INotificationManager _notificationManager;
         public ServerInfor ServerInfor { get; set; }
 
         public DatabaseInfoProvider()
         {
+            _appManager = Ioc.Resolve<IAppManager>();
+            _notificationManager = Ioc.Resolve<INotificationManager>();
             InitServerInfor();
         }
 
         private void InitServerInfor()
         {
+            //TODO
+            //MOBILE PLATFORM
+            if (_appManager == null)
+            {
+                _notificationManager.ShowError("Configuration cannot be null!");
+                return;
+            }
             if (ServerInfor != null)
             {
+                _notificationManager.ShowError("Server cannot be null!");
+                return;
+            }
+            if (_appManager.BootSetting.ServerInfor != null)
+            {
+                ServerInfor = _appManager.BootSetting.ServerInfor;
                 return;
             }
             var ipV4Address = GetIpV4Address();
@@ -28,10 +46,11 @@ namespace SchoolManagement.Core.Services
             }
             ServerInfor = new()
             {
-                ServerName = "192.168.1.103",
+                ServerName = ipV4Address,
                 User = "schoolmanagement",
                 Password = "123",
             };
+            _appManager.BootSetting.ServerInfor = ServerInfor;
         }
 
         private string GetHostName()

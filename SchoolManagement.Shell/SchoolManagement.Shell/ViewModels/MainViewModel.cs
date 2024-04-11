@@ -1,4 +1,6 @@
-﻿using SchoolManagement.Auth;
+﻿using Avalonia.Controls.Notifications;
+using SchoolManagement.Auth;
+using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Managers;
 using SchoolManagement.Shell.Views;
@@ -37,11 +39,11 @@ namespace SchoolManagement.Shell.ViewModels
         {
             if (!isLoginSucess)
             {
-                NotificationManager.ShowWarn(NotificationMessageManager, "Tên đăng nhập hoặc mật khẩu không đúng!");
+                NotificationManager.ShowWarning("Tên đăng nhập hoặc mật khẩu không đúng!");
                 return;
             }
             SetStateLogin(true);
-            NotificationManager.ShowSuccess(NotificationMessageManager, "Đăng nhập thành công!");
+            NotificationManager.ShowSuccess("Đăng nhập thành công!");
             SetMainViewFromPlatform();
         }
 
