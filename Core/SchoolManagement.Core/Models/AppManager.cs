@@ -22,6 +22,7 @@ namespace SchoolManagement.Core.Models
         public void Load()
         {
             BootSetting = FileHelper.Read<BootSetting>(FolderPath.CONFIGURATION, FileName.APP_CONFIG);
+            BootSetting ??= new();
         }
 
         public void Save()
