@@ -31,6 +31,7 @@ namespace SchoolManagement.Shell.Services
             Application.Current.RequestedThemeVariant = _appManager.BootSetting.CurrentTheme;
 
             AddModule(DllName.AuthModule);
+            AddModule(DllName.SettingAccountModule);
             LoadModule();
         }
 

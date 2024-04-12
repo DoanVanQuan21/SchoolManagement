@@ -29,6 +29,7 @@
     <ProjectReference Include="..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
     <ProjectReference Include="..\..\Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj" />
     <ProjectReference Include="..\..\Modules\SchoolManagement.Database\SchoolManagement.Database.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
     <ProjectReference Include="..\..\Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj" />
     <ProjectReference Include="..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />

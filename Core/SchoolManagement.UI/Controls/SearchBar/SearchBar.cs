@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Markup.Xaml.Templates;
 using Avalonia.Styling;
 using System.Windows.Input;
 
@@ -9,13 +8,14 @@ namespace SchoolManagement.UI.Controls.SearchBar
 {
     public class SearchBar : TemplatedControl, IStyleable
     {
-        private TextBox textBox;
+        public static StyledProperty<ICommand> SearchCommandProperty = AvaloniaProperty.Register<SearchBar, ICommand>(nameof(SearchCommand));
+        public static StyledProperty<string> TextProperty = AvaloniaProperty.Register<SearchBar, string>(nameof(Text));
         private Button clearButton;
-        Type IStyleable.StyleKey => typeof(TemplatedControl);
+        private TextBox textBox;
 
-        public string Text
+        static SearchBar()
         {
-            get => GetValue(TextProperty); set => SetValue(TextProperty, value);
+            TextProperty.Changed.AddClassHandler<SearchBar>((s, e) => s.OnTextChanged(e));
         }
 
         public ICommand SearchCommand
@@ -24,12 +24,11 @@ namespace SchoolManagement.UI.Controls.SearchBar
             set => SetValue(SearchCommandProperty, value);
         }
 
-        public static StyledProperty<string> TextProperty = AvaloniaProperty.Register<SearchBar, string>(nameof(Text));
-        public static StyledProperty<ICommand> SearchCommandProperty = AvaloniaProperty.Register<SearchBar, ICommand>(nameof(SearchCommand));
+        Type IStyleable.StyleKey => typeof(TemplatedControl);
 
-        static SearchBar()
+        public string Text
         {
-            TextProperty.Changed.AddClassHandler<SearchBar>((s, e) => s.OnTextChanged(e));
+            get => GetValue(TextProperty); set => SetValue(TextProperty, value);
         }
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -48,23 +47,10 @@ namespace SchoolManagement.UI.Controls.SearchBar
                 clearButton.Click += ClearButton_Click;
             }
         }
+
         private void ClearButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             Text = string.Empty;
-            SearchCommand?.Execute(Text);
-        }
-
-        private void TextBox_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
-        {
-            if(e.Key != Avalonia.Input.Key.Enter)
-            {
-                return;
-            }
-            SearchCommand?.Execute(Text);
-        }
-
-        private void TextBox_KeyUp(object? sender, Avalonia.Input.KeyEventArgs e)
-        {
             SearchCommand?.Execute(Text);
         }
 
@@ -77,5 +63,18 @@ namespace SchoolManagement.UI.Controls.SearchBar
             textBox.Text = (string)e.NewValue;
         }
 
+        private void TextBox_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
+        {
+            if (e.Key != Avalonia.Input.Key.Enter)
+            {
+                return;
+            }
+            SearchCommand?.Execute(Text);
+        }
+
+        private void TextBox_KeyUp(object? sender, Avalonia.Input.KeyEventArgs e)
+        {
+            SearchCommand?.Execute(Text);
+        }
     }
 }

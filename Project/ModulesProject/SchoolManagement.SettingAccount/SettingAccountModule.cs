@@ -21,6 +21,7 @@ namespace SchoolManagement.SettingAccount
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             //TODO
+            var t = 0;
         }
 
         public override void Register()

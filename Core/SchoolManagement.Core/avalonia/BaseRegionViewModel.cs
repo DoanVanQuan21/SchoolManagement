@@ -131,7 +131,7 @@ namespace SchoolManagement.Core.avalonia
             }
             catch (Exception)
             {
-                NotificationManager.ShowError("Có lỗi khi đổi màu giao diện", TimeSpan.FromSeconds(3));
+                NotificationManager.ShowError("Có lỗi khi đổi màu giao diện");
             }
         }
 

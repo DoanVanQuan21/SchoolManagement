@@ -13,6 +13,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\SchoolManagement.Core\SchoolManagement.Core.csproj" />
+    <ProjectReference Include="..\..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
