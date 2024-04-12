@@ -104,7 +104,7 @@ namespace SchoolManagement.Shell.Services
                 }
                 finally
                 {
-                    //RootContext.Modules[module.ModuleName] = true;
+                    RootContext.Modules[module.ModuleName] = true;
                 }
             }
         }

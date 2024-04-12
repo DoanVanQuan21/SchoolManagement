@@ -13,7 +13,7 @@ USE SchoolManagement
 go
 Create table [User]
 (
-	[UserID] Integer NOT NULL,
+	[UserID] Integer IDENTITY(1,1) NOT NULL,
 	[FirstName] nvarchar(100) NULL,
 	[LastName] nvarchar(100) NULL,
 	[Gender] nvarchar(10) NULL,
@@ -34,7 +34,7 @@ go
 
 Create table [Subject]
 (
-	[SubjectID] Integer NOT NULL,
+	[SubjectID] Integer IDENTITY(1,1) NOT NULL,
 	[SubjectCode] nvarchar(15) NULL,
 	[SubjectName] nvarchar(100) NULL,
 	[Image] nvarchar(max),
@@ -45,7 +45,7 @@ go
 
 Create table [Student]
 (
-	[StudentID] Integer NOT NULL,
+	[StudentID] Integer IDENTITY(1,1) NOT NULL,
 	[UserID] Integer NOT NULL foreign key([UserID]) references [User] ([UserID])  on update cascade on delete cascade ,
 	[StudentCode] nvarchar(20) NULL,
 Primary Key ([StudentID])
@@ -53,7 +53,7 @@ Primary Key ([StudentID])
 go
 Create table [Department]
 (
-	[DepartmentID] Integer NOT NULL,
+	[DepartmentID] Integer IDENTITY(1,1) NOT NULL,
 	[DepartmentCode] nvarchar(20) NULL,
 	[DepartmentName] Nvarchar(100) NULL,
 	[Image] nvarchar(max),
@@ -63,7 +63,7 @@ Primary Key ([DepartmentID])
 go
 Create table [Teacher]
 (
-	[TeacherID] Integer NOT NULL,
+	[TeacherID] Integer IDENTITY(1,1) NOT NULL,
 	[DepartmentID] Integer NOT NULL foreign key([DepartmentID]) references [Department] ([DepartmentID])  on update cascade on delete cascade,
 	[UserID] Integer NOT NULL foreign key([UserID]) references [User] ([UserID])  on update cascade on delete cascade,
 	[LeaderID] Integer NOT NULL,
@@ -85,7 +85,7 @@ Primary Key ([TeacherID])
 go
 Create table [Class]
 (
-	[ClassID] Integer NOT NULL,
+	[ClassID] Integer IDENTITY(1,1) NOT NULL,
 	[TeacherID] Integer NOT NULL,
 	[ClassCode] Datetime NULL,
 	[ClassName] nvarchar(100) NULL,
@@ -110,7 +110,7 @@ go
 
 Create table [GradeSheet]
 (
-	[GradeSheetID] Integer NOT NULL,
+	[GradeSheetID] Integer IDENTITY(1,1) NOT NULL,
 	[ClassID] Integer NOT NULL foreign key([ClassID]) references [Class] ([ClassID])  on update no action on delete no action,
 	[SubjectID] Integer NOT NULL foreign key([SubjectID]) references [Subject] ([SubjectID])  on update no action on delete no action,
 	[StudentID] Integer NOT NULL foreign key([StudentID]) references [Student] ([StudentID])  on update no action on delete no action,
@@ -127,7 +127,7 @@ go
 
 Create table [Schedule]
 (
-	[ScheduleID] Integer NOT NULL,
+	[ScheduleID] Integer IDENTITY(1,1) NOT NULL,
 	[ClassID] Integer NOT NULL foreign key([ClassID]) references [Class] ([ClassID])  on update cascade on delete cascade,
 	[SubjectID] Integer NOT NULL foreign key([SubjectID]) references [Subject] ([SubjectID])  on update cascade on delete cascade,
 	[ScheduleCode] nvarchar(100) NULL,
@@ -140,7 +140,7 @@ go
 
 Create table [EducationProgram]
 (
-	[EducationProgramID] Integer NOT NULL,
+	[EducationProgramID] Integer IDENTITY(1,1) NOT NULL,
 	[ClassID] Integer NOT NULL foreign key([ClassID]) references [Class] ([ClassID])  on update cascade on delete cascade,
 	[SubjectID] Integer NOT NULL foreign key([SubjectID]) references [Subject] ([SubjectID])  on update cascade on delete cascade,
 	[EducationProgramCode] nvarchar(20) NULL,
@@ -152,7 +152,7 @@ go
 
 Create table [Lesson]
 (
-	[LessonID] Integer NOT NULL,
+	[LessonID] Integer NOT IDENTITY(1,1) NULL,
 	[EducationProgramID] Integer NOT NULL foreign key([EducationProgramID]) references [EducationProgram] ([EducationProgramID])  on update cascade on delete cascade,
 	[LessonCode] nvarchar(100) NULL,
 	[LessonName] nvarchar(100) NULL,

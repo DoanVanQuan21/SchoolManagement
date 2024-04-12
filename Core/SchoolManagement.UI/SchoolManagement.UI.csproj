@@ -33,4 +33,8 @@
     <ProjectReference Include="..\SchoolManagement.Core\SchoolManagement.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Languages\" />
+  </ItemGroup>
+
 </Project>
