@@ -9,6 +9,7 @@
     x:DataType="vm:LoginViewModel"
     Background="Transparent"
     mc:Ignorable="d">
+
 	<Grid
         MaxWidth="450"
         Margin="10"
@@ -33,7 +34,7 @@
                 Width="15"
                 HorizontalAlignment="Left"
                 Data="{StaticResource UserGeometry}" />
-			<Label Margin="5">
+			<Label>
 				Tên đăng nhập
 			</Label>
 		</StackPanel>
@@ -50,7 +51,7 @@
                 Width="15"
                 HorizontalAlignment="Left"
                 Data="{StaticResource UserKeyGeometry}" />
-			<Label Margin="5">
+			<Label>
 				Mật khẩu
 			</Label>
 		</StackPanel>

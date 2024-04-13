@@ -7,6 +7,7 @@ using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
+using SchoolManagement.UI.Helpers;
 using System;
 using System.Threading.Tasks;
 
@@ -38,13 +39,16 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
+            var notif = "";
             if (!isLoginSucess)
             {
-                NotificationManager.ShowWarning("Tên đăng nhập hoặc mật khẩu không đúng!");
+                notif = Util.GetResourseString("LoginFail_Message");
+                NotificationManager.ShowWarning(notif);
                 return;
             }
+            notif = Util.GetResourseString("LoginSuccess_Message");
             SetStateLogin(true);
-            NotificationManager.ShowSuccess("Đăng nhập thành công!");
+            NotificationManager.ShowSuccess(notif);
             SetMainViewFromPlatform();
         }
 

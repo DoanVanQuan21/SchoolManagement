@@ -1,11 +1,11 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--  Add Resources Here  -->
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceInclude Source="/Themes/Based/Colors/Dark.axaml" />
-        <ResourceInclude Source="/Themes/Based/Colors/Light.axaml" />
-        <ResourceInclude Source="/Geometry/Geometry.axaml" />
-        <ResourceInclude Source="/Themes/Styles/SearchBar.axaml" />
-        <ResourceInclude Source="/Themes/Styles/PropertyGrid.axaml" />
-        <ResourceInclude Source="/Themes/Based/Size.axaml" />
-    </ResourceDictionary.MergedDictionaries>
+	<!--  Add Resources Here  -->
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceInclude Source="/Themes/Based/Colors/Dark.axaml" />
+		<ResourceInclude Source="/Themes/Based/Colors/Light.axaml" />
+		<ResourceInclude Source="/Geometry/Geometry.axaml" />
+		<ResourceInclude Source="/Themes/Styles/SearchBar.axaml" />
+		<ResourceInclude Source="/Themes/Styles/PropertyGrid.axaml" />
+		<ResourceInclude Source="/Themes/Based/Size.axaml" />
+	</ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

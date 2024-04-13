@@ -1,0 +1,30 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+	<!--  Add Resources Here  -->
+	<system:String x:Key="LoginFail_Message">
+		Đăng nhập không thành công. Kiểm tra lại thông tin!.
+	</system:String>
+	<system:String x:Key="LoginSuccess_Message">
+		Đăng nhập thành công!.
+	</system:String>
+	<system:String x:Key="LogoutSuccess_Message">
+		Đăng xuất thành công!.
+	</system:String>
+	<system:String x:Key="ThemeChangeError_Message">
+		Có lỗi khi đổi màu giao diện!.
+	</system:String>
+	<system:String x:Key="ThemeChangeSuccess_Message">
+		Đổi màu giao diện thành công!.
+	</system:String>
+	<system:String x:Key="PageLoadError_Message">
+		Không tải được nội dung!.
+	</system:String>
+	<system:String x:Key="LoadAppConfigError_Message">
+		Phần mềm xảy ra lỗi khi đang tải cấu hình!.
+	</system:String>
+	<system:String x:Key="ServerInfoNull_Message">
+		Thông tin server không được trống!.
+	</system:String>
+</ResourceDictionary>
