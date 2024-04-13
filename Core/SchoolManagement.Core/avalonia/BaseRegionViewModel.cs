@@ -8,6 +8,7 @@ using Prism.Services.Dialogs;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -75,7 +76,7 @@ namespace SchoolManagement.Core.avalonia
         {
         }
 
-        public UserControl PopMainView()
+        public UserControl TryPopMainView()
         {
             RootContext.PreviewMainViews.TryPop(out var mainView);
             try
@@ -90,7 +91,7 @@ namespace SchoolManagement.Core.avalonia
 
         public void PreviewMainView()
         {
-            var mainView = PopMainView();
+            var mainView = TryPopMainView();
             if (mainView == null || mainView == default)
             {
                 return;
@@ -170,6 +171,11 @@ namespace SchoolManagement.Core.avalonia
         protected void SetStateLogin(bool isLogin)
         {
             IsLogin = isLogin;
+        }
+
+        protected void UpdateCurrentUser(User user)
+        {
+            RootContext.UpdateCurrentUser(user);
         }
 
         protected virtual void SubcribeEvent()

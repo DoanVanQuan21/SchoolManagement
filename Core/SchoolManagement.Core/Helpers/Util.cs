@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 
-namespace SchoolManagement.UI.Helpers
+namespace SchoolManagement.Core.Helpers
 {
     public class Util
     {

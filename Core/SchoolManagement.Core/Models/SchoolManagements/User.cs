@@ -37,7 +37,16 @@ public partial class User : BindableBase
 
     [DisplayName("Ngày sinh")]
     public DateTime? DateOfBirth
-    { get => dateOfBirth; set { SetProperty(ref dateOfBirth, value); } }
+    {
+        get => dateOfBirth; set
+        {
+            if (value == null)
+            {
+                return;
+            }
+            SetProperty(ref dateOfBirth, value);
+        }
+    }
 
     [DisplayName("Số điện thoại")]
     public string? PhoneNumber
@@ -72,10 +81,12 @@ public partial class User : BindableBase
     { get => activeStatus; set { SetProperty(ref activeStatus, value); } }
 
     [DisplayName("Ngày bắt đầu")]
+    [Browsable(false)]
     public DateTime? StartDate
     { get => startDate; set { SetProperty(ref startDate, value); } }
 
     [DisplayName("Ngày kết thúc")]
+    [Browsable(false)]
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }
 
@@ -84,4 +95,31 @@ public partial class User : BindableBase
 
     [Browsable(false)]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+
+    public User()
+    {
+    }
+
+    public User(User user)
+    {
+        if (user == null)
+        {
+            return;
+        }
+        UserId = user.UserId;
+        FirstName = user.FirstName;
+        LastName = user.LastName;
+        Gender = user.Gender;
+        DateOfBirth = user.DateOfBirth;
+        PhoneNumber = user.PhoneNumber;
+        Address = user.Address;
+        Email = user.Email;
+        Image = user.Image;
+        Username = user.Username;
+        Password = user.Password;
+        Role = user.Role;
+        ActiveStatus = user.ActiveStatus;
+        StartDate = user.StartDate;
+        EndDate = user.EndDate;
+    }
 }

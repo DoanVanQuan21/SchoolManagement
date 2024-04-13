@@ -27,4 +27,10 @@
 	<system:String x:Key="ServerInfoNull_Message">
 		Thông tin server không được trống!.
 	</system:String>
+	<system:String x:Key="UpdateUserFail_Message">
+		Không tồn tại thông tin tài khoản trên database!.
+	</system:String>
+	<system:String x:Key="UpdateUserSuccess_Message">
+		Cập nhật thông tin tài khoản thành công!.
+	</system:String>
 </ResourceDictionary>

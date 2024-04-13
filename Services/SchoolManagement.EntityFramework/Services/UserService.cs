@@ -53,5 +53,16 @@ namespace SchoolManagement.EntityFramework.Services
             _schoolManagementSevice.UserRepository.Add(user);
             return true;
         }
+
+        public bool UpdateUserInfor(User user)
+        {
+            var userDb = _schoolManagementSevice.UserRepository.FirstOrDefault(u => u.UserId == user.UserId);
+            if (userDb == null)
+            {
+                return false;
+            }
+            _schoolManagementSevice.UserRepository.Update(user);
+            return true;
+        }
     }
 }

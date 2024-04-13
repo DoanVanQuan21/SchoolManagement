@@ -1,13 +1,9 @@
-﻿using Avalonia.Controls.Notifications;
-using SchoolManagement.Auth;
-using SchoolManagement.Auth.Views;
+﻿using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Managers;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
-using SchoolManagement.UI.Helpers;
 using System;
 using System.Threading.Tasks;
 

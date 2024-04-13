@@ -11,7 +11,8 @@
 	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="100" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="8*" />
+			<RowDefinition Height="2*" />
 		</Grid.RowDefinitions>
 		<TextBlock
             Grid.Row="0"
@@ -25,5 +26,19 @@
             VerticalAlignment="Stretch">
 			<cc:PropertyGrid SelectedObject="{Binding User}" Template="{StaticResource PropertyGridTemplate}" />
 		</ScrollViewer>
+		<Button
+            Grid.Row="2"
+            Width="120"
+            Height="40"
+            HorizontalAlignment="Center"
+            Classes="theme-solid accent"
+            Command="{Binding ClickedUpdateInformation}">
+			<Button.Content>
+				<StackPanel Orientation="Horizontal">
+					<PathIcon Data="{StaticResource EditGeometry}" />
+					<Label>Cập nhật</Label>
+				</StackPanel>
+			</Button.Content>
+		</Button>
 	</Grid>
 </UserControl>

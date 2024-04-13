@@ -27,4 +27,10 @@
 	<system:String x:Key="ServerInfoNull_Message">
 		Server information can not be null!.
 	</system:String>
+	<system:String x:Key="UpdateUserFail_Message">
+		This account does not exist in the database!.
+	</system:String>
+	<system:String x:Key="UpdateUserSuccess_Message">
+		Updating account information success!.
+	</system:String>
 </ResourceDictionary>

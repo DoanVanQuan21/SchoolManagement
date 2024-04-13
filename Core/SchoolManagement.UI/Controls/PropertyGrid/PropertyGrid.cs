@@ -11,31 +11,41 @@ using System.Reflection;
 
 namespace SchoolManagement.UI.Controls.PropertyGrid
 {
+    public enum Columns
+    {
+        One,
+        Two
+    }
+
     public class PropertyGrid : TemplatedControl, IStyleable
     {
-        private readonly string CONTENT_CONTROL_KEY = "PART_ContentControl";
+        public static readonly StyledProperty<Columns> ColumnProperty =
+            AvaloniaProperty.Register<PropertyGrid, Columns>(nameof(Column), Columns.Two);
 
         public static readonly StyledProperty<object> SelectedObjectProperty =
             AvaloniaProperty.Register<PropertyGrid, object>(nameof(SelectedObject));
 
-        public static readonly StyledProperty<Columns> ColumnProperty =
-            AvaloniaProperty.Register<PropertyGrid, Columns>(nameof(Column), Columns.Two);
+        private readonly string Accent = "accent";
+        private readonly string CONTENT_CONTROL_KEY = "PART_ContentControl";
+        private readonly string Danger = "danger";
+        private readonly string Success = "success";
+        private readonly string Warning = "warning";
 
         static PropertyGrid()
         {
             var t = 0;
         }
 
-        public object SelectedObject
-        {
-            get => GetValue(SelectedObjectProperty);
-            set => SetValue(SelectedObjectProperty, value);
-        }
-
         public Columns Column
         {
             get => GetValue(ColumnProperty);
             set => SetValue(ColumnProperty, value);
+        }
+
+        public object SelectedObject
+        {
+            get => GetValue(SelectedObjectProperty);
+            set => SetValue(SelectedObjectProperty, value);
         }
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -48,16 +58,99 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             UpdateTemplate(e);
         }
 
-        private void UpdateTemplate(TemplateAppliedEventArgs e)
+        private Control CreateInputControl(PropertyInfo propertyInfo)
         {
-            var contenCotrol = e.NameScope.Find<ContentControl>(CONTENT_CONTROL_KEY);
-            if (contenCotrol == null)
+            var inputControl = CreateInputFromType(propertyInfo.PropertyType, propertyInfo);
+            Binding binding = new(propertyInfo.Name)
             {
-                return;
-            }
-            var properties = SelectedObject.GetType().GetProperties().Where(prop => PropertyHelper.GetBrowsable(prop)).ToList();
+                Source = SelectedObject,
+                Mode = BindingMode.TwoWay
+            };
+            inputControl.Bind(GetInputControlValueProperty(inputControl), binding);
+            return inputControl;
+        }
 
-            GenerateEditor(contenCotrol, properties);
+        private Control CreateInputFromType(Type type, PropertyInfo property)
+        {
+            if (type == typeof(string))
+            {
+                return new TextBox()
+                {
+                    Margin = new Thickness(10),
+                    Classes = { Accent }
+                };
+            }
+            if (type.IsSubclassOf(typeof(Enum)))
+            {
+                return new ComboBox()
+                {
+                    ItemsSource = Enum.GetValues(type),
+                    Margin = new Thickness(10),
+                    Classes = { Accent }
+                };
+            }
+
+            if (type == typeof(int) || type == typeof(double) || type == typeof(long) || type == typeof(float))
+            {
+                return new NumericUpDown()
+                {
+                    Margin = new Thickness(10),
+                    Classes = { Accent }
+                };
+            }
+            if (type == typeof(bool))
+            {
+                return new ToggleSwitch()
+                {
+                    Margin = new Thickness(10),
+                    Classes = { "theme-solid", Accent }
+                };
+            }
+            if (IsDateTime(type))
+            {
+                return new TextBox()
+                {
+                    Margin = new Thickness(10),
+                    Classes = { Accent },
+                    IsReadOnly = true
+                };
+            }
+            return new TextBox()
+            {
+                Margin = new Thickness(10),
+                Classes = { Accent }
+            };
+        }
+
+        private Control CreateLabelForNameProperty(PropertyInfo propertyInfo)
+        {
+            var attribute = propertyInfo.GetCustomAttributes(typeof(DisplayNameAttribute), false).ToList();
+            var displayName = propertyInfo.Name;
+            if (attribute.Count > 0)
+            {
+                displayName = (attribute.First() as DisplayNameAttribute).DisplayName;
+            }
+            TextBlock textBlock = new()
+            {
+                Text = displayName,
+                Margin = new Thickness(10),
+                HorizontalAlignment = HorizontalAlignment.Left,
+                VerticalAlignment = VerticalAlignment.Center,
+            };
+            return textBlock;
+        }
+
+        private Control CreateStackPanel(PropertyInfo property)
+        {
+            StackPanel stackPanel = new()
+            {
+                Orientation = Orientation.Vertical
+            };
+            var label = CreateLabelForNameProperty(property);
+            var inputControl = CreateInputControl(property);
+            stackPanel.Children.Add(label);
+            stackPanel.Children.Add(inputControl);
+            return stackPanel;
         }
 
         private void GenerateEditor(ContentControl content, List<PropertyInfo> properties)
@@ -77,6 +170,102 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             }
             widthType = new GridLength(3, GridUnitType.Star);
             TwoColumn(properties, col, widthType, content);
+        }
+
+        private AvaloniaProperty GetInputControlValueProperty(Control inputControl)
+        {
+            if (inputControl is ComboBox)
+            {
+                return ComboBox.SelectedValueProperty;
+            }
+            if (inputControl is TextBox)
+            {
+                return TextBox.TextProperty;
+            }
+            if (inputControl is NumericUpDown)
+            {
+                return NumericUpDown.ValueProperty;
+            }
+            if (inputControl is DatePicker)
+            {
+                return DatePicker.SelectedDateProperty;
+            }
+            if (inputControl is ToggleSwitch)
+            {
+                return ToggleSwitch.IsCheckedProperty;
+            }
+            return TextBox.TextProperty;
+        }
+
+        private bool IsDateTime(Type type)
+        {
+            if (type.GenericTypeArguments.Length <= 0)
+            {
+                return false;
+            }
+            var dateTimeType = type.GenericTypeArguments.FirstOrDefault(item => item.Name == nameof(DateTime));
+            if (dateTimeType == null)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void OneColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
+        {
+            Grid grid = new()
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+            };
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
+            var labels = new List<Control>();
+            var inputControls = new List<Control>();
+            int count = 0;
+            int propertyIndex = 0;
+            for (int i = 0; i < properties.Count * 2; i++)
+            {
+                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
+            }
+            foreach (var property in properties)
+            {
+                inputControls.Add(CreateInputControl(property));
+                labels.Add(CreateLabelForNameProperty(property));
+                Grid.SetColumn(labels[propertyIndex], 0);
+                Grid.SetColumn(inputControls[propertyIndex], 0);
+                for (int i = 0; i < 2; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Grid.SetRow(labels[propertyIndex], count);
+                        count++;
+                        continue;
+                    }
+                    Grid.SetRow(inputControls[propertyIndex], count);
+                    count++;
+                }
+                propertyIndex++;
+            }
+            foreach (var label in labels)
+            {
+                grid.Children.Add(label);
+            }
+            foreach (var inputControl in inputControls)
+            {
+                grid.Children.Add(inputControl);
+            }
+            if (content == null)
+            {
+                return;
+            }
+            content.Content = grid;
+        }
+
+        private void SetGrid(List<Control> stackPanels, PropertyInfo property, int row, int col)
+        {
+            var stackPanel = CreateStackPanel(property);
+            stackPanels.Add(stackPanel);
+            Grid.SetColumn(stackPanel, col);
+            Grid.SetRow(stackPanel, row);
         }
 
         private void TwoColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
@@ -153,171 +342,16 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             content.Content = grid;
         }
 
-        private void OneColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
+        private void UpdateTemplate(TemplateAppliedEventArgs e)
         {
-            Grid grid = new()
-            {
-                HorizontalAlignment = HorizontalAlignment.Center,
-            };
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
-            var labels = new List<Control>();
-            var inputControls = new List<Control>();
-            int count = 0;
-            int propertyIndex = 0;
-            for (int i = 0; i < properties.Count * 2; i++)
-            {
-                grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
-            }
-            foreach (var property in properties)
-            {
-                inputControls.Add(CreateInputControl(property));
-                labels.Add(CreateLabelForNameProperty(property));
-                Grid.SetColumn(labels[propertyIndex], 0);
-                Grid.SetColumn(inputControls[propertyIndex], 0);
-                for (int i = 0; i < 2; i++)
-                {
-                    if (i % 2 == 0)
-                    {
-                        Grid.SetRow(labels[propertyIndex], count);
-                        count++;
-                        continue;
-                    }
-                    Grid.SetRow(inputControls[propertyIndex], count);
-                    count++;
-                }
-                propertyIndex++;
-            }
-            foreach (var label in labels)
-            {
-                grid.Children.Add(label);
-            }
-            foreach (var inputControl in inputControls)
-            {
-                grid.Children.Add(inputControl);
-            }
-            if (content == null)
+            var contenCotrol = e.NameScope.Find<ContentControl>(CONTENT_CONTROL_KEY);
+            if (contenCotrol == null)
             {
                 return;
             }
-            content.Content = grid;
-        }
+            var properties = SelectedObject.GetType().GetProperties().Where(prop => PropertyHelper.GetBrowsable(prop)).ToList();
 
-        private void SetGrid(List<Control> stackPanels, PropertyInfo property, int row, int col)
-        {
-            var stackPanel = CreateStackPanel(property);
-            stackPanels.Add(stackPanel);
-            Grid.SetColumn(stackPanel, col);
-            Grid.SetRow(stackPanel, row);
+            GenerateEditor(contenCotrol, properties);
         }
-
-        private Control CreateStackPanel(PropertyInfo property)
-        {
-            StackPanel stackPanel = new()
-            {
-                Orientation = Orientation.Vertical
-            };
-            var label = CreateLabelForNameProperty(property);
-            var inputControl = CreateInputControl(property);
-            stackPanel.Children.Add(label);
-            stackPanel.Children.Add(inputControl);
-            return stackPanel;
-        }
-
-        private Control CreateLabelForNameProperty(PropertyInfo propertyInfo)
-        {
-            var attribute = propertyInfo.GetCustomAttributes(typeof(DisplayNameAttribute), false).ToList();
-            var displayName = propertyInfo.Name;
-            if (attribute.Count > 0)
-            {
-                displayName = (attribute.First() as DisplayNameAttribute).DisplayName;
-            }
-            TextBlock textBlock = new()
-            {
-                Text = displayName,
-                Margin = new Thickness(10),
-                HorizontalAlignment = HorizontalAlignment.Left,
-                VerticalAlignment = VerticalAlignment.Center,
-            };
-            return textBlock;
-        }
-
-        private Control CreateInputControl(PropertyInfo propertyInfo)
-        {
-            var inputControl = CreateInputFromType(propertyInfo.PropertyType, propertyInfo);
-            Binding binding = new(propertyInfo.Name)
-            {
-                Source = SelectedObject,
-                Mode = BindingMode.TwoWay
-            };
-            inputControl.Bind(GetInputControlValueProperty(inputControl), binding);
-            return inputControl;
-        }
-
-        private Control CreateInputFromType(Type type, PropertyInfo property)
-        {
-            if (type == typeof(string))
-            {
-                return new TextBox()
-                {
-                    Margin = new Thickness(10),
-                    Height = 40
-                };
-            }
-            if (type.IsSubclassOf(typeof(Enum)))
-            {
-                return new ComboBox()
-                {
-                    ItemsSource = Enum.GetValues(type),
-                    Margin = new Thickness(10),
-                    Height = 40
-                };
-            }
-            if (type.Name == (nameof(DateTime)))
-            {
-                return new DatePicker()
-                {
-                };
-            }
-            if (type == typeof(int) || type == typeof(double) || type == typeof(long) || type == typeof(float))
-            {
-                return new NumericUpDown()
-                {
-                    Margin = new Thickness(10),
-                    Height = 40
-                };
-            }
-            return new TextBox()
-            {
-                Margin = new Thickness(10),
-                Height = 40
-            };
-        }
-
-        private AvaloniaProperty GetInputControlValueProperty(Control inputControl)
-        {
-            if (inputControl is ComboBox)
-            {
-                return ComboBox.SelectedValueProperty;
-            }
-            if (inputControl is TextBox)
-            {
-                return TextBox.TextProperty;
-            }
-            if (inputControl is NumericUpDown)
-            {
-                return NumericUpDown.ValueProperty;
-            }
-            if (inputControl is DatePicker)
-            {
-                return DatePicker.SelectedDateProperty;
-            }
-            return TextBox.TextProperty;
-        }
-    }
-
-    public enum Columns
-    {
-        One,
-        Two
     }
 }
