@@ -25,6 +25,7 @@
 	</Application.Styles>
 	<Application.Resources>
 		<ResourceDictionary>
+			<FontFamily x:Key="Roboto">avares://SchoolManagement.UI/Assets/Fonts#Roboto</FontFamily>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceInclude Source="avares://SchoolManagement.UI/CommonResources.axaml" />
 				<ResourceInclude Source="avares://SchoolManagement.UI/Languages/Message-vn.axaml" />

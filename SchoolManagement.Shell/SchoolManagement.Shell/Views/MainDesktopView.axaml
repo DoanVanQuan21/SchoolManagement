@@ -13,7 +13,7 @@
     x:DataType="vm:MainViewModel"
     Background="{actipro:ThemeResource Container1BackgroundBrush}"
     Closing="Window_Closing"
-	FontFamily=""
+    FontFamily="{StaticResource Roboto}"
     Icon="avares://SchoolManagement.UI/Assets/Images/logo/app_logo.ico"
     Loaded="Window_Loaded"
     mc:Ignorable="d">

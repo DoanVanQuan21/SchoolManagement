@@ -12,6 +12,18 @@
     <None Remove="Assets\Fonts\Quicksand\Quicksand-Medium.ttf" />
     <None Remove="Assets\Fonts\Quicksand\Quicksand-Regular.ttf" />
     <None Remove="Assets\Fonts\Quicksand\Quicksand-SemiBold.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Black.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-BlackItalic.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Bold.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-BoldItalic.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Italic.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Light.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-LightItalic.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Medium.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-MediumItalic.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Regular.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-Thin.ttf" />
+    <None Remove="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf" />
     <None Remove="Assets\Images\logo.png" />
     <None Remove="Assets\Images\logo\app_logo.ico" />
   </ItemGroup>
@@ -35,6 +47,42 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Black.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-BlackItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Bold.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-BoldItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Italic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Light.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-LightItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Medium.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-MediumItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-Thin.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
     <AvaloniaResource Include="Assets\Images\logo\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
@@ -61,45 +109,6 @@
     <AvaloniaResource Include="Assets\Images\logo\app_logo.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Assets\Fonts\Roboto\Roboto-Black.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-BlackItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Bold.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-BoldItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Italic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Light.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-LightItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Medium.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-MediumItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Regular.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-Thin.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>

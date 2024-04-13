@@ -3,6 +3,7 @@ using ActiproSoftware.UI.Avalonia.Themes.Generation;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using Prism.DryIoc;
 using Prism.Ioc;
 using SchoolManagement.Core.avalonia;
@@ -19,6 +20,7 @@ using SchoolManagement.UI.Geometry;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace SchoolManagement.Shell
 {
@@ -35,7 +37,6 @@ namespace SchoolManagement.Shell
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
-
             // Customize the theme definition
             if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is not null))
             {

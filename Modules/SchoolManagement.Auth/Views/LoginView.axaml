@@ -9,7 +9,6 @@
     x:DataType="vm:LoginViewModel"
     Background="Transparent"
     mc:Ignorable="d">
-
 	<Grid
         MaxWidth="450"
         Margin="10"
@@ -41,6 +40,7 @@
 		<TextBox
             Grid.Row="2"
             Classes="accent"
+            FontFamily="{StaticResource Roboto}"
             Text="{Binding User.Username}"
             Watermark="Tên đăng nhập" />
 		<StackPanel
