@@ -3,6 +3,7 @@ using SchoolManagement.Auth;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Managers;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
@@ -15,10 +16,13 @@ namespace SchoolManagement.Shell.ViewModels
     {
         public MainViewModel()
         {
+            User = new();
             InitViewFollowPlatformAsync().GetAwaiter();
         }
 
         public override string Title => "Main View";
+
+        public override User User { get; protected set; }
 
         protected override async Task InitViewFollowPlatformAsync()
         {
@@ -63,7 +67,7 @@ namespace SchoolManagement.Shell.ViewModels
         {
             if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
             {
-                SetMainView(new MainMobileView());
+                SetMainView(new DesktopContentView());
 
                 return;
             }

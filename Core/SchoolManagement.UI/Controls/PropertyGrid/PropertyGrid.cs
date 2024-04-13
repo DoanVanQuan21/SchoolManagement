@@ -1,31 +1,29 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
 using Avalonia.Data;
 using Avalonia.Layout;
-using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Contracts;
+using Avalonia.Styling;
+using DynamicData;
 using SchoolManagement.UI.Helpers;
 using System.ComponentModel;
 using System.Reflection;
 
 namespace SchoolManagement.UI.Controls.PropertyGrid
 {
-    public class PropertyGrid : TemplatedControl
+    public class PropertyGrid : TemplatedControl, IStyleable
     {
         private readonly string CONTENT_CONTROL_KEY = "PART_ContentControl";
-        private readonly INotificationManager _notificationManager;
 
         public static readonly StyledProperty<object> SelectedObjectProperty =
             AvaloniaProperty.Register<PropertyGrid, object>(nameof(SelectedObject));
 
         public static readonly StyledProperty<Columns> ColumnProperty =
-            AvaloniaProperty.Register<PropertyGrid, Columns>(nameof(ColumnProperty));
+            AvaloniaProperty.Register<PropertyGrid, Columns>(nameof(Column), Columns.Two);
 
-        public PropertyGrid()
+        static PropertyGrid()
         {
-            _notificationManager = Ioc.Resolve<INotificationManager>();
+            var t = 0;
         }
 
         public object SelectedObject
@@ -42,19 +40,27 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            var contenCotrol = e.NameScope.Find(CONTENT_CONTROL_KEY) as ContentPresenter;
-            if (contenCotrol != null)
+            base.OnApplyTemplate(e);
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
             {
-                _notificationManager.ShowError($"{CONTENT_CONTROL_KEY} không tồn tại hoặc bị lỗi!");
+                Column = Columns.One;
+            }
+            UpdateTemplate(e);
+        }
+
+        private void UpdateTemplate(TemplateAppliedEventArgs e)
+        {
+            var contenCotrol = e.NameScope.Find<ContentControl>(CONTENT_CONTROL_KEY);
+            if (contenCotrol == null)
+            {
                 return;
             }
             var properties = SelectedObject.GetType().GetProperties().Where(prop => PropertyHelper.GetBrowsable(prop)).ToList();
 
             GenerateEditor(contenCotrol, properties);
-            base.OnApplyTemplate(e);
         }
 
-        private void GenerateEditor(ContentPresenter content, List<PropertyInfo> properties)
+        private void GenerateEditor(ContentControl content, List<PropertyInfo> properties)
         {
             content.Content = null;
             var col = 2;
@@ -65,7 +71,7 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             GridLength widthType = new();
             if (Column == Columns.One)
             {
-                widthType = new GridLength(300, GridUnitType.Pixel);
+                widthType = new GridLength(1, GridUnitType.Star);
                 OneColumn(properties, col, widthType, content);
                 return;
             }
@@ -73,10 +79,12 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             TwoColumn(properties, col, widthType, content);
         }
 
-        private void TwoColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentPresenter content)
+        private void TwoColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
         {
             Grid grid = new()
             {
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
             for (int i = 0; i < col * 2; i++)
             {
@@ -145,30 +153,39 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             content.Content = grid;
         }
 
-        private void OneColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentPresenter content)
+        private void OneColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
         {
             Grid grid = new()
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
             };
-            for (int i = 0; i < col; i++)
-            {
-                grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
-            }
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
             var labels = new List<Control>();
             var inputControls = new List<Control>();
             int count = 0;
-
-            foreach (var property in properties)
+            int propertyIndex = 0;
+            for (int i = 0; i < properties.Count * 2; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(1, GridUnitType.Auto) });
+            }
+            foreach (var property in properties)
+            {
                 inputControls.Add(CreateInputControl(property));
                 labels.Add(CreateLabelForNameProperty(property));
-                Grid.SetColumn(labels[count], 0);
-                Grid.SetColumn(inputControls[count], 1);
-                Grid.SetRow(labels[count], count);
-                Grid.SetRow(inputControls[count], count);
-                count++;
+                Grid.SetColumn(labels[propertyIndex], 0);
+                Grid.SetColumn(inputControls[propertyIndex], 0);
+                for (int i = 0; i < 2; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        Grid.SetRow(labels[propertyIndex], count);
+                        count++;
+                        continue;
+                    }
+                    Grid.SetRow(inputControls[propertyIndex], count);
+                    count++;
+                }
+                propertyIndex++;
             }
             foreach (var label in labels)
             {
@@ -209,10 +226,14 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
         private Control CreateLabelForNameProperty(PropertyInfo propertyInfo)
         {
             var attribute = propertyInfo.GetCustomAttributes(typeof(DisplayNameAttribute), false).ToList();
-            var att = attribute.First() as DisplayNameAttribute;
+            var displayName = propertyInfo.Name;
+            if (attribute.Count > 0)
+            {
+                displayName = (attribute.First() as DisplayNameAttribute).DisplayName;
+            }
             TextBlock textBlock = new()
             {
-                Text = att?.DisplayName,
+                Text = displayName,
                 Margin = new Thickness(10),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,

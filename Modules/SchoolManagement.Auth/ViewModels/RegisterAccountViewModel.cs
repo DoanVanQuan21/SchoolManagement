@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
 namespace SchoolManagement.Auth.ViewModels
@@ -8,11 +9,14 @@ namespace SchoolManagement.Auth.ViewModels
     {
         public RegisterAccountViewModel() : base()
         {
+            User = new User();
         }
 
         public ICommand ClickedPreviewMainViewCommand { get; set; }
         public ICommand ClickedRegisterAccountCommand { get; set; }
         public override string Title => "Register Account";
+
+        public override User User { get; protected set; }
 
         protected override void RegisterCommand()
         {

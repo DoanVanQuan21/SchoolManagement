@@ -8,16 +8,22 @@
     xmlns:vm="clr-namespace:SchoolManagement.SettingAccount.ViewModels"
     x:DataType="vm:SettingAccountViewModel"
     mc:Ignorable="d">
-	<Grid>
+	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="2*" />
-			<RowDefinition Height="8*" />
+			<RowDefinition Height="100" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<cc:PropertyGrid
-            Grid.Column="1"
+		<TextBlock
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            Classes="accent">
+			hêlo
+		</TextBlock>
+		<ScrollViewer
+            Grid.Row="1"
             HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Column="Two"
-            SelectedObject="{Binding User}" />
+            VerticalAlignment="Stretch">
+			<cc:PropertyGrid SelectedObject="{Binding User}" Template="{StaticResource PropertyGridTemplate}" />
+		</ScrollViewer>
 	</Grid>
 </UserControl>

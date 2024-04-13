@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.UI.Geometry;
 using System;
@@ -16,8 +17,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         public MainContentViewModel()
         {
-            AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry });
-            AppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
+            User = new();
         }
 
         public ObservableCollection<AppMenu> AppMenus => RootContext.AppMenus;
@@ -28,6 +28,8 @@ namespace SchoolManagement.Shell.ViewModels
         { get => isOpenPane; set { SetProperty(ref isOpenPane, value); } }
 
         public override string Title => "Main Content";
+
+        public override User User { get; protected set; }
 
         protected override void RegisterCommand()
         {

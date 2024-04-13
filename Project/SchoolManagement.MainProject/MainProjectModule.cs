@@ -1,6 +1,11 @@
 ﻿using Prism.Ioc;
 using SchoolManagement.Core.Contants;
+using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.PrismAvalonia;
+using SchoolManagement.MainProject.Views;
+using SchoolManagement.SettingAccount.Views;
+using SchoolManagement.UI.Geometry;
 
 namespace SchoolManagement.MainProject
 {
@@ -21,6 +26,7 @@ namespace SchoolManagement.MainProject
         public override void OnInitialized(IContainerProvider containerProvider)
         {
             //TODO
+            Init();
         }
 
         public override void Register()

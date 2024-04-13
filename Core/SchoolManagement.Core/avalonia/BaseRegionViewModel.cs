@@ -41,7 +41,7 @@ namespace SchoolManagement.Core.avalonia
 
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
-        public User User => RootContext.CurrentUser;
+        public abstract User User { get; protected set; }
 
         protected IDialogService DialogService { get; private set; }
 

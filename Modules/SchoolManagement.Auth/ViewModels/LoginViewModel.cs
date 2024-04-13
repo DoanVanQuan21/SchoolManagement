@@ -5,6 +5,7 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using System.Windows.Input;
 
@@ -18,6 +19,7 @@ namespace SchoolManagement.Auth.ViewModels
 
         public LoginViewModel() : base()
         {
+            User = new();
             _userService = Ioc.Resolve<IUserService>();
             _appManager = Ioc.Resolve<IAppManager>();
             LogoPath = "avares://SchoolManagement.UI/Assets/Images/logo/logo.png";
@@ -32,6 +34,8 @@ namespace SchoolManagement.Auth.ViewModels
         { get => logoPath; set { SetProperty(ref logoPath, value); } }
 
         public override string Title => "Đăng nhập";
+
+        public override User User { get; protected set; }
 
         protected override void RegisterCommand()
         {

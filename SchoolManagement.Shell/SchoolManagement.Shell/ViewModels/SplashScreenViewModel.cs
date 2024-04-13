@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Shell.ViewModels
@@ -28,6 +29,8 @@ namespace SchoolManagement.Shell.ViewModels
         { get => processValue; set { SetProperty(ref processValue, value); } }
 
         public override string Title => "Splass Screen";
+
+        public override User User { get; protected set; }
 
         private async Task InitApp()
         {

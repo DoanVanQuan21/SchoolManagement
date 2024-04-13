@@ -35,6 +35,16 @@ namespace SchoolManagement.Core.Services
             }
             if (_appManager.BootSetting.ServerInfor != null)
             {
+                if (!OperatingSystem.IsWindows())
+                {
+                    ServerInfor = new()
+                    {
+                        ServerName = "192.168.1.102",
+                        User = "schoolmanagement",
+                        Password = "123",
+                    };
+                    return;
+                }
                 ServerInfor = _appManager.BootSetting.ServerInfor;
                 return;
             }

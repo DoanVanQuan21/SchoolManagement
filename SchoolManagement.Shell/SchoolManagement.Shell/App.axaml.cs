@@ -1,5 +1,5 @@
+﻿using ActiproSoftware.UI.Avalonia.Themes;
 using ActiproSoftware.UI.Avalonia.Themes.Generation;
-using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
@@ -7,17 +7,18 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Models.Common;
+using SchoolManagement.MainProject.Views;
+using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.Shell.Helpers;
 using SchoolManagement.Shell.Services.Contracts;
 using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
 using SchoolManagement.Shell.Views.SplashScreen;
+using SchoolManagement.UI.Geometry;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using Avalonia.Styling;
-using SchoolManagement.Core.Contracts;
 
 namespace SchoolManagement.Shell
 {
@@ -64,6 +65,7 @@ namespace SchoolManagement.Shell
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            InitMenu();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -84,6 +86,12 @@ namespace SchoolManagement.Shell
                 return Ioc.Resolve<MainDesktopView>();
             }
             return Ioc.Resolve<MainMobileView>();
+        }
+
+        private void InitMenu()
+        {
+            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView) });
+            RootContext.AppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
         }
     }
 }

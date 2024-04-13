@@ -4,18 +4,14 @@
     xmlns:local="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI">
 	<!--  Add Resources Here  -->
 	<ControlTemplate x:Key="PropertyGridTemplate" TargetType="{x:Type local:PropertyGrid}">
-		<Border
-            HorizontalAlignment="Stretch"
-            VerticalAlignment="Stretch"
-            Background="{TemplateBinding Background}"
-            BorderBrush="{TemplateBinding BorderBrush}"
-            BorderThickness="{TemplateBinding BorderThickness}">
-			<ContentPresenter
+		<ScrollViewer HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+			<ContentControl
                 x:Name="PART_ContentControl"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                HorizontalContentAlignment="Center"
-                VerticalContentAlignment="Center" />
-		</Border>
+                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}" />
+		</ScrollViewer>
 	</ControlTemplate>
 </ResourceDictionary>

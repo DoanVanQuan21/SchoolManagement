@@ -83,7 +83,11 @@
                         Margin="5"
                         Background="{actipro:ThemeResource Container3BackgroundBrush}"
                         CornerRadius="10">
-						<ContentControl Content="{Binding AppRegion.MainPage}" />
+						<ContentControl
+                            Margin="10"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Content="{Binding AppRegion.MainPage}" />
 					</Border>
 				</Grid>
 			</Border>

@@ -3,6 +3,7 @@ using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
 namespace SchoolManagement.Shell.ViewModels
@@ -11,6 +12,7 @@ namespace SchoolManagement.Shell.ViewModels
     {
         public CommonMenuViewModel()
         {
+            User = RootContext.CurrentUser;
         }
 
         public ICommand ChangeThemeCommand { get; set; }
@@ -18,6 +20,8 @@ namespace SchoolManagement.Shell.ViewModels
         public ICommand SearchTextCommand { get; set; }
         public ICommand SettingAccountCommand { get; set; }
         public override string Title => throw new System.NotImplementedException();
+
+        public override User User { get; protected set; }
 
         protected override void RegisterCommand()
         {

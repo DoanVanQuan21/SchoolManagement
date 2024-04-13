@@ -15,6 +15,8 @@ namespace SchoolManagement.Auth.ViewModels
         public ICommand SendRequestChangePasswordCommand { get; set; }
         public override string Title => "Forgot password";
 
+        public override User User { get; protected set; }
+
         protected override void RegisterCommand()
         {
             SendRequestChangePasswordCommand = new DelegateCommand(OnSend);
