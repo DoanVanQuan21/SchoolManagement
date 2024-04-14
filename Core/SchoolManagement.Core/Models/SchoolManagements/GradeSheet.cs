@@ -1,4 +1,7 @@
-﻿namespace SchoolManagement.Core.Models.SchoolManagements;
+﻿using System;
+using System.Collections.Generic;
+
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class GradeSheet
 {
@@ -6,9 +9,9 @@ public partial class GradeSheet
 
     public int ClassId { get; set; }
 
-    public int SubjectId { get; set; }
-
     public int StudentId { get; set; }
+
+    public int SubjectId { get; set; }
 
     public decimal? FirstRegularScore { get; set; }
 

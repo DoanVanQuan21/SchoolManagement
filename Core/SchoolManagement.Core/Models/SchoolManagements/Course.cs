@@ -1,12 +1,15 @@
-﻿namespace SchoolManagement.Core.Models.SchoolManagements;
+﻿using System;
+using System.Collections.Generic;
+
+namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class Course
 {
     public int ClassId { get; set; }
 
-    public int SubjectId { get; set; }
-
     public int TeacherId { get; set; }
+
+    public int SubjectId { get; set; }
 
     public int? NumberOfLessons { get; set; }
 

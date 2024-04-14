@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Core\SchoolManagement.Core\SchoolManagement.Core.csproj" />
-    <ProjectReference Include="..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\..\Core\SchoolManagement.Core\SchoolManagement.Core.csproj" />
+    <ProjectReference Include="..\..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
   </ItemGroup>
 
 </Project>

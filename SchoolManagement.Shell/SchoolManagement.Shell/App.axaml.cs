@@ -9,6 +9,7 @@ using Prism.Ioc;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
+using SchoolManagement.GradeSheetManagement.Views;
 using SchoolManagement.MainProject.Views;
 using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.Shell.Helpers;
@@ -93,6 +94,7 @@ namespace SchoolManagement.Shell
         {
             RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView) });
             RootContext.AppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
+            RootContext.AppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView) });
         }
     }
 }

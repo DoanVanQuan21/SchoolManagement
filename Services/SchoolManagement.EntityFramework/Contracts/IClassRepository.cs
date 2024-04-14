@@ -6,6 +6,6 @@ namespace SchoolManagement.EntityFramework.Contracts
     {
         T GetClassByID(int classID);
 
-        ObservableCollection<T> GetAllClassesByID(IList<T> ids);
+        ObservableCollection<T> GetAllClassesByID(IList<int> ids);
     }
 }

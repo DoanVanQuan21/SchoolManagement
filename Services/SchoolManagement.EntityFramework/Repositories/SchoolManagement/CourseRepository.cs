@@ -29,5 +29,9 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             _coursesOfTeacher.AddRange(courses);
             return _coursesOfTeacher;
         }
+        public List<int> GetClassIDs(int teacherID)
+        {
+            return GetCouseByTeacherID(teacherID).Select(item=>item.ClassId).ToList();
+        }
     }
 }

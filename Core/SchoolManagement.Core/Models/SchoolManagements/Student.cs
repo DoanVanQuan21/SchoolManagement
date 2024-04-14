@@ -11,6 +11,10 @@ public partial class Student
 
     public string? StudentCode { get; set; }
 
+    public int ClassId { get; set; }
+
+    public virtual Class Class { get; set; } = null!;
+
     public virtual ICollection<GradeSheet> GradeSheets { get; set; } = new List<GradeSheet>();
 
     public virtual User User { get; set; } = null!;

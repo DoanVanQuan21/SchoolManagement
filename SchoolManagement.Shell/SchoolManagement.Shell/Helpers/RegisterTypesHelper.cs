@@ -46,6 +46,8 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IUserService, UserService>();
             containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
             containerRegistry.RegisterSingleton<ICourseService, CourseService>();
+            containerRegistry.RegisterSingleton<IClassService, ClassService>();
+            containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
         }
 
         public static void RegisterTypesModuleMainProject(IContainerRegistry containerRegistry)

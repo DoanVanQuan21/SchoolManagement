@@ -7,5 +7,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         ObservableCollection<T> GetCouseByTeacherID(int teacherID);
 
         ObservableCollection<T> GetCouseByClassID(int classID);
+        List<int> GetClassIDs(int teacherID);
     }
 }

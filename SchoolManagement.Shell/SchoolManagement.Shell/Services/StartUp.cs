@@ -32,6 +32,7 @@ namespace SchoolManagement.Shell.Services
 
             AddModule(DllName.AuthModule);
             AddModule(DllName.SettingAccountModule);
+            AddModule(DllName.GradeSheetModule);
             LoadModule();
         }
 

@@ -11,9 +11,9 @@ public partial class Department
 
     public string? DepartmentName { get; set; }
 
-    public string? Image { get; set; }
-
     public DateTime? FoundingDate { get; set; }
+
+    public string? Image { get; set; }
 
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

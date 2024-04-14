@@ -5,23 +5,23 @@ using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class CourseService : ICourseService
+    public class ClassService : IClassService
     {
         private readonly ISchoolManagementSevice _schoolManagementSevice;
 
-        public CourseService()
+        public ClassService()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
-        public List<int> GetClassIDs(int teacherID)
+        public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)
         {
-            return _schoolManagementSevice.CourseRepository.GetClassIDs(teacherID);
+            return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
         }
 
-        public ObservableCollection<Course> GetCourseByTeacherID(int TeacherID)
+        public Class GetClassByID(int classID)
         {
-            return _schoolManagementSevice.CourseRepository.GetCouseByTeacherID(TeacherID);
+            return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
         }
     }
 }

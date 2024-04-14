@@ -41,7 +41,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ModulesProject", "ModulesPr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.SettingAccount", "Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj", "{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.GradeSheetManagement", "SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj", "{5EC7D500-1443-4546-B029-4C742642061E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Entity", "Services\SchoolManagement.Entity\SchoolManagement.Entity.csproj", "{198E0854-08A6-4931-9217-266A3884DED9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.GradeSheetManagement", "Project\ModulesProject\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj", "{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,10 +107,14 @@ Global
 		{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5EC7D500-1443-4546-B029-4C742642061E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EC7D500-1443-4546-B029-4C742642061E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EC7D500-1443-4546-B029-4C742642061E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EC7D500-1443-4546-B029-4C742642061E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{198E0854-08A6-4931-9217-266A3884DED9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{198E0854-08A6-4931-9217-266A3884DED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{198E0854-08A6-4931-9217-266A3884DED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{198E0854-08A6-4931-9217-266A3884DED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,7 +130,8 @@ Global
 		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
 		{1630DD87-584A-473B-B345-5F6B471F780D} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
 		{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE} = {1630DD87-584A-473B-B345-5F6B471F780D}
-		{5EC7D500-1443-4546-B029-4C742642061E} = {1630DD87-584A-473B-B345-5F6B471F780D}
+		{198E0854-08A6-4931-9217-266A3884DED9} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
+		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88} = {1630DD87-584A-473B-B345-5F6B471F780D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}

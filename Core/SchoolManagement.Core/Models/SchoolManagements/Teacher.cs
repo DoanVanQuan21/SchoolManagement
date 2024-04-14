@@ -9,9 +9,9 @@ public partial class Teacher
 
     public int DepartmentId { get; set; }
 
-    public int UserId { get; set; }
-
     public int LeaderId { get; set; }
+
+    public int UserId { get; set; }
 
     public string? TeacherCode { get; set; }
 
@@ -39,9 +39,15 @@ public partial class Teacher
 
     public string? SelfIntroduction { get; set; }
 
+    public int SubjectId { get; set; }
+
+    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
     public virtual Department Department { get; set; } = null!;
+
+    public virtual Subject Subject { get; set; } = null!;
 
     public virtual User User { get; set; } = null!;
 }

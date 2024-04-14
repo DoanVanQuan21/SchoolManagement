@@ -9,27 +9,27 @@
     d:DesignWidth="800"
     x:DataType="vm:GradeSheetManagementViewModel"
     mc:Ignorable="d">
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="3*" />
-			<ColumnDefinition Width="7*" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="50" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<ComboBox
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="7*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ComboBox
             Grid.Row="0"
             Grid.Column="0"
             Margin="10"
             Classes="theme-outline accent"
-            ItemsSource="{Binding Courses}"
+            ItemsSource="{Binding Classes}"
             PlaceholderText="Chọn lớp học">
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<TextBlock Text="{Binding Name}" />
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-	</Grid>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ClassName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
 </UserControl>
