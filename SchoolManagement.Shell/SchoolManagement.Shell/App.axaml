@@ -6,30 +6,31 @@
     xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation"
     xmlns:ui="clr-namespace:SchoolManagement.UI.ThemeGenerators;assembly=SchoolManagement.UI"
     RequestedThemeVariant="Default">
-	<!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
+    <!--  "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options.  -->
 
-	<Application.Styles>
-		<FluentTheme />
-		<actipro:ModernTheme>
-			<actipro:ModernTheme.Definition>
-				<generation:ThemeDefinition>
-					<generation:ThemeDefinition.Generator>
-						<ui:CustomThemeGenerator />
-					</generation:ThemeDefinition.Generator>
-				</generation:ThemeDefinition>
-			</actipro:ModernTheme.Definition>
-		</actipro:ModernTheme>
-		<!--    -->
-		<StyleInclude Source="avares://Notification.Avalonia/Themes/Generic.xaml" />
-		<StyleInclude Source="avares://SchoolManagement.UI/Themes/Based/CommonStyles.axaml" />
-	</Application.Styles>
-	<Application.Resources>
-		<ResourceDictionary>
-			<FontFamily x:Key="Roboto">avares://SchoolManagement.UI/Assets/Fonts#Roboto</FontFamily>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceInclude Source="avares://SchoolManagement.UI/CommonResources.axaml" />
-				<ResourceInclude Source="avares://SchoolManagement.UI/Languages/Message-vn.axaml" />
-			</ResourceDictionary.MergedDictionaries>
-		</ResourceDictionary>
-	</Application.Resources>
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml" />
+        <actipro:ModernTheme>
+            <actipro:ModernTheme.Definition>
+                <generation:ThemeDefinition>
+                    <generation:ThemeDefinition.Generator>
+                        <ui:CustomThemeGenerator />
+                    </generation:ThemeDefinition.Generator>
+                </generation:ThemeDefinition>
+            </actipro:ModernTheme.Definition>
+        </actipro:ModernTheme>
+        <!--    -->
+        <StyleInclude Source="avares://Notification.Avalonia/Themes/Generic.xaml" />
+        <StyleInclude Source="avares://SchoolManagement.UI/Themes/Based/CommonStyles.axaml" />
+    </Application.Styles>
+    <Application.Resources>
+        <ResourceDictionary>
+            <FontFamily x:Key="Roboto">avares://SchoolManagement.UI/Assets/Fonts#Roboto</FontFamily>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://SchoolManagement.UI/CommonResources.axaml" />
+                <ResourceInclude Source="avares://SchoolManagement.UI/Languages/Message-vn.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>

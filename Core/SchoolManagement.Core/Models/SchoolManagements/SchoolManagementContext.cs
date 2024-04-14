@@ -143,15 +143,15 @@ public partial class SchoolManagementContext : DbContext
                 .ValueGeneratedNever()
                 .HasColumnName("GradeSheetID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
-            entity.Property(e => e.FinalScore).HasColumnType("decimal(2, 2)");
-            entity.Property(e => e.FirstRegularScore).HasColumnType("decimal(2, 2)");
-            entity.Property(e => e.FourRegularScore).HasColumnType("decimal(2, 2)");
-            entity.Property(e => e.MidtermScore).HasColumnType("decimal(2, 2)");
-            entity.Property(e => e.SecondRegularScore).HasColumnType("decimal(2, 2)");
-            entity.Property(e => e.SemesterAverage).HasColumnType("decimal(2, 2)");
+            entity.Property(e => e.FinalScore).HasColumnType("float");
+            entity.Property(e => e.FirstRegularScore).HasColumnType("float");
+            entity.Property(e => e.FourRegularScore).HasColumnType("float");
+            entity.Property(e => e.MidtermScore).HasColumnType("float");
+            entity.Property(e => e.SecondRegularScore).HasColumnType("float");
+            entity.Property(e => e.SemesterAverage).HasColumnType("float");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
-            entity.Property(e => e.ThirdRegularScore).HasColumnType("decimal(2, 2)");
+            entity.Property(e => e.ThirdRegularScore).HasColumnType("float");
 
             entity.HasOne(d => d.Class).WithMany(p => p.GradeSheets)
                 .HasForeignKey(d => d.ClassId)

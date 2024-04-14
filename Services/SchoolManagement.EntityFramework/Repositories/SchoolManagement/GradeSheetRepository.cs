@@ -34,7 +34,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                     return _grades;
                 }
                 _grades.Clear();
-                var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID);
+                var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).ToList() ;
                 if (grades == null)
                 {
                     return _grades;

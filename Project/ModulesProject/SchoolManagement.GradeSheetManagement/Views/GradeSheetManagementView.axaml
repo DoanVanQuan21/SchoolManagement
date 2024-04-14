@@ -31,5 +31,23 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
+        <DataGrid
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            CanUserReorderColumns="False"
+            CanUserSortColumns="True"
+            ItemsSource="{Binding GradeSheets}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding GradeSheetId}" Header="STT" />
+                <DataGridTextColumn Binding="{Binding FirstRegularScore}" Header="TX1" />
+                <DataGridTextColumn Binding="{Binding SecondRegularScore}" Header="TX2" />
+                <DataGridTextColumn Binding="{Binding ThirdRegularScore}" Header="TX3" />
+                <DataGridTextColumn Binding="{Binding FourRegularScore}" Header="TX4" />
+                <DataGridTextColumn Binding="{Binding MidScore}" Header="Giữa kỳ" />
+                <DataGridTextColumn Binding="{Binding FinalScore}" Header="Cuối kỳ" />
+                <DataGridTextColumn Binding="{Binding SemesterAverage}" Header="Điểm TB" />
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate />
+        </DataGrid>
     </Grid>
 </UserControl>

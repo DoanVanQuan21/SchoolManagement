@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SchoolManagement.Core.Models.SchoolManagements;
+﻿namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class GradeSheet
 {
@@ -13,19 +10,24 @@ public partial class GradeSheet
 
     public int SubjectId { get; set; }
 
-    public decimal? FirstRegularScore { get; set; }
+    public float? FirstRegularScore { get; set; }
 
-    public decimal? SecondRegularScore { get; set; }
+    public float? SecondRegularScore { get; set; }
 
-    public decimal? ThirdRegularScore { get; set; }
+    public float? ThirdRegularScore { get; set; }
 
-    public decimal? FourRegularScore { get; set; }
+    public float? FourRegularScore { get; set; }
 
-    public decimal? MidtermScore { get; set; }
+    public float? MidtermScore { get; set; }
 
-    public decimal? FinalScore { get; set; }
+    public float? FinalScore { get; set; }
 
-    public decimal? SemesterAverage { get; set; }
+    public float? SemesterAverage { get; set; }
+
+    public string? Ranked { get; }
+    public string? StudentName { get; }
+    public string? SubjectName { get; }
+    public string? ClassName { get;  }
 
     public virtual Class Class { get; set; } = null!;
 

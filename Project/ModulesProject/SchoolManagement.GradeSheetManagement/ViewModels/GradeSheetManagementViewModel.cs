@@ -8,15 +8,12 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
     internal class GradeSheetManagementViewModel : BaseRegionViewModel
     {
-        public override string Title => "Quản lý điểm";
-        private readonly IGradeSheetService _gradeSheetService;
-        private readonly ICourseService _courseService;
         private readonly IClassService _classService;
+        private readonly ICourseService _courseService;
+        private readonly IGradeSheetService _gradeSheetService;
         private readonly ITeacherService _teacherService;
-        public override User User { get; protected set; }
-        public ObservableCollection<GradeSheet> GradeSheets { get; set; }
-        public ObservableCollection<Course> Courses { get; set; }
-        public ObservableCollection<Class> Classes { get; set; }
+        private Class _class;
+        private Teacher? teacher;
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -24,14 +21,41 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             _classService = Ioc.Resolve<IClassService>();
             _teacherService = Ioc.Resolve<ITeacherService>();
             User = RootContext.CurrentUser;
+            Class = new();
             GradeSheets = new();
-            Courses = new();
             GetClassIDsOfCourse();
+        }
+
+        public Class Class
+        { get => _class; set { SetProperty(ref _class, value);
+                GetGradeSheet();
+            } }
+
+        public ObservableCollection<Class> Classes { get; set; }
+        public ObservableCollection<GradeSheet> GradeSheets { get; set; }
+        public override string Title => "Quản lý điểm";
+        public override User User { get; protected set; }
+        private void GetGradeSheet()
+        {
+            if (teacher == null || Class==null)
+            {
+                return;
+            }
+
+            var gradeSheets = _gradeSheetService.GetGradeSheets(teacher.SubjectId,Class.ClassId);
+            if(gradeSheets == null)
+            {
+                return;
+            }
+            GradeSheets?.Clear();
+            GradeSheets?.AddRange(gradeSheets);
         }
         private void GetClassIDsOfCourse()
         {
-            var teacher = _teacherService.GetTeacherInfo(User.UserId);
-            if(teacher == null) {
+            Classes = new();
+            teacher = _teacherService.GetTeacherInfo(User.UserId);
+            if (teacher == null)
+            {
                 //TODO
                 //ADD MESSAGE
                 return;
@@ -44,7 +68,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 //ADD MESSAGE
                 return;
             }
-            Classes = new();
             Classes.AddRange(classes);
         }
     }
