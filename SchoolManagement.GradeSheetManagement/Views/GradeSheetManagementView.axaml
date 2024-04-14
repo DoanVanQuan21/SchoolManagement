@@ -1,0 +1,35 @@
+<UserControl
+    x:Class="SchoolManagement.GradeSheetManagement.Views.GradeSheetManagementView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:GradeSheetManagementViewModel"
+    mc:Ignorable="d">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="3*" />
+			<ColumnDefinition Width="7*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<ComboBox
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Courses}"
+            PlaceholderText="Chọn lớp học">
+			<ComboBox.ItemTemplate>
+				<DataTemplate>
+					<TextBlock Text="{Binding Name}" />
+				</DataTemplate>
+			</ComboBox.ItemTemplate>
+		</ComboBox>
+	</Grid>
+</UserControl>

@@ -2,17 +2,20 @@
 using Prism.Ioc;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Events;
 
 namespace SchoolManagement.Core.PrismAvalonia
 {
     public abstract class BasePrismModule : ICustomModule
     {
-        protected readonly IEventAggregator _eventAggregator;
         protected readonly IAppManager _appManager;
+        protected readonly IEventAggregator _eventAggregator;
+
         public BasePrismModule()
         {
             _eventAggregator = Ioc.Resolve<IEventAggregator>();
             _appManager = Ioc.Resolve<IAppManager>();
+            _eventAggregator.GetEvent<LogoutSuccessEvent>().Subscribe(OnLogoutSuccess);
         }
 
         public abstract string ModuleName { get; }
@@ -27,7 +30,7 @@ namespace SchoolManagement.Core.PrismAvalonia
 
         public abstract void RegisterTypes(IContainerRegistry containerRegistry);
 
-        private void OnExit()
+        private void OnLogoutSuccess()
         {
             Dispose();
         }

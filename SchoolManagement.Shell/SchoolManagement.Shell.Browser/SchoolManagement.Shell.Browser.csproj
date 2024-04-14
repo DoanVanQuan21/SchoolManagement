@@ -31,6 +31,7 @@
     <ProjectReference Include="..\..\Modules\SchoolManagement.Database\SchoolManagement.Database.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
+    <ProjectReference Include="..\..\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj" />
     <ProjectReference Include="..\SchoolManagement.Shell\SchoolManagement.Shell.csproj" />
   </ItemGroup>
 </Project>

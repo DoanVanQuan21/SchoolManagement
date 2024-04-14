@@ -6,5 +6,6 @@
         public static string DatabaseModule = "SchoolManagement.Database.dll";
         public static string MainProjectModule = "SchoolManagement.MainProject.dll";
         public static string SettingAccountModule = "SchoolManagement.SettingAccount.dll";
+        public static string GradeSheetModule = "SchoolManagement.GradeSheetManagement.dll";
     }
 }

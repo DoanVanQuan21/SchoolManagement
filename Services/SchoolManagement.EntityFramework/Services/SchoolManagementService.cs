@@ -8,18 +8,20 @@ namespace SchoolManagement.EntityFramework.Services
 {
     public class SchoolManagementService : ISchoolManagementSevice
     {
-        private readonly IAppManager _appManager;
         private readonly IDatabaseInfoProvider _databaseInfoProvider;
         private SchoolManagementContext schoolManagementContext;
 
         public SchoolManagementService()
         {
-            _appManager = Ioc.Resolve<IAppManager>();
             _databaseInfoProvider = Ioc.Resolve<IDatabaseInfoProvider>();
             InitConnectionDatabase();
         }
 
         public UserRepository UserRepository { get; private set; }
+
+        public GradeSheetRepository GradeSheetRepository { get; private set; }
+
+        public CourseRepository CourseRepository { get; private set; }
 
         private void InitConnectionDatabase()
         {
@@ -30,6 +32,8 @@ namespace SchoolManagement.EntityFramework.Services
             }
             schoolManagementContext = new SchoolManagementContext(_databaseInfoProvider.ServerInfor.ConnectionString);
             UserRepository = new UserRepository(schoolManagementContext);
+            GradeSheetRepository = new GradeSheetRepository(schoolManagementContext);
+            CourseRepository = new CourseRepository(schoolManagementContext);
         }
     }
 }

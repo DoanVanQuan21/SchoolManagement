@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SchoolManagement.Core.Models.SchoolManagements;
+﻿namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class GradeSheet
 {

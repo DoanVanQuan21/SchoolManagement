@@ -3,6 +3,7 @@ using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
@@ -45,6 +46,7 @@ namespace SchoolManagement.Shell.ViewModels
         {
             RootContext.CurrentUser = new();
             SetMainView(new LoginView());
+            EventAggregator.GetEvent<LogoutSuccessEvent>().Publish();
         }
 
         private void OnSearch(object obj)
