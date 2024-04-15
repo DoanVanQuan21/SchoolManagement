@@ -349,6 +349,10 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             {
                 return;
             }
+            if (SelectedObject == null)
+            {
+                return;
+            }
             var properties = SelectedObject.GetType().GetProperties().Where(prop => PropertyHelper.GetBrowsable(prop)).ToList();
 
             GenerateEditor(contenCotrol, properties);

@@ -17,5 +17,12 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return _schoolManagementSevice.GradeSheetRepository.GetAllGradeSheet(subjectID, classID);
         }
+
+        public Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID)
+        {
+            return Task.Factory.StartNew(() => {
+                return GetGradeSheets(subjectID, classID);
+            });
+        }
     }
 }

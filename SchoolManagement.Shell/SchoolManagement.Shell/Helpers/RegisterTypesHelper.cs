@@ -9,6 +9,7 @@ using SchoolManagement.Shell.Services;
 using SchoolManagement.Core.Services;
 using SchoolManagement.Core.Managers;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using SchoolManagement.GradeSheetManagement.Views;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -58,6 +59,7 @@ namespace SchoolManagement.Shell.Helpers
 
         public static void RegisterDialog(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialog<EditGradeSheetView>();
         }
     }
 }

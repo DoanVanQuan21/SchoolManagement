@@ -6,5 +6,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
     public interface IGradeSheetService
     {
         ObservableCollection<GradeSheet> GetGradeSheets(int subjectID, int classID);
+        Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID);
     }
 }

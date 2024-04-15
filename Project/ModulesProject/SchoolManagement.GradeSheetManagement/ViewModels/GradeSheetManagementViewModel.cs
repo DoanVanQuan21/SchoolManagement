@@ -1,8 +1,12 @@
-﻿using SchoolManagement.Core.avalonia;
+﻿using Prism.Commands;
+using Prism.Services.Dialogs;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using SchoolManagement.GradeSheetManagement.Views;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
@@ -15,6 +19,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private Class _class;
         private Teacher? teacher;
         private ObservableCollection<GradeSheet> gradeSheets;
+        private GradeSheet gradeSheet;
 
         public GradeSheetManagementViewModel()
         {
@@ -28,6 +33,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GetClassIDsOfCourse();
         }
 
+        public ICommand ClickedUpdateCommand { get; set; }
+
         public Class Class
         {
             get => _class; set
@@ -38,19 +45,23 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         }
 
         public ObservableCollection<Class> Classes { get; set; }
+
         public ObservableCollection<GradeSheet> GradeSheets
         { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
+
+        public GradeSheet GradeSheet
+        { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
 
-        private void GetGradeSheet()
+        private async void GetGradeSheet()
         {
             if (teacher == null || Class == null)
             {
                 return;
             }
 
-            var gradeSheets = _gradeSheetService.GetGradeSheets(teacher.SubjectId, Class.ClassId);
+            var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
             if (gradeSheets == null)
             {
                 return;
@@ -59,18 +70,18 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GradeSheets?.AddRange(gradeSheets);
         }
 
-        private void GetClassIDsOfCourse()
+        private async void GetClassIDsOfCourse()
         {
             Classes = new();
-            teacher = _teacherService.GetTeacherInfo(User.UserId);
+            teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
             if (teacher == null)
             {
                 //TODO
                 //ADD MESSAGE
                 return;
             }
-            var classIDs = _courseService.GetClassIDs(teacher.TeacherId);
-            var classes = _classService.GetAllClassesByID(classIDs);
+            var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
+            var classes = await _classService.GetAllClassesByIDAsync(classIDs);
             if (classes == null)
             {
                 //TODO
@@ -78,6 +89,19 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 return;
             }
             Classes.AddRange(classes);
+        }
+
+        protected override void RegisterCommand()
+        {
+            ClickedUpdateCommand = new DelegateCommand(OnUpdate);
+            base.RegisterCommand();
+        }
+
+        private void OnUpdate()
+        {
+            var parmeters = new DialogParameters();
+            parmeters.Add("GradeSheet", GradeSheet);
+            DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
         }
     }
 }

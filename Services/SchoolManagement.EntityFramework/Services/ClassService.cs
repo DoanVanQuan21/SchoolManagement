@@ -17,9 +17,25 @@ namespace SchoolManagement.EntityFramework.Services
             return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
         }
 
+        public Task<ObservableCollection<Class>> GetAllClassesByIDAsync(IList<int> ids)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return GetAllClassesByID(ids);
+            });
+        }
+
         public Class GetClassByID(int classID)
         {
             return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
+        }
+
+        public Task<Class> GetClassByIDAsync(int classID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return GetClassByID(classID);
+            });
         }
     }
 }

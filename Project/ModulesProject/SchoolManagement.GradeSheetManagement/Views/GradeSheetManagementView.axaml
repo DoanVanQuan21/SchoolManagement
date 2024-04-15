@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.GradeSheetManagement.Views.GradeSheetManagementView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
@@ -33,12 +34,15 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <DataGrid
+            x:Name="Container"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             AutoGenerateColumns="False"
             CanUserReorderColumns="False"
             CanUserSortColumns="True"
-            ItemsSource="{Binding GradeSheets}">
+            IsReadOnly="True"
+            ItemsSource="{Binding GradeSheets}"
+            SelectedItem="{Binding GradeSheet}">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Width="*"
@@ -81,7 +85,46 @@
                     Binding="{Binding Ranked}"
                     Header="Xếp loại" />
             </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate />
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="8*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <Button
+                                Width="120"
+                                Height="40"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                Classes="theme-solid accent"
+                                Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <PathIcon Data="{StaticResource EditGeometry}" />
+                                        <Label>Cập nhật</Label>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                            <Button
+                                Width="120"
+                                Height="40"
+                                Margin="10"
+                                HorizontalAlignment="Center"
+                                Classes="theme-solid danger">
+                                <Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <PathIcon Data="{StaticResource DeleteGeometry}" />
+                                        <Label>Xóa</Label>
+                                    </StackPanel>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </UserControl>
