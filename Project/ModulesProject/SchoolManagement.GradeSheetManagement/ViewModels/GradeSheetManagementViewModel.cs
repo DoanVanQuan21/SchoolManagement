@@ -1,7 +1,7 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
@@ -14,6 +14,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private readonly ITeacherService _teacherService;
         private Class _class;
         private Teacher? teacher;
+        private ObservableCollection<GradeSheet> gradeSheets;
+
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -27,29 +29,36 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         }
 
         public Class Class
-        { get => _class; set { SetProperty(ref _class, value);
+        {
+            get => _class; set
+            {
+                SetProperty(ref _class, value);
                 GetGradeSheet();
-            } }
+            }
+        }
 
         public ObservableCollection<Class> Classes { get; set; }
-        public ObservableCollection<GradeSheet> GradeSheets { get; set; }
+        public ObservableCollection<GradeSheet> GradeSheets
+        { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
+
         private void GetGradeSheet()
         {
-            if (teacher == null || Class==null)
+            if (teacher == null || Class == null)
             {
                 return;
             }
 
-            var gradeSheets = _gradeSheetService.GetGradeSheets(teacher.SubjectId,Class.ClassId);
-            if(gradeSheets == null)
+            var gradeSheets = _gradeSheetService.GetGradeSheets(teacher.SubjectId, Class.ClassId);
+            if (gradeSheets == null)
             {
                 return;
             }
             GradeSheets?.Clear();
             GradeSheets?.AddRange(gradeSheets);
         }
+
         private void GetClassIDsOfCourse()
         {
             Classes = new();

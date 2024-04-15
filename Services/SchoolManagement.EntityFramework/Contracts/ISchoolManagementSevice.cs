@@ -9,5 +9,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         CourseRepository CourseRepository { get; }
         ClassRepository ClassRepository { get; }
         TeacherRepository TeacherRepository { get; }
+        StudentRepository StudentRepository { get; }
     }
 }

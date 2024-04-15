@@ -8,6 +8,7 @@ using SchoolManagement.Shell.Services.Contracts;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Core.Services;
 using SchoolManagement.Core.Managers;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -48,6 +49,7 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<ICourseService, CourseService>();
             containerRegistry.RegisterSingleton<IClassService, ClassService>();
             containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
+            containerRegistry.RegisterSingleton<IStudentService, StudentService>();
         }
 
         public static void RegisterTypesModuleMainProject(IContainerRegistry containerRegistry)

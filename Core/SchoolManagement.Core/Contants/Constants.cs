@@ -92,4 +92,12 @@
         STRING,
         BYTE
     }
+    public class Ranked
+    {
+        public static string Excellent = "Giỏi";
+        public static string Good = "Tiên tiến";
+        public static string Average = "Trung bình";
+        public static string BelowAverage = "Yếu";
+        public static string Bad = "Kém";
+    }
 }

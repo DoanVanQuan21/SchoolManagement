@@ -6,7 +6,7 @@ using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
 
 namespace SchoolManagement.Auth.ViewModels

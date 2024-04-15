@@ -1,5 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

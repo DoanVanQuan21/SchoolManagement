@@ -1,6 +1,7 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,10 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class TeacherService : ITeacherService
+    public class TeacherService :BaseService, ITeacherService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
-        public TeacherService()
+        public TeacherService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
         public Teacher? GetTeacherInfo(int userID)
         {

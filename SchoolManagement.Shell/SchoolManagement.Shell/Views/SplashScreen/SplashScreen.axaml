@@ -23,7 +23,6 @@
                 Name="LoadingText"
                 HorizontalAlignment="Center"
                 FontSize="20"
-                Foreground="{DynamicResource DefaultTextBrush}"
                 Text="{Binding LoadingText}" />
         </StackPanel>
     </Panel>

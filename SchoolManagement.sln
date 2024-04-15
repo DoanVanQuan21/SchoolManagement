@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Entity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.GradeSheetManagement", "Project\ModulesProject\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj", "{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.InternalShared", "Project\Management.InternalShared\Management.InternalShared.csproj", "{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,10 @@ Global
 		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +138,7 @@ Global
 		{61A50CD3-EAA5-4C5E-AAE8-90CD5AC481EE} = {1630DD87-584A-473B-B345-5F6B471F780D}
 		{198E0854-08A6-4931-9217-266A3884DED9} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88} = {1630DD87-584A-473B-B345-5F6B471F780D}
+		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}

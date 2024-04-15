@@ -26,6 +26,8 @@ namespace SchoolManagement.EntityFramework.Services
         public ClassRepository ClassRepository { get; private set; }
         public TeacherRepository TeacherRepository { get; private set; }
 
+        public StudentRepository StudentRepository { get; private set; }
+
         private void InitConnectionDatabase()
         {
             if (string.IsNullOrEmpty(_databaseInfoProvider.ServerInfor.ConnectionString))
@@ -39,6 +41,7 @@ namespace SchoolManagement.EntityFramework.Services
             CourseRepository = new CourseRepository(schoolManagementContext);
             ClassRepository = new ClassRepository(schoolManagementContext);
             TeacherRepository = new TeacherRepository(schoolManagementContext);
+            StudentRepository = new StudentRepository(schoolManagementContext);
 
         }
     }

@@ -3,15 +3,15 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
 
 namespace SchoolManagement.SettingAccount.ViewModels
 {
     internal class SettingAccountViewModel : BaseRegionViewModel
     {
-        private User user;
         private readonly IUserService _userService;
+        private User user;
 
         public SettingAccountViewModel()
         {

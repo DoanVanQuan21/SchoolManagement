@@ -1,17 +1,13 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
-
-        public UserService()
+        public UserService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public ObservableCollection<User> GetAllAccounts()
@@ -25,6 +21,11 @@ namespace SchoolManagement.EntityFramework.Services
             //TODO
             var users = new ObservableCollection<User>();
             return users;
+        }
+
+        public string GetFullname(int userID)
+        {
+            return _schoolManagementSevice.UserRepository.GetFullname(userID);
         }
 
         public ObservableCollection<User> GetTeacherByDepartment(int departmentID)

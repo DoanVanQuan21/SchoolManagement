@@ -24,7 +24,8 @@
             Margin="10"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn lớp học">
+            PlaceholderText="Chọn lớp học"
+            SelectedValue="{Binding Class}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding ClassName}" />
@@ -34,18 +35,51 @@
         <DataGrid
             Grid.Row="1"
             Grid.ColumnSpan="2"
+            AutoGenerateColumns="False"
             CanUserReorderColumns="False"
             CanUserSortColumns="True"
             ItemsSource="{Binding GradeSheets}">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding GradeSheetId}" Header="STT" />
-                <DataGridTextColumn Binding="{Binding FirstRegularScore}" Header="TX1" />
-                <DataGridTextColumn Binding="{Binding SecondRegularScore}" Header="TX2" />
-                <DataGridTextColumn Binding="{Binding ThirdRegularScore}" Header="TX3" />
-                <DataGridTextColumn Binding="{Binding FourRegularScore}" Header="TX4" />
-                <DataGridTextColumn Binding="{Binding MidScore}" Header="Giữa kỳ" />
-                <DataGridTextColumn Binding="{Binding FinalScore}" Header="Cuối kỳ" />
-                <DataGridTextColumn Binding="{Binding SemesterAverage}" Header="Điểm TB" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding GradeSheetId}"
+                    Header="STT" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding StudentId, Converter={StaticResource StudentIDConverter}}"
+                    Header="Họ và tên" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding FirstRegularScore}"
+                    Header="TX1" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding SecondRegularScore}"
+                    Header="TX2" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding ThirdRegularScore}"
+                    Header="TX3" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding FourRegularScore}"
+                    Header="TX4" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding MidtermScore}"
+                    Header="Giữa kỳ" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding FinalScore}"
+                    Header="Cuối kỳ" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding SemesterAverage}"
+                    Header="Điểm TB" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Ranked}"
+                    Header="Xếp loại" />
             </DataGrid.Columns>
             <DataGrid.RowDetailsTemplate />
         </DataGrid>

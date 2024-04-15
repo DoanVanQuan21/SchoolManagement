@@ -1,17 +1,15 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class ClassService : IClassService
+    public class ClassService : BaseService, IClassService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
-
-        public ClassService()
+        public ClassService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)

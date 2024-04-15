@@ -1,17 +1,16 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class GradeSheetService : IGradeSheetService
+    public class GradeSheetService :BaseService, IGradeSheetService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
 
-        public GradeSheetService()
+        public GradeSheetService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public ObservableCollection<GradeSheet> GetGradeSheets(int subjectID, int classID)

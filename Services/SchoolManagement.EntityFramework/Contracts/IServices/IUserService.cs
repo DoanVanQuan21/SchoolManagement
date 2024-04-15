@@ -1,7 +1,7 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
 using System.Collections.ObjectModel;
 
-namespace SchoolManagement.EntityFramework.Contracts
+namespace SchoolManagement.EntityFramework.Contracts.IServices
 {
     public interface IUserService
     {
@@ -16,5 +16,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         bool RegisterAccount(User user);
 
         bool UpdateUserInfor(User user);
+        string GetFullname(int userID);
     }
 }

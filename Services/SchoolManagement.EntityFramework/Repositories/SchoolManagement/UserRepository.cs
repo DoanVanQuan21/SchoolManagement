@@ -1,5 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Contracts.IRepositories;
 
 namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
@@ -24,6 +24,16 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         public User? GetById(int id)
         {
             return _context.Users.FirstOrDefault(item => item.UserId == id);
+        }
+
+        public string GetFullname(int id)
+        {
+            var user = FirstOrDefault(item => item.UserId == id);
+            if (user == null)
+            {
+                return string.Empty;
+            }
+            return $"{user.FirstName} {user.LastName}";
         }
 
         public bool Update(User entity)

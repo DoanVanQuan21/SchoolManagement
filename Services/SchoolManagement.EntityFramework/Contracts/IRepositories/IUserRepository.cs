@@ -1,4 +1,4 @@
-﻿namespace SchoolManagement.EntityFramework.Contracts
+﻿namespace SchoolManagement.EntityFramework.Contracts.IRepositories
 {
     public interface IUserRepository<T> : IGenerateRepository<T> where T : class
     {
@@ -6,5 +6,6 @@
         bool Update(T entity);
         bool Delete(int id);
         bool UpdateStatus(T entity);
+        string GetFullname(int id);
     }
 }
