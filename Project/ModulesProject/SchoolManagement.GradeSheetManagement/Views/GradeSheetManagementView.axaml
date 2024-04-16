@@ -17,20 +17,33 @@
             <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            HorizontalAlignment="Right"
+            Classes="theme-subtle accent">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource DocumentAddGeometry}" />
+                    <Label>Upload excel</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
             Margin="10"
+            VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
             PlaceholderText="Chọn lớp học"
             SelectedValue="{Binding Class}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding ClassName}" />
+                    <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>

@@ -168,7 +168,7 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
                 OneColumn(properties, col, widthType, content);
                 return;
             }
-            widthType = new GridLength(3, GridUnitType.Star);
+            widthType = new GridLength(4, GridUnitType.Star);
             TwoColumn(properties, col, widthType, content);
         }
 
@@ -279,7 +279,7 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             {
                 if (i == 0 || i == 3)
                 {
-                    var width = new GridLength(2, GridUnitType.Star);
+                    var width = new GridLength(1, GridUnitType.Star);
                     grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = width });
                     continue;
                 }

@@ -89,7 +89,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             }
             var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
             var classes = await _classService.GetAllClassesByIDAsync(classIDs);
-            await Task.Delay(1000);
             if (classes == null)
             {
                 //TODO
