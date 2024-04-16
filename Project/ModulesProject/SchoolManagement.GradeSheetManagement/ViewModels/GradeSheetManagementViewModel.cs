@@ -2,6 +2,7 @@
 using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views;
@@ -20,6 +21,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private Teacher? teacher;
         private ObservableCollection<GradeSheet> gradeSheets;
         private GradeSheet gradeSheet;
+        private bool dataLoaded = false;
 
         public GradeSheetManagementViewModel()
         {
@@ -51,23 +53,28 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public GradeSheet GradeSheet
         { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
+
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
+        public bool DataLoaded
+        { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
 
         private async void GetGradeSheet()
         {
+            DataLoaded = false;
             if (teacher == null || Class == null)
             {
                 return;
             }
-
             var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
+            await Task.Delay(2000);
             if (gradeSheets == null)
             {
                 return;
             }
             GradeSheets?.Clear();
             GradeSheets?.AddRange(gradeSheets);
+            DataLoaded = true;
         }
 
         private async void GetClassIDsOfCourse()
@@ -82,6 +89,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             }
             var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
             var classes = await _classService.GetAllClassesByIDAsync(classIDs);
+            await Task.Delay(1000);
             if (classes == null)
             {
                 //TODO

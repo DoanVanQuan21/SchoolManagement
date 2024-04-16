@@ -5,6 +5,7 @@
     xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -33,98 +34,109 @@
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <DataGrid
-            x:Name="Container"
-            Grid.Row="1"
-            Grid.ColumnSpan="2"
-            AutoGenerateColumns="False"
-            CanUserReorderColumns="False"
-            CanUserSortColumns="True"
-            IsReadOnly="True"
-            ItemsSource="{Binding GradeSheets}"
-            SelectedItem="{Binding GradeSheet}">
-            <DataGrid.Columns>
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding GradeSheetId}"
-                    Header="STT" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding StudentId, Converter={StaticResource StudentIDConverter}}"
-                    Header="Họ và tên" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding FirstRegularScore}"
-                    Header="TX1" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding SecondRegularScore}"
-                    Header="TX2" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding ThirdRegularScore}"
-                    Header="TX3" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding FourRegularScore}"
-                    Header="TX4" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding MidtermScore}"
-                    Header="Giữa kỳ" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding FinalScore}"
-                    Header="Cuối kỳ" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding SemesterAverage}"
-                    Header="Điểm TB" />
-                <DataGridTextColumn
-                    Width="*"
-                    Binding="{Binding Ranked}"
-                    Header="Xếp loại" />
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="2*" />
-                            <ColumnDefinition Width="8*" />
-                        </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
-                            <Button
-                                Width="120"
-                                Height="40"
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                Classes="theme-solid accent"
-                                Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}">
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <PathIcon Data="{StaticResource EditGeometry}" />
-                                        <Label>Cập nhật</Label>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
-                            <Button
-                                Width="120"
-                                Height="40"
-                                Margin="10"
-                                HorizontalAlignment="Center"
-                                Classes="theme-solid danger">
-                                <Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                        <Label>Xóa</Label>
-                                    </StackPanel>
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <progRing:ProgressRing
+                Grid.Row="1"
+                Width="70"
+                Height="70"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Classes="accent"
+                Foreground="#0da5e8"
+                IsVisible="{Binding !DataLoaded}" />
+            <DataGrid
+                x:Name="Container"
+                AutoGenerateColumns="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="True"
+                IsReadOnly="True"
+                IsVisible="{Binding DataLoaded}"
+                ItemsSource="{Binding GradeSheets}"
+                SelectedItem="{Binding GradeSheet}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding GradeSheetId}"
+                        Header="STT" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding StudentId, Converter={StaticResource StudentIDConverter}}"
+                        Header="Họ và tên" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding FirstRegularScore}"
+                        Header="TX1" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding SecondRegularScore}"
+                        Header="TX2" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding ThirdRegularScore}"
+                        Header="TX3" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding FourRegularScore}"
+                        Header="TX4" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding MidtermScore}"
+                        Header="Giữa kỳ" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding FinalScore}"
+                        Header="Cuối kỳ" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding SemesterAverage}"
+                        Header="Điểm TB" />
+                    <DataGridTextColumn
+                        Width="*"
+                        Binding="{Binding Ranked}"
+                        Header="Xếp loại" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="8*" />
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <Button
+                                    Width="120"
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource EditGeometry}" />
+                                            <Label>Cập nhật</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button
+                                    Width="120"
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid danger">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
+                                            <Label>Xóa</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>

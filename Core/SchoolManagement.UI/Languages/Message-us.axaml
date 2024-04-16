@@ -2,35 +2,41 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
-	<!--  Add Resources Here  -->
-	<system:String x:Key="LoginFail_Message">
-		Login fail, check your information, please!.
-	</system:String>
-	<system:String x:Key="LoginSuccess_Message">
-		Login success!.
-	</system:String>
-	<system:String x:Key="LogoutSuccess_Message">
-		Logout success!.
-	</system:String>
-	<system:String x:Key="ThemeChangeError_Message">
-		Theme changed error!.
-	</system:String>
-	<system:String x:Key="ThemeChangeSuccess_Message">
-		Theme changed success!.
-	</system:String>
-	<system:String x:Key="PageLoadError_Message">
-		Content load fail!.
-	</system:String>
-	<system:String x:Key="LoadAppConfigError_Message">
-		Config application have been error!.
-	</system:String>
-	<system:String x:Key="ServerInfoNull_Message">
-		Server information can not be null!.
-	</system:String>
-	<system:String x:Key="UpdateUserFail_Message">
-		This account does not exist in the database!.
-	</system:String>
-	<system:String x:Key="UpdateUserSuccess_Message">
-		Updating account information success!.
-	</system:String>
+    <!--  Add Resources Here  -->
+    <system:String x:Key="LoginFail_Message">
+        Login fail, check your information, please!.
+    </system:String>
+    <system:String x:Key="LoginSuccess_Message">
+        Login success!.
+    </system:String>
+    <system:String x:Key="LogoutSuccess_Message">
+        Logout success!.
+    </system:String>
+    <system:String x:Key="ThemeChangeError_Message">
+        Theme changed error!.
+    </system:String>
+    <system:String x:Key="ThemeChangeSuccess_Message">
+        Theme changed success!.
+    </system:String>
+    <system:String x:Key="PageLoadError_Message">
+        Content load fail!.
+    </system:String>
+    <system:String x:Key="LoadAppConfigError_Message">
+        Config application have been error!.
+    </system:String>
+    <system:String x:Key="ServerInfoNull_Message">
+        Server information can not be null!.
+    </system:String>
+    <system:String x:Key="UpdateUserFail_Message">
+        This account does not exist in the database!.
+    </system:String>
+    <system:String x:Key="UpdateUserSuccess_Message">
+        Updating account information success!.
+    </system:String>
+    <system:String x:Key="FetchGradeSheetFail_Message">
+        Unable to load grade sheet!.
+    </system:String>
+    <system:String x:Key="NoneGradeSheet_Message">
+        There are no grade sheet!.
+    </system:String>
 </ResourceDictionary>

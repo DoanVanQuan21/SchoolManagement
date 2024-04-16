@@ -23,6 +23,8 @@
         <!--    -->
         <StyleInclude Source="avares://Notification.Avalonia/Themes/Generic.xaml" />
         <StyleInclude Source="avares://SchoolManagement.UI/Themes/Based/CommonStyles.axaml" />
+        <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml" />
+
     </Application.Styles>
     <Application.Resources>
         <ResourceDictionary>
