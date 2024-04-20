@@ -1,9 +1,9 @@
 ﻿using Prism.Commands;
+using SchoolManagement.ApiService.Contracts;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
 
 namespace SchoolManagement.SettingAccount.ViewModels
@@ -33,14 +33,14 @@ namespace SchoolManagement.SettingAccount.ViewModels
 
         private void OnUpdateInfo()
         {
-            var isUpdated = _userService.UpdateUserInfor(User);
-            if (!isUpdated)
-            {
-                NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserFail_Message"));
-                return;
-            }
-            UpdateCurrentUser(User);
-            NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserSuccess_Message"));
+            //var isUpdated = _userService.UpdateUserInfor(User);
+            //if (!isUpdated)
+            //{
+            //    NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserFail_Message"));
+            //    return;
+            //}
+            //UpdateCurrentUser(User);
+            //NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserSuccess_Message"));
         }
     }
 }

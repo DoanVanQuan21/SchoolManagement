@@ -1,12 +1,12 @@
 ﻿using Avalonia.Controls;
 using Prism.Commands;
+using SchoolManagement.ApiService.Contracts;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
 
 namespace SchoolManagement.Auth.ViewModels
@@ -50,7 +50,7 @@ namespace SchoolManagement.Auth.ViewModels
             SetMainView(new ForgotPasswordView());
         }
 
-        private void OnLogin()
+        private async void OnLogin()
 
         {
             if (User == null)
@@ -58,14 +58,16 @@ namespace SchoolManagement.Auth.ViewModels
                 EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
                 return;
             }
-            var (isLogin, user) = _userService.Login(User);
-            if (user != null)
+            var (isLoginOK, user) = await _userService.Login(User.Username, User.Password);
+            if (!isLoginOK || user == null)
             {
-                RootContext.CurrentUser = user;
+                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+                return;
             }
-            //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
+            RootContext.CurrentUser = user;
+            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(true);
+            //var box = MsBox.Avalonia.MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
             //await box.ShowAsPopupAsync(Container);
-            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
 
         private void OnRegister()

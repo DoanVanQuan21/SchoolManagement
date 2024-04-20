@@ -36,6 +36,6 @@
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
     <ProjectReference Include="..\..\Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj" />
-    <ProjectReference Include="..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\Services\SchoolManagement.ApiService\SchoolManagement.ApiService.csproj" />
   </ItemGroup>
 </Project>

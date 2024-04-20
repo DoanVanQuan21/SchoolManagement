@@ -1,15 +1,12 @@
 ﻿using Avalonia.Notification;
 using Prism.Ioc;
 using SchoolManagement.Core.Contracts;
-using SchoolManagement.Core.Models;
-using SchoolManagement.EntityFramework.Contracts;
-using SchoolManagement.EntityFramework.Services;
-using SchoolManagement.Shell.Services.Contracts;
-using SchoolManagement.Shell.Services;
-using SchoolManagement.Core.Services;
 using SchoolManagement.Core.Managers;
-using SchoolManagement.EntityFramework.Contracts.IServices;
+using SchoolManagement.Core.Models;
+using SchoolManagement.Core.Services;
 using SchoolManagement.GradeSheetManagement.Views;
+using SchoolManagement.Shell.Services;
+using SchoolManagement.Shell.Services.Contracts;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -19,6 +16,7 @@ namespace SchoolManagement.Shell.Helpers
         {
             RegisterTypesCommon(containerRegistry);
             RegisterTypesModuleEntityFramework(containerRegistry);
+            RegisterTypesModuleApiService(containerRegistry);
             RegisterTypesModuleMainProject(containerRegistry);
             RegisterTypesModuleAuth(containerRegistry);
             RegisterTypesModuleDatabase(containerRegistry);
@@ -44,13 +42,18 @@ namespace SchoolManagement.Shell.Helpers
 
         public static void RegisterTypesModuleEntityFramework(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
-            containerRegistry.RegisterSingleton<IUserService, UserService>();
-            containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
-            containerRegistry.RegisterSingleton<ICourseService, CourseService>();
-            containerRegistry.RegisterSingleton<IClassService, ClassService>();
-            containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
-            containerRegistry.RegisterSingleton<IStudentService, StudentService>();
+            //containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
+            //containerRegistry.RegisterSingleton<IUserService, UserService>();
+            //containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
+            //containerRegistry.RegisterSingleton<ICourseService, CourseService>();
+            //containerRegistry.RegisterSingleton<IClassService, ClassService>();
+            //containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
+            //containerRegistry.RegisterSingleton<IStudentService, StudentService>();
+        }
+
+        public static void RegisterTypesModuleApiService(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterSingleton<ApiService.Contracts.IUserService, ApiService.Services.UserService>();
         }
 
         public static void RegisterTypesModuleMainProject(IContainerRegistry containerRegistry)

@@ -2,9 +2,7 @@
 using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
-using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -13,10 +11,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
     internal class GradeSheetManagementViewModel : BaseRegionViewModel
     {
-        private readonly IClassService _classService;
-        private readonly ICourseService _courseService;
-        private readonly IGradeSheetService _gradeSheetService;
-        private readonly ITeacherService _teacherService;
         private Class _class;
         private Teacher? teacher;
         private ObservableCollection<GradeSheet> gradeSheets;
@@ -25,10 +19,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public GradeSheetManagementViewModel()
         {
-            _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
-            _courseService = Ioc.Resolve<ICourseService>();
-            _classService = Ioc.Resolve<IClassService>();
-            _teacherService = Ioc.Resolve<ITeacherService>();
             User = RootContext.CurrentUser;
             Class = new();
             GradeSheets = new();
@@ -56,46 +46,47 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
+
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
 
         private async void GetGradeSheet()
         {
-            DataLoaded = false;
-            if (teacher == null || Class == null)
-            {
-                return;
-            }
-            var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
-            await Task.Delay(2000);
-            if (gradeSheets == null)
-            {
-                return;
-            }
-            GradeSheets?.Clear();
-            GradeSheets?.AddRange(gradeSheets);
-            DataLoaded = true;
+            //DataLoaded = false;
+            //if (teacher == null || Class == null)
+            //{
+            //    return;
+            //}
+            //var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
+            //await Task.Delay(2000);
+            //if (gradeSheets == null)
+            //{
+            //    return;
+            //}
+            //GradeSheets?.Clear();
+            //GradeSheets?.AddRange(gradeSheets);
+            //DataLoaded = true;
         }
 
         private async void GetClassIDsOfCourse()
         {
-            Classes = new();
-            teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
-            if (teacher == null)
-            {
-                //TODO
-                //ADD MESSAGE
-                return;
-            }
-            var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
-            var classes = await _classService.GetAllClassesByIDAsync(classIDs);
-            if (classes == null)
-            {
-                //TODO
-                //ADD MESSAGE
-                return;
-            }
-            Classes.AddRange(classes);
+            //Classes = new();
+            //teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
+            //if (teacher == null)
+            //{
+            //    //TODO
+            //    //ADD MESSAGE
+            //    return;
+            //}
+            //var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
+            //var classes = await _classService.GetAllClassesByIDAsync(classIDs);
+            //if (classes == null)
+            //{
+            //    //TODO
+            //    //ADD MESSAGE
+            //    return;
+            //}
+            //Classes.AddRange(classes);
         }
 
         protected override void RegisterCommand()

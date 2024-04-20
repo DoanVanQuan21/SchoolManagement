@@ -23,7 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\SchoolManagement.Core\SchoolManagement.Core.csproj" />
     <ProjectReference Include="..\..\..\Core\SchoolManagement.UI\SchoolManagement.UI.csproj" />
-    <ProjectReference Include="..\..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
+    <ProjectReference Include="..\..\..\Services\SchoolManagement.ApiService\SchoolManagement.ApiService.csproj" />
   </ItemGroup>
 
 </Project>

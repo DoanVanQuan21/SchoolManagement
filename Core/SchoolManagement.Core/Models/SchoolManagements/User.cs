@@ -95,7 +95,7 @@ public partial class User : BindableBase
 
     [Browsable(false)]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
-
+    
     public User()
     {
     }

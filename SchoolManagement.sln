@@ -27,8 +27,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Database",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{61B80E90-E89F-4012-8CFD-F9B956BCAC0F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.EntityFramework", "Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj", "{5AB106DF-B15F-4535-8A41-C89D70D99FD0}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Avalonia", "Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj", "{BFE205A3-514F-4422-9DDC-72CA59D9C444}"
@@ -45,7 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.Entity", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.GradeSheetManagement", "Project\ModulesProject\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj", "{195E0B80-BCA4-4319-BCF9-F2AD147ABF88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Management.InternalShared", "Project\Management.InternalShared\Management.InternalShared.csproj", "{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Management.InternalShared", "Project\Management.InternalShared\Management.InternalShared.csproj", "{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.ApiService", "Services\SchoolManagement.ApiService\SchoolManagement.ApiService.csproj", "{9F6DC638-015A-4043-BAA4-7B1A03902BC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,10 +93,6 @@ Global
 		{D76AA488-4D41-4D3D-8BE3-8A97D593B2D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D76AA488-4D41-4D3D-8BE3-8A97D593B2D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D76AA488-4D41-4D3D-8BE3-8A97D593B2D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5AB106DF-B15F-4535-8A41-C89D70D99FD0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -121,6 +117,10 @@ Global
 		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F6DC638-015A-4043-BAA4-7B1A03902BC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F6DC638-015A-4043-BAA4-7B1A03902BC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F6DC638-015A-4043-BAA4-7B1A03902BC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F6DC638-015A-4043-BAA4-7B1A03902BC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -130,7 +130,6 @@ Global
 		{19F07314-CA95-4E33-8BE9-879B1BC14FB0} = {C776C926-99EB-4B8F-BC30-849FF7B18661}
 		{134ACBD1-B6F2-4D1A-B72D-B52717582958} = {51FEB137-21F5-4AE5-BA27-42F508A67187}
 		{D76AA488-4D41-4D3D-8BE3-8A97D593B2D2} = {C776C926-99EB-4B8F-BC30-849FF7B18661}
-		{5AB106DF-B15F-4535-8A41-C89D70D99FD0} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{BFE205A3-514F-4422-9DDC-72CA59D9C444} = {5AE8B6F2-50B6-42A6-B85D-33BC9A3EAF9A}
 		{E9F2A1FF-BE33-4D00-90C7-27179C9C0265} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
@@ -139,6 +138,7 @@ Global
 		{198E0854-08A6-4931-9217-266A3884DED9} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 		{195E0B80-BCA4-4319-BCF9-F2AD147ABF88} = {1630DD87-584A-473B-B345-5F6B471F780D}
 		{16F2E8B5-6AA0-4EB8-B521-A29F4C746AB5} = {104D96B7-9183-4C6C-9E55-17877D7415CC}
+		{9F6DC638-015A-4043-BAA4-7B1A03902BC5} = {61B80E90-E89F-4012-8CFD-F9B956BCAC0F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}
