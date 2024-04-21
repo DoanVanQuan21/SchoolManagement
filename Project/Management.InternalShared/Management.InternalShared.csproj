@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.10" />
+    <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.6" />
     <PackageReference Include="HanumanInstitute.MvvmDialogs.Avalonia" Version="2.1.0" />
   </ItemGroup>

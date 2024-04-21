@@ -20,18 +20,28 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button
+        <Menu
             Grid.Row="0"
             Grid.Column="1"
-            HorizontalAlignment="Right"
-            Classes="theme-subtle accent">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <PathIcon Data="{StaticResource DocumentAddGeometry}" />
-                    <Label>Upload excel</Label>
-                </StackPanel>
-            </Button.Content>
-        </Button>
+            Margin="10,0,10,0"
+            HorizontalAlignment="Left">
+            <MenuItem Header="File">
+                <MenuItem.Icon>
+                    <PathIcon Data="{StaticResource DocumentGeometry}" />
+                </MenuItem.Icon>
+                <MenuItem Command="{Binding ClickedUploadFile}" Header="Upload file .xlsx">
+                    <MenuItem.Icon>
+                        <PathIcon Data="{StaticResource DocumentArrowUpGeometry}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Command="{Binding ClickedDownloadFile}" Header="Download file .xlsx">
+                    <MenuItem.Icon>
+                        <PathIcon Data="{StaticResource DocumentArrowDownGeometry}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
@@ -58,8 +68,10 @@
                 Classes="accent"
                 Foreground="#0da5e8"
                 IsVisible="{Binding !DataLoaded}" />
+
             <DataGrid
                 x:Name="Container"
+                HorizontalAlignment="Left"
                 AutoGenerateColumns="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="True"
@@ -70,42 +82,52 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding GradeSheetId}"
                         Header="STT" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding StudentId, Converter={StaticResource StudentIDConverter}}"
                         Header="Họ và tên" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding FirstRegularScore}"
                         Header="TX1" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding SecondRegularScore}"
                         Header="TX2" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding ThirdRegularScore}"
                         Header="TX3" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding FourRegularScore}"
                         Header="TX4" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding MidtermScore}"
                         Header="Giữa kỳ" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding FinalScore}"
                         Header="Cuối kỳ" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding SemesterAverage}"
                         Header="Điểm TB" />
                     <DataGridTextColumn
                         Width="*"
+                        MinWidth="150"
                         Binding="{Binding Ranked}"
                         Header="Xếp loại" />
                 </DataGrid.Columns>
@@ -151,5 +173,7 @@
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
         </Grid>
+
+
     </Grid>
 </UserControl>

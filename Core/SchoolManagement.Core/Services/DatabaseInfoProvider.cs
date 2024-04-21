@@ -33,13 +33,24 @@ namespace SchoolManagement.Core.Services
                 _notificationManager.ShowError("Server cannot be null!");
                 return;
             }
+            if (!OperatingSystem.IsWindows())
+            {
+                ServerInfor = new()
+                {
+                    ServerName = "192.168.1.77",
+                    User = "schoolmanagement",
+                    Password = "123",
+                };
+                _appManager.BootSetting.ServerInfor = ServerInfor;
+                return;
+            }
             if (_appManager.BootSetting.ServerInfor != null)
             {
                 if (!OperatingSystem.IsWindows())
                 {
                     ServerInfor = new()
                     {
-                        ServerName = "192.168.1.102",
+                        ServerName = "192.168.1.77",
                         User = "schoolmanagement",
                         Password = "123",
                     };

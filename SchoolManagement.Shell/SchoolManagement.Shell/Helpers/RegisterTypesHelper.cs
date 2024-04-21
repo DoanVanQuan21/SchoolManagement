@@ -10,6 +10,8 @@ using SchoolManagement.Core.Services;
 using SchoolManagement.Core.Managers;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views;
+using HanumanInstitute.MvvmDialogs;
+using HanumanInstitute.MvvmDialogs.Avalonia;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -29,6 +31,9 @@ namespace SchoolManagement.Shell.Helpers
         {
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
+            containerRegistry.RegisterSingleton<IStorageService, StorageService>();
+            containerRegistry.RegisterSingleton<IDialogService, DialogService>();
+            containerRegistry.RegisterSingleton<IExcelService, ExcelService>();
             containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
             containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
