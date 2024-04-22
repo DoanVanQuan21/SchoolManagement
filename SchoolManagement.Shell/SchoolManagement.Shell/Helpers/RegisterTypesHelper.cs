@@ -1,5 +1,4 @@
-﻿using Avalonia.Notification;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Managers;
 using SchoolManagement.Core.Models;
@@ -30,7 +29,6 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
             containerRegistry.RegisterSingleton<IExcelService, ExcelService>();
-            containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
             containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
         }

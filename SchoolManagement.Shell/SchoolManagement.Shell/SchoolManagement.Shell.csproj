@@ -36,7 +36,7 @@
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
-    <ProjectReference Include="..\..\Services\Notifications\Notification.Avalonia\Notification.Avalonia.csproj" />
+    <ProjectReference Include="..\..\Services\DialogHost\DialogHost.Avalonia\DialogHost.Avalonia.csproj" />
     <ProjectReference Include="..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
   </ItemGroup>
 </Project>

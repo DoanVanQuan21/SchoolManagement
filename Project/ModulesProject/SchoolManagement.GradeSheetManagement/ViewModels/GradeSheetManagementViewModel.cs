@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform.Storage;
+using DialogHostAvalonia;
 using Prism.Commands;
 using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
@@ -8,6 +9,7 @@ using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views;
+using SchoolManagement.UI.Dialogs;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -155,7 +157,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             filePath = await saveDialog.ShowAsync(new Window());
             if (string.IsNullOrWhiteSpace(filePath))
                 return; // User canceled
-            DataLoaded = false;
+            await DialogHost.Show(new ProcessView(), "MainDialogHost");
             var isDownload = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
             {
                 return await GetFullName(studentID);
@@ -163,7 +165,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return await GetStudentCode(studentID);
             });
-            DataLoaded = true;
             if (!isDownload)
             {
                 NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");

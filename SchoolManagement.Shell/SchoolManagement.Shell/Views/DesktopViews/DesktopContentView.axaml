@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
     xmlns:local="clr-namespace:SchoolManagement.Shell.Views.DesktopViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
@@ -12,7 +13,7 @@
     x:DataType="vm:MainContentViewModel"
     Background="{actipro:ThemeResource Container1BackgroundBrush}"
     mc:Ignorable="d">
-	<SplitView
+    <SplitView
         Name="SplitView"
         Background="Transparent"
         CompactPaneLength="48"
@@ -21,76 +22,82 @@
         OpenPaneLength="200"
         PaneBackground="Transparent"
         PanePlacement="Left">
-		<SplitView.Pane>
-			<Border
+        <SplitView.Pane>
+            <Border
                 Margin="10,5,5,5"
                 Background="{actipro:ThemeResource Container3BackgroundBrush}"
                 BorderBrush="Transparent"
                 BorderThickness="1"
                 CornerRadius="10">
-				<StackPanel Margin="0" Spacing="0">
-					<Button
+                <StackPanel Margin="0" Spacing="0">
+                    <Button
                         Margin="0,5,0,5"
                         HorizontalAlignment="Left"
                         Background="Transparent"
                         Classes="theme-subtle"
                         Command="{Binding ClickNavigationCommand}">
-						<PathIcon Data="{StaticResource NavigationGeometry}" />
-					</Button>
-					<ListBox
+                        <PathIcon Data="{StaticResource NavigationGeometry}" />
+                    </Button>
+                    <ListBox
                         Background="Transparent"
                         BorderThickness="0"
                         ItemsSource="{Binding AppMenus}"
                         SelectionChanged="ListBox_SelectionChanged">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel
                                     Margin="-5,5,0,5"
                                     Orientation="Horizontal"
                                     ScrollViewer.VerticalScrollBarVisibility="Disabled">
-									<PathIcon
+                                    <PathIcon
                                         Width="25"
                                         HorizontalAlignment="Left"
                                         Data="{Binding Geometry}" />
-									<TextBlock
+                                    <TextBlock
                                         Padding="10,0,0,0"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Text="{Binding Label}" />
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</StackPanel>
-			</Border>
-		</SplitView.Pane>
-		<SplitView.Content>
-			<Border Background="Transparent">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="55" />
-						<RowDefinition Height="*" />
-					</Grid.RowDefinitions>
-					<Border
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </SplitView.Pane>
+        <SplitView.Content>
+            <Border Background="Transparent">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="55" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Border
                         Grid.Row="0"
                         Margin="5"
                         Background="{actipro:ThemeResource Container3BackgroundBrush}"
                         CornerRadius="10">
-						<local:DesktopHeaderView />
-					</Border>
-					<Border
+                        <local:DesktopHeaderView />
+                    </Border>
+                    <Border
                         Grid.Row="1"
                         Margin="5"
                         Background="{actipro:ThemeResource Container3BackgroundBrush}"
                         CornerRadius="10">
-						<ContentControl
-                            Margin="10"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Content="{Binding AppRegion.MainPage}" />
-					</Border>
-				</Grid>
-			</Border>
-		</SplitView.Content>
-	</SplitView>
+                        <dialogHostAvalonia:DialogHost
+                            dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
+                            DialogMargin="16"
+                            Identifier="MainDialogHost">
+                            <ContentControl
+                                Margin="10"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Content="{Binding AppRegion.MainPage}" />
+                        </dialogHostAvalonia:DialogHost>
+
+                    </Border>
+                </Grid>
+            </Border>
+        </SplitView.Content>
+    </SplitView>
 </UserControl>
