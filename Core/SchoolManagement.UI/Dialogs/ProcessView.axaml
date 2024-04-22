@@ -1,0 +1,16 @@
+<UserControl
+    x:Class="SchoolManagement.UI.Dialogs.ProcessView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+    Background="Transparent"
+    mc:Ignorable="d">
+    <progRing:ProgressRing
+        Grid.Row="1"
+        Width="70"
+        Height="70"
+        Background="Transparent"
+        Foreground="#0da5e8" />
+</UserControl>
