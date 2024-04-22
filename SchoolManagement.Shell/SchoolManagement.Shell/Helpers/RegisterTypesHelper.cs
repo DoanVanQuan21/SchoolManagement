@@ -1,17 +1,15 @@
 ﻿using Avalonia.Notification;
 using Prism.Ioc;
 using SchoolManagement.Core.Contracts;
-using SchoolManagement.Core.Models;
-using SchoolManagement.EntityFramework.Contracts;
-using SchoolManagement.EntityFramework.Services;
-using SchoolManagement.Shell.Services.Contracts;
-using SchoolManagement.Shell.Services;
-using SchoolManagement.Core.Services;
 using SchoolManagement.Core.Managers;
+using SchoolManagement.Core.Models;
+using SchoolManagement.Core.Services;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using SchoolManagement.EntityFramework.Services;
 using SchoolManagement.GradeSheetManagement.Views;
-using HanumanInstitute.MvvmDialogs;
-using HanumanInstitute.MvvmDialogs.Avalonia;
+using SchoolManagement.Shell.Services;
+using SchoolManagement.Shell.Services.Contracts;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -31,8 +29,6 @@ namespace SchoolManagement.Shell.Helpers
         {
             containerRegistry.RegisterSingleton<IStartUp, StartUp>();
             containerRegistry.RegisterSingleton<IAppManager, AppManager>();
-            containerRegistry.RegisterSingleton<IStorageService, StorageService>();
-            containerRegistry.RegisterSingleton<IDialogService, DialogService>();
             containerRegistry.RegisterSingleton<IExcelService, ExcelService>();
             containerRegistry.RegisterSingleton<INotificationMessageManager, NotificationMessageManager>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();

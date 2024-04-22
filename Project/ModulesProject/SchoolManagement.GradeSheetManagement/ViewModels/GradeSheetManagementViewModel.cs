@@ -18,15 +18,14 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
     {
         private readonly IClassService _classService;
         private readonly ICourseService _courseService;
+        private readonly IExcelService _excelService;
         private readonly IGradeSheetService _gradeSheetService;
         private readonly ITeacherService _teacherService;
-        private readonly IExcelService _excelService;
         private Class _class;
-        private Teacher? teacher;
-        private ObservableCollection<GradeSheet> gradeSheets;
-        private GradeSheet gradeSheet;
         private bool dataLoaded = false;
-
+        private GradeSheet gradeSheet;
+        private ObservableCollection<GradeSheet> gradeSheets;
+        private Teacher? teacher;
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -40,10 +39,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GetClassIDsOfCourse();
         }
 
-        public ICommand ClickedUpdateCommand { get; set; }
-        public ICommand ClickedUploadFile { get; set; }
-        public ICommand ClickedDownloadFile { get; set; }
-
         public Class Class
         {
             get => _class; set
@@ -54,35 +49,25 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         }
 
         public ObservableCollection<Class> Classes { get; set; }
-
-        public ObservableCollection<GradeSheet> GradeSheets
-        { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
+        public ICommand ClickedDownloadFile { get; set; }
+        public ICommand ClickedUpdateCommand { get; set; }
+        public ICommand ClickedUploadFile { get; set; }
+        public bool DataLoaded
+        { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
 
         public GradeSheet GradeSheet
         { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
 
+        public ObservableCollection<GradeSheet> GradeSheets
+        { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
-
-        public bool DataLoaded
-        { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
-
-        private async void GetGradeSheet()
+        protected override void RegisterCommand()
         {
-            DataLoaded = false;
-            if (teacher == null || Class == null)
-            {
-                return;
-            }
-            var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
-            await Task.Delay(2000);
-            if (gradeSheets == null)
-            {
-                return;
-            }
-            GradeSheets?.Clear();
-            GradeSheets?.AddRange(gradeSheets);
-            DataLoaded = true;
+            ClickedUpdateCommand = new DelegateCommand(OnUpdate);
+            ClickedUploadFile = new DelegateCommand(OnUploadFile);
+            ClickedDownloadFile = new DelegateCommand(OnDownloadFile);
+            base.RegisterCommand();
         }
 
         private async void GetClassIDsOfCourse()
@@ -106,29 +91,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             Classes.AddRange(classes);
         }
 
-        protected override void RegisterCommand()
-        {
-            ClickedUpdateCommand = new DelegateCommand(OnUpdate);
-            ClickedUploadFile = new DelegateCommand(OnUploadFile);
-            ClickedDownloadFile = new DelegateCommand(OnDownloadFile);
-            base.RegisterCommand();
-        }
-
-        private async void OnDownloadFile()
-        {
-            var filePath = "";
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.DefaultExtension = "xlsx";
-            saveDialog.Filters.Add(new FileDialogFilter() { Name = "Excel Files", Extensions = { "xlsx" } });
-            filePath = await saveDialog.ShowAsync(new Window());
-            if (string.IsNullOrWhiteSpace(filePath))
-                return; // User canceled
-
-            await _excelService.ExportGradeSheetAsync(GradeSheets, filePath,Class.ClassName, async (t) =>
-            {
-                return await GetFullName(t);
-            });
-        }
         private Task<string> GetFullName(object? value)
         {
             return Task.Factory.StartNew(() =>
@@ -148,6 +110,74 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 }
             });
         }
+
+        private async void GetGradeSheet()
+        {
+            DataLoaded = false;
+            if (teacher == null || Class == null)
+            {
+                return;
+            }
+            var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
+            await Task.Delay(2000);
+            if (gradeSheets == null)
+            {
+                return;
+            }
+            GradeSheets?.Clear();
+            GradeSheets?.AddRange(gradeSheets);
+            DataLoaded = true;
+        }
+        private Task<string?> GetStudentCode(int studentId)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    var studentService = Ioc.Resolve<IStudentService>();
+                    var student = studentService.GetStudent(studentId);
+                    Debug.WriteLine(student?.User?.ToString());
+                    return student?.StudentCode;
+                }
+                catch (Exception)
+                {
+                    return "NaN";
+                }
+            });
+        }
+
+        private async void OnDownloadFile()
+        {
+            var filePath = "";
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.DefaultExtension = "xlsx";
+            saveDialog.Filters.Add(new FileDialogFilter() { Name = "Excel Files", Extensions = { "xlsx" } });
+            filePath = await saveDialog.ShowAsync(new Window());
+            if (string.IsNullOrWhiteSpace(filePath))
+                return; // User canceled
+            DataLoaded = false;
+            var isDownload = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
+            {
+                return await GetFullName(studentID);
+            }, async (studentID) =>
+            {
+                return await GetStudentCode(studentID);
+            });
+            DataLoaded = true;
+            if (!isDownload)
+            {
+                NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
+                return;
+            }
+            NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
+        }
+        private void OnUpdate()
+        {
+            var parmeters = new DialogParameters();
+            parmeters.Add("GradeSheet", GradeSheet);
+            DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
+        }
+
         private async void OnUploadFile()
         {
             var topLevel = TopLevel.GetTopLevel(AppRegion.MainView);
@@ -166,13 +196,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             await using var stream = await files[0].OpenReadAsync();
             using var streamReader = new StreamReader(stream);
             var fileContent = await streamReader.ReadToEndAsync();
-        }
-
-        private void OnUpdate()
-        {
-            var parmeters = new DialogParameters();
-            parmeters.Add("GradeSheet", GradeSheet);
-            DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
         }
     }
 }

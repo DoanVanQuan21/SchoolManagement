@@ -16,11 +16,13 @@
     FontFamily="{StaticResource Roboto}"
     Icon="avares://SchoolManagement.UI/Assets/Images/logo/app_logo.ico"
     Loaded="Window_Loaded"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Maximized"
     mc:Ignorable="d">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-		<ContentControl Grid.Row="0" Content="{Binding AppRegion.MainView}" />
-	</Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ContentControl Grid.Row="0" Content="{Binding AppRegion.MainView}" />
+    </Grid>
 </Window>
