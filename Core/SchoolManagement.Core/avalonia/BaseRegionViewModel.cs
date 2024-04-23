@@ -3,12 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Styling;
 using Prism.Events;
 using Prism.Mvvm;
-using Prism.Regions;
-using Prism.Services.Dialogs;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
-using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -16,8 +13,9 @@ using INotificationManager = SchoolManagement.Core.Contracts.INotificationManage
 
 namespace SchoolManagement.Core.avalonia
 {
-    public abstract class BaseRegionViewModel : BindableBase, INavigationAware, IConfirmNavigationRequest, IDialogAware
+    public abstract class BaseRegionViewModel : BindableBase
     {
+        protected readonly string _dialogIdentifier = "MainDialogHost";
         protected readonly IEventAggregator EventAggregator;
         private readonly IAppManager _appManager;
         private bool isLogin = false;
@@ -26,13 +24,10 @@ namespace SchoolManagement.Core.avalonia
         {
             _appManager = Ioc.Resolve<IAppManager>();
             EventAggregator = Ioc.Resolve<IEventAggregator>();
-            DialogService = Ioc.Resolve<IDialogService>();
             NotificationManager = Ioc.Resolve<INotificationManager>();
             RegisterCommand();
             SubcribeEvent();
         }
-
-        public event Action<IDialogResult>? RequestClose;
 
         public AppRegion AppRegion { get => _appManager.AppRegion; }
         public BootSetting BootSetting { get => _appManager.BootSetting; }
@@ -43,51 +38,6 @@ namespace SchoolManagement.Core.avalonia
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
-
-        protected IDialogService DialogService { get; private set; }
-
-        public virtual bool CanCloseDialog()
-        {
-            return true;
-        }
-
-        public virtual void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
-        {
-        }
-
-        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return true;
-        }
-
-        public virtual void OnDialogClosed()
-        {
-        }
-
-        public virtual void OnDialogOpened(IDialogParameters parameters)
-        {
-        }
-
-        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-        }
-
-        public virtual void OnNavigatedTo(NavigationContext navigationContext)
-        {
-        }
-
-        public UserControl TryPopMainView()
-        {
-            RootContext.PreviewMainViews.TryPop(out var mainView);
-            try
-            {
-                return (UserControl)Activator.CreateInstance(mainView);
-            }
-            catch (Exception)
-            {
-                return default;
-            }
-        }
 
         public void PreviewMainView()
         {
@@ -104,11 +54,6 @@ namespace SchoolManagement.Core.avalonia
             RootContext.PreviewMainViews.Push(mainView);
         }
 
-        public virtual void RaiseRequestClose(IDialogResult dialogResult)
-        {
-            RequestClose?.Invoke(dialogResult);
-        }
-
         public void SetMainPage(UserControl mainPage)
         {
             AppRegion.MainPage = mainPage;
@@ -123,6 +68,19 @@ namespace SchoolManagement.Core.avalonia
             AppRegion.MainView = mainView;
         }
 
+        public UserControl TryPopMainView()
+        {
+            RootContext.PreviewMainViews.TryPop(out var mainView);
+            try
+            {
+                return (UserControl)Activator.CreateInstance(mainView);
+            }
+            catch (Exception)
+            {
+                return default;
+            }
+        }
+
         protected void ChangeTheme(ThemeVariant theme)
         {
             try
@@ -134,19 +92,6 @@ namespace SchoolManagement.Core.avalonia
             {
                 NotificationManager.ShowError("Có lỗi khi đổi màu giao diện");
             }
-        }
-
-        protected virtual void CloseDialog(string parameter = "")
-        {
-            ButtonResult res = ButtonResult.None;
-            if (parameter?.ToLower() == "true")
-            {
-                res = ButtonResult.OK;
-                RaiseRequestClose(new DialogResult(res));
-                return;
-            }
-            res = ButtonResult.Cancel;
-            RaiseRequestClose(new DialogResult(res));
         }
 
         protected void DefaultView()
@@ -173,12 +118,30 @@ namespace SchoolManagement.Core.avalonia
             IsLogin = isLogin;
         }
 
+        protected virtual void SubcribeEvent()
+        { }
+
         protected void UpdateCurrentUser(User user)
         {
             RootContext.UpdateCurrentUser(user);
         }
 
-        protected virtual void SubcribeEvent()
-        { }
+        protected virtual void ShowDialogHostAndClose(object content, bool isClose)
+        {
+            DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier).Start();
+            CloseDialog(_dialogIdentifier, isClose);
+        }
+
+        private void CloseDialog(string dialogIdentifier, bool isClose)
+        {
+            Task.Factory.StartNew(async () =>
+            {
+                while (isClose)
+                {
+                    await Task.Delay(500);
+                }
+                DialogHostAvalonia.DialogHost.Close(dialogIdentifier);
+            });
+        }
     }
 }

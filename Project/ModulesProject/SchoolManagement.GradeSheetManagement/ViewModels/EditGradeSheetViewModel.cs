@@ -22,7 +22,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             User = RootContext.CurrentUser;
         }
 
-        public override void OnDialogOpened(IDialogParameters parameters)
+        public void OnDialogOpened(IDialogParameters parameters)
         {
             var gradeSh = parameters.GetValue<GradeSheet>("GradeSheet");
             if (gradeSh == null)

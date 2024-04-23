@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Services\DialogHost\DialogHost.Avalonia\DialogHost.Avalonia.csproj" />
     <ProjectReference Include="..\SchoolManagement.GlobalShared\SchoolManagement.GlobalShared.csproj" />
   </ItemGroup>
 

@@ -1,14 +1,11 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Platform.Storage;
-using DialogHostAvalonia;
 using Prism.Commands;
-using Prism.Services.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
-using SchoolManagement.GradeSheetManagement.Views;
 using SchoolManagement.UI.Dialogs;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -28,6 +25,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private GradeSheet gradeSheet;
         private ObservableCollection<GradeSheet> gradeSheets;
         private Teacher? teacher;
+        private bool isExportCompleted = false;
+
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -54,6 +53,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public ICommand ClickedDownloadFile { get; set; }
         public ICommand ClickedUpdateCommand { get; set; }
         public ICommand ClickedUploadFile { get; set; }
+
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
 
@@ -62,8 +62,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public ObservableCollection<GradeSheet> GradeSheets
         { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
+
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
+
         protected override void RegisterCommand()
         {
             ClickedUpdateCommand = new DelegateCommand(OnUpdate);
@@ -130,6 +132,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GradeSheets?.AddRange(gradeSheets);
             DataLoaded = true;
         }
+
         private Task<string?> GetStudentCode(int studentId)
         {
             return Task.Factory.StartNew(() =>
@@ -157,26 +160,28 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             filePath = await saveDialog.ShowAsync(new Window());
             if (string.IsNullOrWhiteSpace(filePath))
                 return; // User canceled
-            await DialogHost.Show(new ProcessView(), "MainDialogHost");
-            var isDownload = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
+            ShowDialogHostAndClose(new ProcessView(), isExportCompleted);
+            isExportCompleted = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
             {
                 return await GetFullName(studentID);
             }, async (studentID) =>
             {
                 return await GetStudentCode(studentID);
             });
-            if (!isDownload)
+            if (!isExportCompleted)
             {
                 NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
                 return;
             }
             NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
         }
+
         private void OnUpdate()
         {
-            var parmeters = new DialogParameters();
-            parmeters.Add("GradeSheet", GradeSheet);
-            DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
+            //TODO
+            //var parmeters = new DialogParameters();
+            //parmeters.Add("GradeSheet", GradeSheet);
+            //DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
         }
 
         private async void OnUploadFile()

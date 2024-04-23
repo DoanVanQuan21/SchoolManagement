@@ -15,8 +15,10 @@ using Avalonia.Media;
 using DialogHostAvalonia.Positioners;
 using DialogHostAvalonia.Utilities;
 
-namespace DialogHostAvalonia {
-    public class DialogHost : ContentControl {
+namespace DialogHostAvalonia
+{
+    public class DialogHost : ContentControl
+    {
         public const string ContentCoverName = "PART_ContentCover";
         public const string DialogHostRoot = "PART_DialogHostRoot";
 
@@ -140,75 +142,90 @@ namespace DialogHostAvalonia {
 
         private IDisposable? _templateDisposables;
 
-        public DialogHost() {
+        public DialogHost()
+        {
             _closeDialogCommand = new DialogHostCommandImpl(InternalClose, o => IsOpen, this.GetObservable(IsOpenProperty));
             _openDialogCommand = new DialogHostCommandImpl(o => ShowInternal(o, null, null), o => !IsOpen, this.GetObservable(IsOpenProperty));
         }
 
-        public IControlTemplate? PopupTemplate {
+        public IControlTemplate? PopupTemplate
+        {
             get => GetValue(PopupTemplateProperty);
             set => SetValue(PopupTemplateProperty, value);
         }
 
-        public DialogOpenedEventHandler? DialogOpenedCallback {
+        public DialogOpenedEventHandler? DialogOpenedCallback
+        {
             get => _dialogOpenedCallback;
             set => SetAndRaise(DialogOpenedCallbackProperty, ref _dialogOpenedCallback, value);
         }
 
-        public ICommand OpenDialogCommand {
+        public ICommand OpenDialogCommand
+        {
             get => _openDialogCommand;
             private set => SetAndRaise<ICommand>(OpenDialogCommandProperty, ref _openDialogCommand, value);
         }
 
-        public ICommand CloseDialogCommand {
+        public ICommand CloseDialogCommand
+        {
             get => _closeDialogCommand;
             private set => SetAndRaise<ICommand>(CloseDialogCommandProperty, ref _closeDialogCommand, value);
         }
 
-        public string? Identifier {
+        public string? Identifier
+        {
             get => _identifier;
             set => SetAndRaise(IdentifierProperty, ref _identifier, value);
         }
 
-        public object? DialogContent {
+        public object? DialogContent
+        {
             get => GetValue(DialogContentProperty);
             set => SetValue(DialogContentProperty, value);
         }
 
-        public IDataTemplate? DialogContentTemplate {
+        public IDataTemplate? DialogContentTemplate
+        {
             get => GetValue(DialogContentTemplateProperty);
             set => SetValue(DialogContentTemplateProperty, value);
         }
 
-        public IBrush OverlayBackground {
+        public IBrush OverlayBackground
+        {
             get => GetValue(OverlayBackgroundProperty);
             set => SetValue(OverlayBackgroundProperty, value);
         }
 
-        public Thickness DialogMargin {
+        public Thickness DialogMargin
+        {
             get => GetValue(DialogMarginProperty);
             set => SetValue(DialogMarginProperty, value);
         }
 
-        public bool IsOpen {
+        public bool IsOpen
+        {
             get => _isOpen;
-            set {
+            set
+            {
                 SetAndRaise(IsOpenProperty, ref _isOpen, value);
                 IsOpenPropertyChangedCallback(this, value);
             }
         }
 
-        public bool CloseOnClickAway {
+        public bool CloseOnClickAway
+        {
             get => _closeOnClickAway;
             set => SetAndRaise(CloseOnClickAwayProperty, ref _closeOnClickAway, value);
         }
 
-        public object? CloseOnClickAwayParameter {
+        public object? CloseOnClickAwayParameter
+        {
             get => _closeOnClickAwayParameter;
             set => SetAndRaise(CloseOnClickAwayParameterProperty, ref _closeOnClickAwayParameter, value);
         }
 
-        public bool DisableOpeningAnimation {
+        public bool DisableOpeningAnimation
+        {
             get => _disableOpeningAnimation;
             set => SetAndRaise(DisableOpeningAnimationProperty, ref _disableOpeningAnimation, value);
         }
@@ -216,7 +233,8 @@ namespace DialogHostAvalonia {
         /// <summary>
         /// Allows to override popup positioner
         /// </summary>
-        public IDialogPopupPositioner? PopupPositioner {
+        public IDialogPopupPositioner? PopupPositioner
+        {
             get => _popupPositioner;
             set => SetAndRaise(PopupPositionerProperty, ref _popupPositioner, value);
         }
@@ -226,7 +244,8 @@ namespace DialogHostAvalonia {
         /// </summary>
         public DialogSession? CurrentSession { get; private set; }
 
-        public DialogClosingEventHandler DialogClosingCallback {
+        public DialogClosingEventHandler DialogClosingCallback
+        {
             get => _dialogClosingCallback;
             set => SetAndRaise(DialogClosingCallbackProperty, ref _dialogClosingCallback, value);
         }
@@ -242,8 +261,8 @@ namespace DialogHostAvalonia {
         /// <summary>
         /// Shows a modal dialog. To use, a <see cref="DialogHost"/> instance must be in a visual tree (typically this may be specified towards the root of a Window's XAML).
         /// </summary>
-        /// <param name="content">Content to show (can be a control or view model).</param>        
-        /// <param name="openedEventHandler">Allows access to opened event which would otherwise have been subscribed to on a instance.</param>        
+        /// <param name="content">Content to show (can be a control or view model).</param>
+        /// <param name="openedEventHandler">Allows access to opened event which would otherwise have been subscribed to on a instance.</param>
         /// <returns>Task result is the parameter used to close the dialog, typically what is passed to the <see cref="CloseDialogCommand"/> command.</returns>
         public static Task<object?> Show(object content, DialogOpenedEventHandler openedEventHandler)
             => Show(content, (string?)null, openedEventHandler, null);
@@ -260,7 +279,7 @@ namespace DialogHostAvalonia {
         /// <summary>
         /// Shows a modal dialog. To use, a <see cref="DialogHost"/> instance must be in a visual tree (typically this may be specified towards the root of a Window's XAML).
         /// </summary>
-        /// <param name="content">Content to show (can be a control or view model).</param>        
+        /// <param name="content">Content to show (can be a control or view model).</param>
         /// <param name="openedEventHandler">Allows access to opened event which would otherwise have been subscribed to on a instance.</param>
         /// <param name="closingEventHandler">Allows access to closing event which would otherwise have been subscribed to on a instance.</param>
         /// <returns>Task result is the parameter used to close the dialog, typically what is passed to the <see cref="CloseDialogCommand"/> command.</returns>
@@ -290,7 +309,7 @@ namespace DialogHostAvalonia {
         /// Shows a modal dialog. To use, a <see cref="DialogHost"/> instance must be in a visual tree (typically this may be specified towards the root of a Window's XAML).
         /// </summary>
         /// <param name="content">Content to show (can be a control or view model).</param>
-        /// <param name="dialogIdentifier"><see cref="Identifier"/> of the instance where the dialog should be shown. Typically this will match an identifier set in XAML. <c>null</c> is allowed.</param>        
+        /// <param name="dialogIdentifier"><see cref="Identifier"/> of the instance where the dialog should be shown. Typically this will match an identifier set in XAML. <c>null</c> is allowed.</param>
         /// <param name="closingEventHandler">Allows access to closing event which would otherwise have been subscribed to on a instance.</param>
         /// <returns>Task result is the parameter used to close the dialog, typically what is passed to the <see cref="CloseDialogCommand"/> command.</returns>
         public static Task<object?> Show(object content, string? dialogIdentifier, DialogClosingEventHandler closingEventHandler)
@@ -305,7 +324,8 @@ namespace DialogHostAvalonia {
         /// <param name="closingEventHandler">Allows access to closing event which would otherwise have been subscribed to on a instance.</param>
         /// <returns>Task result is the parameter used to close the dialog, typically what is passed to the <see cref="CloseDialogCommand"/> command.</returns>
         public static Task<object?> Show(object content, string? dialogIdentifier, DialogOpenedEventHandler? openedEventHandler,
-                                         DialogClosingEventHandler? closingEventHandler) {
+                                         DialogClosingEventHandler? closingEventHandler)
+        {
             if (content is null) throw new ArgumentNullException(nameof(content));
             return GetInstance(dialogIdentifier).ShowInternal(content, openedEventHandler, closingEventHandler);
         }
@@ -348,7 +368,8 @@ namespace DialogHostAvalonia {
         /// <param name="closingEventHandler">Allows access to closing event which would otherwise have been subscribed to on a instance.</param>
         /// <returns>Task result is the parameter used to close the dialog, typically what is passed to the <see cref="CloseDialogCommand"/> command.</returns>
         public static Task<object?> Show(object content, DialogHost instance, DialogOpenedEventHandler? openedEventHandler,
-                                         DialogClosingEventHandler? closingEventHandler) {
+                                         DialogClosingEventHandler? closingEventHandler)
+        {
             if (content is null) throw new ArgumentNullException(nameof(content));
             if (instance is null) throw new ArgumentNullException(nameof(instance));
             return instance.ShowInternal(content, openedEventHandler, closingEventHandler);
@@ -364,9 +385,11 @@ namespace DialogHostAvalonia {
         /// </summary>
         /// <param name="dialogIdentifier"> of the instance where the dialog should be closed. Typically this will match an identifier set in XAML. </param>
         /// <param name="parameter"> to provide to close handler</param>
-        public static void Close(string? dialogIdentifier, object? parameter) {
+        public static void Close(string? dialogIdentifier, object? parameter)
+        {
             DialogHost dialogHost = GetInstance(dialogIdentifier);
-            if (dialogHost.CurrentSession is { } currentSession) {
+            if (dialogHost.CurrentSession is { } currentSession)
+            {
                 currentSession.Close(parameter);
                 return;
             }
@@ -379,7 +402,8 @@ namespace DialogHostAvalonia {
         /// </summary>
         /// <param name="dialogIdentifier">The identifier to use to retrieve the DialogHost</param>
         /// <returns>The DialogSession if one is in process, or null</returns>
-        public static DialogSession? GetDialogSession(string? dialogIdentifier) {
+        public static DialogSession? GetDialogSession(string? dialogIdentifier)
+        {
             DialogHost dialogHost = GetInstance(dialogIdentifier);
             return dialogHost.CurrentSession;
         }
@@ -391,7 +415,8 @@ namespace DialogHostAvalonia {
         /// <returns></returns>
         public static bool IsDialogOpen(string? dialogIdentifier) => GetDialogSession(dialogIdentifier)?.IsEnded == false;
 
-        private static DialogHost GetInstance(string? dialogIdentifier) {
+        private static DialogHost GetInstance(string? dialogIdentifier)
+        {
             if (LoadedInstances.Count == 0)
                 throw new InvalidOperationException("No loaded DialogHost instances.");
 
@@ -407,7 +432,8 @@ namespace DialogHostAvalonia {
         }
 
         internal async Task<object?> ShowInternal(object content, DialogOpenedEventHandler? openedEventHandler,
-                                                  DialogClosingEventHandler? closingEventHandler) {
+                                                  DialogClosingEventHandler? closingEventHandler)
+        {
             if (IsOpen)
                 throw new InvalidOperationException("DialogHost is already open.");
 
@@ -428,8 +454,10 @@ namespace DialogHostAvalonia {
             return result;
         }
 
-        private static void IsOpenPropertyChangedCallback(DialogHost dialogHost, bool newValue) {
-            if (newValue) {
+        private static void IsOpenPropertyChangedCallback(DialogHost dialogHost, bool newValue)
+        {
+            if (newValue)
+            {
                 dialogHost.CurrentSession = new DialogSession(dialogHost);
                 dialogHost._restoreFocusDialogClose = TopLevel.GetTopLevel(dialogHost)?.FocusManager?.GetFocusedElement();
 
@@ -438,7 +466,7 @@ namespace DialogHostAvalonia {
 
                 //multiple ways of calling back that the dialog has opened:
                 // * routed event
-                // * straight forward dependency property 
+                // * straight forward dependency property
                 // * handler provided to the async show method
                 var dialogOpenedEventArgs = new DialogOpenedEventArgs(dialogHost.CurrentSession, DialogOpenedEvent);
                 dialogHost.OnDialogOpened(dialogOpenedEventArgs);
@@ -447,16 +475,20 @@ namespace DialogHostAvalonia {
 
                 // dialogHost._overlayPopupHost?.ConfigurePosition(dialogHost._root, PlacementMode.AnchorAndGravity, new Point());
             }
-            else {
+            else
+            {
                 object? closeParameter = null;
-                if (dialogHost.CurrentSession is { } session) {
-                    if (!session.IsEnded) {
+                if (dialogHost.CurrentSession is { } session)
+                {
+                    if (!session.IsEnded)
+                    {
                         session.Close(session.CloseParameter);
                     }
 
                     //DialogSession.Close may attempt to cancel the closing of the dialog.
                     //When the dialog is closed in this manner it is not valid
-                    if (!session.IsEnded) {
+                    if (!session.IsEnded)
+                    {
                         throw new InvalidOperationException($"Cannot cancel dialog closing after {nameof(IsOpen)} property has been set to {bool.FalseString}");
                     }
 
@@ -475,22 +507,30 @@ namespace DialogHostAvalonia {
             dialogHost.RaiseCommandsCanExecuteChanged();
         }
 
-        protected void RaiseCommandsCanExecuteChanged() {
+        protected void RaiseCommandsCanExecuteChanged()
+        {
             (_openDialogCommand as DialogHostCommandImpl)?.OnCanExecuteChanged();
             (_closeDialogCommand as DialogHostCommandImpl)?.OnCanExecuteChanged();
         }
 
-        protected override void OnApplyTemplate(TemplateAppliedEventArgs e) {
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
             _templateDisposables?.Dispose();
 
             _root = e.NameScope.Find<Grid>(DialogHostRoot) ?? throw new InvalidOperationException($"No Grid with name {DialogHostRoot} found");
-            _overlayPopupHost = new DialogOverlayPopupHost(_root) {
-                Content = DialogContent, ContentTemplate = DialogContentTemplate, Template = PopupTemplate,
-                Padding = DialogMargin, ClipToBounds = false, DisableOpeningAnimation = DisableOpeningAnimation,
+            _overlayPopupHost = new DialogOverlayPopupHost(_root)
+            {
+                Content = DialogContent,
+                ContentTemplate = DialogContentTemplate,
+                Template = PopupTemplate,
+                Padding = DialogMargin,
+                ClipToBounds = false,
+                DisableOpeningAnimation = DisableOpeningAnimation,
                 PopupPositioner = PopupPositioner
             };
 
-            if (IsOpen) {
+            if (IsOpen)
+            {
                 _overlayPopupHost.IsOpen = true;
                 // _overlayPopupHost?.ConfigurePosition(_root, PlacementMode.AnchorAndGravity, new Point());
             }
@@ -509,8 +549,10 @@ namespace DialogHostAvalonia {
             base.OnApplyTemplate(e);
         }
 
-        private void ContentCoverGrid_OnPointerReleased(object sender, PointerReleasedEventArgs e) {
-            if (CloseOnClickAway && CurrentSession != null) {
+        private void ContentCoverGrid_OnPointerReleased(object sender, PointerReleasedEventArgs e)
+        {
+            if (CloseOnClickAway && CurrentSession != null)
+            {
                 InternalClose(CloseOnClickAwayParameter);
             }
         }
@@ -520,7 +562,8 @@ namespace DialogHostAvalonia {
         /// <summary>
         /// Raised when a dialog is opened.
         /// </summary>
-        public event DialogOpenedEventHandler DialogOpened {
+        public event DialogOpenedEventHandler DialogOpened
+        {
             add => AddHandler(DialogOpenedEvent, value);
             remove => RemoveHandler(DialogOpenedEvent, value);
         }
@@ -528,14 +571,16 @@ namespace DialogHostAvalonia {
         /// <summary>
         /// Raised just before a dialog is closed.
         /// </summary>
-        public event EventHandler<DialogClosingEventArgs> DialogClosing {
+        public event EventHandler<DialogClosingEventArgs> DialogClosing
+        {
             add => AddHandler(DialogClosingEvent, value);
             remove => RemoveHandler(DialogClosingEvent, value);
         }
 
         protected void OnDialogClosing(DialogClosingEventArgs eventArgs) => RaiseEvent(eventArgs);
 
-        internal void InternalClose(object? parameter) {
+        internal void InternalClose(object? parameter)
+        {
             var currentSession = CurrentSession ?? throw new InvalidOperationException($"{nameof(DialogHost)} does not have a current session");
 
             currentSession.CloseParameter = parameter;
@@ -543,14 +588,15 @@ namespace DialogHostAvalonia {
 
             //multiple ways of calling back that the dialog is closing:
             // * routed event
-            // * straight forward IsOpen dependency property 
+            // * straight forward IsOpen dependency property
             // * handler provided to the async show method
             var dialogClosingEventArgs = new DialogClosingEventArgs(currentSession, DialogClosingEvent);
             OnDialogClosing(dialogClosingEventArgs);
             DialogClosingCallback?.Invoke(this, dialogClosingEventArgs);
             _asyncShowClosingEventHandler?.Invoke(this, dialogClosingEventArgs);
 
-            if (dialogClosingEventArgs.IsCancelled) {
+            if (dialogClosingEventArgs.IsCancelled)
+            {
                 currentSession.IsEnded = false;
                 return;
             }
@@ -558,12 +604,14 @@ namespace DialogHostAvalonia {
             IsOpen = false;
         }
 
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e) {
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
             base.OnAttachedToVisualTree(e);
             LoadedInstances.Add(this);
         }
 
-        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e) {
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
             base.OnDetachedFromVisualTree(e);
             LoadedInstances.Remove(this);
         }

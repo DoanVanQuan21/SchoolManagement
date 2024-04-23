@@ -73,7 +73,6 @@ namespace SchoolManagement.Shell
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             RegisterTypesHelper.RegisterTypes(containerRegistry);
-            containerRegistry.RegisterDialog<SplashScreen, SplashScreenViewModel>();
             Ioc.AppContainer = containerRegistry.GetContainer();
             Ioc.ContainerRegistry = containerRegistry;
             Ioc.ContainerProvider = Container;
