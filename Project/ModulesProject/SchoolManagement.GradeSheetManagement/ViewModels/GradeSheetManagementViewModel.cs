@@ -160,7 +160,13 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             filePath = await saveDialog.ShowAsync(new Window());
             if (string.IsNullOrWhiteSpace(filePath))
                 return; // User canceled
-            ShowDialogHostAndClose(new ProcessView(), isExportCompleted);
+            var progressDialog = ShowDialogHostAndClose(new ProgressDialog(), isExportCompleted);
+            var download = ExportFile(filePath);
+            await Task.WhenAll(progressDialog,download);
+            
+        }
+        private async Task ExportFile(string filePath)
+        {
             isExportCompleted = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
             {
                 return await GetFullName(studentID);
@@ -168,6 +174,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return await GetStudentCode(studentID);
             });
+            CloseDialog();
             if (!isExportCompleted)
             {
                 NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
@@ -175,7 +182,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             }
             NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
         }
-
         private void OnUpdate()
         {
             //TODO

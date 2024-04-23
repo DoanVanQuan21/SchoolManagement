@@ -126,22 +126,14 @@ namespace SchoolManagement.Core.avalonia
             RootContext.UpdateCurrentUser(user);
         }
 
-        protected virtual void ShowDialogHostAndClose(object content, bool isClose)
+        protected virtual async Task ShowDialogHostAndClose(object content, bool isClose)
         {
-            DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier).Start();
-            CloseDialog(_dialogIdentifier, isClose);
+            await DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier);
         }
 
-        private void CloseDialog(string dialogIdentifier, bool isClose)
+        protected void CloseDialog()
         {
-            Task.Factory.StartNew(async () =>
-            {
-                while (isClose)
-                {
-                    await Task.Delay(500);
-                }
-                DialogHostAvalonia.DialogHost.Close(dialogIdentifier);
-            });
+            DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
         }
     }
 }

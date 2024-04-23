@@ -114,4 +114,10 @@
     </AvaloniaResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Dialogs\ProgressDialog.axaml.cs">
+      <DependentUpon>ProgressDialog.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

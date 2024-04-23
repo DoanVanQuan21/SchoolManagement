@@ -63,9 +63,9 @@ namespace SchoolManagement.Auth.ViewModels
             {
                 RootContext.CurrentUser = user;
             }
+            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
             //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
             //await box.ShowAsPopupAsync(Container);
-            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
 
         private void OnRegister()
