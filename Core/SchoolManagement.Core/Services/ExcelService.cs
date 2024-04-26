@@ -64,11 +64,8 @@ namespace SchoolManagement.Core.Services
                         continue;
                     }
                     GradeSheet gradeSheet = new GradeSheet();
-                    while (col < totalCol)
-                    {
-                        gradeSheet = (GradeSheet)GetRow<GradeSheet>(row, col, totalCol);
-                        col++;
-                    }
+                    gradeSheet = (GradeSheet)GetRow<GradeSheet>(row, col, totalCol);
+
                     gradeSheet.StudentId = studentID;
                     gradeSheet.ClassId = classID;
                     gradeSheets.Add(gradeSheet);

@@ -213,9 +213,21 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return await _studentService.GetStudentIDByStudentCodeAsync(studentCode);
             });
+            await GetFullDetailGradeSheet(gradeSheets);
             var uploadView = new UploadGradeSheets();
             uploadView.GradeSheetViewModel.GradeSheets = gradeSheets;
             await ShowDialogHost(uploadView);
+        }
+        private Task GetFullDetailGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                foreach (var gs in gradeSheets)
+                {
+                    gs.Student = _studentService.GetStudent(gs.StudentId);
+                    gs.Class = _classService.GetClassByID(gs.ClassId);
+                }
+            });
         }
     }
 }
