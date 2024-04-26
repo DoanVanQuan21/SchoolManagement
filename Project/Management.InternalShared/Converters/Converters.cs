@@ -10,7 +10,10 @@ namespace Management.InternalShared.Converters
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            return GetFullName(value).GetAwaiter().GetResult();
+            TaskCompletionSource<string> tsk = new();
+
+            GetFullName(value, tsk);
+            return tsk.Task.Result;
         }
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -18,24 +21,25 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
 
-        private Task<string> GetFullName(object? value)
+        private void GetFullName(object? value, TaskCompletionSource<string> tsk)
         {
-            return Task.Factory.StartNew(() =>
+            var fullname = "";
+            try
             {
-                try
-                {
-                    var studentService = Ioc.Resolve<IStudentService>();
-                    var userService = Ioc.Resolve<IUserService>();
-                    var student = studentService.GetStudent((int)value);
-                    Debug.WriteLine(student.User?.ToString());
-                    var fullName = userService.GetFullname(student.UserId);
-                    return fullName;
-                }
-                catch (Exception)
-                {
-                    return "NaN";
-                }
-            });
+                var studentService = Ioc.Resolve<IStudentService>();
+                var userService = Ioc.Resolve<IUserService>();
+                var student = studentService.GetStudent((int)value);
+                Debug.WriteLine(student.User?.ToString());
+                fullname = userService.GetFullname(student.UserId);
+            }
+            catch (Exception)
+            {
+                fullname = "NaN";
+            }
+            finally
+            {
+                tsk.SetResult(fullname);
+            }
         }
     }
 }

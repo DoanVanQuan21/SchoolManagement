@@ -13,5 +13,9 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
             return FirstOrDefault(item => item.StudentId == studentID);
         }
+        public Student? GetStudent(string studentCode)
+        {
+            return FirstOrDefault(item => item.StudentCode == studentCode);
+        }
     }
 }

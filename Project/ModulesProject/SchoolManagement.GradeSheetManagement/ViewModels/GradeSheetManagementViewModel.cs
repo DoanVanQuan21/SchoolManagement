@@ -19,14 +19,15 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private readonly ICourseService _courseService;
         private readonly IExcelService _excelService;
         private readonly IGradeSheetService _gradeSheetService;
+        private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
+        private readonly IUserService _userService;
         private Class _class;
         private bool dataLoaded = false;
         private GradeSheet gradeSheet;
         private ObservableCollection<GradeSheet> gradeSheets;
-        private Teacher? teacher;
         private bool isExportCompleted = false;
-
+        private Teacher? teacher;
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -34,6 +35,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             _classService = Ioc.Resolve<IClassService>();
             _teacherService = Ioc.Resolve<ITeacherService>();
             _excelService = Ioc.Resolve<IExcelService>();
+            _studentService = Ioc.Resolve<IStudentService>();
+            _userService = Ioc.Resolve<IUserService>();
+
             User = RootContext.CurrentUser;
             Class = new();
             GradeSheets = new();
@@ -45,7 +49,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             get => _class; set
             {
                 SetProperty(ref _class, value);
-                GetGradeSheet();
+                GetGradeSheet().GetAwaiter();
             }
         }
 
@@ -74,6 +78,24 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             base.RegisterCommand();
         }
 
+        private async Task ExportFile(string filePath)
+        {
+            isExportCompleted = await _excelService.ExportGradeSheetsAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
+            {
+                return await GetFullName(studentID);
+            }, async (studentID) =>
+            {
+                return await GetStudentCode(studentID);
+            });
+            CloseDialog();
+            if (!isExportCompleted)
+            {
+                NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
+                return;
+            }
+            NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
+        }
+
         private async void GetClassIDsOfCourse()
         {
             Classes = new();
@@ -93,29 +115,25 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 return;
             }
             Classes.AddRange(classes);
+            Class = Classes.First();
         }
 
-        private Task<string> GetFullName(object? value)
+        private async Task<string> GetFullName(object? value)
         {
-            return Task.Factory.StartNew(() =>
+            try
             {
-                try
-                {
-                    var studentService = Ioc.Resolve<IStudentService>();
-                    var userService = Ioc.Resolve<IUserService>();
-                    var student = studentService.GetStudent((int)value);
-                    Debug.WriteLine(student.User?.ToString());
-                    var fullName = userService.GetFullname(student.UserId);
-                    return fullName;
-                }
-                catch (Exception)
-                {
-                    return "NaN";
-                }
-            });
+                var student = await _studentService.GetStudentByStudentIDAsync((int)value);
+                Debug.WriteLine(student.User?.ToString());
+                var fullName = _userService.GetFullname(student.UserId);
+                return fullName;
+            }
+            catch (Exception)
+            {
+                return "NaN";
+            }
         }
 
-        private async void GetGradeSheet()
+        private async Task GetGradeSheet()
         {
             DataLoaded = false;
             if (teacher == null || Class == null)
@@ -133,54 +151,34 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             DataLoaded = true;
         }
 
-        private Task<string?> GetStudentCode(int studentId)
+        private async Task<string?> GetStudentCode(int studentId)
         {
-            return Task.Factory.StartNew(() =>
+            try
             {
-                try
-                {
-                    var studentService = Ioc.Resolve<IStudentService>();
-                    var student = studentService.GetStudent(studentId);
-                    Debug.WriteLine(student?.User?.ToString());
-                    return student?.StudentCode;
-                }
-                catch (Exception)
-                {
-                    return "NaN";
-                }
-            });
+                var student = await _studentService.GetStudentByStudentIDAsync(studentId);
+                Debug.WriteLine(student?.User?.ToString());
+                return student?.StudentCode;
+            }
+            catch (Exception)
+            {
+                return "NaN";
+            }
         }
 
         private async void OnDownloadFile()
         {
-            var filePath = "";
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.DefaultExtension = "xlsx";
-            saveDialog.Filters.Add(new FileDialogFilter() { Name = "Excel Files", Extensions = { "xlsx" } });
-            filePath = await saveDialog.ShowAsync(new Window());
+            var topLevel = TopLevel.GetTopLevel(AppRegion.MainView);
+            var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
+            {
+                Title = "Save file",
+                SuggestedFileName = $"{Class.ClassName}.xlsx",
+            });
+            var filePath = file.TryGetLocalPath();
             if (string.IsNullOrWhiteSpace(filePath))
                 return; // User canceled
             var progressDialog = ShowDialogHostAndClose(new ProgressDialog(), isExportCompleted);
             var download = ExportFile(filePath);
-            await Task.WhenAll(progressDialog,download);
-            
-        }
-        private async Task ExportFile(string filePath)
-        {
-            isExportCompleted = await _excelService.ExportGradeSheetAsync(GradeSheets, filePath, Class.ClassName, async (studentID) =>
-            {
-                return await GetFullName(studentID);
-            }, async (studentID) =>
-            {
-                return await GetStudentCode(studentID);
-            });
-            CloseDialog();
-            if (!isExportCompleted)
-            {
-                NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
-                return;
-            }
-            NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
+            await Task.WhenAll(progressDialog, download);
         }
         private void OnUpdate()
         {
@@ -205,9 +203,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 NotificationManager.ShowWarning("Không có file nào được chọn");
                 return;
             }
-            await using var stream = await files[0].OpenReadAsync();
-            using var streamReader = new StreamReader(stream);
-            var fileContent = await streamReader.ReadToEndAsync();
+            var path = files.First().Path.LocalPath;
+            var gradeSheets = await _excelService.ImportGradeSheetsAsync(path, Class.ClassId, async (studentCode) =>
+            {
+                return await _studentService.GetStudentIDByStudentCodeAsync(studentCode);
+            });
         }
     }
 }

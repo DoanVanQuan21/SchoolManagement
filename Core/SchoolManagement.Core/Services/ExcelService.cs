@@ -1,6 +1,8 @@
-﻿using ClosedXML.Excel;
+﻿using ActiproSoftware.Extensions;
+using ClosedXML.Excel;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Helpers;
+using SchoolManagement.Core.Models.SchoolManagements;
 using System.Collections.ObjectModel;
 using System.Reflection;
 
@@ -9,10 +11,12 @@ namespace SchoolManagement.Core.Services
     public class ExcelService : IExcelService
     {
         private readonly string _defaultNameWorkSheet = "Sheet1";
+        private readonly int defaultColumn = 1;
+        private readonly int defaultRow = 1;
         private XLWorkbook? workbook;
         private IXLWorksheet? worksheet;
 
-        public async Task<bool> ExportGradeSheetAsync<T>(ObservableCollection<T> datas, string filePath, string nameSheet, Func<int, Task<string>> getStudentName = null, Func<int, Task<string?>> getStudentCode = null)
+        public async Task<bool> ExportGradeSheetsAsync<T>(ObservableCollection<T> datas, string filePath, string nameSheet, Func<int, Task<string>> getStudentName = null, Func<int, Task<string?>> getStudentCode = null)
         {
             if (datas == null || datas.Count <= 0)
             {
@@ -31,6 +35,53 @@ namespace SchoolManagement.Core.Services
             }
             workbook.SaveAs(filePath);
             return true;
+        }
+
+        public async Task<ObservableCollection<GradeSheet>> ImportGradeSheetsAsync(string filePath, int classID, Func<string, Task<int>> getStudentID)
+        {
+            try
+            {
+                var gradeSheets = new ObservableCollection<GradeSheet>();
+                workbook = new XLWorkbook(filePath);
+                worksheet = workbook.Worksheet(1);
+                var totalRow = worksheet.LastRowUsed().RowNumber();
+                var totalCol = worksheet.LastColumnUsed().ColumnNumber();
+                int row = defaultRow;
+                int col = 3;
+                var isHeaderOK = ValidateHeader(totalCol);
+                if (!isHeaderOK)
+                {
+                    return new();
+                }
+                while (row < totalRow)
+                {
+                    worksheet.Cell(row, defaultColumn).Value.TryGetText(out var studentCode);
+                    int studentID = await getStudentID(studentCode);
+                    if (studentID == 0)
+                    {
+                        row++;
+                        col = 3;
+                        continue;
+                    }
+                    GradeSheet gradeSheet = new GradeSheet();
+                    while (col < totalCol)
+                    {
+                        gradeSheet = (GradeSheet)GetRow<GradeSheet>(row, col, totalCol);
+                        col++;
+                    }
+                    gradeSheet.StudentId = studentID;
+                    gradeSheet.ClassId = classID;
+                    gradeSheets.Add(gradeSheet);
+                    row++;
+                    col = 3;
+                }
+                return gradeSheets;
+            }
+            catch (Exception ex)
+            {
+                //TODO
+                return new();
+            }
         }
 
         private int BuildHeader<T>(ObservableCollection<T> datas, IXLWorksheet ws)
@@ -86,6 +137,48 @@ namespace SchoolManagement.Core.Services
         private List<PropertyInfo> GetPropertyInfos(object obj)
         {
             return obj?.GetType().GetProperties().Where(p => PropertyHelper.IsHeaderExcel(p)).ToList();
+        }
+
+        private object GetRow<T>(int row, int col, int totalCol)
+        {
+            var obj = Activator.CreateInstance(typeof(T));
+            var properties = obj.GetType()
+                .GetProperties()
+                .Where(p => PropertyHelper.IsHeaderExcel(p))
+                .Where(p => !PropertyHelper.IsID(p)).ToList();
+            int index = 0;
+            while (col < totalCol)
+            {
+                worksheet.Cell(row, col).Value.TryGetText(out string value);
+                _ = float.TryParse(value,out var result);
+                
+                properties[index++].SetValue(obj, result);
+                col++;
+            }
+            return obj;
+        }
+
+        private bool ValidateHeader(int totalCol)
+        {
+            GradeSheet gradeSheet = new();
+            var displayName = gradeSheet.GetType()
+                .GetProperties()
+                .Where(p => PropertyHelper.IsHeaderExcel(p))
+                .Select(p => PropertyHelper.GetDisplayName(p)).ToList();
+            int row = defaultRow;
+            int col = 2;
+            int index = 0;
+            while (col < totalCol)
+            {
+                worksheet.Cell(row, col).Value.TryGetText(out var header);
+                if (header != displayName[index])
+                {
+                    return false;
+                }
+                col++;
+                index++;
+            }
+            return true;
         }
     }
 }
