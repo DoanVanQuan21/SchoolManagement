@@ -7,6 +7,7 @@ using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using System.Diagnostics;
 using System.Windows.Input;
 
 namespace SchoolManagement.Auth.ViewModels
@@ -53,19 +54,32 @@ namespace SchoolManagement.Auth.ViewModels
         private void OnLogin()
 
         {
-            if (User == null)
+            try
             {
-                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
-                return;
+                if (User == null)
+                {
+                    NotificationManager.ShowWarning("User null");
+
+                    EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+                    return;
+                }
+                var (isLogin, user) = _userService.Login(User);
+                NotificationManager.ShowWarning($">>>Login: {isLogin} --- user: {user?.ToString()}");
+
+                Debug.WriteLine($">>>Login: {isLogin} --- user: {user.ToString()}");
+                if (user != null)
+                {
+                    RootContext.CurrentUser = user;
+                }
+                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
+                //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
+                //await box.ShowAsPopupAsync(Container);
             }
-            var (isLogin, user) = _userService.Login(User);
-            if (user != null)
+            catch (Exception e)
             {
-                RootContext.CurrentUser = user;
+
+                NotificationManager.ShowWarning(e.ToString(),10);
             }
-            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
-            //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
-            //await box.ShowAsPopupAsync(Container);
         }
 
         private void OnRegister()

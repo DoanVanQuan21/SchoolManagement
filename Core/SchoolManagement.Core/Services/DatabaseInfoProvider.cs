@@ -33,50 +33,50 @@ namespace SchoolManagement.Core.Services
                 _notificationManager.ShowError("Server cannot be null!");
                 return;
             }
-            if (!OperatingSystem.IsWindows())
-            {
-                ServerInfor = new()
-                {
-                    ServerName = "192.168.102.221",
-                    User = "schoolmanagement",
-                    Password = "123",
-                };
-                _appManager.BootSetting.ServerInfor = ServerInfor;
-                return;
-            }
-            if (_appManager.BootSetting.ServerInfor != null)
-            {
-                if (!OperatingSystem.IsWindows())
-                {
-                    ServerInfor = new()
-                    {
-                        ServerName = "192.168.1.77",
-                        User = "schoolmanagement",
-                        Password = "123",
-                    };
-                    return;
-                }
-                ServerInfor = _appManager.BootSetting.ServerInfor;
-                return;
-            }
-            var ipV4Address = GetIpV4Address();
-            if (string.IsNullOrEmpty(ipV4Address))
-            {
-                Debug.WriteLine("Can not get IPV4 ADDRESS");
-                return;
-            }
-            ServerInfor = new()
-            {
-                ServerName = ipV4Address,
-                User = "schoolmanagement",
-                Password = "123",
-            };
+            //if (!OperatingSystem.IsWindows())
+            //{
+            //    ServerInfor = new()
+            //    {
+            //        ServerName = "192.168.102.221",
+            //        User = "schoolmanagement",
+            //        Password = "123",
+            //    };
+            //    _appManager.BootSetting.ServerInfor = ServerInfor;
+            //    return;
+            //}
+            //if (_appManager.BootSetting.ServerInfor != null)
+            //{
+            //    if (!OperatingSystem.IsWindows())
+            //    {
+            //        ServerInfor = new()
+            //        {
+            //            ServerName = "192.168.1.77",
+            //            User = "schoolmanagement",
+            //            Password = "123",
+            //        };
+            //        return;
+            //    }
+            //    ServerInfor = _appManager.BootSetting.ServerInfor;
+            //    return;
+            //}
+            //var ipV4Address = GetIpV4Address();
+            //if (string.IsNullOrEmpty(ipV4Address))
+            //{
+            //    Debug.WriteLine("Can not get IPV4 ADDRESS");
+            //    return;
+            //}
             //ServerInfor = new()
             //{
-            //    ServerName = "schoolmanagementvy2.database.windows.net",
+            //    ServerName = ipV4Address,
             //    User = "schoolmanagement",
-            //    Password = "admin@123",
+            //    Password = "123",
             //};
+            ServerInfor = new()
+            {
+                ServerName = "schoolmanagementvy2.database.windows.net",
+                User = "schoolmanagement",
+                Password = "admin@123",
+            };
             _appManager.BootSetting.ServerInfor = ServerInfor;
         }
 

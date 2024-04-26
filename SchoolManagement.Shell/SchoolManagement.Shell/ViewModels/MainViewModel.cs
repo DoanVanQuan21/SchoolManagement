@@ -1,10 +1,12 @@
 ﻿using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Shell.Views.DesktopViews;
 using SchoolManagement.Shell.Views.SplashScreen;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Shell.ViewModels
@@ -35,10 +37,14 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
+            NotificationManager.ShowWarning("isLoginSucess");
+
             var notif = "";
             if (!isLoginSucess)
             {
                 notif = Util.GetResourseString("LoginFail_Message");
+                Debug.WriteLine($">>>Login Faild: {isLoginSucess} --- user: {RootContext.CurrentUser.ToString()}");
+
                 NotificationManager.ShowWarning(notif);
                 return;
             }

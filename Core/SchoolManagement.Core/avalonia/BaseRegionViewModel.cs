@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Prism.Events;
 using Prism.Mvvm;
 using SchoolManagement.Core.Context;
@@ -9,6 +10,7 @@ using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
+using System.Diagnostics;
 using INotificationManager = SchoolManagement.Core.Contracts.INotificationManager;
 
 namespace SchoolManagement.Core.avalonia
@@ -66,6 +68,7 @@ namespace SchoolManagement.Core.avalonia
                 PushMainView(AppRegion.MainView.GetType());
             }
             AppRegion.MainView = mainView;
+            Debug.WriteLine($">>>Change View: {nameof(AppRegion.MainView)} --- user: {RootContext.CurrentUser.ToString()}");
         }
 
         public UserControl TryPopMainView()
@@ -106,6 +109,8 @@ namespace SchoolManagement.Core.avalonia
 
         protected virtual void OnLogginSuccess(bool isLoginSucess)
         {
+            NotificationManager.ShowWarning($"base: {isLoginSucess}");
+
         }
 
         protected virtual void RegisterCommand()
