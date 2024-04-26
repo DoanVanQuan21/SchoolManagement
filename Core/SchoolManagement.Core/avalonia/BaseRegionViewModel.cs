@@ -126,7 +126,7 @@ namespace SchoolManagement.Core.avalonia
             RootContext.UpdateCurrentUser(user);
         }
 
-        protected virtual async Task ShowDialogHostAndClose(object content, bool isClose)
+        protected virtual async Task ShowDialogHost(object content)
         {
             await DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier);
         }

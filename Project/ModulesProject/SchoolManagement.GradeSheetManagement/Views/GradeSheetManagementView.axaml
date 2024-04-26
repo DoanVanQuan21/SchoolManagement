@@ -88,7 +88,7 @@
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding StudentId, Converter={StaticResource StudentIDConverter}}"
+                        Binding="{Binding Student.User.FullName}"
                         Header="Họ và tên" />
                     <DataGridTextColumn
                         Width="*"

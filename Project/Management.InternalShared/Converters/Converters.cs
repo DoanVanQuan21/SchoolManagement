@@ -18,7 +18,7 @@ namespace Management.InternalShared.Converters
 
         public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return "0";
         }
 
         private void GetFullName(object? value, TaskCompletionSource<string> tsk)

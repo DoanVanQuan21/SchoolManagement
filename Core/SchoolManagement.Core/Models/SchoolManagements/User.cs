@@ -30,7 +30,7 @@ public partial class User : BindableBase
     [DisplayName("Tên")]
     public string? LastName
     { get => lastName; set { SetProperty(ref lastName, value); } }
-
+    public string FullName => $"{FirstName} {LastName}";
     [DisplayName("Giới tính")]
     public string? Gender
     { get => gender; set { SetProperty(ref gender, value); } }

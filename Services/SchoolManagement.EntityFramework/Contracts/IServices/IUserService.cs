@@ -17,5 +17,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
 
         bool UpdateUserInfor(User user);
         string GetFullname(int userID);
+        User? GetUser(int userID);
     }
 }

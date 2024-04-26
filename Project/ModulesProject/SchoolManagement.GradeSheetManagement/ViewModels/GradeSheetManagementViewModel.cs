@@ -6,6 +6,7 @@ using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using SchoolManagement.GradeSheetManagement.Views.Dialogs;
 using SchoolManagement.UI.Dialogs;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -173,10 +174,14 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 Title = "Save file",
                 SuggestedFileName = $"{Class.ClassName}.xlsx",
             });
+            if (file == null)
+            {
+                return;
+            }
             var filePath = file.TryGetLocalPath();
             if (string.IsNullOrWhiteSpace(filePath))
                 return; // User canceled
-            var progressDialog = ShowDialogHostAndClose(new ProgressDialog(), isExportCompleted);
+            var progressDialog = ShowDialogHost(new ProgressDialog());
             var download = ExportFile(filePath);
             await Task.WhenAll(progressDialog, download);
         }
@@ -208,6 +213,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return await _studentService.GetStudentIDByStudentCodeAsync(studentCode);
             });
+            var uploadView = new UploadGradeSheets();
+            uploadView.GradeSheetViewModel.GradeSheets = gradeSheets;
+            await ShowDialogHost(uploadView);
         }
     }
 }

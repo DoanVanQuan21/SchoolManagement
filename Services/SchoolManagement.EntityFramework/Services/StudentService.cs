@@ -1,17 +1,22 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 
 namespace SchoolManagement.EntityFramework.Services
 {
     public class StudentService : BaseService, IStudentService
     {
+        private readonly IUserService _userService;
         public StudentService() : base()
         {
+            _userService = Ioc.Resolve<IUserService>();
         }
 
         public Student? GetStudent(int studentID)
         {
-            return _schoolManagementSevice.StudentRepository.GetStudent(studentID);
+            var student = _schoolManagementSevice.StudentRepository.GetStudent(studentID);
+            student.User = _userService.GetUser(student.UserId);
+            return student;
         }
 
         public Student? GetStudent(string studentCode)
