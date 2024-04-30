@@ -27,6 +27,7 @@ namespace SchoolManagement.EntityFramework.Services
         public TeacherRepository TeacherRepository { get; private set; }
 
         public StudentRepository StudentRepository { get; private set; }
+        public SubjectRepository SubjectRepository { get; private set; }
 
         private void InitConnectionDatabase()
         {
