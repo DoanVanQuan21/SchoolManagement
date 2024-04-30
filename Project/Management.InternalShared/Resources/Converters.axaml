@@ -3,5 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:cvt="clr-namespace:Management.InternalShared.Converters">
     <cvt:StudentIDConverter x:Key="StudentIDConverter" />
+    <cvt:NumerRowConverter x:Key="NumerRowConverter" />
+    <cvt:VisibleProgressConverter x:Key="VisibleProgressConverter" />
+    <cvt:VisibleDatagridConverter x:Key="VisibleDatagridConverter" />
     <!--  Add Resources Here  -->
 </ResourceDictionary>

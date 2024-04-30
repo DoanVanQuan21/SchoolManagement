@@ -1,4 +1,6 @@
-﻿using Avalonia.Data.Converters;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Data.Converters;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Diagnostics;
@@ -42,4 +44,61 @@ namespace Management.InternalShared.Converters
             }
         }
     }
+    public class NumerRowConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            try
+            {
+                if (value is DataGridRow row)
+                {
+                    return (row.GetIndex() + 1).ToString();
+                }
+                else
+                {
+                    return "*"; // Default value if not a DataGridRow
+                }
+            }
+            catch
+            {
+                return "*"; // Default value in case of an exception
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class VisibleProgressConverter : IMultiValueConverter
+    {
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Count < 2 || !(values[0] is bool) || !(values[1] is bool))
+                return AvaloniaProperty.UnsetValue;
+
+            return (bool)values[0] && !(bool)values[1];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class VisibleDatagridConverter : IMultiValueConverter
+    {
+        public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Count < 2 || !(values[0] is bool) || !(values[1] is bool))
+                return AvaloniaProperty.UnsetValue;
+
+            return (bool)values[0] && (bool)values[1];
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
 }

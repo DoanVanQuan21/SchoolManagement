@@ -25,27 +25,30 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return true;
         }
 
-        public ObservableCollection<GradeSheet> GetAllGradeSheet(int subjectID, int classID)
+        public Task<ObservableCollection<GradeSheet>> GetAllGradeSheetAsync(int subjectID, int classID)
         {
-            try
+            return Task.Factory.StartNew(() =>
             {
-                if (_context.GradeSheets.Any() == false)
+                try
+                {
+                    if (_context.GradeSheets.Any() == false)
+                    {
+                        return _grades;
+                    }
+                    _grades.Clear();
+                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).ToList();
+                    if (grades == null)
+                    {
+                        return _grades;
+                    }
+                    _grades.AddRange(grades);
+                    return _grades;
+                }
+                catch (Exception)
                 {
                     return _grades;
                 }
-                _grades.Clear();
-                var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).ToList() ;
-                if (grades == null)
-                {
-                    return _grades;
-                }
-                _grades.AddRange(grades);
-                return _grades;
-            }
-            catch (Exception)
-            {
-                return _grades;
-            }
+            });
         }
 
         public GradeSheet? GetById(int subjectID, int classID)
@@ -53,21 +56,79 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return FirstOrDefault(item => item.ClassId == classID && item.SubjectId == subjectID);
         }
 
-        public bool Update(GradeSheet entity)
+        public Task<bool> Update(GradeSheet entity)
         {
-            var gradeSheet = FirstOrDefault(item => item.GradeSheetId == entity.GradeSheetId);
-            if (gradeSheet == null)
+            return Task.Factory.StartNew(() =>
             {
-                return false;
-            }
-            gradeSheet.FirstRegularScore = entity.FirstRegularScore;
-            gradeSheet.SecondRegularScore = entity.SecondRegularScore;
-            gradeSheet.ThirdRegularScore = entity.ThirdRegularScore;
-            gradeSheet.FourRegularScore = entity.FourRegularScore;
-            gradeSheet.MidtermScore = entity.MidtermScore;
-            gradeSheet.FinalScore = entity.FinalScore;
-            _context.SaveChanges();
-            return true;
+                var gradeSheet = FirstOrDefault(item => item.GradeSheetId == entity.GradeSheetId);
+                if (gradeSheet == null)
+                {
+                    return false;
+                }
+                gradeSheet.FirstRegularScore = entity.FirstRegularScore;
+                gradeSheet.SecondRegularScore = entity.SecondRegularScore;
+                gradeSheet.ThirdRegularScore = entity.ThirdRegularScore;
+                gradeSheet.FourRegularScore = entity.FourRegularScore;
+                gradeSheet.MidtermScore = entity.MidtermScore;
+                gradeSheet.FinalScore = entity.FinalScore;
+                gradeSheet.SemesterAverage = ComputeSemesterAverage(gradeSheet);
+                _context.SaveChanges();
+                return true;
+            });
+        }
+
+        public Task<bool> UpdateByClassIDAndSubjectID(GradeSheet entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var gradeSheet = FirstOrDefault(item => item.ClassId == entity.ClassId && item.SubjectId == entity.SubjectId);
+                if (gradeSheet == null)
+                {
+                    return false;
+                }
+                gradeSheet.FirstRegularScore = entity.FirstRegularScore;
+                gradeSheet.SecondRegularScore = entity.SecondRegularScore;
+                gradeSheet.ThirdRegularScore = entity.ThirdRegularScore;
+                gradeSheet.FourRegularScore = entity.FourRegularScore;
+                gradeSheet.MidtermScore = entity.MidtermScore;
+                gradeSheet.FinalScore = entity.FinalScore;
+                gradeSheet.SemesterAverage = ComputeSemesterAverage(gradeSheet);
+                _context.SaveChanges();
+                return true;
+            });
+        }
+
+        public Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    foreach (var grade in gradeSheets)
+                    {
+                        var gs = FirstOrDefault(g => g.ClassId == grade.ClassId && g.StudentId == grade.StudentId);
+                        if (gs == null)
+                        {
+                            Add(grade);
+                            Task.Delay(100);
+                            continue;
+                        }
+                        UpdateByClassIDAndSubjectID(grade);
+                        Task.Delay(100);
+                    }
+                    return true;
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            });
+        }
+
+        private float? ComputeSemesterAverage(GradeSheet gradeSheet)
+        {
+            return (gradeSheet.FirstRegularScore + gradeSheet.SecondRegularScore + gradeSheet.ThirdRegularScore
+            + gradeSheet.FourRegularScore + gradeSheet.MidtermScore * 2 + gradeSheet.FinalScore * 3) / 9;
         }
     }
 }

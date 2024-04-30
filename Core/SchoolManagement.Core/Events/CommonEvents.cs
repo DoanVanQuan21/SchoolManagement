@@ -1,4 +1,5 @@
 ﻿using Prism.Events;
+using SchoolManagement.Core.Models.SchoolManagements;
 
 namespace SchoolManagement.Core.Events
 {
@@ -8,4 +9,5 @@ namespace SchoolManagement.Core.Events
 
     public class LogoutSuccessEvent : PubSubEvent
     { }
+    public class UpdateGradeSheetEvent : PubSubEvent<GradeSheet> { }
 }

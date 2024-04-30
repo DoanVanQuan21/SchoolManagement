@@ -3,6 +3,7 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Shell.Views.DesktopViews;
+using SchoolManagement.Shell.Views.MobileViews;
 using SchoolManagement.Shell.Views.SplashScreen;
 using System;
 using System.Threading.Tasks;
@@ -67,7 +68,7 @@ namespace SchoolManagement.Shell.ViewModels
         {
             if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
             {
-                SetMainView(new DesktopContentView());
+                SetMainView(new MobileContentView());
 
                 return;
             }

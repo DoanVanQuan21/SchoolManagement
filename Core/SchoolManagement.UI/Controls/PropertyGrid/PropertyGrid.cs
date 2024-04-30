@@ -5,6 +5,8 @@ using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Styling;
 using DynamicData;
+using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Models.Common;
 using SchoolManagement.UI.Helpers;
 using System.ComponentModel;
 using System.Reflection;
@@ -162,10 +164,9 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
                 return;
             }
             GridLength widthType = new();
-            if (Column == Columns.One)
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS() || Column == Columns.One)
             {
-                widthType = new GridLength(1, GridUnitType.Star);
-                OneColumn(properties, col, widthType, content);
+                OneColumn(properties, col, content);
                 return;
             }
             widthType = new GridLength(4, GridUnitType.Star);
@@ -211,13 +212,13 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             return true;
         }
 
-        private void OneColumn(List<PropertyInfo> properties, int col, GridLength gridLength, ContentControl content)
+        private void OneColumn(List<PropertyInfo> properties, int col, ContentControl content)
         {
             Grid grid = new()
             {
-                HorizontalAlignment = HorizontalAlignment.Center,
+                HorizontalAlignment = HorizontalAlignment.Stretch,
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = gridLength });
             var labels = new List<Control>();
             var inputControls = new List<Control>();
             int count = 0;
@@ -230,8 +231,6 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
             {
                 inputControls.Add(CreateInputControl(property));
                 labels.Add(CreateLabelForNameProperty(property));
-                Grid.SetColumn(labels[propertyIndex], 0);
-                Grid.SetColumn(inputControls[propertyIndex], 0);
                 for (int i = 0; i < 2; i++)
                 {
                     if (i % 2 == 0)

@@ -9,29 +9,34 @@ namespace SchoolManagement.EntityFramework.Services
     {
         private readonly IStudentService _studentService;
         private readonly IClassService _classService;
+
         public GradeSheetService() : base()
         {
-            _studentService = Ioc.Resolve<IStudentService>();  
+            _studentService = Ioc.Resolve<IStudentService>();
             _classService = Ioc.Resolve<IClassService>();
         }
 
-        public ObservableCollection<GradeSheet> GetGradeSheets(int subjectID, int classID)
+        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID)
         {
-            var gradeSheets = _schoolManagementSevice.GradeSheetRepository.GetAllGradeSheet(subjectID, classID);
+            var gradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetAllGradeSheetAsync(subjectID, classID);
             foreach (var gradeSheet in gradeSheets)
             {
                 gradeSheet.Class = _classService.GetClassByID(gradeSheet.ClassId);
+                gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
                 gradeSheet.Student = _studentService.GetStudent(gradeSheet.StudentId);
+                await Task.Delay(100);
             }
             return gradeSheets;
         }
 
-        public Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID)
+        public async Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
         {
-            return Task.Factory.StartNew(() =>
-            {
-                return GetGradeSheets(subjectID, classID);
-            });
+            return await _schoolManagementSevice.GradeSheetRepository.UpdateOrAddRange(gradeSheets);
+        }
+
+        public async Task<bool> UpdateGradeSheetAsync(GradeSheet gradeSheet)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.Update(gradeSheet);
         }
     }
 }

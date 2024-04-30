@@ -1,19 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
-public partial class Department
+public partial class Department : BindableBase
 {
-    public int DepartmentId { get; set; }
+    private int departmentId;
+    private string? departmentCode;
+    private string? departmentName;
+    private DateTime? foundingDate;
+    private string? image;
 
-    public string? DepartmentCode { get; set; }
+    public int DepartmentId
+    { get => departmentId; set { SetProperty(ref departmentId, value); } }
 
-    public string? DepartmentName { get; set; }
+    public string? DepartmentCode
+    { get => departmentCode; set { SetProperty(ref departmentCode, value); } }
 
-    public DateTime? FoundingDate { get; set; }
+    public string? DepartmentName
+    { get => departmentName; set { SetProperty(ref departmentName, value); } }
 
-    public string? Image { get; set; }
+    public DateTime? FoundingDate
+    { get => foundingDate; set { SetProperty(ref foundingDate, value); } }
+
+    public string? Image
+    { get => image; set { SetProperty(ref image, value); } }
 
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

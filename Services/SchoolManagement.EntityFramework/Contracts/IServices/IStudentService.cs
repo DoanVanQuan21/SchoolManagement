@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
+using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Contracts.IServices
 {
@@ -13,5 +14,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<Student?> GetStudentByStudentIDAsync(int studentID);
 
         Task<int> GetStudentIDByStudentCodeAsync(string studentCode);
+
+        Task<ObservableCollection<Student>> GetStudentsByClass(int classID);
     }
 }

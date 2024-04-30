@@ -3,8 +3,6 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.SettingAccount.Views;
-using SchoolManagement.UI.Geometry;
 using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -18,9 +16,10 @@ namespace SchoolManagement.Shell.ViewModels
         public MainContentViewModel()
         {
             User = new();
+            InitAppMenus();
         }
 
-        public ObservableCollection<AppMenu> AppMenus => RootContext.AppMenus;
+        public ObservableCollection<AppMenu> AppMenus { get; private set; }
         public ICommand ClickNavigationCommand { get; set; }
         public ICommand ClickSelectionPageCommand { get; set; }
 
@@ -37,8 +36,14 @@ namespace SchoolManagement.Shell.ViewModels
             ClickSelectionPageCommand = new DelegateCommand<object>(OnClickSelectionPage);
         }
 
-        protected override void SubcribeEvent()
+        private void InitAppMenus()
         {
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            {
+                AppMenus = RootContext.MobileAppMenus;
+                return;
+            }
+            AppMenus = RootContext.DesktopAppMenus;
         }
 
         private void OnClickNavigation()

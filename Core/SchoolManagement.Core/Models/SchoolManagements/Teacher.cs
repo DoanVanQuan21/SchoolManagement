@@ -1,53 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 
-namespace SchoolManagement.Core.Models.SchoolManagements;
-
-public partial class Teacher
+namespace SchoolManagement.Core.Models.SchoolManagements
 {
-    public int TeacherId { get; set; }
+    public partial class Teacher : BindableBase
+    {
+        private int teacherId;
+        private int departmentId;
+        private int leaderId;
+        private int userId;
+        private string? teacherCode;
+        private string? degree;
+        private string? expertise;
+        private string? university;
+        private DateTime? graduationYear;
+        private string? major;
+        private string? otherCertifications;
+        private string? position;
+        private decimal? salary;
+        private string? additionalBenifits;
+        private string? currentHealthStatus;
+        private string? healthInsuranceInfo;
+        private string? selfIntroduction;
+        private int subjectId;
 
-    public int DepartmentId { get; set; }
+        public int TeacherId { get => teacherId; set => SetProperty(ref teacherId, value); }
 
-    public int LeaderId { get; set; }
+        public int DepartmentId { get => departmentId; set => SetProperty(ref departmentId, value); }
 
-    public int UserId { get; set; }
+        public int LeaderId { get => leaderId; set => SetProperty(ref leaderId, value); }
 
-    public string? TeacherCode { get; set; }
+        public int UserId { get => userId; set => SetProperty(ref userId, value); }
 
-    public string? Degree { get; set; }
+        public string? TeacherCode { get => teacherCode; set => SetProperty(ref teacherCode, value); }
 
-    public string? Expertise { get; set; }
+        public string? Degree { get => degree; set => SetProperty(ref degree, value); }
 
-    public string? University { get; set; }
+        public string? Expertise { get => expertise; set => SetProperty(ref expertise, value); }
 
-    public DateTime? GraduationYear { get; set; }
+        public string? University { get => university; set => SetProperty(ref university, value); }
 
-    public string? Major { get; set; }
+        public DateTime? GraduationYear { get => graduationYear; set => SetProperty(ref graduationYear, value); }
 
-    public string? OtherCertifications { get; set; }
+        public string? Major { get => major; set => SetProperty(ref major, value); }
 
-    public string? Position { get; set; }
+        public string? OtherCertifications { get => otherCertifications; set => SetProperty(ref otherCertifications, value); }
 
-    public decimal? Salary { get; set; }
+        public string? Position { get => position; set => SetProperty(ref position, value); }
 
-    public string? AdditionalBenifits { get; set; }
+        public decimal? Salary { get => salary; set => SetProperty(ref salary, value); }
 
-    public string? CurrentHealthStatus { get; set; }
+        public string? AdditionalBenifits { get => additionalBenifits; set => SetProperty(ref additionalBenifits, value); }
 
-    public string? HealthInsuranceInfo { get; set; }
+        public string? CurrentHealthStatus { get => currentHealthStatus; set => SetProperty(ref currentHealthStatus, value); }
 
-    public string? SelfIntroduction { get; set; }
+        public string? HealthInsuranceInfo { get => healthInsuranceInfo; set => SetProperty(ref healthInsuranceInfo, value); }
 
-    public int SubjectId { get; set; }
+        public string? SelfIntroduction { get => selfIntroduction; set => SetProperty(ref selfIntroduction, value); }
 
-    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+        public int SubjectId { get => subjectId; set => SetProperty(ref subjectId, value); }
 
-    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+        // Navigation properties
+        public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
-    public virtual Department Department { get; set; } = null!;
+        public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
-    public virtual Subject Subject { get; set; } = null!;
+        public virtual Department Department { get; set; } = null!;
 
-    public virtual User User { get; set; } = null!;
+        public virtual Subject Subject { get; set; } = null!;
+
+        public virtual User User { get; set; } = null!;
+    }
 }

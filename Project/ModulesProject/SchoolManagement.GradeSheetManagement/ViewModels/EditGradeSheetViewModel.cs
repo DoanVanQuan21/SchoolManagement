@@ -1,13 +1,28 @@
-﻿using Prism.Services.Dialogs;
+﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts.IServices;
+using System.Windows.Input;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
-    internal class EditGradeSheetViewModel : BaseRegionViewModel
+    public class EditGradeSheetViewModel : BaseRegionViewModel
     {
+        private readonly IGradeSheetService _gradeSheetService;
         private GradeSheet gradeSheet;
+
+        public EditGradeSheetViewModel()
+        {
+            _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
+            GradeSheet = new GradeSheet();
+            User = RootContext.CurrentUser;
+        }
+
+        public ICommand ClickedExit { get; set; }
+
+        public ICommand ClickedUpdate { get; set; }
 
         public GradeSheet GradeSheet
         { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
@@ -16,20 +31,30 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public override User User { get; protected set; }
 
-        public EditGradeSheetViewModel()
+        protected override void RegisterCommand()
         {
-            GradeSheet = new GradeSheet();
-            User = RootContext.CurrentUser;
+            ClickedExit = new DelegateCommand(OnExit);
+            ClickedUpdate = new DelegateCommand(OnUpdate);
+            base.RegisterCommand();
         }
 
-        public void OnDialogOpened(IDialogParameters parameters)
+        private void OnExit()
         {
-            var gradeSh = parameters.GetValue<GradeSheet>("GradeSheet");
-            if (gradeSh == null)
+            CloseDialog();
+        }
+
+        private async void OnUpdate()
+        {
+            var isUpdated = await _gradeSheetService.UpdateGradeSheetAsync(GradeSheet);
+            if (!isUpdated)
             {
+                CloseDialog();
+                NotificationManager.ShowError("Cập nhật bảng điểm không thành công!");
                 return;
             }
-            GradeSheet = gradeSh;
+            CloseDialog();
+            NotificationManager.ShowSuccess("Cập nhật bảng điểm thành công!");
+            EventAggregator.GetEvent<UpdateGradeSheetEvent>().Publish(GradeSheet);
         }
     }
 }

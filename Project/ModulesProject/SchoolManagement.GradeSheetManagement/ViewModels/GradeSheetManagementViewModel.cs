@@ -4,6 +4,7 @@ using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views.Dialogs;
@@ -29,6 +30,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private ObservableCollection<GradeSheet> gradeSheets;
         private bool isExportCompleted = false;
         private Teacher? teacher;
+
         public GradeSheetManagementViewModel()
         {
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
@@ -57,7 +59,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public ObservableCollection<Class> Classes { get; set; }
         public ICommand ClickedDownloadFile { get; set; }
         public ICommand ClickedUpdateCommand { get; set; }
-        public ICommand ClickedUploadFile { get; set; }
+        public ICommand ClickedAddGradeSheet { get; set; }
 
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
@@ -74,9 +76,23 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         protected override void RegisterCommand()
         {
             ClickedUpdateCommand = new DelegateCommand(OnUpdate);
-            ClickedUploadFile = new DelegateCommand(OnUploadFile);
+            ClickedAddGradeSheet = new DelegateCommand(OnAddGradeSheet);
             ClickedDownloadFile = new DelegateCommand(OnDownloadFile);
             base.RegisterCommand();
+        }
+
+        protected override void SubcribeEvent()
+        {
+            EventAggregator.GetEvent<UpdateGradeSheetEvent>().Subscribe(OnUpdatedAsync);
+
+            base.SubcribeEvent();
+        }
+
+        private void OnUpdatedAsync(GradeSheet sheet)
+        {
+            var gradesheet = GradeSheets.FirstOrDefault(gs => gs.GradeSheetId == sheet.GradeSheetId);
+            gradesheet = sheet;
+            gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
         }
 
         private async Task ExportFile(string filePath)
@@ -141,14 +157,15 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return;
             }
-            var gradeSheets = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
-            await Task.Delay(2000);
-            if (gradeSheets == null)
+            await Task.Delay(1000);
+            var grades = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
+            if (grades == null)
             {
                 return;
             }
             GradeSheets?.Clear();
-            GradeSheets?.AddRange(gradeSheets);
+            GradeSheets?.AddRange(grades);
+            await Task.Delay(1000);
             DataLoaded = true;
         }
 
@@ -185,49 +202,19 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var download = ExportFile(filePath);
             await Task.WhenAll(progressDialog, download);
         }
-        private void OnUpdate()
+
+        private async void OnUpdate()
         {
-            //TODO
-            //var parmeters = new DialogParameters();
-            //parmeters.Add("GradeSheet", GradeSheet);
-            //DialogService.ShowDialog(nameof(EditGradeSheetView), parmeters);
+            var editView = new EditGradeSheetView();
+            editView.ViewModel.GradeSheet = new(GradeSheet);
+            await ShowDialogHost(editView);
         }
 
-        private async void OnUploadFile()
+        private async void OnAddGradeSheet()
         {
-            var topLevel = TopLevel.GetTopLevel(AppRegion.MainView);
-            var files = await topLevel.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
-            {
-                Title = "Open Text File",
-                AllowMultiple = false
-            });
-            if (files.Count <= 0)
-            {
-                //TODO
-                // MULTI LANGUAGE
-                NotificationManager.ShowWarning("Không có file nào được chọn");
-                return;
-            }
-            var path = files.First().Path.LocalPath;
-            var gradeSheets = await _excelService.ImportGradeSheetsAsync(path, Class.ClassId, async (studentCode) =>
-            {
-                return await _studentService.GetStudentIDByStudentCodeAsync(studentCode);
-            });
-            await GetFullDetailGradeSheet(gradeSheets);
             var uploadView = new UploadGradeSheets();
-            uploadView.GradeSheetViewModel.GradeSheets = gradeSheets;
+            uploadView.GradeSheetViewModel.Classes = Classes;
             await ShowDialogHost(uploadView);
-        }
-        private Task GetFullDetailGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                foreach (var gs in gradeSheets)
-                {
-                    gs.Student = _studentService.GetStudent(gs.StudentId);
-                    gs.Class = _classService.GetClassByID(gs.ClassId);
-                }
-            });
         }
     }
 }

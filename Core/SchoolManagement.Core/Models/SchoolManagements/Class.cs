@@ -1,19 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
-public partial class Class
+public partial class Class : BindableBase
 {
-    public int ClassId { get; set; }
+    private int classId;
+    private int teacherId;
+    private DateTime? classCode;
+    private string? className;
+    private int? numberOfStudent;
 
-    public int TeacherId { get; set; }
+    public int ClassId
+    { get => classId; set { SetProperty(ref classId, value); } }
 
-    public DateTime? ClassCode { get; set; }
+    public int TeacherId
+    { get => teacherId; set { SetProperty(ref teacherId, value); } }
 
-    public string? ClassName { get; set; }
+    public DateTime? ClassCode
+    { get => classCode; set { SetProperty(ref classCode, value); } }
 
-    public int? NumberOfStudent { get; set; }
+    public string? ClassName
+    { get => className; set { SetProperty(ref className, value); } }
+
+    public int? NumberOfStudent
+    { get => numberOfStudent; set { SetProperty(ref numberOfStudent, value); } }
 
     public virtual ICollection<EducationProgram> EducationPrograms { get; set; } = new List<EducationProgram>();
 

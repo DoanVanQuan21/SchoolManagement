@@ -6,7 +6,7 @@ using SchoolManagement.Core.Services;
 using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.EntityFramework.Services;
-using SchoolManagement.GradeSheetManagement.Views;
+using SchoolManagement.GradeSheetManagement.Views.Dialogs;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
 
@@ -45,11 +45,11 @@ namespace SchoolManagement.Shell.Helpers
         {
             containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
             containerRegistry.RegisterSingleton<IUserService, UserService>();
+            containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
             containerRegistry.RegisterSingleton<ICourseService, CourseService>();
             containerRegistry.RegisterSingleton<IClassService, ClassService>();
             containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
             containerRegistry.RegisterSingleton<IStudentService, StudentService>();
-            containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
         }
 
         public static void RegisterTypesModuleMainProject(IContainerRegistry containerRegistry)

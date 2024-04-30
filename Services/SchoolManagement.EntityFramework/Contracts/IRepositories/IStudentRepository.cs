@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
+using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Contracts.IRepositories
 {
@@ -6,5 +7,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
     {
         T? GetStudent(int studentID);
         T? GetStudent(string studentCode);
+        Task<ObservableCollection<Student>> GetStudentsByClass(int classID);
     }
 }

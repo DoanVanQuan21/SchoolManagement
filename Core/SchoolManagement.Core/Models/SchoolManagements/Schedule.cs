@@ -1,23 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
-public partial class Schedule
+public partial class Schedule : BindableBase
 {
-    public int ScheduleId { get; set; }
+    private int scheduleId;
+    private int classId;
+    private int subjectId;
+    private string? scheduleCode;
+    private DateTime? day;
+    private DateTime? start;
+    private DateTime? end;
 
-    public int ClassId { get; set; }
+    public int ScheduleId { get => scheduleId; set { SetProperty(ref scheduleId, value); } }
 
-    public int SubjectId { get; set; }
+    public int ClassId { get => classId; set { SetProperty(ref classId, value); } }
 
-    public string? ScheduleCode { get; set; }
+    public int SubjectId { get => subjectId; set { SetProperty(ref subjectId, value); } }
 
-    public DateTime? Day { get; set; }
+    public string? ScheduleCode { get => scheduleCode; set { SetProperty(ref scheduleCode, value); } }
 
-    public DateTime? Start { get; set; }
+    public DateTime? Day { get => day; set { SetProperty(ref day, value); } }
 
-    public DateTime? End { get; set; }
+    public DateTime? Start { get => start; set { SetProperty(ref start, value); } }
+
+    public DateTime? End { get => end; set { SetProperty(ref end, value); } }
 
     public virtual Class Class { get; set; } = null!;
 

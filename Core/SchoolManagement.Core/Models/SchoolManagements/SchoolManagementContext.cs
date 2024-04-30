@@ -100,7 +100,7 @@ public partial class SchoolManagementContext : DbContext
                 .HasMaxLength(100)
                 .IsUnicode(false);
             entity.Property(e => e.FoundingDate).HasColumnType("datetime");
-        });
+        }).UseIdentityColumns(1,1);
 
         modelBuilder.Entity<EducationProgram>(entity =>
         {
@@ -140,7 +140,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("GradeSheet");
 
             entity.Property(e => e.GradeSheetId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("GradeSheetID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.FinalScore).HasColumnType("float");

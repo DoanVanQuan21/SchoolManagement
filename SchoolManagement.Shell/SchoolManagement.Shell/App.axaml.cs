@@ -91,9 +91,16 @@ namespace SchoolManagement.Shell
 
         private void InitMenu()
         {
-            RootContext.AppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView) });
-            RootContext.AppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
-            RootContext.AppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView) });
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            {
+                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView) });
+                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
+                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Xem điểm thành phần", Geometry = GeometryString.ListSquarePersonGeometry, Type = typeof(GradeSheetManagementView) });
+                return;
+            }
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView) });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserSettingGeometry, Type = typeof(SettingAccountView) });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView) });
         }
     }
 }

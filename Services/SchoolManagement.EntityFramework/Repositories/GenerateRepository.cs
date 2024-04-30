@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;

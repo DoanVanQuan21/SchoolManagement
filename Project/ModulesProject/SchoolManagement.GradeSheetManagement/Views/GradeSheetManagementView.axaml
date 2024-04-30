@@ -29,9 +29,9 @@
                 <MenuItem.Icon>
                     <PathIcon Data="{StaticResource DocumentGeometry}" />
                 </MenuItem.Icon>
-                <MenuItem Command="{Binding ClickedUploadFile}" Header="Upload file .xlsx">
+                <MenuItem Command="{Binding ClickedAddGradeSheet}" Header="Thêm mới">
                     <MenuItem.Icon>
-                        <PathIcon Data="{StaticResource DocumentArrowUpGeometry}" />
+                        <PathIcon Data="{StaticResource AddsGeometry}" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Command="{Binding ClickedDownloadFile}" Header="Download file .xlsx">
@@ -71,20 +71,19 @@
 
             <DataGrid
                 x:Name="Container"
+                Margin="10,0,0,0"
                 HorizontalAlignment="Left"
                 AutoGenerateColumns="False"
                 CanUserReorderColumns="False"
                 CanUserSortColumns="True"
+                GridLinesVisibility="All"
+                HeadersVisibility="All"
                 IsReadOnly="True"
                 IsVisible="{Binding DataLoaded}"
-                ItemsSource="{Binding GradeSheets}"
+                ItemsSource="{Binding GradeSheets, Mode=TwoWay}"
                 SelectedItem="{Binding GradeSheet}">
+
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="150"
-                        Binding="{Binding GradeSheetId}"
-                        Header="STT" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
@@ -139,7 +138,7 @@
                                 <ColumnDefinition Width="8*" />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0">
+                            <StackPanel Grid.Column="0" Orientation="Horizontal">
                                 <Button
                                     Width="120"
                                     Height="40"

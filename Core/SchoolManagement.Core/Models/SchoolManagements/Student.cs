@@ -1,17 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
-public partial class Student
+public partial class Student : BindableBase
 {
-    public int StudentId { get; set; }
+    private int studentId;
+    private int userId;
+    private string? studentCode;
+    private int classId;
 
-    public int UserId { get; set; }
+    public int StudentId
+    { get => studentId; set { SetProperty(ref studentId, value); } }
 
-    public string? StudentCode { get; set; }
+    public int UserId
+    { get => userId; set { SetProperty(ref userId, value); } }
 
-    public int ClassId { get; set; }
+    public string? StudentCode
+    { get => studentCode; set { SetProperty(ref studentCode, value); } }
+
+    public int ClassId
+    { get => classId; set { SetProperty(ref classId, value); } }
 
     public virtual Class Class { get; set; } = null!;
 

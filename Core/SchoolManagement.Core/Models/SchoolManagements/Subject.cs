@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Prism.Mvvm;
+using System.Reactive.Concurrency;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
-public partial class Subject
+public partial class Subject : BindableBase
 {
-    public int SubjectId { get; set; }
+    private int subjectId;
+    private string? subjectCode;
+    private string? subjectName;
+    private string? image;
 
-    public string? SubjectCode { get; set; }
+    public int SubjectId { get => subjectId; set { SetProperty(ref subjectId, value); } }
 
-    public string? SubjectName { get; set; }
+    public string? SubjectCode { get => subjectCode; set { SetProperty(ref subjectCode, value); } }
 
-    public string? Image { get; set; }
+    public string? SubjectName { get => subjectName; set { SetProperty(ref subjectName, value); } }
+
+    public string? Image { get => image; set { SetProperty(ref image, value); } }
 
     public virtual ICollection<EducationProgram> EducationPrograms { get; set; } = new List<EducationProgram>();
 

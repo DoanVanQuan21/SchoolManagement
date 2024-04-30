@@ -25,6 +25,11 @@ namespace SchoolManagement.EntityFramework.Services
             });
         }
 
+        public async Task<ObservableCollection<Course>> GetCourseByClassID(int classID)
+        {
+            return await _schoolManagementSevice.CourseRepository.GetCouseByClassID(classID);
+        }
+
         public ObservableCollection<Course> GetCourseByTeacherID(int TeacherID)
         {
             return _schoolManagementSevice.CourseRepository.GetCouseByTeacherID(TeacherID);
