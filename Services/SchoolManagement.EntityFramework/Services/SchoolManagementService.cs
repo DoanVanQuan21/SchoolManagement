@@ -43,6 +43,7 @@ namespace SchoolManagement.EntityFramework.Services
             ClassRepository = new ClassRepository(schoolManagementContext);
             TeacherRepository = new TeacherRepository(schoolManagementContext);
             StudentRepository = new StudentRepository(schoolManagementContext);
+            SubjectRepository = new SubjectRepository(schoolManagementContext);
 
         }
     }

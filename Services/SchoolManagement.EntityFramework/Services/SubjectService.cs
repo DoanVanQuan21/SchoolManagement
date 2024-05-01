@@ -3,7 +3,7 @@ using SchoolManagement.EntityFramework.Contracts.IServices;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    internal class SubjectService : BaseService, ISubjectService
+    public class SubjectService : BaseService, ISubjectService
     {
         public async Task<Subject?> GetSubjectByID(int id)
         {

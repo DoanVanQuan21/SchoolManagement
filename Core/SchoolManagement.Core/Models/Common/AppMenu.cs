@@ -9,5 +9,6 @@ namespace SchoolManagement.Core.Models.Common
         public Type? Type { get; set; }
         public UserControl? View => (UserControl)Activator.CreateInstance(Type);
         public string? Geometry { get; set; }
+        public string? Roles { get; set; } = string.Empty;
     }
 }

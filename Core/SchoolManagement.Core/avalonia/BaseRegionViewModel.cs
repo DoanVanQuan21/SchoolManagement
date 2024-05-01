@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Styling;
 using Prism.Events;
 using Prism.Mvvm;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
@@ -19,6 +20,7 @@ namespace SchoolManagement.Core.avalonia
         protected readonly IEventAggregator EventAggregator;
         private readonly IAppManager _appManager;
         private bool isLogin = false;
+        private Role role;
 
         public BaseRegionViewModel()
         {
@@ -38,6 +40,7 @@ namespace SchoolManagement.Core.avalonia
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
+        public virtual Role Role { get => role; set => SetProperty(ref role, value); }
 
         public void PreviewMainView()
         {
@@ -134,6 +137,16 @@ namespace SchoolManagement.Core.avalonia
         protected void CloseDialog()
         {
             DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
+        }
+
+        private void SetRole()
+        {
+            if (RootContext.CurrentUser.Role == "student")
+            {
+                Role = Role.Student;
+                return;
+            }
+            Role = Role.Teacher;
         }
     }
 }

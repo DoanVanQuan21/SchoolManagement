@@ -50,6 +50,31 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
+        public Task<ObservableCollection<GradeSheet>> GetAllGradeSheetByClassAndStudentID(int studentID, int classID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    if (_context.GradeSheets.Any() == false)
+                    {
+                        return _grades;
+                    }
+                    _grades.Clear();
+                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.StudentId == studentID).ToList();
+                    if (grades == null)
+                    {
+                        return _grades;
+                    }
+                    _grades.AddRange(grades);
+                    return _grades;
+                }
+                catch (Exception)
+                {
+                    return _grades;
+                }
+            });
+        }
 
         public GradeSheet? GetById(int subjectID, int classID)
         {

@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -29,7 +30,6 @@ namespace SchoolManagement.Shell.ViewModels
         public override string Title => "Main Content";
 
         public override User User { get; protected set; }
-
         protected override void RegisterCommand()
         {
             ClickNavigationCommand = new DelegateCommand(OnClickNavigation);

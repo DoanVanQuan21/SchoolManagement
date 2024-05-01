@@ -22,6 +22,14 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return FirstOrDefault(item => item.StudentCode == studentCode);
         }
 
+        public Task<Student?> GetStudentByUserID(int userID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return FirstOrDefault(s => s.UserId == userID);
+            });
+        }
+
         public Task<ObservableCollection<Student>> GetStudentsByClass(int classID)
         {
             return Task.Factory.StartNew(() =>

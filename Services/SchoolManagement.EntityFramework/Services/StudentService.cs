@@ -18,6 +18,10 @@ namespace SchoolManagement.EntityFramework.Services
         public Student? GetStudent(int studentID)
         {
             var student = _schoolManagementSevice.StudentRepository.GetStudent(studentID);
+            if (student == null)
+            {
+                return student;
+            }
             student.User = _userService.GetUser(student.UserId);
             return student;
         }
@@ -43,6 +47,17 @@ namespace SchoolManagement.EntityFramework.Services
             {
                 return GetStudent(studentID);
             });
+        }
+
+        public async Task<Student?> GetStudentByUserID(int userID)
+        {
+            var student = await _schoolManagementSevice.StudentRepository.GetStudentByUserID(userID);
+            if (student == null)
+            {
+                return student;
+            }
+            student.Class = await _classService.GetClassByIDAsync(student.ClassId);
+            return student;
         }
 
         public async Task<int> GetStudentIDByStudentCodeAsync(string studentCode)

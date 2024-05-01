@@ -37,7 +37,7 @@ namespace SchoolManagement.Core.Services
             {
                 ServerInfor = new()
                 {
-                    ServerName = " 192.168.1.72",
+                    ServerName = "192.168.1.102",
                     User = "schoolmanagement",
                     Password = "123",
                 };
@@ -50,7 +50,7 @@ namespace SchoolManagement.Core.Services
                 {
                     ServerInfor = new()
                     {
-                        ServerName = "192.168.1.77",
+                        ServerName = "192.168.1.102",
                         User = "schoolmanagement",
                         Password = "123",
                     };

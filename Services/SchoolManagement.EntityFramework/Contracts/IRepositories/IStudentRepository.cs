@@ -7,6 +7,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
     {
         T? GetStudent(int studentID);
         T? GetStudent(string studentCode);
+        Task<T?> GetStudentByUserID(int userID);
         Task<ObservableCollection<Student>> GetStudentsByClass(int classID);
     }
 }

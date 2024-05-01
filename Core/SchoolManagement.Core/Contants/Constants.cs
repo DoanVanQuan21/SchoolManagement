@@ -26,10 +26,10 @@
 
     public enum Role
     {
-        Admin,
-        User,
-        SupperUser,
-        SuperAdmin,
+        Student,
+        Teacher,
+        Leader,
+        Admin
     }
 
     public class PnpClass

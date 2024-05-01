@@ -8,6 +8,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Student? GetStudent(int studentID);
 
         Student? GetStudent(string studentCode);
+        Task<Student?> GetStudentByUserID(int userID);
 
         Task<Student?> GetStudentByStudentCodeAsync(string studentCode);
 

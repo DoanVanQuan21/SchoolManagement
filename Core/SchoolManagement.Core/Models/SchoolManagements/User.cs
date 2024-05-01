@@ -1,5 +1,7 @@
 ﻿using Prism.Mvvm;
+using SchoolManagement.Core.Constants;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -19,6 +21,7 @@ public partial class User : BindableBase
     private byte? activeStatus;
     private DateTime? startDate;
     private DateTime? endDate;
+    private Role userRole;
 
     [Browsable(false)]
     public int UserId { get; set; }
@@ -30,7 +33,9 @@ public partial class User : BindableBase
     [DisplayName("Tên")]
     public string? LastName
     { get => lastName; set { SetProperty(ref lastName, value); } }
+
     public string FullName => $"{FirstName} {LastName}";
+
     [DisplayName("Giới tính")]
     public string? Gender
     { get => gender; set { SetProperty(ref gender, value); } }
@@ -89,6 +94,10 @@ public partial class User : BindableBase
     [Browsable(false)]
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }
+
+    [NotMapped]
+    public Role UserRole
+    { get => userRole; set { SetProperty(ref userRole, value); } }
 
     [Browsable(false)]
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
