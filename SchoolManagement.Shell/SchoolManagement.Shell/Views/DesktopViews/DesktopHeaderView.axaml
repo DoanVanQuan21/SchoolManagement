@@ -14,8 +14,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <cc:SearchBar
@@ -25,6 +24,7 @@
             IsVisible="{Binding IsDesktopPlatform}"
             SearchCommand="{Binding SearchTextCommand, ConverterParameter={Binding}}"
             Template="{StaticResource SearchBarTemplate}" />
+        <Label Grid.Column="1" Content="{Binding AppRegion.Title}" />
         <StackPanel
             Grid.Column="3"
             Margin="5"

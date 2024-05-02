@@ -25,7 +25,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public ICommand ClickedUpdate { get; set; }
 
         public GradeSheet GradeSheet
-        { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
+        { get => gradeSheet; set { 
+                SetProperty(ref gradeSheet, value); 
+            } }
 
         public override string Title => "Sửa bảng điểm";
 

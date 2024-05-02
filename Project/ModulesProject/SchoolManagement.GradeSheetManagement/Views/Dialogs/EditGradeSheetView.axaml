@@ -45,7 +45,13 @@
                 <Label Content="Lớp:" />
                 <Label Content="{Binding GradeSheet.Class.ClassName}" />
             </StackPanel>
-
+            <Viewbox>
+                <Image
+                    Width="200"
+                    Height="200"
+                    Source="{Binding GradeSheet.Student.User.Image}"
+                    Stretch="Uniform" />
+            </Viewbox>
         </StackPanel>
         <Border
             Grid.Row="2"

@@ -28,11 +28,11 @@ namespace SchoolManagement.Core.avalonia
             NotificationManager = Ioc.Resolve<INotificationManager>();
             RegisterCommand();
             SubcribeEvent();
+            AppRegion.Title = Title;
         }
 
         public AppRegion AppRegion { get => _appManager.AppRegion; }
         public BootSetting BootSetting { get => _appManager.BootSetting; }
-
         public bool IsLogin
         { get => isLogin; set { SetProperty(ref isLogin, value); } }
 

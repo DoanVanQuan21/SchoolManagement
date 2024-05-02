@@ -11,7 +11,6 @@ namespace SchoolManagement.Core.Models
 
         public List<Gender> Genders { get; private set; }
         public AppRegion AppRegion { get; set; }
-
         public AppManager()
         {
             BootSetting = new();

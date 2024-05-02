@@ -24,6 +24,7 @@
     <None Remove="Assets\Fonts\Roboto\Roboto-Regular.ttf" />
     <None Remove="Assets\Fonts\Roboto\Roboto-Thin.ttf" />
     <None Remove="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <None Remove="Assets\Images\dvquan.jpg" />
     <None Remove="Assets\Images\logo.png" />
     <None Remove="Assets\Images\logo\app_logo.ico" />
   </ItemGroup>
@@ -110,6 +111,12 @@
 
   <ItemGroup>
     <AvaloniaResource Include="Assets\Images\logo\app_logo.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\Images\dvquan.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
   </ItemGroup>

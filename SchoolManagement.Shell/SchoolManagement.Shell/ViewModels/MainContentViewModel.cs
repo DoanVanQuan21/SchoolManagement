@@ -46,7 +46,15 @@ namespace SchoolManagement.Shell.ViewModels
         private void InitAppMenus()
         {
             AppMenus.Clear();
-            foreach (var menu in RootContext.DesktopAppMenus)
+            //if(OperatingSystem.IsAndroid() ||  OperatingSystem.IsIOS()) {
+            //    AddMenus(RootContext.MobileAppMenus);
+            //    return;
+            //}
+            AddMenus(RootContext.DesktopAppMenus);
+        }
+        private void AddMenus(ObservableCollection<AppMenu> appMenus)
+        {
+            foreach (var menu in appMenus)
             {
                 if (!IsHavePermission(menu.Roles))
                 {
