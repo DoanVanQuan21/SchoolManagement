@@ -20,6 +20,7 @@ namespace SchoolManagement.SettingAccount.ViewModels
         }
 
         public ICommand ClickedUpdateInformation { get; set; }
+        public ICommand ClickedChangeImage { get; set; }    
         public override string Title => "Tài khoản";
 
         public override User User
@@ -28,7 +29,13 @@ namespace SchoolManagement.SettingAccount.ViewModels
         protected override void RegisterCommand()
         {
             ClickedUpdateInformation = new DelegateCommand(OnUpdateInfo);
+            ClickedChangeImage = new DelegateCommand(OnChangeImage);
             base.RegisterCommand();
+        }
+
+        private void OnChangeImage()
+        {
+            NotificationManager.ShowInfor("Change image");
         }
 
         private void OnUpdateInfo()

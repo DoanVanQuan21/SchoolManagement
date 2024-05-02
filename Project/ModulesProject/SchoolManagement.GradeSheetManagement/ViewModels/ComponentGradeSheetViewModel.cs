@@ -12,6 +12,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
     {
         private readonly IStudentService _studentService;
         private readonly IGradeSheetService _gradeSheetService;
+        private Date currentDate;
+
         public override string Title => "Điểm thành phần";
 
         public override User User { get; protected set; }
@@ -22,7 +24,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
             User = RootContext.CurrentUser;
             GradeSheets = new();
-            GetGradeSheets();
             InitDates();
         }
 
@@ -31,7 +32,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             Dates = new();
             var startYear = User.StartDate.Year;
             var now = DateTime.Now.Year;
-            for (int i = startYear; i < now; i++)
+            for (int i = startYear; i <= now; i++)
             {
                 Dates.Add(new Date()
                 {
@@ -39,16 +40,20 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 });
                 await Task.Delay(100);
             }
+            CurrentDate = Dates.LastOrDefault();
         }
 
         public ObservableCollection<GradeSheet> GradeSheets { get; set; }
         public ObservableCollection<Date> Dates { get; set; }
 
+        public Date CurrentDate
+        { get => currentDate; set { SetProperty(ref currentDate, value); GetGradeSheets(); } }
+
         private async void GetGradeSheets()
         {
             GradeSheets.Clear();
             var student = await _studentService.GetStudentByUserID(User.UserId);
-            var grades = await _gradeSheetService.GetAllGradeSheetByClassAndStudentID(student.StudentId, student.ClassId);
+            var grades = await _gradeSheetService.GetGradeSheetsByStudentID(student.StudentId, CurrentDate.Year);
             if (grades == null)
             {
                 NotificationManager.ShowWarning("Không có bảng điểm nào!.");

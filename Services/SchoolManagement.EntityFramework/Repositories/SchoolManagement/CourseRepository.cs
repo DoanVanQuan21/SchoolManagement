@@ -46,5 +46,18 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
             return GetCouseByTeacherID(teacherID).Select(item => item.ClassId).ToList();
         }
+
+        public Task<Course?> GetCouseByClassAndSubjectID(int classID, int subjectID,int year)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var course = FirstOrDefault(item => item.ClassId == classID && item.SubjectId == subjectID && item.StartDate.Year == year);
+                if (course == null)
+                {
+                    return course;
+                }
+                return course;
+            });
+        }
     }
 }

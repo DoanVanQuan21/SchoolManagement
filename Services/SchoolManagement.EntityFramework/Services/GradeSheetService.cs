@@ -2,7 +2,6 @@
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
-using System.Reactive.Subjects;
 
 namespace SchoolManagement.EntityFramework.Services
 {
@@ -11,11 +10,14 @@ namespace SchoolManagement.EntityFramework.Services
         private readonly IStudentService _studentService;
         private readonly IClassService _classService;
         private readonly ISubjectService _subjectService;
+        private readonly ICourseService _courseService;
+
         public GradeSheetService() : base()
         {
             _studentService = Ioc.Resolve<IStudentService>();
             _classService = Ioc.Resolve<IClassService>();
             _subjectService = Ioc.Resolve<ISubjectService>();
+            _courseService = Ioc.Resolve<ICourseService>();
         }
 
         public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID)
@@ -57,6 +59,35 @@ namespace SchoolManagement.EntityFramework.Services
                 await Task.Delay(10);
             }
             return gradeSheets;
+        }
+
+        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID, int year)
+        {
+            var gradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetsByStudentID(studentID);
+            if (gradeSheets == null)
+            {
+                return new();
+            }
+            var gradesInYear = new ObservableCollection<GradeSheet>();
+
+            foreach (var gradeSheet in gradeSheets)
+            {
+                var course = await _courseService.GetCourseByClassAndSubjectID(gradeSheet.ClassId, gradeSheet.SubjectId, year);
+                if (course == null)
+                {
+                    continue;
+                }
+                gradesInYear.Add(gradeSheet);
+            }
+            foreach (var grade in gradesInYear)
+            {
+                grade.Class = _classService.GetClassByID(grade.ClassId);
+                grade.Ranked = GradeSheet.GetRanked(grade);
+                grade.Student = _studentService.GetStudent(grade.StudentId);
+                grade.Subject = await _subjectService.GetSubjectByID(grade.SubjectId);
+                await Task.Delay(10);
+            }
+            return gradesInYear;
         }
     }
 }

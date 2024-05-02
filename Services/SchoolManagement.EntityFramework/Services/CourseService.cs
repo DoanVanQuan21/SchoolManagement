@@ -1,6 +1,4 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
@@ -19,10 +17,15 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<List<int>> GetClassIDsAsync(int teacherID)
         {
-            return Task.Factory.StartNew(() => { 
+            return Task.Factory.StartNew(() =>
+            {
                 return GetClassIDs(teacherID);
-                
             });
+        }
+
+        public async Task<Course?> GetCourseByClassAndSubjectID(int classID, int subjectID,int year)
+        {
+            return await _schoolManagementSevice.CourseRepository.GetCouseByClassAndSubjectID(classID, subjectID,year);
         }
 
         public async Task<ObservableCollection<Course>> GetCourseByClassID(int classID)

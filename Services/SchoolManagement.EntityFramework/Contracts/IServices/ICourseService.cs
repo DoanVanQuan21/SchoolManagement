@@ -14,5 +14,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<List<int>> GetClassIDsAsync(int teacherID);
 
         Task<ObservableCollection<Course>> GetCourseByClassID(int classID);
+        Task<Course?> GetCourseByClassAndSubjectID(int classID,int subjectID,int year);
+
     }
 }

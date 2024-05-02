@@ -149,7 +149,30 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
-
+        public Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID)
+        {
+            return Task.Factory.StartNew(() => {
+                try
+                {
+                    if (_context.GradeSheets.Any() == false)
+                    {
+                        return _grades;
+                    }
+                    _grades.Clear();
+                    var grades = _context.GradeSheets.Where(g => g.StudentId == studentID);
+                    if (grades == null)
+                    {
+                        return _grades;
+                    }
+                    _grades.AddRange(grades);
+                    return _grades;
+                }
+                catch (Exception)
+                {
+                    return _grades;
+                }
+            });
+        }
         private float? ComputeSemesterAverage(GradeSheet gradeSheet)
         {
             return (gradeSheet.FirstRegularScore + gradeSheet.SecondRegularScore + gradeSheet.ThirdRegularScore

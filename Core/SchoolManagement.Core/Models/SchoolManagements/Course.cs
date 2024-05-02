@@ -8,7 +8,7 @@ public partial class Course : BindableBase
     private int teacherId;
     private int subjectId;
     private int? numberOfLessons;
-    private DateTime? startDate;
+    private DateTime startDate;
     private DateTime? endDate;
 
     public int ClassId
@@ -23,7 +23,7 @@ public partial class Course : BindableBase
     public int? NumberOfLessons
     { get => numberOfLessons; set { SetProperty(ref numberOfLessons, value); } }
 
-    public DateTime? StartDate
+    public DateTime StartDate
     { get => startDate; set { SetProperty(ref startDate, value); } }
 
     public DateTime? EndDate

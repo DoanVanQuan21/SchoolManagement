@@ -12,7 +12,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
         Task<ObservableCollection<T>> GetAllGradeSheetAsync(int subjectID, int classID);
 
         Task<ObservableCollection<GradeSheet>> GetAllGradeSheetByClassAndStudentID(int studentID, int classID);
-
+        Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID);
         bool Delete(int subjectID, int classID);
 
         Task<bool> UpdateOrAddRange(ObservableCollection<T> gradeSheets);

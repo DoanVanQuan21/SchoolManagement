@@ -7,6 +7,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
         ObservableCollection<T> GetCouseByTeacherID(int teacherID);
 
         Task<ObservableCollection<T>> GetCouseByClassID(int classID);
+        Task<T?> GetCouseByClassAndSubjectID(int classID,int subjectID,int year);
         List<int> GetClassIDs(int teacherID);
     }
 }
