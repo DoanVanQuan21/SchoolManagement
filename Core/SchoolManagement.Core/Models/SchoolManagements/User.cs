@@ -2,6 +2,7 @@
 using SchoolManagement.Core.Constants;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -104,7 +105,6 @@ public partial class User : BindableBase
 
     [Browsable(false)]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
-
     public User()
     {
     }

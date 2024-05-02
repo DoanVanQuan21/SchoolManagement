@@ -2,6 +2,8 @@
     x:Class="SchoolManagement.SettingAccount.Views.SettingAccountView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -16,6 +18,7 @@
         </Grid.RowDefinitions>
 
         <Button
+            x:Name="ImageSelector"
             Grid.Row="0"
             Width="150"
             Height="150"
@@ -32,6 +35,22 @@
             </Button.Styles>
             <Button.Template>
                 <ControlTemplate>
+                    <Border CornerRadius="80">
+                        <Image
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+                            asyncImageLoader:ImageLoader.Source="{Binding ElementName=ImageSelector, Path=DataContext.User.Image}"
+                            Stretch="Fill">
+                            <Image.Clip>
+                                <EllipseGeometry
+                                    Center="{Binding Path=Bounds.Center, ElementName=ellipse}"
+                                    RadiusX="60"
+                                    RadiusY="60" />
+                            </Image.Clip>
+                        </Image>
+                    </Border>
+                    <!--
                     <Grid>
                         <Ellipse
                             x:Name="ellipse"
@@ -50,6 +69,7 @@
                             </Image.Clip>
                         </Image>
                     </Grid>
+					-->
                 </ControlTemplate>
             </Button.Template>
         </Button>
