@@ -91,17 +91,10 @@ namespace SchoolManagement.Shell
 
         private void InitMenu()
         {
-            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
-            {
-                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "teacher,student" });
-                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
-                RootContext.MobileAppMenus.Add(new AppMenu() { Label = "Xem điểm thành phần", Geometry = GeometryString.ListDetailGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
-                return;
-            }
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "teacher,student" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Cài đặt tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Xem điểm thành phần", Geometry = GeometryString.ListDetailGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ListDetailGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
         }
     }
 }

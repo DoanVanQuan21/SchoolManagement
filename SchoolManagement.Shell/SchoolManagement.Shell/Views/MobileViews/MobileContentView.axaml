@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
     xmlns:local="clr-namespace:SchoolManagement.Shell.Views.DesktopViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
@@ -25,10 +26,16 @@
             <local:DesktopHeaderView />
         </Border>
         <ScrollViewer Grid.Row="1">
-            <ContentControl
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Content="{Binding AppRegion.MainPage}" />
+            <dialogHostAvalonia:DialogHost
+                dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
+                DialogMargin="16"
+                Identifier="MainDialogHost">
+                <ContentControl
+                    Margin="10"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Content="{Binding AppRegion.MainPage}" />
+            </dialogHostAvalonia:DialogHost>
         </ScrollViewer>
         <Border
             Grid.Row="2"

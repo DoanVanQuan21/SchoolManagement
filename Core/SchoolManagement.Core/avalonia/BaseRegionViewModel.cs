@@ -20,7 +20,6 @@ namespace SchoolManagement.Core.avalonia
         protected readonly IEventAggregator EventAggregator;
         private readonly IAppManager _appManager;
         private bool isLogin = false;
-        private Role role;
 
         public BaseRegionViewModel()
         {
@@ -40,8 +39,6 @@ namespace SchoolManagement.Core.avalonia
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
-        public virtual Role Role { get => role; set => SetProperty(ref role, value); }
-
         public void PreviewMainView()
         {
             var mainView = TryPopMainView();
@@ -109,6 +106,7 @@ namespace SchoolManagement.Core.avalonia
 
         protected virtual void OnLogginSuccess(bool isLoginSucess)
         {
+            SetRole();
         }
 
         protected virtual void RegisterCommand()
@@ -143,10 +141,11 @@ namespace SchoolManagement.Core.avalonia
         {
             if (RootContext.CurrentUser.Role == "student")
             {
-                Role = Role.Student;
+                RootContext.Role = Role.Student;
                 return;
             }
-            Role = Role.Teacher;
+            RootContext.Role = Role.Teacher;
+
         }
     }
 }

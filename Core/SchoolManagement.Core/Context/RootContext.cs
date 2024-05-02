@@ -14,6 +14,7 @@ namespace SchoolManagement.Core.Context
         public static IApplicationLifetime ApplicationLifetime { get; set; }
         public static Stack<Type> PreviewMainViews = new();
         public static User CurrentUser { get; set; } = new User();
+        public static Role Role { get; set; }
         public static bool UpdateCurrentUser(User user)
         {
             if (user == null || RootContext.CurrentUser == null)

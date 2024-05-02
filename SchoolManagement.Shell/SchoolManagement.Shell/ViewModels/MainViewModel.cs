@@ -36,6 +36,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
+            base.OnLogginSuccess(isLoginSucess);
             var notif = "";
             if (!isLoginSucess)
             {

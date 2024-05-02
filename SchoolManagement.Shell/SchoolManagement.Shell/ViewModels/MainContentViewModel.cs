@@ -2,10 +2,12 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace SchoolManagement.Shell.ViewModels
@@ -14,9 +16,10 @@ namespace SchoolManagement.Shell.ViewModels
     {
         private bool isOpenPane = true;
 
-        public MainContentViewModel()
+        public MainContentViewModel():base()
         {
             User = new();
+            AppMenus = new();
             InitAppMenus();
         }
 
@@ -35,17 +38,33 @@ namespace SchoolManagement.Shell.ViewModels
             ClickNavigationCommand = new DelegateCommand(OnClickNavigation);
             ClickSelectionPageCommand = new DelegateCommand<object>(OnClickSelectionPage);
         }
-
+        protected override void OnLogginSuccess(bool isLoginSucess)
+        {
+            base.OnLogginSuccess(isLoginSucess);
+            InitAppMenus();
+        }
         private void InitAppMenus()
         {
-            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            AppMenus.Clear();
+            foreach (var menu in RootContext.DesktopAppMenus)
             {
-                AppMenus = RootContext.MobileAppMenus;
-                return;
+                if (!IsHavePermission(menu.Roles))
+                {
+                    continue;
+                }
+                AppMenus.Add(menu);
             }
-            AppMenus = RootContext.DesktopAppMenus;
         }
-
+        private bool IsHavePermission(string role)
+        {
+            var roles = role.Split(',');
+            var actualRole = roles.FirstOrDefault(r => r.ToLower() == RootContext.Role.ToString().ToLower());
+            if(actualRole != null)
+            {
+                return true;
+            }
+            return false;
+        }
         private void OnClickNavigation()
         {
             if (IsOpenPane)
@@ -55,7 +74,6 @@ namespace SchoolManagement.Shell.ViewModels
             }
             IsOpenPane = true;
         }
-
         private void OnClickSelectionPage(object obj)
         {
             var selectedPage = obj as AppMenu;
