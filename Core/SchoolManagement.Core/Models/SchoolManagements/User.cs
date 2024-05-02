@@ -19,7 +19,7 @@ public partial class User : BindableBase
     private string? password;
     private string? role;
     private byte? activeStatus;
-    private DateTime? startDate;
+    private DateTime startDate;
     private DateTime? endDate;
     private Role userRole;
 
@@ -87,7 +87,7 @@ public partial class User : BindableBase
 
     [DisplayName("Ngày bắt đầu")]
     [Browsable(false)]
-    public DateTime? StartDate
+    public DateTime StartDate
     { get => startDate; set { SetProperty(ref startDate, value); } }
 
     [DisplayName("Ngày kết thúc")]

@@ -20,7 +20,7 @@ namespace SchoolManagement.SettingAccount.ViewModels
         }
 
         public ICommand ClickedUpdateInformation { get; set; }
-        public override string Title => "Setting Account";
+        public override string Title => "Tài khoản";
 
         public override User User
         { get => user; protected set { SetProperty(ref user, value); } }

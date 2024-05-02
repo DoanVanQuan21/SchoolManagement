@@ -5,6 +5,7 @@ using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.Shell.Views.MobileViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace SchoolManagement.Shell.ViewModels
         public ObservableCollection<AppMenu> AppMenus { get; private set; }
         public ICommand ClickNavigationCommand { get; set; }
         public ICommand ClickSelectionPageCommand { get; set; }
-
+        public ICommand ClickedSettingViewCommand { get; set; }
         public bool IsOpenPane
         { get => isOpenPane; set { SetProperty(ref isOpenPane, value); } }
 
@@ -37,7 +38,14 @@ namespace SchoolManagement.Shell.ViewModels
         {
             ClickNavigationCommand = new DelegateCommand(OnClickNavigation);
             ClickSelectionPageCommand = new DelegateCommand<object>(OnClickSelectionPage);
+            ClickedSettingViewCommand = new DelegateCommand<object>(OnSettingView);
         }
+
+        private void OnSettingView(object obj)
+        {
+            SetMainPage(new SettingView());
+        }
+
         protected override void OnLogginSuccess(bool isLoginSucess)
         {
             base.OnLogginSuccess(isLoginSucess);

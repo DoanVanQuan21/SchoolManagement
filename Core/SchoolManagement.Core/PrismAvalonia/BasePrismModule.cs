@@ -33,6 +33,7 @@ namespace SchoolManagement.Core.PrismAvalonia
         private void OnLogoutSuccess()
         {
             Dispose();
+
         }
     }
 }

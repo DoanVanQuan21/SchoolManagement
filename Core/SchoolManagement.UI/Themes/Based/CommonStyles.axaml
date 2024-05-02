@@ -22,4 +22,5 @@
         <Setter Property="FontSize" Value="25" />
         <Setter Property="FontWeight" Value="Bold" />
     </Style>
+    <Style Selector="MenuItem" />
 </Styles>

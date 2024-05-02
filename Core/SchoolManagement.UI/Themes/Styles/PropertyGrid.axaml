@@ -2,16 +2,16 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI">
-	<!--  Add Resources Here  -->
-	<ControlTemplate x:Key="PropertyGridTemplate" TargetType="{x:Type local:PropertyGrid}">
-		<ScrollViewer HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-			<ContentControl
+    <!--  Add Resources Here  -->
+    <ControlTemplate x:Key="PropertyGridTemplate" TargetType="{x:Type local:PropertyGrid}">
+        <ScrollViewer HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+            <ContentControl
                 x:Name="PART_ContentControl"
                 HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                 VerticalAlignment="{TemplateBinding VerticalAlignment}"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}" />
-		</ScrollViewer>
-	</ControlTemplate>
+        </ScrollViewer>
+    </ControlTemplate>
 </ResourceDictionary>

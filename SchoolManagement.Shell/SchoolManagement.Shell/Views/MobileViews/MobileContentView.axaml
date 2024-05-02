@@ -8,8 +8,6 @@
     xmlns:local="clr-namespace:SchoolManagement.Shell.Views.DesktopViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
-    d:DesignHeight="700"
-    d:DesignWidth="400"
     x:DataType="vm:MainContentViewModel"
     Background="{actipro:ThemeResource Container1BackgroundBrush}"
     mc:Ignorable="d">
@@ -24,12 +22,14 @@
             Grid.Row="0"
             Margin="10,0,0,0"
             HorizontalAlignment="Left"
-            VerticalAlignment="Center" />
+            VerticalAlignment="Center"
+            Content="{Binding AppRegion.Title}" />
         <Button
             Grid.Row="0"
             HorizontalAlignment="Right"
             Background="Transparent"
-            BorderThickness="0">
+            BorderThickness="0"
+            Command="{Binding ClickedSettingViewCommand}">
             <Button.Content>
                 <PathIcon
                     Width="24"

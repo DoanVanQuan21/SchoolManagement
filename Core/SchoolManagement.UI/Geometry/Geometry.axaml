@@ -32,6 +32,7 @@
     <StreamGeometry x:Key="ThemeDarkLightGeometry">M10 3a7 7 0 1 1 0 14zm0-1a8 8 0 1 0 0 16a8 8 0 0 0 0-16</StreamGeometry>
     <StreamGeometry x:Key="CheckMarkCircleGeometry">M10 2a8 8 0 1 1 0 16a8 8 0 0 1 0-16m0 1a7 7 0 1 0 0 14a7 7 0 0 0 0-14m3.358 4.646a.5.5 0 0 1 .058.638l-.058.07l-4.004 4.004a.5.5 0 0 1-.638.058l-.07-.058l-2-2a.5.5 0 0 1 .638-.765l.07.058L9 11.298l3.651-3.652a.5.5 0 0 1 .707 0</StreamGeometry>
     <StreamGeometry x:Key="ArrowCircleLeftGeometry">m9.146 13.354l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L7.707 9.5H13.5a.5.5 0 0 1 0 1H7.707l2.147 2.146a.5.5 0 0 1-.708.708M2 10a8 8 0 1 0 16 0a8 8 0 0 0-16 0m8 7a7 7 0 1 1 0-14a7 7 0 0 1 0 14</StreamGeometry>
+    <StreamGeometry x:Key="ArrowLeftGeometry">M9.159 16.867a.5.5 0 1 0 .674-.739l-6.168-5.63h13.831a.5.5 0 0 0 0-1H3.668l6.165-5.629a.5.5 0 0 0-.674-.738L2.243 9.445a.75.75 0 0 0-.24.631a.75.75 0 0 0 .24.477z</StreamGeometry>
 
 
 

@@ -24,7 +24,6 @@
             IsVisible="{Binding IsDesktopPlatform}"
             SearchCommand="{Binding SearchTextCommand, ConverterParameter={Binding}}"
             Template="{StaticResource SearchBarTemplate}" />
-        <Label Grid.Column="1" Content="{Binding AppRegion.Title}" />
         <StackPanel
             Grid.Column="3"
             Margin="5"
