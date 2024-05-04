@@ -7,20 +7,23 @@ using SchoolManagement.EntityFramework.Contracts.IServices;
 using Avalonia.Media.Imaging;
 using System.Windows.Input;
 using Avalonia.Controls;
+using SchoolManagement.Core.Contracts;
 
 namespace SchoolManagement.SettingAccount.ViewModels
 {
     internal class SettingAccountViewModel : BaseRegionViewModel
     {
         private readonly IUserService _userService;
+        private readonly IBlobContainerService _blobContainerService;
         private User user;
         private Bitmap? image;
 
         public SettingAccountViewModel()
         {
             _userService = Ioc.Resolve<IUserService>();
+            _blobContainerService = Ioc.Resolve<IBlobContainerService>();
             User = new User(RootContext.CurrentUser);
-            LoadImageAsync().GetAwaiter();
+            LoadImageAsync(null).GetAwaiter();
         }
 
         public ICommand ClickedUpdateInformation { get; set; }
@@ -29,9 +32,14 @@ namespace SchoolManagement.SettingAccount.ViewModels
         public Bitmap? Image { get => image; set => SetProperty(ref image,value); }
         public override User User
         { get => user; protected set { SetProperty(ref user, value); } }
-        private async Task LoadImageAsync()
+        private async Task LoadImageAsync(Uri uri)
         {
-            Image = await ImageHelper.LoadImageFromResourse(User.Image);
+            if (uri == null)
+            {
+                Image = await ImageHelper.LoadImageFromResourse(User.Image);
+                return;
+            }
+            Image = await ImageHelper.LoadFromWeb(uri);
         }
         protected override void RegisterCommand()
         {
@@ -54,8 +62,9 @@ namespace SchoolManagement.SettingAccount.ViewModels
                 return;
             }
             var file = files.FirstOrDefault();
-            User.Image = file.Path.LocalPath;
-            //await LoadImageAsync();
+            var uri = await _blobContainerService.GetImage("logo");
+            User.Image = uri.AbsoluteUri;
+            await LoadImageAsync(uri);
         }
 
         private void OnUpdateInfo()

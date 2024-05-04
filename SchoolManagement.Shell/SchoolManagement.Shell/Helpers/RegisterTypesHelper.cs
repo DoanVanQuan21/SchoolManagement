@@ -31,6 +31,7 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IExcelService, ExcelService>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
             containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
+            containerRegistry.RegisterSingleton<IBlobContainerService, BlobContainerService>();
         }
 
         public static void RegisterTypesModuleAuth(IContainerRegistry containerRegistry)

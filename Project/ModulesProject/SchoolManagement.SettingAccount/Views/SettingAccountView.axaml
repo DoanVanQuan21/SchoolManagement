@@ -40,7 +40,7 @@
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
                             actipro:BorderChildClipConverter.ClipToContainingBorder="True"
-                            asyncImageLoader:ImageLoader.Source="{Binding ElementName=ImageSelector, Path=DataContext.User.Image}"
+                            Source="{Binding ElementName=ImageSelector, Path=DataContext.Image}"
                             Stretch="Fill">
                             <Image.Clip>
                                 <EllipseGeometry
