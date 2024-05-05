@@ -21,7 +21,8 @@
                 Background="Transparent"
                 BorderThickness="0"
                 Classes="theme-scroll-overlay"
-                ItemsSource="{Binding Dates}">
+                ItemsSource="{Binding Dates}"
+                SelectedValue="{Binding CurrentDate}">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel VerticalAlignment="Center" />

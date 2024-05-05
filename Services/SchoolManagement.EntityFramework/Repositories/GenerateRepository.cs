@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
@@ -14,6 +13,7 @@ namespace SchoolManagement.EntityFramework.Repositories
         protected GenerateRepository(SchoolManagementContext context)
         {
             _context = context;
+            _allItems = new();
         }
 
         public void Add(T entity)
@@ -46,6 +46,39 @@ namespace SchoolManagement.EntityFramework.Repositories
             _allItems.Clear();
             _allItems.AddRange(_context.Set<T>().ToList());
             return _allItems;
+        }
+
+        public Task<ObservableCollection<T>> GetAllAsync()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return GetAll();
+            });
+        }
+
+        public Task<ObservableCollection<T>> GetRecordBySize(int size, int page)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (_allItems == null)
+                {
+                    return new();
+                }
+                _allItems.Clear();
+                var records = _context.Set<T>().ToList();
+                if (records?.Any() == false)
+                {
+                    return new();
+                }
+                //if (records.Count < size * page)
+                //{
+                //    _allItems.AddRange(records);
+                //    return _allItems;
+                //}
+                var countSkip = size * page - size;
+                _allItems.AddRange(records.Skip(countSkip).Take(size));
+                return _allItems;
+            });
         }
 
         public IEnumerable<T> Where(Func<T, bool> predicate)

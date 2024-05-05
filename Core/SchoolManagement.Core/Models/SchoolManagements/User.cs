@@ -1,13 +1,18 @@
-﻿using Prism.Mvvm;
+﻿using Avalonia.Media.Imaging;
+using Prism.Mvvm;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
+using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Helpers;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Drawing;
+using System.Diagnostics;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class User : BindableBase
 {
+    
     private string? firstName;
     private string? lastName;
     private string? gender;
@@ -23,6 +28,7 @@ public partial class User : BindableBase
     private DateTime startDate;
     private DateTime? endDate;
     private Role userRole;
+    private Bitmap imageBitmap;
 
     [Browsable(false)]
     public int UserId { get; set; }
@@ -96,19 +102,43 @@ public partial class User : BindableBase
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }
 
+    [Browsable(false)]
     [NotMapped]
     public Role UserRole
     { get => userRole; set { SetProperty(ref userRole, value); } }
+
+    [Browsable(false)]
+    [NotMapped]
+    public Bitmap ImageBitmap { get => imageBitmap; set => SetProperty(ref imageBitmap, value); }
 
     [Browsable(false)]
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
 
     [Browsable(false)]
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
+
     public User()
     {
-    }
+        UpdateImage();
 
+    }
+    public async void UpdateImage()
+    {
+        try
+        {
+            ImageBitmap = await ImageHelper.LoadFromWeb(new Uri(Image));
+            if (ImageBitmap == null)
+            {
+                ImageBitmap = await ImageHelper.LoadImageFromResourse(ImagePath.DefaultUserImage);
+                return;
+            }
+        }
+        catch (Exception e)
+        {
+            ImageBitmap = await ImageHelper.LoadImageFromResourse(ImagePath.DefaultUserImage);
+            Debug.WriteLine(e);
+        }
+    }
     public User(User user)
     {
         if (user == null)
@@ -130,5 +160,6 @@ public partial class User : BindableBase
         ActiveStatus = user.ActiveStatus;
         StartDate = user.StartDate;
         EndDate = user.EndDate;
+        UpdateImage();
     }
 }

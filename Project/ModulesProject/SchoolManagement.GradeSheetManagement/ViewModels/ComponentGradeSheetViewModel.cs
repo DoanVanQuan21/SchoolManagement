@@ -1,10 +1,11 @@
-﻿using SchoolManagement.Core.avalonia;
+﻿using Prism.Commands;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
-using SchoolManagement.EntityFramework.Services;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
@@ -25,6 +26,19 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             User = RootContext.CurrentUser;
             GradeSheets = new();
             InitDates();
+        }
+
+        public ICommand ClickedSelectedDate { get; set; }
+
+        protected override void RegisterCommand()
+        {
+            ClickedSelectedDate = new DelegateCommand(OnSelectedDate);
+            base.RegisterCommand();
+        }
+
+        private void OnSelectedDate()
+        {
+            throw new NotImplementedException();
         }
 
         private async void InitDates()
@@ -54,7 +68,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GradeSheets.Clear();
             var student = await _studentService.GetStudentByUserID(User.UserId);
             var grades = await _gradeSheetService.GetGradeSheetsByStudentID(student.StudentId, CurrentDate.Year);
-            if (grades == null)
+            if (grades?.Any() == false)
             {
                 NotificationManager.ShowWarning("Không có bảng điểm nào!.");
                 return;

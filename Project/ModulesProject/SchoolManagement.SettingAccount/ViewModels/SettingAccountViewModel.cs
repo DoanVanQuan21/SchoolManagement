@@ -23,7 +23,7 @@ namespace SchoolManagement.SettingAccount.ViewModels
             _userService = Ioc.Resolve<IUserService>();
             _blobContainerService = Ioc.Resolve<IBlobContainerService>();
             User = new User(RootContext.CurrentUser);
-            LoadImageAsync(null).GetAwaiter();
+            User.UpdateImage();
         }
 
         public ICommand ClickedUpdateInformation { get; set; }
@@ -62,9 +62,10 @@ namespace SchoolManagement.SettingAccount.ViewModels
                 return;
             }
             var file = files.FirstOrDefault();
-            var uri = await _blobContainerService.GetImage("logo");
-            User.Image = uri.AbsoluteUri;
-            await LoadImageAsync(uri);
+            //var uri = await _blobContainerService.GetImage("logo");
+            //User.Image = uri.AbsoluteUri;
+            //await LoadImageAsync(uri);
+            User.UpdateImage();
         }
 
         private void OnUpdateInfo()

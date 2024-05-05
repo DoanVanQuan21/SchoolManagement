@@ -10,6 +10,14 @@ namespace SchoolManagement.EntityFramework.Services
         {
         }
 
+        public async Task<ObservableCollection<User>> GetAccounts()
+        {
+            return await _schoolManagementSevice.UserRepository.GetAllAsync();
+        }
+        public async Task<ObservableCollection<User>> GetAccountsBySize(int size, int page)
+        {
+            return await _schoolManagementSevice.UserRepository.GetRecordBySize(size,page);
+        }
         public ObservableCollection<User> GetAllAccounts()
         {
             //TODO

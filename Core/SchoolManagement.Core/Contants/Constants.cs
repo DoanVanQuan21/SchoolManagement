@@ -22,6 +22,8 @@
 
     public class ImagePath
     {
+        public static readonly string DefaultUserImage = "avares://SchoolManagement.UI/Assets/Images/default_user_image.png";
+
     }
 
     public enum Role

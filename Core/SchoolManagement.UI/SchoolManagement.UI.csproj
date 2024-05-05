@@ -24,6 +24,7 @@
     <None Remove="Assets\Fonts\Roboto\Roboto-Regular.ttf" />
     <None Remove="Assets\Fonts\Roboto\Roboto-Thin.ttf" />
     <None Remove="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf" />
+    <None Remove="Assets\Images\default_user_image.png" />
     <None Remove="Assets\Images\dvquan.jpg" />
     <None Remove="Assets\Images\logo.png" />
     <None Remove="Assets\Images\logo\app_logo.ico" />
@@ -84,6 +85,9 @@
     <AvaloniaResource Include="Assets\Fonts\Roboto\Roboto-ThinItalic.ttf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
+    <AvaloniaResource Include="Assets\Images\default_user_image.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AvaloniaResource>
     <AvaloniaResource Include="Assets\Images\logo\logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AvaloniaResource>
@@ -105,6 +109,8 @@
     <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.6" />
     <PackageReference Include="Material.Icons.Avalonia" Version="2.1.0" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.1.5.1" />
+    <PackageReference Include="Prism.Avalonia" Version="8.1.97.11072" />
+    <PackageReference Include="Prism.DryIoc.Avalonia" Version="8.1.97.11072" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,0 +1,187 @@
+<UserControl
+    x:Class="SchoolManagement.AccountManagement.Views.AccountManagementView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
+    xmlns:vm="clr-namespace:SchoolManagement.AccountManagement.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:AccountManagementViewModel"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="8*" />
+        </Grid.RowDefinitions>
+
+        <Button
+            Grid.Row="0"
+            Grid.Column="0"
+            Height="40"
+            Classes="accent">
+            <Button.Content>
+                <DockPanel>
+                    <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
+                    <Label>Thêm mới</Label>
+                </DockPanel>
+            </Button.Content>
+        </Button>
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="1"
+            Orientation="Horizontal">
+            <Button
+                Height="40"
+                Classes="accent"
+                Command="{Binding ClickedPreviousCommand}">
+                <Button.Content>
+                    <DockPanel>
+                        <PathIcon Data="{StaticResource ArrowPreviousGeometry}" DockPanel.Dock="Left" />
+                    </DockPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                Height="40"
+                Classes="accent"
+                Command="{Binding ClickedNextCommand}">
+                <Button.Content>
+                    <DockPanel>
+                        <PathIcon Data="{StaticResource ArrowNextGeometry}" DockPanel.Dock="Left" />
+                    </DockPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <progRing:ProgressRing
+                Grid.Row="1"
+                Width="70"
+                Height="70"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Classes="accent"
+                Foreground="#0da5e8"
+                IsVisible="{Binding !DataLoaded}" />
+
+            <DataGrid
+                x:Name="Container"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                AutoGenerateColumns="False"
+                CanUserReorderColumns="False"
+                CanUserSortColumns="True"
+                GridLinesVisibility="All"
+                HeadersVisibility="All"
+                IsReadOnly="True"
+                IsVisible="{Binding DataLoaded}"
+                ItemsSource="{Binding Users, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedUser}">
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="150"
+                        Binding="{Binding FullName}"
+                        Header="Họ và tên" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="150"
+                        Binding="{Binding Gender}"
+                        Header="Giới tính" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="150"
+                        Binding="{Binding DateOfBirth}"
+                        Header="Ngày sinh" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="150"
+                        Binding="{Binding PhoneNumber}"
+                        Header="Số điện thoại" />
+                    <DataGridTextColumn
+                        Width="*"
+                        MinWidth="150"
+                        Binding="{Binding Address}"
+                        Header="Địa chỉ" />
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1">
+                                    <Label Content="{Binding FullName}" />
+                                </StackPanel>
+                                <Viewbox
+                                    Grid.Column="0"
+                                    Width="100"
+                                    Height="100"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                                    <Border CornerRadius="80">
+                                        <Image
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+                                            Source="{Binding ImageBitmap}"
+                                            Stretch="Fill">
+                                            <Image.Clip>
+                                                <EllipseGeometry
+                                                    Center="{Binding Path=Bounds.Center, ElementName=ellipse}"
+                                                    RadiusX="60"
+                                                    RadiusY="60" />
+                                            </Image.Clip>
+                                        </Image>
+                                    </Border>
+                                </Viewbox>
+                            </Grid>
+                            <WrapPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedResetPasswordCommand}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource EditGeometry}" />
+                                            <Label>Đổi mật khẩu</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid danger"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedDeleteUserCommand}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
+                                            <Label>Xóa</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                            </WrapPanel>
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

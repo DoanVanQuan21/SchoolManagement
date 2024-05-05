@@ -16,6 +16,8 @@ namespace SchoolManagement.Core.avalonia
 {
     public abstract class BaseRegionViewModel : BindableBase
     {
+        protected const int DEFAULT_ROW = 20;
+        protected int page = 1;
         protected readonly string _dialogIdentifier = "MainDialogHost";
         protected readonly IEventAggregator EventAggregator;
         private readonly IAppManager _appManager;
@@ -33,12 +35,14 @@ namespace SchoolManagement.Core.avalonia
 
         public AppRegion AppRegion { get => _appManager.AppRegion; }
         public BootSetting BootSetting { get => _appManager.BootSetting; }
+
         public bool IsLogin
         { get => isLogin; set { SetProperty(ref isLogin, value); } }
 
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
+
         public void PreviewMainView()
         {
             var mainView = TryPopMainView();
@@ -145,7 +149,6 @@ namespace SchoolManagement.Core.avalonia
                 return;
             }
             RootContext.Role = Role.Teacher;
-
         }
     }
 }

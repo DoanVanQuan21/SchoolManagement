@@ -3,9 +3,9 @@ using ActiproSoftware.UI.Avalonia.Themes.Generation;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Prism.DryIoc;
 using Prism.Ioc;
+using SchoolManagement.AccountManagement.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
@@ -14,14 +14,12 @@ using SchoolManagement.MainProject.Views;
 using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.Shell.Helpers;
 using SchoolManagement.Shell.Services.Contracts;
-using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
-using SchoolManagement.Shell.Views.SplashScreen;
+using SchoolManagement.SubjectManagement.Views;
 using SchoolManagement.UI.Geometry;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace SchoolManagement.Shell
 {
@@ -91,11 +89,12 @@ namespace SchoolManagement.Shell
 
         private void InitMenu()
         {
-            
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "teacher,student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ListDetailGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý tài khoản", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(AccountManagementView), Roles = "teacher" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý môn học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(SubjectManagementView), Roles = "teacher" });
         }
     }
 }
