@@ -1,4 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
+using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Contracts.IServices
 {
@@ -6,5 +7,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
     {
         Teacher? GetTeacherInfo(int userID);
         Task<Teacher?> GetTeacherInfoAsync(int userID);
+        Task<Teacher?> GetTeacherByTeacherID(int teacherID);
+        Task<ObservableCollection<Teacher>> GetTeachers();
     }
 }

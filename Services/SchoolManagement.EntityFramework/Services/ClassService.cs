@@ -1,6 +1,4 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
@@ -10,6 +8,24 @@ namespace SchoolManagement.EntityFramework.Services
     {
         public ClassService() : base()
         {
+        }
+
+        public Task<bool> AddClass(Class _class)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (_class == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.ClassRepository.Add(_class);
+                return true;
+            });
+        }
+
+        public async Task<bool> DeleteClass(int classID)
+        {
+            return await _schoolManagementSevice.ClassRepository.DeleteRecord(GetClassByID(classID));
         }
 
         public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)

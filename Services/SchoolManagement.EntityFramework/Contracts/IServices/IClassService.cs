@@ -11,5 +11,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         ObservableCollection<Class> GetAllClassesByID(IList<int> ids);
         Task<ObservableCollection<Class>> GetAllClassesByIDAsync(IList<int> ids);
         Task<ObservableCollection<Class>> GetClassesBySize(int size,int page);
+        Task<bool> AddClass(Class _class);
+        Task<bool> DeleteClass(int classID);
     }
 }

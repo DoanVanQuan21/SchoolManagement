@@ -47,6 +47,14 @@ namespace SchoolManagement.EntityFramework.Services
             return _schoolManagementSevice.UserRepository.GetById(userID);
         }
 
+        public Task<User?> GetUserAsync(int userID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return GetUser(userID);
+            });
+        }
+
         public (bool, User) Login(User user)
         {
             var currentUser = _schoolManagementSevice.UserRepository.FirstOrDefault(r => r.Username == user.Username && r.Password == user.Password);

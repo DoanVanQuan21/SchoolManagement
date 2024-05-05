@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -26,7 +26,7 @@
             Grid.Column="0"
             Height="40"
             Classes="accent"
-            Command="{Binding ClickedAddSubjectCommand}">
+            Command="{Binding ClickedAddClassCommand}">
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
@@ -37,9 +37,10 @@
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
+            HorizontalAlignment="Right"
             Orientation="Horizontal">
             <Button
-                Height="40"
+                Height="35"
                 Classes="accent"
                 Command="{Binding ClickedPreviousCommand}">
                 <Button.Content>
@@ -49,7 +50,7 @@
                 </Button.Content>
             </Button>
             <Button
-                Height="40"
+                Height="35"
                 Classes="accent"
                 Command="{Binding ClickedNextCommand}">
                 <Button.Content>

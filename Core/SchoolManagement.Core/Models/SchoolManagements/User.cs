@@ -30,6 +30,7 @@ public partial class User : BindableBase
     private Role userRole;
     private Bitmap imageBitmap;
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Browsable(false)]
     public int UserId { get; set; }
 

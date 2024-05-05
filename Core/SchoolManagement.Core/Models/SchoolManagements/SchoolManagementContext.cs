@@ -54,9 +54,11 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Class");
 
             entity.Property(e => e.ClassId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("ClassID");
-            entity.Property(e => e.ClassCode).HasColumnType("datetime");
+            entity.Property(e => e.ClassCode)
+                .HasMaxLength(100)
+                .IsUnicode(false);
             entity.Property(e => e.ClassName)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -91,7 +93,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Department");
 
             entity.Property(e => e.DepartmentId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("DepartmentID");
             entity.Property(e => e.DepartmentCode)
                 .HasMaxLength(20)
@@ -109,7 +111,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("EducationProgram");
 
             entity.Property(e => e.EducationProgramId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("EducationProgramID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.EducationName)
@@ -176,7 +178,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Lesson");
 
             entity.Property(e => e.LessonId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("LessonID");
             entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.ImageUrl).IsUnicode(false);
@@ -203,7 +205,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Schedule");
 
             entity.Property(e => e.ScheduleId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("ScheduleID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.Day).HasColumnType("datetime");
@@ -231,7 +233,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Student");
 
             entity.Property(e => e.StudentId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("StudentID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.StudentCode)
@@ -255,7 +257,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Subject");
 
             entity.Property(e => e.SubjectId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("SubjectID");
             entity.Property(e => e.SubjectCode)
                 .HasMaxLength(15)
@@ -272,7 +274,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("Teacher");
 
             entity.Property(e => e.TeacherId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("TeacherID");
             entity.Property(e => e.AdditionalBenifits)
                 .HasMaxLength(100)
@@ -339,7 +341,7 @@ public partial class SchoolManagementContext : DbContext
             entity.ToTable("User");
 
             entity.Property(e => e.UserId)
-                .ValueGeneratedNever()
+                .ValueGeneratedOnAdd()
                 .HasColumnName("UserID");
             entity.Property(e => e.Address)
                 .HasMaxLength(100)

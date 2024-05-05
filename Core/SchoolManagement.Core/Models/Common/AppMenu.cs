@@ -7,6 +7,7 @@ namespace SchoolManagement.Core.Models.Common
     {
         public AppMenu()
         {
+            Childs = new();
         }
 
         public string? Geometry { get; set; }
@@ -15,5 +16,6 @@ namespace SchoolManagement.Core.Models.Common
         public Type? Type { get; set; }
         public UserControl? View => (UserControl)Activator.CreateInstance(Type);
         public string? ViewName { get; set; }
+        public ObservableCollection<AppMenu> Childs { get; set; }
     }
 }

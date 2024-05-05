@@ -27,6 +27,22 @@ namespace SchoolManagement.EntityFramework.Repositories
             _context.Set<T>().AddRange(entities);
         }
 
+        public Task<bool> DeleteRecord(T entity)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+
+                var record = _context.Set<T>().Remove(entity);
+                if (record == null)
+                {
+                    return false;
+                }
+                _context.SaveChanges();
+                return true;
+            });
+
+        }
+
         public T? Find(Func<T, bool> predicate)
         {
             return _context.Set<T>().Find(predicate);

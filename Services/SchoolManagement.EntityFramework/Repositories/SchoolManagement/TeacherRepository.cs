@@ -14,6 +14,14 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
         }
 
+        public Task<Teacher?> GetTeacherByTeacherID(int teacherID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return FirstOrDefault(item => item.TeacherId == teacherID);
+            });
+        }
+
         public Teacher? GetTeacherInfo(int userID)
         {
             return FirstOrDefault(item => item.UserId == userID);
