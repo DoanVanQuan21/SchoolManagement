@@ -37,5 +37,10 @@ namespace SchoolManagement.EntityFramework.Services
                 return GetClassByID(classID);
             });
         }
+
+        public async Task<ObservableCollection<Class>> GetClassesBySize(int size, int page)
+        {
+            return await _schoolManagementSevice.ClassRepository.GetRecordBySize(size, page);
+        }
     }
 }
