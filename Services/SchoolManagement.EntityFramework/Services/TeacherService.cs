@@ -10,6 +10,19 @@ namespace SchoolManagement.EntityFramework.Services
         {
         }
 
+        public Task<bool> AddTeacher(Teacher teacher)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (teacher == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.TeacherRepository.Add(teacher);
+                return true;
+            });
+        }
+
         public async Task<Teacher?> GetTeacherByTeacherID(int teacherID)
         {
             return await _schoolManagementSevice.TeacherRepository.GetTeacherByTeacherID(teacherID);

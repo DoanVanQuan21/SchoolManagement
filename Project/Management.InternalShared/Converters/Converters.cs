@@ -44,6 +44,37 @@ namespace Management.InternalShared.Converters
             }
         }
     }
+    public class MinWidthFollowPlatformConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            var isMobilePlatform = (bool)value;
+            if (isMobilePlatform)
+            {
+                return 50;
+            }
+            return 500;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class EnumToItemsSourceConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            var enums = Enum.GetValues(value?.GetType());
+            var values = Enum.GetNames(value?.GetType());
+            return values;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class NumerRowConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

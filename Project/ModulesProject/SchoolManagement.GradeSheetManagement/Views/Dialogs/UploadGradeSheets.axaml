@@ -8,6 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:progRing="clr-namespace:AvaloniaProgressRing;assembly=AvaloniaProgressRing"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
+    MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
+    MaxWidth="1000"
     x:DataType="vm:UploadGradeSheetViewModel"
     mc:Ignorable="d">
     <Grid>

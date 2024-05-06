@@ -1,13 +1,14 @@
 <UserControl
-    x:Class="SchoolManagement.ClassManagement.Views.Dialogs.ConfirmDeleteClassView"
+    x:Class="SchoolManagement.AccountManagement.Views.Dialogs.AddUserView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:vm="clr-namespace:SchoolManagement.ClassManagement.ViewModels"
-    MinHeight="200"
-    x:DataType="vm:ConfirmDeleteClassViewModel"
+    xmlns:vm="clr-namespace:SchoolManagement.AccountManagement.ViewModels"
+    MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
+    x:DataType="vm:AddAccountViewModel"
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,15 +16,24 @@
             <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="8*" />
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
             Grid.ColumnSpan="2"
             HorizontalAlignment="Center"
-            VerticalAlignment="Center"
+            Classes="title"
             Content="{Binding Title}" />
+        <ScrollViewer Grid.Row="1" Grid.ColumnSpan="2">
+            <cc:PropertyGrid
+                Column="One"
+                DockPanel.Dock="Top"
+                SelectedObject="{Binding NewUser}"
+                Template="{StaticResource PropertyGridTemplate}" />
+        </ScrollViewer>
+
         <Border
             Grid.Row="4"
             Grid.ColumnSpan="2"

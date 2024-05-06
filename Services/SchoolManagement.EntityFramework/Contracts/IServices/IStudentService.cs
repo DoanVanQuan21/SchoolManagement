@@ -17,5 +17,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<int> GetStudentIDByStudentCodeAsync(string studentCode);
 
         Task<ObservableCollection<Student>> GetStudentsByClass(int classID);
+        Task<bool> AddStudent(Student student);
     }
 }

@@ -9,5 +9,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<Teacher?> GetTeacherInfoAsync(int userID);
         Task<Teacher?> GetTeacherByTeacherID(int teacherID);
         Task<ObservableCollection<Teacher>> GetTeachers();
+        Task<bool> AddTeacher(Teacher teacher);
     }
 }

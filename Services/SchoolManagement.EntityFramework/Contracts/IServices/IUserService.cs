@@ -26,5 +26,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         User? GetUser(int userID);
 
         Task<User?> GetUserAsync(int userID);
+        Task<bool> AddUser(User user);
     }
 }

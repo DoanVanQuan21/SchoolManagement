@@ -9,10 +9,24 @@ namespace SchoolManagement.EntityFramework.Services
     {
         private readonly IUserService _userService;
         private readonly IClassService _classService;
+
         public StudentService() : base()
         {
             _userService = Ioc.Resolve<IUserService>();
             _classService = Ioc.Resolve<IClassService>();
+        }
+
+        public Task<bool> AddStudent(Student student)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (student == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.StudentRepository.Add(student);
+                return true;
+            });
         }
 
         public Student? GetStudent(int studentID)

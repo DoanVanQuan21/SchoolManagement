@@ -1,4 +1,5 @@
 ﻿using Prism.Commands;
+using SchoolManagement.AccountManagement.Views.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -11,20 +12,26 @@ namespace SchoolManagement.AccountManagement.ViewModels
     internal class AccountManagementViewModel : BaseRegionViewModel
     {
         private readonly IUserService _userService;
+        private readonly IStudentService _studentService;
+        private readonly ITeacherService _teacherService;
         private bool dataLoaded = false;
         private User selectedUser;
+
         public AccountManagementViewModel()
         {
             _userService = Ioc.Resolve<IUserService>();
+            _studentService = Ioc.Resolve<IStudentService>();
+            _teacherService = Ioc.Resolve<ITeacherService>();
             User = RootContext.CurrentUser;
             Users = new();
             GetAccounts().GetAwaiter();
         }
 
+        public ICommand ClickedDeleteUserCommand { get; set; }
         public ICommand ClickedNextCommand { get; set; }
         public ICommand ClickedPreviousCommand { get; set; }
         public ICommand ClickedResetPasswordCommand { get; set; }
-        public ICommand ClickedDeleteUserCommand { get; set; }
+        public ICommand ClickedAddCommand { get; set; }
         public bool DataLoaded { get => dataLoaded; set => SetProperty(ref dataLoaded, value); }
         public User SelectedUser { get => selectedUser; set => SetProperty(ref selectedUser, value); }
         public override string Title => "Quản lý tài khoản";
@@ -38,35 +45,33 @@ namespace SchoolManagement.AccountManagement.ViewModels
             ClickedDeleteUserCommand = new DelegateCommand(OnDeleteUser);
             ClickedNextCommand = new DelegateCommand(OnNext);
             ClickedPreviousCommand = new DelegateCommand(OnPreviousAsync);
+            ClickedAddCommand = new DelegateCommand(OnAdd);
             base.RegisterCommand();
         }
 
-        private void OnResetPassword()
+        private async void OnAdd()
         {
-            throw new NotImplementedException();
+            var addAccountView = new AddUserView();
+            addAccountView.SetAddAccountAction(AddAccount);
+            await ShowDialogHost(addAccountView);
         }
 
-        private void OnDeleteUser()
+        private async void AddAccount(User user)
         {
-            throw new NotImplementedException();
-        }
-
-        private async void OnPreviousAsync()
-        {
-            page--;
+            var isAdded = await _userService.AddUser(user);
+            if (!isAdded)
+            {
+                NotificationManager.ShowWarning("Thêm tài khoản không thành công!.");
+                return;
+            }
             await GetAccounts();
-        }
-
-        private async void OnNext()
-        {
-            page++;
-            await GetAccounts();
+            NotificationManager.ShowSuccess($"Thêm tài khoản thành công!.");
         }
 
         private async Task GetAccounts()
         {
             DataLoaded = false;
-            var users = await _userService.GetAccountsBySize(DEFAULT_ROW,page);
+            var users = await _userService.GetAccountsBySize(DEFAULT_ROW, page);
             if (users?.Any() == false)
             {
                 DataLoaded = true;
@@ -77,6 +82,26 @@ namespace SchoolManagement.AccountManagement.ViewModels
             await Task.Delay(1500);
             Users.AddRange(users);
             DataLoaded = true;
+        }
+
+        private void OnDeleteUser()
+        {
+        }
+
+        private async void OnNext()
+        {
+            page++;
+            await GetAccounts();
+        }
+
+        private async void OnPreviousAsync()
+        {
+            page--;
+            await GetAccounts();
+        }
+
+        private void OnResetPassword()
+        {
         }
     }
 }

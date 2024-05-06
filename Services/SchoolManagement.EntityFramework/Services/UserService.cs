@@ -10,6 +10,19 @@ namespace SchoolManagement.EntityFramework.Services
         {
         }
 
+        public Task<bool> AddUser(User user)
+        {
+            return Task.Factory.StartNew(() => { 
+            
+                if (user == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.UserRepository.Add(user);
+                return true;
+            });
+        }
+
         public async Task<ObservableCollection<User>> GetAccounts()
         {
             return await _schoolManagementSevice.UserRepository.GetAllAsync();

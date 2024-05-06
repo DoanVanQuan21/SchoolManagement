@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
+    MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
     x:DataType="vm:EditGradeSheetViewModel"
     mc:Ignorable="d">
     <ScrollViewer>
