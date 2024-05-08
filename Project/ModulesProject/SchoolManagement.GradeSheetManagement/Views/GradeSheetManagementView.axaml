@@ -14,7 +14,8 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="7*" />
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -22,7 +23,7 @@
         </Grid.RowDefinitions>
         <Menu
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="2"
             Margin="10,0,10,0"
             HorizontalAlignment="Left">
             <MenuItem Header="File">
@@ -41,10 +42,24 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Dates}"
+            PlaceholderText="Chọn năm học"
+            SelectedValue="{Binding CurrentDate}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Year}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="0"
+            Grid.Column="1"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
@@ -58,7 +73,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="1" Grid.ColumnSpan="3">
             <progRing:ProgressRing
                 Grid.Row="1"
                 Width="70"
@@ -172,7 +187,5 @@
                 </DataGrid.RowDetailsTemplate>
             </DataGrid>
         </Grid>
-
-
     </Grid>
 </UserControl>

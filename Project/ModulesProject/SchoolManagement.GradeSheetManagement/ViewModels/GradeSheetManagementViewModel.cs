@@ -5,6 +5,7 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views.Dialogs;
@@ -30,6 +31,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private ObservableCollection<GradeSheet> gradeSheets;
         private bool isExportCompleted = false;
         private Teacher? teacher;
+        private Date currentDate;
 
         public GradeSheetManagementViewModel()
         {
@@ -43,9 +45,13 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
             User = RootContext.CurrentUser;
             Class = new();
+            Classes = new();
             GradeSheets = new();
-            GetClassIDsOfCourse();
+            Dates = new();
+            InitDates();
         }
+
+        public ObservableCollection<Date> Dates { get; set; }
 
         public Class Class
         {
@@ -72,6 +78,25 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public override string Title => "Quản lý điểm";
         public override User User { get; protected set; }
+
+        public Date CurrentDate
+        { get => currentDate; set { SetProperty(ref currentDate, value); GetClassIDsOfCourse(); } }
+
+        private async void InitDates()
+        {
+            Dates = new();
+            var startYear = User.StartDate.Year;
+            var now = DateTime.Now.Year;
+            for (int i = startYear; i <= now; i++)
+            {
+                Dates.Add(new Date()
+                {
+                    Year = i,
+                });
+                await Task.Delay(100);
+            }
+            CurrentDate = Dates.LastOrDefault();
+        }
 
         protected override void RegisterCommand()
         {
@@ -115,7 +140,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         private async void GetClassIDsOfCourse()
         {
-            Classes = new();
+            Classes.Clear();
+            GradeSheets.Clear();
             teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
             if (teacher == null)
             {
@@ -123,12 +149,13 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 //ADD MESSAGE
                 return;
             }
-            var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
+            var classIDs = await _courseService.GetClassIDsByTeacherIDAndYear(teacher.TeacherId, CurrentDate.Year);
             var classes = await _classService.GetAllClassesByIDAsync(classIDs);
-            if (classes == null)
+            if (classes?.Any()==false)
             {
-                //TODO
-                //ADD MESSAGE
+                NotificationManager.ShowWarning("Không có lớp nào!.");
+                Class = new();
+
                 return;
             }
             Classes.AddRange(classes);

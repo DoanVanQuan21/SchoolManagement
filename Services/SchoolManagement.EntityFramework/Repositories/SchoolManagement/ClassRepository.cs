@@ -6,7 +6,8 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class ClassRepository : GenerateRepository<Class>, IClassRepository<Class>
     {
-        ObservableCollection<Class> _classesOfTeacher;
+        private ObservableCollection<Class> _classesOfTeacher;
+
         public ClassRepository(SchoolManagementContext context) : base(context)
         {
             _classesOfTeacher = new();
@@ -14,13 +15,13 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 
         public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)
         {
-            if(ids == null || ids.Count == 0) { return _classesOfTeacher; }
             _classesOfTeacher.Clear();
+            if (ids == null || ids.Count == 0) { return _classesOfTeacher; }
             var classes = new ObservableCollection<Class>();
             foreach (var id in ids)
             {
                 var c = GetClassByID(id);
-                if(c == null)
+                if (c == null)
                 {
                     continue;
                 }

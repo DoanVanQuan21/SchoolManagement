@@ -1,7 +1,6 @@
 ﻿using Prism.Mvvm;
 using SchoolManagement.GlobalShared.CustomAttributes;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
@@ -97,6 +96,7 @@ public partial class GradeSheet : BindableBase
     public float? SemesterAverage
     { get => semesterAverage; set { SetProperty(ref semesterAverage, value); } }
 
+    [IsHeaderExcel(false)]
     [Browsable(false)]
     public bool? PromotionDecision { get => promotionDecision; set => SetProperty(ref promotionDecision, value); }
 

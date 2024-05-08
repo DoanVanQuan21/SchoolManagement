@@ -42,9 +42,21 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return _coursesOfTeacher;
         }
 
-        public List<int> GetClassIDs(int teacherID)
+        private ObservableCollection<Course> GetCouseByTeacherIDAndYear(int teacherID, int year)
         {
-            return GetCouseByTeacherID(teacherID).Select(item => item.ClassId).ToList();
+            var courses = Where(item => item.TeacherId == teacherID && item.StartDate.Year == year);
+            if (courses == null)
+            {
+                return _coursesOfTeacher;
+            }
+            _coursesOfTeacher.Clear();
+            _coursesOfTeacher.AddRange(courses);
+            return _coursesOfTeacher;
+        }
+
+        public List<int> GetClassIDs(int teacherID, int year)
+        {
+            return GetCouseByTeacherIDAndYear(teacherID, year).Select(item => item.ClassId).ToList();
         }
 
         public Task<Course?> GetCouseByClassAndSubjectID(int classID, int subjectID, int year)

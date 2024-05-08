@@ -10,16 +10,11 @@ namespace SchoolManagement.EntityFramework.Services
         {
         }
 
-        public List<int> GetClassIDs(int teacherID)
-        {
-            return _schoolManagementSevice.CourseRepository.GetClassIDs(teacherID);
-        }
-
-        public Task<List<int>> GetClassIDsAsync(int teacherID)
+        public Task<List<int>> GetClassIDsByTeacherIDAndYear(int teacherID, int year)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetClassIDs(teacherID);
+                return GetClassIDs(teacherID, year);
             });
         }
 
@@ -49,6 +44,11 @@ namespace SchoolManagement.EntityFramework.Services
             {
                 return GetCourseByTeacherID(TeacherID);
             });
+        }
+
+        private List<int> GetClassIDs(int teacherID, int year)
+        {
+            return _schoolManagementSevice.CourseRepository.GetClassIDs(teacherID, year);
         }
     }
 }
