@@ -36,7 +36,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                         return _grades;
                     }
                     _grades.Clear();
-                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).ToList();
+                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).Distinct().ToList();
                     if (grades == null)
                     {
                         return _grades;
@@ -50,6 +50,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
+
         public Task<ObservableCollection<GradeSheet>> GetAllGradeSheetByClassAndStudentID(int studentID, int classID)
         {
             return Task.Factory.StartNew(() =>
@@ -149,9 +150,11 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
+
         public Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
                 try
                 {
                     if (_context.GradeSheets.Any() == false)
@@ -173,6 +176,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
+
         private float? ComputeSemesterAverage(GradeSheet gradeSheet)
         {
             return (gradeSheet.FirstRegularScore + gradeSheet.SecondRegularScore + gradeSheet.ThirdRegularScore

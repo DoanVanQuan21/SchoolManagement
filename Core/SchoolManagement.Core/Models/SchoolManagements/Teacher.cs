@@ -6,7 +6,6 @@ namespace SchoolManagement.Core.Models.SchoolManagements
     {
         private int teacherId;
         private int departmentId;
-        private int leaderId;
         private int userId;
         private string? teacherCode;
         private string? degree;
@@ -22,12 +21,11 @@ namespace SchoolManagement.Core.Models.SchoolManagements
         private string? healthInsuranceInfo;
         private string? selfIntroduction;
         private int subjectId;
+        private bool? isLeader;
 
         public int TeacherId { get => teacherId; set => SetProperty(ref teacherId, value); }
 
         public int DepartmentId { get => departmentId; set => SetProperty(ref departmentId, value); }
-
-        public int LeaderId { get => leaderId; set => SetProperty(ref leaderId, value); }
 
         public int UserId { get => userId; set => SetProperty(ref userId, value); }
 
@@ -58,6 +56,7 @@ namespace SchoolManagement.Core.Models.SchoolManagements
         public string? SelfIntroduction { get => selfIntroduction; set => SetProperty(ref selfIntroduction, value); }
 
         public int SubjectId { get => subjectId; set => SetProperty(ref subjectId, value); }
+        public bool? IsLeader { get => isLeader; set => SetProperty(ref isLeader, value); }
 
         // Navigation properties
         public virtual ICollection<Class> Classes { get; set; } = new List<Class>();

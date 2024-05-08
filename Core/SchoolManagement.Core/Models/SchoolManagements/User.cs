@@ -26,6 +26,7 @@ public partial class User : BindableBase
     private DateTime? endDate = DateTime.Now;
     private Role userRole;
     private Bitmap imageBitmap;
+    private bool? lockAccount;
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Browsable(false)]
@@ -100,6 +101,9 @@ public partial class User : BindableBase
     [Browsable(false)]
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }
+
+    [Browsable(false)]
+    public bool? LockAccount { get => lockAccount; set => SetProperty(ref lockAccount, value); }
 
     [NotMapped]
     [DisplayName("Role")]

@@ -117,7 +117,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 {
                     return;
                 }
-                var students = await _studentService.GetStudentsByClass(Class.ClassId);
+                var students = await _studentService.GetStudentsByClass(Class.ClassId,DateTime.Now.Year);
                 if (students == null)
                 {
                     NotificationManager.ShowWarning("Không có học sinh nào!.");

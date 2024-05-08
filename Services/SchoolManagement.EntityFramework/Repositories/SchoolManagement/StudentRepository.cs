@@ -1,5 +1,7 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IRepositories;
+using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
@@ -27,21 +29,6 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return Task.Factory.StartNew(() =>
             {
                 return FirstOrDefault(s => s.UserId == userID);
-            });
-        }
-
-        public Task<ObservableCollection<Student>> GetStudentsByClass(int classID)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                _students.Clear();
-                var students = Where(s => s.ClassId == classID);
-                if (students?.Any() == false)
-                {
-                    return _students;
-                }
-                _students.AddRange(students);
-                return _students;
             });
         }
     }

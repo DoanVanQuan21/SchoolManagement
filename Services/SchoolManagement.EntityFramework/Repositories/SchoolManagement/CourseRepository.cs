@@ -47,7 +47,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return GetCouseByTeacherID(teacherID).Select(item => item.ClassId).ToList();
         }
 
-        public Task<Course?> GetCouseByClassAndSubjectID(int classID, int subjectID,int year)
+        public Task<Course?> GetCouseByClassAndSubjectID(int classID, int subjectID, int year)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -57,6 +57,21 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                     return course;
                 }
                 return course;
+            });
+        }
+
+        public Task<ObservableCollection<Course>> GetCourseByClassID(int classID, int year)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                _coursesOfClass.Clear();
+                var course = Where(c => c.ClassId == classID && c.StartDate.Year == year);
+                if (course == null)
+                {
+                    return _coursesOfClass;
+                }
+                _coursesOfClass.AddRange(course);
+                return _coursesOfClass;
             });
         }
     }

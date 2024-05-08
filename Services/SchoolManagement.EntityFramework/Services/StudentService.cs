@@ -8,12 +8,12 @@ namespace SchoolManagement.EntityFramework.Services
     public class StudentService : BaseService, IStudentService
     {
         private readonly IUserService _userService;
-        private readonly IClassService _classService;
+        private readonly ICourseService _courseService;
 
         public StudentService() : base()
         {
             _userService = Ioc.Resolve<IUserService>();
-            _classService = Ioc.Resolve<IClassService>();
+            _courseService = Ioc.Resolve<ICourseService>();
         }
 
         public Task<bool> AddStudent(Student student)
@@ -70,7 +70,6 @@ namespace SchoolManagement.EntityFramework.Services
             {
                 return student;
             }
-            student.Class = await _classService.GetClassByIDAsync(student.ClassId);
             return student;
         }
 
@@ -84,13 +83,22 @@ namespace SchoolManagement.EntityFramework.Services
             return student.StudentId;
         }
 
-        public async Task<ObservableCollection<Student>> GetStudentsByClass(int classID)
+        public async Task<ObservableCollection<Student>> GetStudentsByClass(int classID, int year)
         {
-            var students = await _schoolManagementSevice.StudentRepository.GetStudentsByClass(classID);
-            foreach (var student in students)
+            var students = new ObservableCollection<Student>();
+            var courses = await _courseService.GetCourseByClassID(classID, year);
+            if (courses?.Any() == false)
             {
-                student.User = _userService.GetUser(student.UserId);
-                student.Class = _classService.GetClassByID(student.ClassId);
+                return students;
+            }
+            foreach (var course in courses)
+            {
+                var student = GetStudent(course.StudentId);
+                if (student == null)
+                {
+                    continue;
+                }
+                students.Add(student);
             }
             return students;
         }
