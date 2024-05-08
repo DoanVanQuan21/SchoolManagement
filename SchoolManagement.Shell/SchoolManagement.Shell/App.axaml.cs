@@ -92,7 +92,7 @@ namespace SchoolManagement.Shell
         {
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "teacher,student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.ClipboardTextEditorGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ClipboardDataBarGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý tài khoản", Geometry = GeometryString.PeopleTeamGeometry, Type = typeof(AccountManagementView), Roles = "teacher" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý môn học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(SubjectManagementView), Roles = "teacher" });

@@ -10,6 +10,7 @@ public partial class Course : BindableBase
     private int? numberOfLessons;
     private DateTime startDate;
     private DateTime? endDate;
+    private string? semester;
 
     public int ClassId
     { get => classId; set { SetProperty(ref classId, value); } }
@@ -19,6 +20,8 @@ public partial class Course : BindableBase
 
     public int SubjectId
     { get => subjectId; set { SetProperty(ref subjectId, value); } }
+
+    public string? Semester { get => semester; set => SetProperty(ref semester, value); }
 
     public int? NumberOfLessons
     { get => numberOfLessons; set { SetProperty(ref numberOfLessons, value); } }

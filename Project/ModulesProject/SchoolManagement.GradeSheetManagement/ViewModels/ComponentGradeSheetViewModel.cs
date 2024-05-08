@@ -69,7 +69,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var student = await _studentService.GetStudentByUserID(User.UserId);
             var grades = await _gradeSheetService.GetGradeSheetsByStudentID(student.StudentId, CurrentDate.Year);
             if (grades?.Any() == false)
-            {
+            {   
                 NotificationManager.ShowWarning("Không có bảng điểm nào!.");
                 return;
             }

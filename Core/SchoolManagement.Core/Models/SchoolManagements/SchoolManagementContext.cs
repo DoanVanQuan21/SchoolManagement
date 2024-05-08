@@ -78,6 +78,7 @@ public partial class SchoolManagementContext : DbContext
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
             entity.Property(e => e.EndDate).HasColumnType("datetime");
+            entity.Property(e => e.Semester).HasMaxLength(100);
             entity.Property(e => e.StartDate).HasColumnType("datetime");
             entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
 
@@ -151,6 +152,7 @@ public partial class SchoolManagementContext : DbContext
             entity.Property(e => e.MidtermScore).HasColumnType("float");
             entity.Property(e => e.SecondRegularScore).HasColumnType("float");
             entity.Property(e => e.SemesterAverage).HasColumnType("float");
+            entity.Property(e => e.PromotionDecision).HasColumnType("bool");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
             entity.Property(e => e.ThirdRegularScore).HasColumnType("float");

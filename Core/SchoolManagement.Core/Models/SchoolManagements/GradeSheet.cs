@@ -20,6 +20,7 @@ public partial class GradeSheet : BindableBase
     private float? finalScore;
     private float? semesterAverage;
     private string? ranked;
+    private bool? promotionDecision;
 
     public GradeSheet()
     {
@@ -95,6 +96,9 @@ public partial class GradeSheet : BindableBase
     [DisplayName("Trung bình TL")]
     public float? SemesterAverage
     { get => semesterAverage; set { SetProperty(ref semesterAverage, value); } }
+
+    [Browsable(false)]
+    public bool? PromotionDecision { get => promotionDecision; set => SetProperty(ref promotionDecision, value); }
 
     [Browsable(false)]
     [NotMapped]
