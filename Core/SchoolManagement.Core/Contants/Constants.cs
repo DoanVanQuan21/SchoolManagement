@@ -23,7 +23,6 @@
     public class ImagePath
     {
         public static readonly string DefaultUserImage = "avares://SchoolManagement.UI/Assets/Images/default_user_image.png";
-
     }
 
     public enum Role
@@ -83,6 +82,13 @@
         BTBOX
     }
 
+    public enum AceptFormStatus
+    {
+        Accept,
+        Cancel,
+        Waitting
+    }
+
     public enum Theme
     {
         Light = 0,
@@ -94,6 +100,7 @@
         STRING,
         BYTE
     }
+
     public class Ranked
     {
         public static string Excellent = "Giỏi";

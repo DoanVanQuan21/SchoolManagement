@@ -13,35 +13,38 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Menu
-            Grid.Row="0"
-            Grid.Column="2"
-            Margin="10,0,10,0"
-            HorizontalAlignment="Left">
-            <MenuItem Header="File">
-                <MenuItem.Icon>
-                    <PathIcon Data="{StaticResource DocumentGeometry}" />
-                </MenuItem.Icon>
-                <MenuItem Command="{Binding ClickedAddGradeSheet}" Header="Thêm mới">
+        <StackPanel
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="10"
+            Orientation="Horizontal">
+            <Menu HorizontalAlignment="Left">
+                <MenuItem Header="File">
                     <MenuItem.Icon>
-                        <PathIcon Data="{StaticResource AddsGeometry}" />
+                        <PathIcon Data="{StaticResource DocumentGeometry}" />
                     </MenuItem.Icon>
+                    <MenuItem Command="{Binding ClickedAddGradeSheet}" Header="Thêm mới">
+                        <MenuItem.Icon>
+                            <PathIcon Data="{StaticResource AddsGeometry}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Command="{Binding ClickedDownloadFile}" Header="Download file .xlsx">
+                        <MenuItem.Icon>
+                            <PathIcon Data="{StaticResource DocumentArrowDownGeometry}" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
-                <MenuItem Command="{Binding ClickedDownloadFile}" Header="Download file .xlsx">
-                    <MenuItem.Icon>
-                        <PathIcon Data="{StaticResource DocumentArrowDownGeometry}" />
-                    </MenuItem.Icon>
-                </MenuItem>
-            </MenuItem>
-        </Menu>
+            </Menu>
+            <Button Classes="accent" Command="{Binding ClickedFinishCommand}">Hoàn thành</Button>
+        </StackPanel>
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
@@ -73,7 +76,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
 
-        <Grid Grid.Row="1" Grid.ColumnSpan="3">
+        <Grid Grid.Row="2" Grid.ColumnSpan="3">
             <progRing:ProgressRing
                 Grid.Row="1"
                 Width="70"
@@ -160,7 +163,8 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}">
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}"
+                                    IsEnabled="{Binding !Lock}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
@@ -173,11 +177,12 @@
                                     Height="40"
                                     Margin="10"
                                     HorizontalAlignment="Center"
-                                    Classes="theme-solid danger">
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedSendRequestEditCommand}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label>Xóa</Label>
+                                            <PathIcon Data="{StaticResource SendGeometry}" />
+                                            <Label>Yêu cầu sửa</Label>
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
@@ -6,8 +7,10 @@ namespace SchoolManagement.EntityFramework.Services
 {
     public class TeacherService : BaseService, ITeacherService
     {
+        private readonly IUserService _userService;
         public TeacherService() : base()
         {
+            _userService = Ioc.Resolve<IUserService>();
         }
 
         public Task<bool> AddTeacher(Teacher teacher)
@@ -25,12 +28,24 @@ namespace SchoolManagement.EntityFramework.Services
 
         public async Task<Teacher?> GetTeacherByTeacherID(int teacherID)
         {
-            return await _schoolManagementSevice.TeacherRepository.GetTeacherByTeacherID(teacherID);
+            var teacher =  await _schoolManagementSevice.TeacherRepository.GetTeacherByTeacherID(teacherID);
+            if (teacher == null)
+            {
+                return teacher;
+            }
+            teacher.User = _userService.GetUser(teacher.UserId);
+            return teacher;
         }
 
         public Teacher? GetTeacherInfo(int userID)
         {
-            return _schoolManagementSevice.TeacherRepository.GetTeacherInfo(userID);
+            var teacher =  _schoolManagementSevice.TeacherRepository.GetTeacherInfo(userID);
+            if (teacher == null)
+            {
+                return teacher;
+            }
+            teacher.User = _userService.GetUser(teacher.UserId);
+            return teacher;
         }
 
         public Task<Teacher?> GetTeacherInfoAsync(int userID)

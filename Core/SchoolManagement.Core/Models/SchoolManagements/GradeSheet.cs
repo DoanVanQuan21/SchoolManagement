@@ -20,6 +20,7 @@ public partial class GradeSheet : BindableBase
     private float? semesterAverage;
     private string? ranked;
     private bool? promotionDecision;
+    private bool? @lock;
 
     public GradeSheet()
     {
@@ -100,6 +101,10 @@ public partial class GradeSheet : BindableBase
     [Browsable(false)]
     public bool? PromotionDecision { get => promotionDecision; set => SetProperty(ref promotionDecision, value); }
 
+    [IsHeaderExcel(false)]
+    [Browsable(false)]
+    public bool? Lock { get => @lock; set => SetProperty(ref @lock, value); }
+
     [Browsable(false)]
     [NotMapped]
     [DisplayName("Xếp loại")]
@@ -117,6 +122,10 @@ public partial class GradeSheet : BindableBase
     [Browsable(false)]
     [IsHeaderExcel(false)]
     public virtual Subject Subject { get; set; } = null!;
+
+    [IsHeaderExcel(false)]
+    [Browsable(false)]
+    public virtual ICollection<EditGradeSheetForm> EditGradeSheetForms { get; set; } = new List<EditGradeSheetForm>();
 
     public static string GetRanked(GradeSheet gradeSheet)
     {

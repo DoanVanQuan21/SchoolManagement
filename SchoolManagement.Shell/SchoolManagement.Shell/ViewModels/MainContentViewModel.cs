@@ -70,6 +70,7 @@ namespace SchoolManagement.Shell.ViewModels
                 }
                 AppMenus.Add(menu);
             }
+            SetMainPage(AppMenus.First().View);
         }
         private bool IsHavePermission(string role)
         {

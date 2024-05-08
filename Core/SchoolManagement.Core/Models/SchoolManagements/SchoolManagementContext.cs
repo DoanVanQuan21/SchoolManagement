@@ -136,6 +136,7 @@ public partial class SchoolManagementContext : DbContext
             entity.Property(e => e.SecondRegularScore).HasColumnType("float");
             entity.Property(e => e.SemesterAverage).HasColumnType("float");
             entity.Property(e => e.PromotionDecision).HasColumnType("bool");
+            entity.Property(e => e.Lock).HasColumnType("bool");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
             entity.Property(e => e.ThirdRegularScore).HasColumnType("float");
@@ -155,7 +156,29 @@ public partial class SchoolManagementContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__GradeShee__Subje__4222D4EF");
         });
+        modelBuilder.Entity<EditGradeSheetForm>(entity =>
+        {
+            entity.HasKey(e => e.EditGradeSheetFormId).HasName("PK__EditGrad__31DF283E41DC0B3A");
 
+            entity.ToTable("EditGradeSheetForm");
+
+            entity.Property(e => e.EditGradeSheetFormId)
+                .ValueGeneratedOnAdd()
+                .HasColumnName("EditGradeSheetFormID");
+            entity.Property(e => e.GradeSheetId).HasColumnName("GradeSheetID");
+            entity.Property(e => e.Reason).HasColumnName("reason");
+            entity.Property(e => e.Status).HasMaxLength(100);
+            entity.Property(e => e.Time).HasColumnType("datetime");
+
+            entity.HasOne(d => d.GradeSheet).WithMany(p => p.EditGradeSheetForms)
+                .HasForeignKey(d => d.GradeSheetId)
+                .HasConstraintName("FK__EditGrade__Grade__4F7CD00D");
+
+            entity.HasOne(d => d.Teacher).WithMany(p => p.EditGradeSheetForms)
+                .HasForeignKey(d => d.TeacherId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__EditGrade__Teach__5070F446");
+        });
         modelBuilder.Entity<Lesson>(entity =>
         {
             entity.HasKey(e => e.LessonId).HasName("PK__Lesson__B084ACB04C7A6B38");

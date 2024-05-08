@@ -11,5 +11,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         TeacherRepository TeacherRepository { get; }
         StudentRepository StudentRepository { get; }
         SubjectRepository SubjectRepository { get; }
+        EditGradeSheetFormRepository EditGradeSheetFormRepository { get; }
     }
 }

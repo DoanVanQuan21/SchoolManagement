@@ -320,7 +320,15 @@ Create table [Lesson]
 Primary Key ([LessonID])
 ) 
 go
-
+Create table [EditGradeSheetForm]
+(
+	[EditGradeSheetFormID] Integer Identity(1,1) NOT NULL primary key,
+	[GradeSheetID] Integer NOT NULL Foreign key ([GradeSheetID]) REFERENCES GradeSheet([GradeSheetID]) ON UPDATE cascade ON DELETE cascade,
+	[TeacherID] Integer NOT NULL Foreign key ([TeacherID]) REFERENCES Teacher(TeacherID) ON UPDATE no action ON DELETE NO ACTION,
+	[Time] Datetime NULL,
+	[Status] Nvarchar(100) NULL,
+	[reason] Nvarchar(max) NOT NULL
+) 
 
 Set quoted_identifier on
 go

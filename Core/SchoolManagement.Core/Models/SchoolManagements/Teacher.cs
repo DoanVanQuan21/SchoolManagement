@@ -62,6 +62,7 @@ namespace SchoolManagement.Core.Models.SchoolManagements
         public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
 
         public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+        public virtual ICollection<EditGradeSheetForm> EditGradeSheetForms { get; set; } = new List<EditGradeSheetForm>();
 
         public virtual Department Department { get; set; } = null!;
 

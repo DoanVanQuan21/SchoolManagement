@@ -148,7 +148,12 @@ namespace SchoolManagement.Core.avalonia
                 RootContext.Role = Role.Student;
                 return;
             }
-            RootContext.Role = Role.Teacher;
+            if (RootContext.CurrentUser.Role == "teacher")
+            {
+                RootContext.Role = Role.Teacher;
+                return;
+            }
+            RootContext.Role = Role.Admin;
         }
         private void CheckPlatform()
         {

@@ -18,5 +18,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
         Task<bool> UpdateOrAddRange(ObservableCollection<T> gradeSheets);
 
         Task<bool> UpdateByClassIDAndSubjectID(GradeSheet entity);
+        Task<ObservableCollection<T>> FinishEditGradeSheet(ObservableCollection<T> gradeSheets);
+        Task<T?> GetGradeSheetByGradeSheetID(int gradeSheetID);
     }
 }

@@ -89,5 +89,19 @@ namespace SchoolManagement.EntityFramework.Services
             }
             return gradesInYear;
         }
+
+        public async Task<ObservableCollection<GradeSheet>> FinishEditGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.FinishEditGradeSheet(gradeSheets);
+        }
+
+        public async Task<GradeSheet?> GetGradeSheetByGradeSheetID(int gradeSheetID)
+        {
+            var gradeSheet = await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetByGradeSheetID(gradeSheetID);
+            gradeSheet.Class = await _classService.GetClassByIDAsync(gradeSheet.ClassId);
+            gradeSheet.Subject = await _subjectService.GetSubjectByID(gradeSheet.SubjectId);
+            gradeSheet.Student = await _studentService.GetStudentByStudentIDAsync(gradeSheet.StudentId);
+            return gradeSheet;
+        }
     }
 }
