@@ -75,6 +75,11 @@ namespace SchoolManagement.EntityFramework.Services
             });
         }
 
+        public async Task<bool> LockAccount(User user)
+        {
+            return await _schoolManagementSevice.UserRepository.LockAccount(user);
+        }
+
         public (bool, User) Login(User user)
         {
             var currentUser = _schoolManagementSevice.UserRepository.FirstOrDefault(r => r.Username == user.Username && r.Password == user.Password);
@@ -94,6 +99,11 @@ namespace SchoolManagement.EntityFramework.Services
             }
             _schoolManagementSevice.UserRepository.Add(user);
             return true;
+        }
+
+        public async Task<bool> UnLockAccount(User user)
+        {
+            return await _schoolManagementSevice.UserRepository.UnLockAccount(user);
         }
 
         public bool UpdateUserInfor(User user)

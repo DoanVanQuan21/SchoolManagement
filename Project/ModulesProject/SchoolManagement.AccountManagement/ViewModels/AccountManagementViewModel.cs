@@ -27,7 +27,8 @@ namespace SchoolManagement.AccountManagement.ViewModels
             GetAccounts().GetAwaiter();
         }
 
-        public ICommand ClickedDeleteUserCommand { get; set; }
+        public ICommand ClickedLockAccountCommand { get; set; }
+        public ICommand ClickedUnLockAccountCommand { get; set; }
         public ICommand ClickedNextCommand { get; set; }
         public ICommand ClickedPreviousCommand { get; set; }
         public ICommand ClickedResetPasswordCommand { get; set; }
@@ -42,11 +43,30 @@ namespace SchoolManagement.AccountManagement.ViewModels
         protected override void RegisterCommand()
         {
             ClickedResetPasswordCommand = new DelegateCommand(OnResetPassword);
-            ClickedDeleteUserCommand = new DelegateCommand(OnDeleteUser);
+            ClickedLockAccountCommand = new DelegateCommand<object>(OnLockAccount);
+            ClickedUnLockAccountCommand = new DelegateCommand<object>(OnUnLockAccount);
             ClickedNextCommand = new DelegateCommand(OnNext);
             ClickedPreviousCommand = new DelegateCommand(OnPreviousAsync);
             ClickedAddCommand = new DelegateCommand(OnAdd);
             base.RegisterCommand();
+        }
+
+        private async void OnUnLockAccount(object obj)
+        {
+            var user = (obj as User);
+            if (user == null)
+            {
+                NotificationManager.ShowWarning("Không lấy được thông tin tài khoản cần khóa!.");
+                return;
+            }
+            var isLocked = await _userService.UnLockAccount(user);
+            if (!isLocked)
+            {
+                NotificationManager.ShowWarning($"Mở khóa tài khoản của {user.FullName} thất bại!.");
+                return;
+            }
+            NotificationManager.ShowSuccess($"Mở khóa tài khoản của {user.FullName} thành công!.");
+            user.LockAccount = false;
         }
 
         private async void OnAdd()
@@ -84,8 +104,22 @@ namespace SchoolManagement.AccountManagement.ViewModels
             DataLoaded = true;
         }
 
-        private void OnDeleteUser()
+        private async void OnLockAccount(object obj)
         {
+            var user = (obj as User);
+            if (user == null)
+            {
+                NotificationManager.ShowWarning("Không lấy được thông tin tài khoản cần khóa!.");
+                return;
+            }
+            var isLocked = await _userService.LockAccount(user);
+            if(!isLocked)
+            {
+                NotificationManager.ShowWarning($"Khóa tài khoản của {user.FullName} thất bại!.");
+                return;
+            }
+            NotificationManager.ShowSuccess($"Khóa tài khoản của {user.FullName} thành công!.");
+
         }
 
         private async void OnNext()

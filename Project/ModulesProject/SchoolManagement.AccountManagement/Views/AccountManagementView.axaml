@@ -153,6 +153,7 @@
                                 </Viewbox>
                             </Grid>
                             <WrapPanel Grid.Column="1" Orientation="Horizontal">
+
                                 <Button
                                     Height="40"
                                     Margin="10"
@@ -171,11 +172,28 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid danger"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedDeleteUserCommand}">
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedLockAccountCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding !LockAccount}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label>Xóa</Label>
+                                            <PathIcon Data="{StaticResource LockClosedGeometry}" />
+                                            <Label>Khóa tài khoản</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnLockAccountCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding LockAccount}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource LockOpenGeometry}" />
+                                            <Label>Mở khóa</Label>
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

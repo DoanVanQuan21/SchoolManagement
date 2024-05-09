@@ -19,7 +19,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             {
                 return false;
             }
-            var f = FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+            var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
             if (f == null)
             {
                 return false;
@@ -37,7 +37,8 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 {
                     return false;
                 }
-                var f = FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+                var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+
                 if (f == null)
                 {
                     return false;

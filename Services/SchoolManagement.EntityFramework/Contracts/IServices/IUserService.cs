@@ -27,5 +27,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
 
         Task<User?> GetUserAsync(int userID);
         Task<bool> AddUser(User user);
+        Task<bool> LockAccount(User user);
+        Task<bool> UnLockAccount(User user);
     }
 }
