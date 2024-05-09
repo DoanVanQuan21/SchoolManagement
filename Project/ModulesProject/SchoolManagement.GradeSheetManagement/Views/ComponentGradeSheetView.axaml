@@ -55,7 +55,15 @@
             ItemsSource="{Binding GradeSheets}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding Subject.SubjectName}">
+                    <Expander>
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Course.Subject.SubjectName}" />
+                                <Label Content="-" />
+                                <Label Content="{Binding Course.Semester}" />
+
+                            </StackPanel>
+                        </Expander.Header>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5*" />

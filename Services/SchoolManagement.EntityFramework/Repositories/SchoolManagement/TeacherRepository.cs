@@ -1,10 +1,5 @@
 ﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
@@ -22,9 +17,13 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             });
         }
 
-        public Teacher? GetTeacherInfo(int userID)
+        public Task<Teacher?> GetTeacherByUserID(int userID)
         {
-            return FirstOrDefault(item => item.UserId == userID);
+            return Task.Factory.StartNew(() =>
+            {
+                return FirstOrDefault(item => item.UserId == userID);
+            });
         }
+
     }
 }

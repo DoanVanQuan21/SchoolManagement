@@ -31,9 +31,9 @@
                                     Orientation="Horizontal">
                                     <Label Content="{Binding Teacher.User.FullName}" />
                                     <Label Content="-" />
-                                    <Label Content="{Binding GradeSheet.Class.ClassName}" />
+                                    <Label Content="{Binding GradeSheet.Course.Class.ClassName}" />
                                     <Label Content="-" />
-                                    <Label Content="{Binding GradeSheet.Subject.SubjectName}" />
+                                    <Label Content="{Binding GradeSheet.Course.Subject.SubjectName}" />
                                 </StackPanel>
                                 <TextBlock
                                     Margin="10"

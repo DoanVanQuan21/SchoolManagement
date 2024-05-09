@@ -1,99 +1,67 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class StudentService : BaseService, IStudentService
+    public class StudentService : IStudentService
     {
+        private readonly ISchoolManagementSevice _schoolManagementSevice;
         private readonly IUserService _userService;
-        private readonly ICourseService _courseService;
-
-        public StudentService() : base()
+        public StudentService()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
             _userService = Ioc.Resolve<IUserService>();
-            _courseService = Ioc.Resolve<ICourseService>();
         }
 
-        public Task<bool> AddStudent(Student student)
+        public async Task<Student?> GetStudentAndGradeSheets(int userID)
+        {
+            var student = await GetStudentByUserID(userID);
+            if(student == null)
+            {
+                return student;
+            }
+            student.GradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetsByStudentID(student.StudentId);
+            return student;
+        }
+
+        public Task<int> GetStudentByStudentCode(string studentCode)
         {
             return Task.Factory.StartNew(() =>
             {
-                if (student == null)
+                var student = _schoolManagementSevice.StudentRepository.FirstOrDefault(s => s.StudentCode == studentCode);
+                if(student == null)
                 {
-                    return false;
+                    return 0;
                 }
-                _schoolManagementSevice.StudentRepository.Add(student);
-                return true;
+                return student.StudentId;
             });
         }
 
-        public Student? GetStudent(int studentID)
+        public async Task<Student?> GetStudentByStudentID(int studentID)
         {
-            var student = _schoolManagementSevice.StudentRepository.GetStudent(studentID);
-            if (student == null)
-            {
-                return student;
-            }
-            student.User = _userService.GetUser(student.UserId);
+            var student = _schoolManagementSevice.StudentRepository.FirstOrDefault(s => s.StudentId == studentID);
+            student.User = await _userService.GetUserAsync(student.UserId);
             return student;
         }
 
-        public Student? GetStudent(string studentCode)
+        public Task<Student?> GetStudentByUserID(int userID)
         {
-            return _schoolManagementSevice.StudentRepository.GetStudent(studentCode);
-        }
-
-        public Task<Student?> GetStudentByStudentCodeAsync(string studentCode)
-        {
-            return Task.Factory.StartNew(
-            () =>
+            return Task.Factory.StartNew(() =>
             {
-                return GetStudent(studentCode);
+                return _schoolManagementSevice.StudentRepository.FirstOrDefault(s => s.UserId == userID);
             });
         }
 
-        public Task<Student?> GetStudentByStudentIDAsync(int studentID)
-        {
-            return Task.Factory.StartNew(
-            () =>
-            {
-                return GetStudent(studentID);
-            });
-        }
-
-        public async Task<Student?> GetStudentByUserID(int userID)
-        {
-            var student = await _schoolManagementSevice.StudentRepository.GetStudentByUserID(userID);
-            if (student == null)
-            {
-                return student;
-            }
-            return student;
-        }
-
-        public async Task<int> GetStudentIDByStudentCodeAsync(string studentCode)
-        {
-            var student = await GetStudentByStudentCodeAsync(studentCode);
-            if (student == null)
-            {
-                return 0;
-            }
-            return student.StudentId;
-        }
-
-        public async Task<ObservableCollection<Student>> GetStudentsByClass(int classID, int year)
+        public async Task<ObservableCollection<Student>> GetStudentOfClassByYear(int classID, int year)
         {
             var students = new ObservableCollection<Student>();
-            var courses = await _courseService.GetCourseByClassID(classID, year);
-            if (courses?.Any() == false)
+            var studentAssigns = await _schoolManagementSevice.StudentAssignmentRepository.GetStudentAssignsOfClassByYear(classID, year);
+            foreach (var studentAssign in studentAssigns)
             {
-                return students;
-            }
-            foreach (var course in courses)
-            {
-                var student = GetStudent(course.StudentId);
+                var student = await GetStudentByStudentID(studentAssign.StudentId);
                 if (student == null)
                 {
                     continue;

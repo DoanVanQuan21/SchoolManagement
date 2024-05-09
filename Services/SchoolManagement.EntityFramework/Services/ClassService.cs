@@ -1,13 +1,17 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class ClassService : BaseService, IClassService
+    public class ClassService : IClassService
     {
-        public ClassService() : base()
+        private ISchoolManagementSevice _schoolManagementSevice;
+        public ClassService()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public Task<bool> AddClass(Class _class)
@@ -25,32 +29,22 @@ namespace SchoolManagement.EntityFramework.Services
 
         public async Task<bool> DeleteClass(int classID)
         {
-            return await _schoolManagementSevice.ClassRepository.DeleteRecord(GetClassByID(classID));
+            return await _schoolManagementSevice.ClassRepository.DeleteRecord(await GetClassByID(classID));
         }
 
-        public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)
-        {
-            return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
-        }
-
-        public Task<ObservableCollection<Class>> GetAllClassesByIDAsync(IList<int> ids)
+        public Task<ObservableCollection<Class>> GetAllClassesByID(IList<int> ids)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetAllClassesByID(ids);
+                return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
             });
         }
 
-        public Class GetClassByID(int classID)
-        {
-            return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
-        }
-
-        public Task<Class> GetClassByIDAsync(int classID)
+        public Task<Class> GetClassByID(int classID)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetClassByID(classID);
+                return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
             });
         }
 

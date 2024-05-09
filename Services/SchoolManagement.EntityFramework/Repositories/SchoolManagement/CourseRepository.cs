@@ -6,95 +6,33 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class CourseRepository : GenerateRepository<Course>, ICourseRepository<Course>
     {
-        private ObservableCollection<Course> _coursesOfTeacher;
-        private ObservableCollection<Course> _coursesOfClass;
+        private ObservableCollection<Course> _courses;
 
         public CourseRepository(SchoolManagementContext context) : base(context)
         {
-            _coursesOfTeacher = new();
-            _coursesOfClass = new();
+            _courses = new();
         }
 
-        public Task<ObservableCollection<Course>> GetCouseByClassID(int classID)
+        public Task<ObservableCollection<Course>> GetCourseOfTeacherByYear(int teacherID, int year, string semester)
         {
             return Task.Factory.StartNew(() =>
             {
-                var courses = Where(item => item.ClassId == classID);
-                if (courses == null)
+                _courses.Clear();
+                var courses = Where(c => c.TeacherId == teacherID && c.StartDate.Year == year && c.Semester == semester);
+                if (courses?.Any() == false)
                 {
-                    return _coursesOfTeacher;
+                    return _courses;
                 }
-                _coursesOfClass.Clear();
-                _coursesOfClass.AddRange(courses);
-                return _coursesOfClass;
+                _courses.AddRange(courses);
+                return _courses;
             });
         }
 
-        public ObservableCollection<Course> GetCouseByTeacherID(int teacherID)
-        {
-            var courses = Where(item => item.TeacherId == teacherID);
-            if (courses == null)
-            {
-                return _coursesOfTeacher;
-            }
-            _coursesOfTeacher.Clear();
-            _coursesOfTeacher.AddRange(courses);
-            return _coursesOfTeacher;
-        }
-
-        private ObservableCollection<Course> GetCouseByTeacherIDAndYear(int teacherID, int year)
-        {
-            var courses = Where(item => item.TeacherId == teacherID && item.StartDate.Year == year);
-            if (courses == null)
-            {
-                return _coursesOfTeacher;
-            }
-            _coursesOfTeacher.Clear();
-            _coursesOfTeacher.AddRange(courses);
-            return _coursesOfTeacher;
-        }
-
-        public List<int> GetClassIDs(int teacherID, int year)
-        {
-            return GetCouseByTeacherIDAndYear(teacherID, year).Select(item => item.ClassId).ToList();
-        }
-
-        public Task<Course?> GetCouseByClassAndSubjectID(int classID, int subjectID, int year)
+        public Task<Course?> GetCourseById(int courseID)
         {
             return Task.Factory.StartNew(() =>
             {
-                var course = FirstOrDefault(item => item.ClassId == classID && item.SubjectId == subjectID && item.StartDate.Year == year);
-                if (course == null)
-                {
-                    return course;
-                }
-                return course;
-            });
-        }
-
-        public Task<ObservableCollection<Course>> GetCourseByClassID(int classID, int year)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                _coursesOfClass.Clear();
-                var course = Where(c => c.ClassId == classID && c.StartDate.Year == year);
-                if (course == null)
-                {
-                    return _coursesOfClass;
-                }
-                _coursesOfClass.AddRange(course);
-                return _coursesOfClass;
-            });
-        }
-
-        public Task<ObservableCollection<Course>> GetQuantityByStudent(int studentID,int year)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                _coursesOfClass.Clear();
-                var courses = Where(c => c.StudentId == studentID);
-                _coursesOfClass.AddRange(courses);
-                return _coursesOfClass;
+                return FirstOrDefault(c => c.CourseId == courseID);
             });
         }
     }

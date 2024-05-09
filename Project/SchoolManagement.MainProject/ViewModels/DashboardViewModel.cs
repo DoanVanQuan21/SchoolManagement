@@ -38,18 +38,20 @@ namespace SchoolManagement.MainProject.ViewModels
             }
             FormsNeedToConfirm.Clear();
             var forms = new ObservableCollection<EditGradeSheetForm>();
-            var teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
+            
+            if (User.Role == "admin")
+            {
+                forms = await _editFormService.GetFormWaitting();
+                FormsNeedToConfirm.AddRange(forms);
+               
+                return;
+            }
+            var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
             if (teacher == null)
             {
                 return;
             }
-            if (User.Role == "teacher")
-            {
-                forms = await _editFormService.GetFormWaittingByTeacherID(teacher.TeacherId);
-                FormsNeedToConfirm.AddRange(forms);
-                return;
-            }
-            forms = await _editFormService.GetFormWaitting();
+            forms = await _editFormService.GetFormWaittingByTeacherID(teacher.TeacherId);
             FormsNeedToConfirm.AddRange(forms);
         }
 

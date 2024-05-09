@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
         <StackPanel
             Grid.Row="1"
-            Grid.Column="0"
+            Grid.Column="1"
             Margin="10"
             Orientation="Horizontal">
             <Menu HorizontalAlignment="Left">
@@ -48,6 +48,7 @@
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
+            Height="35"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
@@ -63,6 +64,23 @@
         <ComboBox
             Grid.Row="0"
             Grid.Column="1"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Semesters}"
+            PlaceholderText="Chọn học kỳ"
+            SelectedValue="{Binding Semester}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Value}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="35"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"

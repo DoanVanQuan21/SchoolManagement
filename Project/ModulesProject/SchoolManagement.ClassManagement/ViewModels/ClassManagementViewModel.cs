@@ -58,10 +58,11 @@ namespace SchoolManagement.ClassManagement.ViewModels
             _confirmDeleteClassView.SetOnOkClicked(DeleteClass);
             await ShowDialogHost(_confirmDeleteClassView);
         }
+
         private async void DeleteClass()
         {
             var deleteOK = await _classService.DeleteClass(SelectedClass.ClassId);
-            if(!deleteOK)
+            if (!deleteOK)
             {
                 NotificationManager.ShowWarning($"Xóa lớp {SelectedClass.ClassName} thất bại!.");
                 return;
@@ -70,6 +71,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             CloseDialog();
             await GetClasses();
         }
+
         private void OnUpdate()
         {
         }
@@ -85,16 +87,14 @@ namespace SchoolManagement.ClassManagement.ViewModels
         private async void AddClass(Class _class)
         {
             var isAdded = await _classService.AddClass(_class);
-            if(!isAdded)
+            if (!isAdded)
             {
                 NotificationManager.ShowWarning($"Không thể thêm lớp {_class.ClassName} vào trong database!.");
                 return;
             }
             NotificationManager.ShowSuccess($"Thêm lớp {_class.ClassName} vào trong database thành công!.");
-            CloseDialog() ;
+            CloseDialog();
             await GetClasses();
-
-
         }
 
         private async void OnPreviousAsync()

@@ -67,7 +67,7 @@
 
     public class Semester
     {
-        public string Value { get; set; }
+        public string Value { get; set; } = "Kỳ 1";
         public static List<Semester> Semesters = new() { new() { Value = "Kỳ 1" }, new() { Value = "Kỳ 2" } };
     }
 

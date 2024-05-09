@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -9,6 +10,7 @@ public partial class Subject : BindableBase
     private string? subjectName;
     private string? image;
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int SubjectId
     { get => subjectId; set { SetProperty(ref subjectId, value); } }
 
@@ -21,7 +23,7 @@ public partial class Subject : BindableBase
     public string? Image
     { get => image; set { SetProperty(ref image, value); } }
 
-    public virtual ICollection<GradeSheet> GradeSheets { get; set; } = new List<GradeSheet>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
     public virtual ICollection<Teacher> Teachers { get; set; } = new List<Teacher>();
 }

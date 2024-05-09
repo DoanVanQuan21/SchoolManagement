@@ -6,8 +6,11 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
     public interface IEditGradeSheetFormService
     {
         Task<bool> AddForm(EditGradeSheetForm form);
+
         Task<ObservableCollection<EditGradeSheetForm>> GetFormWaitting();
+
         Task<ObservableCollection<EditGradeSheetForm>> GetFormWaittingByTeacherID(int teacherID);
+
         Task<bool> Accepted(EditGradeSheetForm form);
 
         Task<bool> UnAccepted(EditGradeSheetForm form);

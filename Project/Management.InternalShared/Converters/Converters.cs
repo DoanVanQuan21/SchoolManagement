@@ -14,7 +14,6 @@ namespace Management.InternalShared.Converters
         {
             TaskCompletionSource<string> tsk = new();
 
-            GetFullName(value, tsk);
             return tsk.Task.Result;
         }
 
@@ -23,26 +22,7 @@ namespace Management.InternalShared.Converters
             return "0";
         }
 
-        private void GetFullName(object? value, TaskCompletionSource<string> tsk)
-        {
-            var fullname = "";
-            try
-            {
-                var studentService = Ioc.Resolve<IStudentService>();
-                var userService = Ioc.Resolve<IUserService>();
-                var student = studentService.GetStudent((int)value);
-                Debug.WriteLine(student.User?.ToString());
-                fullname = userService.GetFullname(student.UserId);
-            }
-            catch (Exception)
-            {
-                fullname = "NaN";
-            }
-            finally
-            {
-                tsk.SetResult(fullname);
-            }
-        }
+        
     }
 
     public class MinWidthFollowPlatformConverter : IValueConverter

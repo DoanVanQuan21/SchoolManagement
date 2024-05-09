@@ -1,17 +1,20 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class EditGradeSheetFormService : BaseService, IEditGradeSheetFormService
+    public class EditGradeSheetFormService : IEditGradeSheetFormService
     {
         private readonly IGradeSheetService _gradeSheetService;
         private readonly ITeacherService _teacherService;
+        private readonly ISchoolManagementSevice _schoolManagementSevice;
 
         public EditGradeSheetFormService()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
             _teacherService = Ioc.Resolve<ITeacherService>();
         }
@@ -54,7 +57,7 @@ namespace SchoolManagement.EntityFramework.Services
         {
             foreach (var form in forms)
             {
-                form.GradeSheet = await _gradeSheetService.GetGradeSheetByGradeSheetID(form.GradeSheetId);
+                form.GradeSheet = await _gradeSheetService.GetGradeSheet(form.GradeSheetId);
                 form.Teacher = await _teacherService.GetTeacherByTeacherID(form.TeacherId);
             }
         }

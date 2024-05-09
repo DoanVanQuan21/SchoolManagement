@@ -30,7 +30,7 @@ public partial class Class : BindableBase
     public int? NumberOfStudent
     { get => numberOfStudent; set { SetProperty(ref numberOfStudent, value); } }
 
-    public virtual ICollection<GradeSheet> GradeSheets { get; set; } = new List<GradeSheet>();
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
     public virtual Teacher Teacher { get; set; } = null!;
 }

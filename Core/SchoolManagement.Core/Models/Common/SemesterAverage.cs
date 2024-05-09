@@ -1,5 +1,4 @@
 ﻿using Prism.Mvvm;
-using SchoolManagement.Core.Models.SchoolManagements;
 
 namespace SchoolManagement.Core.Models.Common
 {
@@ -12,17 +11,28 @@ namespace SchoolManagement.Core.Models.Common
 
         public string Semester { get => semester; set => SetProperty(ref semester, value); }
         public int TotalSubject { get => totalSubject; set => SetProperty(ref totalSubject, value); }
-        public double Average { get => average; set => SetProperty(ref average, value); }
+        public double Average { get => average; set { SetProperty(ref average, value); SetRanked(); } }
         public string Rank { get => rank; set => SetProperty(ref rank, value); }
-
-        public SemesterAverage(string sesmester, int totalSubject, double aver)
+        public SemesterAverage()
         {
-            Semester = sesmester;
+            
+        }
+        public SemesterAverage(int totalSubject, double aver)
+        {
             TotalSubject = totalSubject;
             Average = aver;
+            SetRanked();
+        }
+        
+        public static List<SemesterAverage> SemesterAverages = new() { 
+            new() { Semester = "Kỳ 1" }, 
+            new() { Semester = "Kỳ 2" },
+            new() { Semester = "Cuối năm" }
+        };
+        private void SetRanked()
+        {
             Rank = GetRanked();
         }
-
         private string GetRanked()
         {
             try

@@ -1,54 +1,72 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class CourseService : BaseService, ICourseService
+    public class CourseService : ICourseService
     {
+        private readonly IClassService _classService;
+        private ISchoolManagementSevice _schoolManagementSevice;
+        private readonly ISubjectService _subjectService;
         public CourseService() : base()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
+            _classService = Ioc.Resolve<IClassService>();
+            _subjectService = Ioc.Resolve<ISubjectService>();
         }
 
-        public Task<List<int>> GetClassIDsByTeacherIDAndYear(int teacherID, int year)
+        public Task<ObservableCollection<Course>> GetCourses(int teacherID, int subjectID, int classID, int year)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetClassIDs(teacherID, year);
+                var courses = new ObservableCollection<Course>();
+                var cs = _schoolManagementSevice.CourseRepository.Where(c => c.TeacherId == teacherID
+                                                                                    && c.SubjectId == subjectID
+                                                                                    && c.ClassId == classID
+                                                                                    && c.StartDate.Year == year);
+                if (cs?.Any() == false)
+                {
+                    return courses;
+                }
+                courses.AddRange(cs);
+                return courses;
             });
         }
 
-        public async Task<Course?> GetCourseByClassAndSubjectID(int classID, int subjectID, int year)
+        public async Task<Course?> GetCourseByID(int courseID)
         {
-            return await _schoolManagementSevice.CourseRepository.GetCouseByClassAndSubjectID(classID, subjectID, year);
+            var course = await _schoolManagementSevice.CourseRepository.GetCourseById(courseID);
+            if (course == null)
+            {
+                return course;
+            }
+            course.Subject = await _subjectService.GetSubject(course.SubjectId);
+            course.Class = await _classService.GetClassByID(course.ClassId);
+            return course;
         }
 
-        public async Task<ObservableCollection<Course>> GetCourseByClassID(int classID)
+        public async Task<ObservableCollection<Course>> GetCourseOfTeacherByYear(int teacherID, int year, string semester)
         {
-            return await _schoolManagementSevice.CourseRepository.GetCouseByClassID(classID);
+            var courses = await _schoolManagementSevice.CourseRepository.GetCourseOfTeacherByYear(teacherID, year, semester);
+            foreach (var course in courses)
+            {
+                course.Class = await _classService.GetClassByID(course.ClassId);
+            }
+            return courses;
         }
 
-        public Task<ObservableCollection<Course>> GetCourseByClassID(int classID, int year)
-        {
-            return _schoolManagementSevice.CourseRepository.GetCourseByClassID(classID, year);
-        }
-
-        public ObservableCollection<Course> GetCourseByTeacherID(int TeacherID)
-        {
-            return _schoolManagementSevice.CourseRepository.GetCouseByTeacherID(TeacherID);
-        }
-
-        public Task<ObservableCollection<Course>> GetCourseByTeacherIDAsync(int TeacherID)
+        public Task<Course?> GetCourse(int teacherID, int classID, int year, string semester)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetCourseByTeacherID(TeacherID);
+                var course = _schoolManagementSevice.CourseRepository.FirstOrDefault(c => c.TeacherId == teacherID
+                && c.ClassId == classID
+                && c.StartDate.Year == year && c.Semester == semester);
+                return course;
             });
-        }
-
-        private List<int> GetClassIDs(int teacherID, int year)
-        {
-            return _schoolManagementSevice.CourseRepository.GetClassIDs(teacherID, year);
         }
     }
 }

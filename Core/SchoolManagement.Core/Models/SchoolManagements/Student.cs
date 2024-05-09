@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -8,6 +9,7 @@ public partial class Student : BindableBase
     private int userId;
     private string? studentCode;
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int StudentId
     { get => studentId; set { SetProperty(ref studentId, value); } }
 

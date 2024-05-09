@@ -29,6 +29,7 @@ namespace SchoolManagement.EntityFramework.Services
         public StudentRepository StudentRepository { get; private set; }
         public SubjectRepository SubjectRepository { get; private set; }
         public EditGradeSheetFormRepository EditGradeSheetFormRepository { get; private set; }
+        public StudentAssignmentRepository StudentAssignmentRepository { get; private set; }
 
         private void InitConnectionDatabase()
         {
@@ -46,7 +47,7 @@ namespace SchoolManagement.EntityFramework.Services
             StudentRepository = new StudentRepository(schoolManagementContext);
             SubjectRepository = new SubjectRepository(schoolManagementContext);
             EditGradeSheetFormRepository = new EditGradeSheetFormRepository(schoolManagementContext);
-
+            StudentAssignmentRepository = new StudentAssignmentRepository(schoolManagementContext);
         }
     }
 }

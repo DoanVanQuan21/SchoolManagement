@@ -3,9 +3,8 @@ using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Contracts.IServices
 {
-    public interface ISubjectService
+    public interface IStudentAssignmentService
     {
-        Task<ObservableCollection<Subject>> GetSubjectsBySize(int size, int page);
-        Task<Subject?> GetSubject(int subjectID);
+        Task<ObservableCollection<Student>> GetStudentsOfClassByYear(int classID, int year);
     }
 }

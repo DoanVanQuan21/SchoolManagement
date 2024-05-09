@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.GradeSheetManagement.Views.SemesterAverageView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
@@ -11,59 +12,74 @@
     mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <ListBox
+                HorizontalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Classes="theme-scroll-overlay"
+                ItemsSource="{Binding Dates}"
+                SelectedValue="{Binding CurrentDate}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel VerticalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <actipro:ShadowChrome
+                            Width="60"
+                            Height="60"
+                            Elevation="8"
+                            ShadowOpacity="{Binding}">
+                            <Border Background="{actipro:ThemeResource Container3BackgroundBrush}" CornerRadius="8">
+                                <Label
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{Binding Year}" />
+                            </Border>
+                        </actipro:ShadowChrome>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
         <ListBox
             x:Name="Container"
-            Grid.Row="0"
+            Grid.Row="1"
             Background="Transparent"
             BorderThickness="0"
             Classes="theme-scroll-overlay"
-            ItemsSource="{Binding Semesters}">
+            ItemsSource="{Binding SemesterAverages}"
+            SelectedValue="{Binding SemesterAverage}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding Value}">
+                    <Expander Header="{Binding Semester}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="5*" />
                                 <ColumnDefinition Width="5*" />
                             </Grid.ColumnDefinitions>
-                            <TextBox
-                                Grid.ColumnSpan="1"
-                                Margin="10"
-                                VerticalContentAlignment="Top"
-                                AcceptsReturn="True"
-                                Classes="theme-outline"
-                                IsReadOnly="True"
-                                ScrollViewer.IsScrollChainingEnabled="False"
-                                Text="{Binding Reason}"
-                                TextWrapping="Wrap"
-                                UseFloatingWatermark="True"
-                                Watermark="Lý do" />
-                            <StackPanel Grid.Column="1">
-                                <Button
-                                    Width="120"
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
-                                    CommandParameter="{Binding}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
-                                    Chấp nhận
-                                </Button>
-                                <Button
-                                    Width="120"
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid danger"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
-                                    CommandParameter="{Binding}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
-                                    Từ chối
-                                </Button>
+                            <DockPanel Grid.Column="0">
+                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                    <Label>Tổng số môn:</Label>
+                                    <Label Content="{Binding TotalSubject}" />
+                                </StackPanel>
+                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                                    <Label>Điểm tổng kết:</Label>
+                                    <Label Content="{Binding Average}" />
+                                </StackPanel>
+                            </DockPanel>
+                            <StackPanel
+                                Grid.Column="1"
+                                DockPanel.Dock="Bottom"
+                                Orientation="Horizontal">
+                                <Label>Xếp loại:</Label>
+                                <Label Content="{Binding Rank}" />
                             </StackPanel>
+
                         </Grid>
                     </Expander>
                 </DataTemplate>

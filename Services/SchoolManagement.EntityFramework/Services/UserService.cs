@@ -1,19 +1,24 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class UserService : BaseService, IUserService
+    public class UserService : IUserService
     {
+        private ISchoolManagementSevice _schoolManagementSevice;
+
         public UserService() : base()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public Task<bool> AddUser(User user)
         {
-            return Task.Factory.StartNew(() => { 
-            
+            return Task.Factory.StartNew(() =>
+            {
                 if (user == null)
                 {
                     return false;
@@ -27,10 +32,12 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return await _schoolManagementSevice.UserRepository.GetAllAsync();
         }
+
         public async Task<ObservableCollection<User>> GetAccountsBySize(int size, int page)
         {
-            return await _schoolManagementSevice.UserRepository.GetRecordBySize(size,page);
+            return await _schoolManagementSevice.UserRepository.GetRecordBySize(size, page);
         }
+
         public ObservableCollection<User> GetAllAccounts()
         {
             //TODO

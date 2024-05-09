@@ -1,4 +1,5 @@
 ﻿using Prism.Mvvm;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -10,6 +11,7 @@ public partial class Department : BindableBase
     private DateTime? foundingDate;
     private string? image;
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int DepartmentId
     { get => departmentId; set { SetProperty(ref departmentId, value); } }
 
