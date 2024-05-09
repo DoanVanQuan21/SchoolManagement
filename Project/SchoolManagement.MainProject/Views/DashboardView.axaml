@@ -68,7 +68,9 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}">
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
                                     Chấp nhận
                                 </Button>
                                 <Button
@@ -77,8 +79,10 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid danger"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}">
-                                    <Label>Từ chối</Label>
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
+                                    Từ chối
                                 </Button>
                             </StackPanel>
                         </Grid>

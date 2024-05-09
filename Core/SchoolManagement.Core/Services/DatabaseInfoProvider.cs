@@ -37,8 +37,8 @@ namespace SchoolManagement.Core.Services
             {
                 ServerInfor = new()
                 {
-                    ServerName = "192.168.1.102",
-                    User = "schoolmanagement",
+                    ServerName = "192.168.1.100",
+                    User = "mobileplatform",
                     Password = "123",
                 };
                 _appManager.BootSetting.ServerInfor = ServerInfor;
@@ -50,8 +50,8 @@ namespace SchoolManagement.Core.Services
                 {
                     ServerInfor = new()
                     {
-                        ServerName = "192.168.1.102",
-                        User = "schoolmanagement",
+                        ServerName = "192.168.1.100",
+                        User = "mobileplatform",
                         Password = "123",
                     };
                     return;

@@ -44,6 +44,7 @@ namespace Management.InternalShared.Converters
             }
         }
     }
+
     public class MinWidthFollowPlatformConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -61,6 +62,7 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
     public class EnumToItemsSourceConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
@@ -75,6 +77,7 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
     public class NumerRowConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -101,6 +104,36 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class PermissionConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (parameter == null || value == null)
+            {
+                return false;
+            }
+            var roles = ((string)parameter).Split(",");
+            if (roles.Length <= 0)
+            {
+                return false;
+            }
+            var actualRole = value.ToString();
+            var isHave = roles.FirstOrDefault(r => r == actualRole);
+            if (isHave == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class VisibleProgressConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
@@ -116,6 +149,7 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
     public class VisibleDatagridConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
@@ -131,5 +165,4 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
-
 }

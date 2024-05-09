@@ -29,6 +29,7 @@ public partial class SchoolManagementContext : DbContext
     public virtual DbSet<Department> Departments { get; set; }
 
     public virtual DbSet<EducationProgram> EducationPrograms { get; set; }
+    public virtual DbSet<EditGradeSheetForm> EditGradeSheetForms { get; set; }
 
     public virtual DbSet<GradeSheet> GradeSheets { get; set; }
 

@@ -103,5 +103,10 @@ namespace SchoolManagement.EntityFramework.Services
             gradeSheet.Student = await _studentService.GetStudentByStudentIDAsync(gradeSheet.StudentId);
             return gradeSheet;
         }
+
+        public async Task<bool> UnLock(int gradeSheetID)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.UnLock(gradeSheetID);
+        }
     }
 }

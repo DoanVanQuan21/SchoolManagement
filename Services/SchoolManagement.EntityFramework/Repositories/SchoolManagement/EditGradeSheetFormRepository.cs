@@ -13,6 +13,41 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
         }
 
+        public async Task<bool> Accepted(EditGradeSheetForm form)
+        {
+            if (form == null)
+            {
+                return false;
+            }
+            var f = FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+            if (f == null)
+            {
+                return false;
+            }
+            f.Status = AceptFormStatus.Accept.ToString();
+            await _context.SaveChangesAsync();
+            return true;
+        }
+
+        public Task<bool> UnAccepted(EditGradeSheetForm form)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (form == null)
+                {
+                    return false;
+                }
+                var f = FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+                if (f == null)
+                {
+                    return false;
+                }
+                f.Status = AceptFormStatus.Cancel.ToString();
+                _context.SaveChanges();
+                return true;
+            });
+        }
+
         public Task<ObservableCollection<EditGradeSheetForm>> GetFormWaitting()
         {
             return Task.Factory.StartNew(() =>
@@ -33,6 +68,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return Task.Factory.StartNew(() =>
             {
                 _forms.Clear();
+                var t = GetAll();
                 var forms = Where(f => f.Status == AceptFormStatus.Waitting.ToString() && f.TeacherId == teacherID);
                 if (forms?.Any() == false)
                 {

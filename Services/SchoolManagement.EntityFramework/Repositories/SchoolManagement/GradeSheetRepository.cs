@@ -109,7 +109,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
             return Task.Factory.StartNew(() =>
             {
-                return FirstOrDefault(g=>g.GradeSheetId == gradeSheetID);
+                return FirstOrDefault(g => g.GradeSheetId == gradeSheetID);
             });
         }
 
@@ -136,6 +136,21 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 {
                     return _grades;
                 }
+            });
+        }
+
+        public Task<bool> UnLock(int gradeSheetID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var grade = FirstOrDefault(g => g.GradeSheetId == gradeSheetID);
+                if (grade == null)
+                {
+                    return false;
+                }
+                grade.Lock = false;
+                _context.SaveChanges();
+                return true;
             });
         }
 
@@ -207,11 +222,13 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
+
         private float? ComputeSemesterAverage(GradeSheet gradeSheet)
         {
             return (gradeSheet.FirstRegularScore + gradeSheet.SecondRegularScore + gradeSheet.ThirdRegularScore
             + gradeSheet.FourRegularScore + gradeSheet.MidtermScore * 2 + gradeSheet.FinalScore * 3) / 9;
         }
+
         private bool LockGradeSheet(GradeSheet grade)
         {
             var g = FirstOrDefault(g => g.GradeSheetId == grade.GradeSheetId);

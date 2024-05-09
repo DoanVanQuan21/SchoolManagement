@@ -13,7 +13,13 @@ namespace SchoolManagement.EntityFramework.Repositories
         protected GenerateRepository(SchoolManagementContext context)
         {
             _context = context;
+            _context.SavingChanges += _context_SavingChanges;
             _allItems = new();
+        }
+
+        private void _context_SavingChanges(object? sender, Microsoft.EntityFrameworkCore.SavingChangesEventArgs e)
+        {
+            var t = 0;
         }
 
         public void Add(T entity)

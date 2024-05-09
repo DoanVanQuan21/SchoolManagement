@@ -24,6 +24,7 @@ namespace SchoolManagement.Shell.ViewModels
         public ICommand LogoutCommand { get; set; }
         public ICommand SearchTextCommand { get; set; }
         public ICommand SettingAccountCommand { get; set; }
+        public ICommand RequestRefreshPageCommand { get; set; }
         public override string Title => "Cài đặt chung";
         public bool IsDesktopPlatform { get => isDesktopPlatform; set => SetProperty(ref isDesktopPlatform, value); }
         public override User User { get; protected set; }
@@ -33,7 +34,13 @@ namespace SchoolManagement.Shell.ViewModels
             SearchTextCommand = new DelegateCommand<object>(OnSearch);
             ChangeThemeCommand = new DelegateCommand<object>(OnChangeTheme);
             LogoutCommand = new DelegateCommand(OnLogout);
+            RequestRefreshPageCommand = new DelegateCommand(OnRefresh);
             base.RegisterCommand();
+        }
+
+        private void OnRefresh()
+        {
+            EventAggregator.GetEvent<RequestRefreshPageEvent>().Publish();
         }
 
         private void OnChangeTheme(object obj)

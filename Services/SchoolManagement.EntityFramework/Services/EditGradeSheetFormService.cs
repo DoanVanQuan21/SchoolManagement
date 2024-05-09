@@ -16,6 +16,11 @@ namespace SchoolManagement.EntityFramework.Services
             _teacherService = Ioc.Resolve<ITeacherService>();
         }
 
+        public async Task<bool> Accepted(EditGradeSheetForm form)
+        {
+            return await _schoolManagementSevice.EditGradeSheetFormRepository.Accepted(form);
+        }
+
         public Task<bool> AddForm(EditGradeSheetForm form)
         {
             return Task.Factory.StartNew(() =>
@@ -38,6 +43,11 @@ namespace SchoolManagement.EntityFramework.Services
             var forms = await _schoolManagementSevice.EditGradeSheetFormRepository.GetFormWaittingByTeacherID(teacherID);
             await GetDetailEditForm(forms);
             return forms;
+        }
+
+        public async Task<bool> UnAccepted(EditGradeSheetForm form)
+        {
+            return await _schoolManagementSevice.EditGradeSheetFormRepository.UnAccepted(form);
         }
 
         private async Task GetDetailEditForm(ObservableCollection<EditGradeSheetForm> forms)
