@@ -86,5 +86,16 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return _coursesOfClass;
             });
         }
+
+        public Task<ObservableCollection<Course>> GetQuantityByStudent(int studentID,int year)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                _coursesOfClass.Clear();
+                var courses = Where(c => c.StudentId == studentID);
+                _coursesOfClass.AddRange(courses);
+                return _coursesOfClass;
+            });
+        }
     }
 }

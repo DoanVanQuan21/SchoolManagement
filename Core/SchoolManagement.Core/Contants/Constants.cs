@@ -65,6 +65,12 @@
         DISCONNECTED,
     }
 
+    public class Semester
+    {
+        public string Value { get; set; }
+        public static List<Semester> Semesters = new() { new() { Value = "Kỳ 1" }, new() { Value = "Kỳ 2" } };
+    }
+
     public class FolderPath
     {
         public static string CONFIGURATION => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine("management", "configurations"));
