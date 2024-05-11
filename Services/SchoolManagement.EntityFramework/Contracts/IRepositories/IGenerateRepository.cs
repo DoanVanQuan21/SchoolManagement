@@ -13,7 +13,9 @@ namespace SchoolManagement.EntityFramework.Contracts
         T? FirstOrDefault(Func<T, bool> predicate);
 
         ObservableCollection<T> GetAll();
-
+        Task<ObservableCollection<T>> GetAllAsync();
+        Task<ObservableCollection<T>> GetRecordBySize(int size, int page);
         IEnumerable<T> Where(Func<T, bool> predicate);
+        Task<bool> DeleteRecord(T entity);
     }
 }

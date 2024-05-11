@@ -14,7 +14,6 @@ namespace Management.InternalShared.Converters
         {
             TaskCompletionSource<string> tsk = new();
 
-            GetFullName(value, tsk);
             return tsk.Task.Result;
         }
 
@@ -23,27 +22,42 @@ namespace Management.InternalShared.Converters
             return "0";
         }
 
-        private void GetFullName(object? value, TaskCompletionSource<string> tsk)
+        
+    }
+
+    public class MinWidthFollowPlatformConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
-            var fullname = "";
-            try
+            var isMobilePlatform = (bool)value;
+            if (isMobilePlatform)
             {
-                var studentService = Ioc.Resolve<IStudentService>();
-                var userService = Ioc.Resolve<IUserService>();
-                var student = studentService.GetStudent((int)value);
-                Debug.WriteLine(student.User?.ToString());
-                fullname = userService.GetFullname(student.UserId);
+                return 50;
             }
-            catch (Exception)
-            {
-                fullname = "NaN";
-            }
-            finally
-            {
-                tsk.SetResult(fullname);
-            }
+            return 500;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
+
+    public class EnumToItemsSourceConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            var enums = Enum.GetValues(value?.GetType());
+            var values = Enum.GetNames(value?.GetType());
+            return values;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class NumerRowConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -70,6 +84,36 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
+    public class PermissionConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            if (parameter == null || value == null)
+            {
+                return false;
+            }
+            var roles = ((string)parameter).Split(",");
+            if (roles.Length <= 0)
+            {
+                return false;
+            }
+            var actualRole = value.ToString();
+            var isHave = roles.FirstOrDefault(r => r == actualRole);
+            if (isHave == null)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     public class VisibleProgressConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
@@ -85,6 +129,7 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+
     public class VisibleDatagridConverter : IMultiValueConverter
     {
         public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
@@ -100,5 +145,4 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
-
 }

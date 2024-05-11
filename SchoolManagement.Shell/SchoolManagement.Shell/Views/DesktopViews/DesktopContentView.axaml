@@ -44,6 +44,7 @@
                         Background="Transparent"
                         BorderThickness="0"
                         ItemsSource="{Binding AppMenus}"
+                        SelectedValue="{Binding CurrentMenu}"
                         SelectionChanged="ListBox_SelectionChanged">
                         <ListBox.ItemTemplate>
                             <DataTemplate>

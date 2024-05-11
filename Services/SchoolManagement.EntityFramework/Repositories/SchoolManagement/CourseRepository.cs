@@ -6,45 +6,34 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class CourseRepository : GenerateRepository<Course>, ICourseRepository<Course>
     {
-        private ObservableCollection<Course> _coursesOfTeacher;
-        private ObservableCollection<Course> _coursesOfClass;
+        private ObservableCollection<Course> _courses;
 
         public CourseRepository(SchoolManagementContext context) : base(context)
         {
-            _coursesOfTeacher = new();
-            _coursesOfClass = new();
+            _courses = new();
         }
 
-        public Task<ObservableCollection<Course>> GetCouseByClassID(int classID)
+        public Task<ObservableCollection<Course>> GetCourseOfTeacherByYear(int teacherID, int year, string semester)
         {
             return Task.Factory.StartNew(() =>
             {
-                var courses = Where(item => item.ClassId == classID);
-                if (courses == null)
+                _courses.Clear();
+                var courses = Where(c => c.TeacherId == teacherID && c.StartDate.Year == year && c.Semester == semester);
+                if (courses?.Any() == false)
                 {
-                    return _coursesOfTeacher;
+                    return _courses;
                 }
-                _coursesOfClass.Clear();
-                _coursesOfClass.AddRange(courses);
-                return _coursesOfClass;
+                _courses.AddRange(courses);
+                return _courses;
             });
         }
 
-        public ObservableCollection<Course> GetCouseByTeacherID(int teacherID)
+        public Task<Course?> GetCourseById(int courseID)
         {
-            var courses = Where(item => item.TeacherId == teacherID);
-            if (courses == null)
+            return Task.Factory.StartNew(() =>
             {
-                return _coursesOfTeacher;
-            }
-            _coursesOfTeacher.Clear();
-            _coursesOfTeacher.AddRange(courses);
-            return _coursesOfTeacher;
-        }
-
-        public List<int> GetClassIDs(int teacherID)
-        {
-            return GetCouseByTeacherID(teacherID).Select(item => item.ClassId).ToList();
+                return FirstOrDefault(c => c.CourseId == courseID);
+            });
         }
     }
 }

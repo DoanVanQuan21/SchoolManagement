@@ -1,0 +1,54 @@
+<UserControl
+    x:Class="SchoolManagement.ClassManagement.Views.Dialogs.ConfirmDeleteClassView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.ClassManagement.ViewModels"
+    MinHeight="200"
+    x:DataType="vm:ConfirmDeleteClassViewModel"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="{Binding Title}" />
+        <Border
+            Grid.Row="4"
+            Grid.ColumnSpan="2"
+            Background="{actipro:ThemeResource Container1BorderBrush}" />
+        <Button
+            Grid.Row="4"
+            Grid.Column="0"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedExit}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource ArrowExitGeometry}" />
+                    <Label>Thoát</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button
+            Grid.Row="4"
+            Grid.Column="1"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedOK}"
+            Content="OK" />
+    </Grid>
+</UserControl>

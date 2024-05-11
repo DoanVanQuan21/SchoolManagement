@@ -2,43 +2,96 @@
     x:Class="SchoolManagement.SettingAccount.Views.SettingAccountView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:asyncImageLoader="clr-namespace:AsyncImageLoader;assembly=AsyncImageLoader.Avalonia"
     xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.SettingAccount.ViewModels"
     x:DataType="vm:SettingAccountViewModel"
     mc:Ignorable="d">
-	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="100" />
-			<RowDefinition Height="8*" />
-			<RowDefinition Height="2*" />
-		</Grid.RowDefinitions>
-		<TextBlock
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150" />
+            <RowDefinition Height="8*" />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+
+        <Button
+            x:Name="ImageSelector"
             Grid.Row="0"
-            HorizontalAlignment="Center"
-            Classes="accent">
-			hêlo
-		</TextBlock>
-		<ScrollViewer
+            Width="150"
+            Height="150"
+            Margin="0,10,0,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Classes="accent"
+            Command="{Binding ClickedChangeImage}"
+            ToolTip.Tip="Chọn hình ảnh">
+            <Button.Styles>
+                <Style Selector="Button:pointerover">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Style>
+            </Button.Styles>
+            <Button.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="80">
+                        <Image
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+                            Source="{Binding ElementName=ImageSelector, Path=DataContext.User.ImageBitmap}"
+                            Stretch="Fill">
+                            <Image.Clip>
+                                <EllipseGeometry
+                                    Center="{Binding Path=Bounds.Center, ElementName=ellipse}"
+                                    RadiusX="60"
+                                    RadiusY="60" />
+                            </Image.Clip>
+                        </Image>
+                    </Border>
+                    <!--
+                    <Grid>
+                        <Ellipse
+                            x:Name="ellipse"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch" />
+                        <Image
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Source="avares://SchoolManagement.UI/Assets/Images/dvquan.jpg"
+                            Stretch="Fill">
+                            <Image.Clip>
+                                <EllipseGeometry
+                                    Center="{Binding Path=Bounds.Center, ElementName=ellipse}"
+                                    RadiusX="60"
+                                    RadiusY="60" />
+                            </Image.Clip>
+                        </Image>
+                    </Grid>
+					-->
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <ScrollViewer
             Grid.Row="1"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch">
-			<cc:PropertyGrid SelectedObject="{Binding User}" Template="{StaticResource PropertyGridTemplate}" />
-		</ScrollViewer>
-		<Button
+            <cc:PropertyGrid SelectedObject="{Binding User}" Template="{StaticResource PropertyGridTemplate}" />
+        </ScrollViewer>
+        <Button
             Grid.Row="2"
             Width="120"
             Height="40"
             HorizontalAlignment="Center"
             Classes="theme-solid accent"
             Command="{Binding ClickedUpdateInformation}">
-			<Button.Content>
-				<StackPanel Orientation="Horizontal">
-					<PathIcon Data="{StaticResource EditGeometry}" />
-					<Label>Cập nhật</Label>
-				</StackPanel>
-			</Button.Content>
-		</Button>
-	</Grid>
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource EditGeometry}" />
+                    <Label>Cập nhật</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+    </Grid>
 </UserControl>

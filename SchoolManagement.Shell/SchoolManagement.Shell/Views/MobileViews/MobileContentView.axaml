@@ -8,8 +8,6 @@
     xmlns:local="clr-namespace:SchoolManagement.Shell.Views.DesktopViews"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
-    d:DesignHeight="700"
-    d:DesignWidth="400"
     x:DataType="vm:MainContentViewModel"
     Background="{actipro:ThemeResource Container1BackgroundBrush}"
     mc:Ignorable="d">
@@ -19,12 +17,27 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="90" />
         </Grid.RowDefinitions>
-        <Border
+        <Border Grid.Row="0" Background="{actipro:ThemeResource Container2BackgroundBrush}" />
+        <Label
             Grid.Row="0"
-            Margin="5,5,5,5"
-            Background="{actipro:ThemeResource Container2BackgroundBrush}">
-            <local:DesktopHeaderView />
-        </Border>
+            Margin="10,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Content="{Binding AppRegion.Title}" />
+        <Button
+            Grid.Row="0"
+            HorizontalAlignment="Right"
+            Background="Transparent"
+            BorderThickness="0"
+            Command="{Binding ClickedSettingViewCommand}">
+            <Button.Content>
+                <PathIcon
+                    Width="24"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="{StaticResource SettingGeometry}" />
+            </Button.Content>
+        </Button>
         <ScrollViewer Grid.Row="1">
             <dialogHostAvalonia:DialogHost
                 dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
@@ -37,41 +50,42 @@
                     Content="{Binding AppRegion.MainPage}" />
             </dialogHostAvalonia:DialogHost>
         </ScrollViewer>
-        <Border
-            Grid.Row="2"
-            Margin="5"
-            Background="{actipro:ThemeResource Container2BackgroundBrush}"
-            CornerRadius="10">
-            <ListBox
-                actipro:ThemeProperties.ScrollBarHasLineButtons="True"
-                Background="Transparent"
-                BorderThickness="0"
-                Classes="theme-scroll-overlay"
-                ItemsSource="{Binding AppMenus}"
-                SelectionChanged="ListBox_SelectionChanged">
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <WrapPanel VerticalAlignment="Center" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <actipro:ShadowChrome
-                            Width="60"
-                            Height="60"
-                            Elevation="8"
-                            ShadowOpacity="{Binding}">
-                            <Border Background="{actipro:ThemeResource Container3BackgroundBrush}" CornerRadius="8">
-                                <PathIcon
-                                    Width="24"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Data="{Binding Geometry}" />
-                            </Border>
-                        </actipro:ShadowChrome>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+        <Border Grid.Row="2" Background="{actipro:ThemeResource Container2BackgroundBrush}">
+
+            <DockPanel>
+                <ListBox
+                    HorizontalAlignment="Center"
+                    actipro:ThemeProperties.ScrollBarHasLineButtons="True"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Classes="theme-scroll-overlay"
+                    DockPanel.Dock="Left"
+                    ItemsSource="{Binding AppMenus}"
+                    SelectionChanged="ListBox_SelectionChanged">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel VerticalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <actipro:ShadowChrome
+                                Width="60"
+                                Height="60"
+                                Elevation="8"
+                                ShadowOpacity="{Binding}">
+                                <Border Background="{actipro:ThemeResource Container3BackgroundBrush}" CornerRadius="8">
+                                    <PathIcon
+                                        Width="24"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Data="{Binding Geometry}" />
+                                </Border>
+                            </actipro:ShadowChrome>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
         </Border>
     </Grid>
 </UserControl>

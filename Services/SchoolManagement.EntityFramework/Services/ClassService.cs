@@ -6,36 +6,57 @@ using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class ClassService : BaseService, IClassService
+    public class ClassService : IClassService
     {
-        public ClassService() : base()
+        private ISchoolManagementSevice _schoolManagementSevice;
+
+        public ClassService()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
-        public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)
-        {
-            return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
-        }
-
-        public Task<ObservableCollection<Class>> GetAllClassesByIDAsync(IList<int> ids)
+        public Task<bool> AddClass(Class _class)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetAllClassesByID(ids);
+                if (_class == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.ClassRepository.Add(_class);
+                return true;
             });
         }
 
-        public Class GetClassByID(int classID)
+        public async Task<bool> DeleteClass(int classID)
         {
-            return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
+            return await _schoolManagementSevice.ClassRepository.DeleteRecord(await GetClassByID(classID));
         }
 
-        public Task<Class> GetClassByIDAsync(int classID)
+        public Task<ObservableCollection<Class>> GetAllClassesByID(IList<int> ids)
         {
             return Task.Factory.StartNew(() =>
             {
-                return GetClassByID(classID);
+                return _schoolManagementSevice.ClassRepository.GetAllClassesByID(ids);
             });
+        }
+
+        public Task<Class> GetClassByID(int classID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
+            });
+        }
+
+        public async Task<ObservableCollection<Class>> GetClasses()
+        {
+            return await _schoolManagementSevice.ClassRepository.GetAllAsync();
+        }
+
+        public async Task<ObservableCollection<Class>> GetClassesBySize(int size, int page)
+        {
+            return await _schoolManagementSevice.ClassRepository.GetRecordBySize(size, page);
         }
     }
 }

@@ -1,0 +1,82 @@
+<UserControl
+    x:Class="SchoolManagement.StudentManagement.Views.Dialogs.AddStudentView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.StudentManagement.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:AddStudentViewModel"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="6*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Classes="title"
+            Content="{Binding Title}" />
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Users}"
+            PlaceholderText="Chọn tài khoản"
+            SelectedValue="{Binding CurrentUser}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding FullName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ScrollViewer Grid.Row="2" Grid.ColumnSpan="2">
+            <cc:PropertyGrid
+                Column="One"
+                DockPanel.Dock="Top"
+                SelectedObject="{Binding Student}"
+                Template="{StaticResource PropertyGridTemplate}" />
+        </ScrollViewer>
+
+        <Border
+            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Background="{actipro:ThemeResource Container1BorderBrush}" />
+        <Button
+            Grid.Row="3"
+            Grid.Column="0"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedExit}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource ArrowExitGeometry}" />
+                    <Label>Thoát</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button
+            Grid.Row="3"
+            Grid.Column="1"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedOK}"
+            Content="OK" />
+    </Grid>
+</UserControl>

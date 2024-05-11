@@ -1,7 +1,6 @@
 ﻿using Prism.Mvvm;
 using SchoolManagement.GlobalShared.CustomAttributes;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
@@ -9,17 +8,18 @@ namespace SchoolManagement.Core.Models.SchoolManagements;
 public partial class GradeSheet : BindableBase
 {
     private int gradeSheetId;
-    private int classId;
     private int studentId;
-    private int subjectId;
-    private float? firstRegularScore;
-    private float? secondRegularScore;
-    private float? thirdRegularScore;
-    private float? fourRegularScore;
-    private float? midtermScore;
-    private float? finalScore;
-    private float? semesterAverage;
+    private double? firstRegularScore;
+    private double? secondRegularScore;
+    private double? thirdRegularScore;
+    private double? fourRegularScore;
+    private double? midtermScore;
+    private double? finalScore;
+    private double? semesterAverage;
     private string? ranked;
+    private bool? promotionDecision;
+    private bool? @lock;
+    private int courseId;
 
     public GradeSheet()
     {
@@ -29,9 +29,7 @@ public partial class GradeSheet : BindableBase
     {
         // Copy constructor
         gradeSheetId = other.gradeSheetId;
-        classId = other.classId;
         studentId = other.studentId;
-        subjectId = other.subjectId;
         firstRegularScore = other.firstRegularScore;
         secondRegularScore = other.secondRegularScore;
         thirdRegularScore = other.thirdRegularScore;
@@ -39,9 +37,7 @@ public partial class GradeSheet : BindableBase
         midtermScore = other.midtermScore;
         finalScore = other.finalScore;
         semesterAverage = other.semesterAverage;
-        Class = other.Class;
         Student = other.Student;
-        Subject = other.Subject;
     }
 
     [IsHeaderExcel(false)]
@@ -53,8 +49,7 @@ public partial class GradeSheet : BindableBase
     [Browsable(false)]
     [DisplayName("Lớp")]
     [IsHeaderExcel(false)]
-    public int ClassId
-    { get => classId; set { SetProperty(ref classId, value); } }
+    public int CourseId { get => courseId; set => SetProperty(ref courseId, value); }
 
     [Browsable(false)]
     [IsID(true)]
@@ -62,39 +57,42 @@ public partial class GradeSheet : BindableBase
     public int StudentId
     { get => studentId; set { SetProperty(ref studentId, value); } }
 
-    [Browsable(false)]
-    [IsHeaderExcel(false)]
-    public int SubjectId
-    { get => subjectId; set { SetProperty(ref subjectId, value); } }
-
     [DisplayName("Thường xuyên 1")]
-    public float? FirstRegularScore
+    public double? FirstRegularScore
     { get => firstRegularScore; set { SetProperty(ref firstRegularScore, value); } }
 
     [DisplayName("Thường xuyên 2")]
-    public float? SecondRegularScore
+    public double? SecondRegularScore
     { get => secondRegularScore; set { SetProperty(ref secondRegularScore, value); } }
 
     [DisplayName("Thường xuyên 3")]
-    public float? ThirdRegularScore
+    public double? ThirdRegularScore
     { get => thirdRegularScore; set { SetProperty(ref thirdRegularScore, value); } }
 
     [DisplayName("Thường xuyên 4")]
-    public float? FourRegularScore
+    public double? FourRegularScore
     { get => fourRegularScore; set { SetProperty(ref fourRegularScore, value); } }
 
     [DisplayName("Giữa kỳ")]
-    public float? MidtermScore
+    public double? MidtermScore
     { get => midtermScore; set { SetProperty(ref midtermScore, value); } }
 
     [DisplayName("Cuối kỳ")]
-    public float? FinalScore
+    public double? FinalScore
     { get => finalScore; set { SetProperty(ref finalScore, value); } }
 
     [Browsable(false)]
     [DisplayName("Trung bình TL")]
-    public float? SemesterAverage
+    public double? SemesterAverage
     { get => semesterAverage; set { SetProperty(ref semesterAverage, value); } }
+
+    [IsHeaderExcel(false)]
+    [Browsable(false)]
+    public bool? PromotionDecision { get => promotionDecision; set => SetProperty(ref promotionDecision, value); }
+
+    [IsHeaderExcel(false)]
+    [Browsable(false)]
+    public bool? Lock { get => @lock; set => SetProperty(ref @lock, value); }
 
     [Browsable(false)]
     [NotMapped]
@@ -102,17 +100,17 @@ public partial class GradeSheet : BindableBase
     public string? Ranked
     { get => ranked; set { SetProperty(ref ranked, value); } }
 
-    [Browsable(false)]
     [IsHeaderExcel(false)]
-    public virtual Class Class { get; set; } = null!;
+    [Browsable(false)]
+    public virtual Course Course { get; set; } = null!;
 
-    [Browsable(false)]
     [IsHeaderExcel(false)]
+    [Browsable(false)]
+    public virtual ICollection<EditGradeSheetForm> EditGradeSheetForms { get; set; } = new List<EditGradeSheetForm>();
+
+    [IsHeaderExcel(false)]
+    [Browsable(false)]
     public virtual Student Student { get; set; } = null!;
-
-    [Browsable(false)]
-    [IsHeaderExcel(false)]
-    public virtual Subject Subject { get; set; } = null!;
 
     public static string GetRanked(GradeSheet gradeSheet)
     {

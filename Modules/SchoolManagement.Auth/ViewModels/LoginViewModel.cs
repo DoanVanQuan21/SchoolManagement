@@ -59,9 +59,15 @@ namespace SchoolManagement.Auth.ViewModels
                 return;
             }
             var (isLogin, user) = _userService.Login(User);
-            if (user != null)
+            if (user == null)
             {
-                RootContext.CurrentUser = user;
+                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+            }
+            RootContext.CurrentUser = user;
+            if (user.LockAccount == true)
+            {
+                NotificationManager.ShowWarning("Tài khoản của bạn đã bị khóa!.");
+                return;
             }
             EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
             //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);

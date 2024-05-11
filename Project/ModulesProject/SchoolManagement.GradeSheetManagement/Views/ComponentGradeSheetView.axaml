@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.GradeSheetManagement.Views.ComponentGradeSheetView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
@@ -9,50 +10,98 @@
     d:DesignWidth="800"
     x:DataType="vm:ComponentGradeSheetViewModel"
     mc:Ignorable="d">
-    <ListBox
-        Background="Transparent"
-        BorderThickness="0"
-        ItemsSource="{Binding GradeSheets}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Expander Header="{Binding Subject.SubjectName}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="5*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Grid.Column="0">
-                            <Label Content="Thường xuyên 1" />
-                            <Label Content="{Binding FirstRegularScore}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="0">
-                            <Label Content="Thường xuyên 2" />
-                            <Label Content="{Binding SecondRegularScore}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="0">
-                            <Label Content="Thường xuyên 3" />
-                            <Label Content="{Binding ThirdRegularScore}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="0" Grid.Column="1">
-                            <Label Content="Thường xuyên 4" />
-                            <Label Content="{Binding FourRegularScore}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="1" Grid.Column="1">
-                            <Label Content="Giữa kỳ" />
-                            <Label Content="{Binding MidtermScore}" />
-                        </StackPanel>
-                        <StackPanel Grid.Row="2" Grid.Column="1">
-                            <Label Content="Cuối kỳ" />
-                            <Label Content="{Binding FinalScore}" />
-                        </StackPanel>
-                    </Grid>
-                </Expander>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="120" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0">
+            <ListBox
+                HorizontalAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Classes="theme-scroll-overlay"
+                ItemsSource="{Binding Dates}"
+                SelectedValue="{Binding CurrentDate}">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel VerticalAlignment="Center" />
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <actipro:ShadowChrome
+                            Width="60"
+                            Height="60"
+                            Elevation="8"
+                            ShadowOpacity="{Binding}">
+                            <Border Background="{actipro:ThemeResource Container3BackgroundBrush}" CornerRadius="8">
+                                <Label
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{Binding Year}" />
+                            </Border>
+                        </actipro:ShadowChrome>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </ScrollViewer>
+
+        <ListBox
+            Grid.Row="1"
+            Background="Transparent"
+            BorderThickness="0"
+            Classes="theme-scroll-overlay"
+            ItemsSource="{Binding GradeSheets}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Expander>
+                        <Expander.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="{Binding Course.Subject.SubjectName}" />
+                                <Label Content="-" />
+                                <Label Content="{Binding Course.Semester}" />
+
+                            </StackPanel>
+                        </Expander.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="5*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0">
+                                <Label Content="Thường xuyên 1" />
+                                <Label Content="{Binding FirstRegularScore}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <Label Content="Thường xuyên 2" />
+                                <Label Content="{Binding SecondRegularScore}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="0">
+                                <Label Content="Thường xuyên 3" />
+                                <Label Content="{Binding ThirdRegularScore}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1">
+                                <Label Content="Thường xuyên 4" />
+                                <Label Content="{Binding FourRegularScore}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="1">
+                                <Label Content="Giữa kỳ" />
+                                <Label Content="{Binding MidtermScore}" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="1">
+                                <Label Content="Cuối kỳ" />
+                                <Label Content="{Binding FinalScore}" />
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

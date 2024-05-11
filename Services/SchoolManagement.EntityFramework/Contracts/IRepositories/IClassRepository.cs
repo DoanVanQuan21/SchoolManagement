@@ -7,5 +7,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IRepositories
         T GetClassByID(int classID);
 
         ObservableCollection<T> GetAllClassesByID(IList<int> ids);
+        Task<bool> DeleteClass(int classID);
     }
 }

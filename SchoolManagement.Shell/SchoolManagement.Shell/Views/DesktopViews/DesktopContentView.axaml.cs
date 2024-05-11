@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Shell.ViewModels;
-using System.Linq;
 
 namespace SchoolManagement.Shell.Views.DesktopViews
 {

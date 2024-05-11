@@ -3,25 +3,27 @@ using ActiproSoftware.UI.Avalonia.Themes.Generation;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Prism.DryIoc;
 using Prism.Ioc;
+using SchoolManagement.AccountManagement.Views;
+using SchoolManagement.ClassManagement.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
+using SchoolManagement.CourseManagement.Views;
 using SchoolManagement.GradeSheetManagement.Views;
 using SchoolManagement.MainProject.Views;
 using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.Shell.Helpers;
 using SchoolManagement.Shell.Services.Contracts;
-using SchoolManagement.Shell.ViewModels;
 using SchoolManagement.Shell.Views;
-using SchoolManagement.Shell.Views.SplashScreen;
+using SchoolManagement.StudentManagement.Views;
+using SchoolManagement.SubjectManagement.Views;
+using SchoolManagement.TeacherManagement.Views;
 using SchoolManagement.UI.Geometry;
 using System;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
 namespace SchoolManagement.Shell
 {
@@ -91,10 +93,17 @@ namespace SchoolManagement.Shell
 
         private void InitMenu()
         {
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "teacher,student" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "teacher,student" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.UserSettingGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ListDetailGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Trang chủ", Geometry = GeometryString.HomeGeometry, Type = typeof(DashboardView), Roles = "admin,teacher,student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Tài khoản", Geometry = GeometryString.UserGeometry, Type = typeof(SettingAccountView), Roles = "admin,teacher,student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.ClipboardTextEditorGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ClipboardDataBarGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm tổng kết", Geometry = GeometryString.ClipboardDataBarGeometry, Type = typeof(SemesterAverageView), Roles = "student" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý tài khoản", Geometry = GeometryString.PeopleTeamGeometry, Type = typeof(AccountManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý môn học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(SubjectManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý lớp học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(ClassManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý khóa học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(CourseManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý học sinh", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(StudentManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý giáo viên", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(TeacherManagementView), Roles = "admin" });
         }
     }
 }

@@ -1,39 +1,81 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
-using System.Reactive.Subjects;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class GradeSheetService : BaseService, IGradeSheetService
+    public class GradeSheetService : IGradeSheetService
     {
-        private readonly IStudentService _studentService;
+        private readonly ISchoolManagementSevice _schoolManagementSevice;
+        private readonly ICourseService _courseService;
         private readonly IClassService _classService;
-        private readonly ISubjectService _subjectService;
-        public GradeSheetService() : base()
+        private readonly IStudentService _studentService;
+        public GradeSheetService()
         {
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
+            _courseService = Ioc.Resolve<ICourseService>();
             _studentService = Ioc.Resolve<IStudentService>();
             _classService = Ioc.Resolve<IClassService>();
-            _subjectService = Ioc.Resolve<ISubjectService>();
         }
 
-        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsAsync(int subjectID, int classID)
+        public async Task<ObservableCollection<GradeSheet>> FinishEditGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
         {
-            var gradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetAllGradeSheetAsync(subjectID, classID);
+            return await _schoolManagementSevice.GradeSheetRepository.FinishEditGradeSheet(gradeSheets);
+        }
+
+        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetsByStudentID(studentID);
+        }
+
+        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID, int year)
+        {
+            var gradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetsByStudentID(studentID);
+            if (gradeSheets == null)
+            {
+                return new();
+            }
+            var gradesInYear = new ObservableCollection<GradeSheet>();
+
             foreach (var gradeSheet in gradeSheets)
             {
-                gradeSheet.Class = _classService.GetClassByID(gradeSheet.ClassId);
-                gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
-                gradeSheet.Student = _studentService.GetStudent(gradeSheet.StudentId);
+                var course = await _courseService.GetCourseByID(gradeSheet.CourseId);
+                if (course == null)
+                {
+                    continue;
+                }
+                if (course.StartDate.Year != year)
+                {
+                    continue;
+                }
+                gradeSheet.Course = course;
+                gradesInYear.Add(gradeSheet);
+            }
+            foreach (var grade in gradesInYear)
+            {
+                grade.Ranked = GradeSheet.GetRanked(grade);
+                grade.Student = await _studentService.GetStudentByStudentID(grade.StudentId);
                 await Task.Delay(10);
             }
-            return gradeSheets;
+            return gradesInYear;
         }
 
-        public async Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
+        public async Task<GradeSheet?> GetGradeSheet(int gradeSheetID)
         {
-            return await _schoolManagementSevice.GradeSheetRepository.UpdateOrAddRange(gradeSheets);
+            var grade = _schoolManagementSevice.GradeSheetRepository.FirstOrDefault(g => g.GradeSheetId == gradeSheetID);
+            if (grade == null)
+            {
+                return grade;
+            }
+            var course = await _courseService.GetCourseByID(grade.CourseId);
+            if (course == null)
+            {
+                return grade;
+            }
+            grade.Course = course;
+            return grade;
         }
 
         public async Task<bool> UpdateGradeSheetAsync(GradeSheet gradeSheet)
@@ -41,22 +83,30 @@ namespace SchoolManagement.EntityFramework.Services
             return await _schoolManagementSevice.GradeSheetRepository.Update(gradeSheet);
         }
 
-        public async Task<ObservableCollection<GradeSheet>> GetAllGradeSheetByClassAndStudentID(int studentID, int classID)
+        public async Task<ObservableCollection<GradeSheet>> GetGradeSheetOfSubjectByClass(int courseID)
         {
-            var gradeSheets = await _schoolManagementSevice.GradeSheetRepository.GetAllGradeSheetByClassAndStudentID(studentID, classID);
-            if (gradeSheets == null)
+            var grades = await _schoolManagementSevice.GradeSheetRepository.GetGradeSheetOfSubjectByClass(courseID);
+            if (grades == null)
             {
                 return new();
             }
-            foreach (var gradeSheet in gradeSheets)
+            foreach (var grade in grades)
             {
-                gradeSheet.Class = _classService.GetClassByID(gradeSheet.ClassId);
-                gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
-                gradeSheet.Student = _studentService.GetStudent(gradeSheet.StudentId);
-                gradeSheet.Subject = await _subjectService.GetSubjectByID(gradeSheet.SubjectId);
-                await Task.Delay(10);
+                grade.Ranked = GradeSheet.GetRanked(grade);
+                grade.Course = await _courseService.GetCourseByID(grade.CourseId);
+                grade.Student = await _studentService.GetStudentByStudentID(grade.StudentId);
             }
-            return gradeSheets;
+            return grades;
+        }
+
+        public async Task<bool> UnLock(int gradeSheetID)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.UnLock(gradeSheetID);
+        }
+
+        public async Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
+        {
+            return await _schoolManagementSevice.GradeSheetRepository.UpdateOrAddRange(gradeSheets);
         }
     }
 }

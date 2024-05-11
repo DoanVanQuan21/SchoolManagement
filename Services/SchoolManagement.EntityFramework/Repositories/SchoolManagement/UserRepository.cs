@@ -57,5 +57,31 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
             return Update(entity);
         }
+        public Task<bool> LockAccount(User entity)
+        {
+            return Task.Factory.StartNew(() => {
+                var user = _context.Users.FirstOrDefault(u=>u.UserId == entity.UserId);
+                if (user == null)
+                {
+                    return false;
+                }
+                user.LockAccount = true;
+                _context.SaveChanges();
+                return true;
+            });
+        }
+        public Task<bool> UnLockAccount(User entity)
+        {
+            return Task.Factory.StartNew(() => {
+                var user = _context.Users.FirstOrDefault(u => u.UserId == entity.UserId);
+                if (user == null)
+                {
+                    return false;
+                }
+                user.LockAccount = false;
+                _context.SaveChanges();
+                return true;
+            });
+        }
     }
 }

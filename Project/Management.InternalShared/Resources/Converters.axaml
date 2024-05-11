@@ -6,5 +6,8 @@
     <cvt:NumerRowConverter x:Key="NumerRowConverter" />
     <cvt:VisibleProgressConverter x:Key="VisibleProgressConverter" />
     <cvt:VisibleDatagridConverter x:Key="VisibleDatagridConverter" />
+    <cvt:EnumToItemsSourceConverter x:Key="EnumToItemsSourceConverter" />
+    <cvt:MinWidthFollowPlatformConverter x:Key="MinWidthFollowPlatformConverter" />
+    <cvt:PermissionConverter x:Key="PermissionConverter" />
     <!--  Add Resources Here  -->
 </ResourceDictionary>

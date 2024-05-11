@@ -6,21 +6,37 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class ClassRepository : GenerateRepository<Class>, IClassRepository<Class>
     {
-        ObservableCollection<Class> _classesOfTeacher;
+        private ObservableCollection<Class> _classesOfTeacher;
+
         public ClassRepository(SchoolManagementContext context) : base(context)
         {
             _classesOfTeacher = new();
         }
 
+        public Task<bool> DeleteClass(int classID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var _class = FirstOrDefault(c => c.ClassId == classID);
+                if (_class == null)
+                {
+                    return false;
+                }
+                _context.Classes.Remove(_class);
+                _context.SaveChanges();
+                return true;
+            });
+        }
+
         public ObservableCollection<Class> GetAllClassesByID(IList<int> ids)
         {
-            if(ids == null || ids.Count == 0) { return _classesOfTeacher; }
             _classesOfTeacher.Clear();
+            if (ids == null || ids.Count == 0) { return _classesOfTeacher; }
             var classes = new ObservableCollection<Class>();
             foreach (var id in ids)
             {
                 var c = GetClassByID(id);
-                if(c == null)
+                if (c == null)
                 {
                     continue;
                 }

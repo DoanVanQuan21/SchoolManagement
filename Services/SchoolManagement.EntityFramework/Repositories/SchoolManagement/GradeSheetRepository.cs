@@ -13,19 +13,45 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             _grades = new();
         }
 
-        public bool Delete(int subjectID, int classID)
+        public Task<ObservableCollection<GradeSheet>> FinishEditGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
         {
-            var gradeSheet = GetById(subjectID, classID);
-            if (gradeSheet == null)
+            return Task.Factory.StartNew(() =>
             {
-                return false;
-            }
-            _context.Remove(gradeSheet);
-            _context.SaveChanges();
-            return true;
+                var missingGrades = new ObservableCollection<GradeSheet>();
+                var gradeSheetsNotLock = Where(g => g.Lock == false);
+                if (gradeSheetsNotLock?.Any() == false)
+                {
+                    return missingGrades;
+                }
+                foreach (var gradeSheet in gradeSheets)
+                {
+                    var isLocked = LockGradeSheet(gradeSheet);
+                    if (isLocked != false)
+                    {
+                        continue;
+                    }
+                    missingGrades.Add(gradeSheet);
+                }
+                return missingGrades;
+            });
         }
 
-        public Task<ObservableCollection<GradeSheet>> GetAllGradeSheetAsync(int subjectID, int classID)
+        public Task<ObservableCollection<GradeSheet>> GetGradeSheetOfSubjectByClass(int courseID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                _grades.Clear();
+                var grades = Where(g => g.CourseId == courseID);
+                if (grades?.Any() == false)
+                {
+                    return _grades;
+                }
+                _grades.AddRange(grades);
+                return _grades;
+            });
+        }
+
+        public Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -36,7 +62,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                         return _grades;
                     }
                     _grades.Clear();
-                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.SubjectId == subjectID).ToList();
+                    var grades = _context.GradeSheets.Where(g => g.StudentId == studentID);
                     if (grades == null)
                     {
                         return _grades;
@@ -50,35 +76,20 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
-        public Task<ObservableCollection<GradeSheet>> GetAllGradeSheetByClassAndStudentID(int studentID, int classID)
+
+        public Task<bool> UnLock(int gradeSheetID)
         {
             return Task.Factory.StartNew(() =>
             {
-                try
+                var grade = FirstOrDefault(g => g.GradeSheetId == gradeSheetID);
+                if (grade == null)
                 {
-                    if (_context.GradeSheets.Any() == false)
-                    {
-                        return _grades;
-                    }
-                    _grades.Clear();
-                    var grades = _context.GradeSheets.Where(item => item.ClassId == classID && item.StudentId == studentID).ToList();
-                    if (grades == null)
-                    {
-                        return _grades;
-                    }
-                    _grades.AddRange(grades);
-                    return _grades;
+                    return false;
                 }
-                catch (Exception)
-                {
-                    return _grades;
-                }
+                grade.Lock = false;
+                _context.SaveChanges();
+                return true;
             });
-        }
-
-        public GradeSheet? GetById(int subjectID, int classID)
-        {
-            return FirstOrDefault(item => item.ClassId == classID && item.SubjectId == subjectID);
         }
 
         public Task<bool> Update(GradeSheet entity)
@@ -101,28 +112,6 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return true;
             });
         }
-
-        public Task<bool> UpdateByClassIDAndSubjectID(GradeSheet entity)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                var gradeSheet = FirstOrDefault(item => item.ClassId == entity.ClassId && item.SubjectId == entity.SubjectId);
-                if (gradeSheet == null)
-                {
-                    return false;
-                }
-                gradeSheet.FirstRegularScore = entity.FirstRegularScore;
-                gradeSheet.SecondRegularScore = entity.SecondRegularScore;
-                gradeSheet.ThirdRegularScore = entity.ThirdRegularScore;
-                gradeSheet.FourRegularScore = entity.FourRegularScore;
-                gradeSheet.MidtermScore = entity.MidtermScore;
-                gradeSheet.FinalScore = entity.FinalScore;
-                gradeSheet.SemesterAverage = ComputeSemesterAverage(gradeSheet);
-                _context.SaveChanges();
-                return true;
-            });
-        }
-
         public Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
         {
             return Task.Factory.StartNew(() =>
@@ -131,14 +120,14 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 {
                     foreach (var grade in gradeSheets)
                     {
-                        var gs = FirstOrDefault(g => g.ClassId == grade.ClassId && g.StudentId == grade.StudentId);
+                        var gs = FirstOrDefault(g => g.CourseId == grade.CourseId && g.StudentId == grade.StudentId);
                         if (gs == null)
                         {
                             Add(grade);
                             Task.Delay(100);
                             continue;
                         }
-                        UpdateByClassIDAndSubjectID(grade);
+                        UpdateByClassIDAndSubjectID(gs,grade);
                         Task.Delay(100);
                     }
                     return true;
@@ -149,11 +138,36 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 }
             });
         }
-
-        private float? ComputeSemesterAverage(GradeSheet gradeSheet)
+        public Task<bool> UpdateByClassIDAndSubjectID(GradeSheet gradeSheet,GradeSheet newGrade)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                gradeSheet.FirstRegularScore = newGrade.FirstRegularScore;
+                gradeSheet.SecondRegularScore = newGrade.SecondRegularScore;
+                gradeSheet.ThirdRegularScore = newGrade.ThirdRegularScore;
+                gradeSheet.FourRegularScore = newGrade.FourRegularScore;
+                gradeSheet.MidtermScore = newGrade.MidtermScore;
+                gradeSheet.FinalScore = newGrade.FinalScore;
+                gradeSheet.SemesterAverage = ComputeSemesterAverage(gradeSheet);
+                _context.SaveChanges();
+                return true;
+            });
+        }
+        private double? ComputeSemesterAverage(GradeSheet gradeSheet)
         {
             return (gradeSheet.FirstRegularScore + gradeSheet.SecondRegularScore + gradeSheet.ThirdRegularScore
             + gradeSheet.FourRegularScore + gradeSheet.MidtermScore * 2 + gradeSheet.FinalScore * 3) / 9;
+        }
+        private bool LockGradeSheet(GradeSheet grade)
+        {
+            var g = FirstOrDefault(g => g.GradeSheetId == grade.GradeSheetId);
+            if (g == null)
+            {
+                return false;
+            }
+            g.Lock = true;
+            _context.SaveChanges();
+            return true;
         }
     }
 }

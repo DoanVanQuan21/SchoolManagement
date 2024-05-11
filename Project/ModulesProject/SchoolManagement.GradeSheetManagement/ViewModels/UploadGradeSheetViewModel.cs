@@ -3,8 +3,10 @@ using Avalonia.Platform.Storage;
 using DynamicData;
 using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -28,6 +30,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private bool isUploadFile = false;
         private Student student;
         private ObservableCollection<Student> students;
+        private Semester semester;
 
         public UploadGradeSheetViewModel()
         {
@@ -65,6 +68,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
 
+        public Date CurrentDate
+        { get; set; }
+
         public GradeSheet GradeSheet { get => gradeSheet; set => SetProperty(ref gradeSheet, value); }
 
         public ObservableCollection<GradeSheet> GradeSheets
@@ -75,6 +81,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         public ObservableCollection<Student> Students
         { get => students; set { SetProperty(ref students, value); } }
+
+        public Semester Semester
+        { get; set; }
 
         public override string Title => "Upload file";
 
@@ -95,16 +104,19 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 foreach (var gs in gradeSheets)
                 {
-                    var teacher =await _teacherService.GetTeacherInfoAsync(User.UserId);
-                    if (teacher==null)
+                    var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
+                    if (teacher == null)
                     {
                         continue;
                     }
                     gs.Ranked = GradeSheet.GetRanked(gs);
-                    gs.Student = _studentService.GetStudent(gs.StudentId);
-                    gs.ClassId = Class.ClassId;
-                    gs.SubjectId = teacher.SubjectId;
-                    gs.Class = Class;
+                    gs.Student = await _studentService.GetStudentByStudentID(gs.StudentId);
+                    gs.Course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
+                    if (gs.Course == null)
+                    {
+                        continue;
+                    }
+                    gs.CourseId = gs.Course.CourseId;
                 }
             });
         }
@@ -117,7 +129,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 {
                     return;
                 }
-                var students = await _studentService.GetStudentsByClass(Class.ClassId);
+                var students = await _studentService.GetStudentOfClassByYear(Class.ClassId, DateTime.Now.Year);
                 if (students == null)
                 {
                     NotificationManager.ShowWarning("Không có học sinh nào!.");
@@ -179,7 +191,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 var path = files.First().Path.LocalPath;
                 var gradeSheets = await _excelService.ImportGradeSheetsAsync(path, Class.ClassId, async (studentCode) =>
                 {
-                    return await _studentService.GetStudentIDByStudentCodeAsync(studentCode);
+                    return await _studentService.GetStudentByStudentCode(studentCode);
                 });
                 await GetFullDetailGradeSheet(gradeSheets);
                 GradeSheets.Clear();

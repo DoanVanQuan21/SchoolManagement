@@ -9,7 +9,86 @@
     d:DesignWidth="800"
     x:DataType="vm:DashboardViewModel"
     mc:Ignorable="d">
-	<Grid>
-		<TextBlock Classes="accent" Text="{Binding Title}" />
-	</Grid>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ListBox
+            x:Name="Container"
+            Grid.Row="0"
+            Background="Transparent"
+            BorderThickness="0"
+            Classes="theme-scroll-overlay"
+            ItemsSource="{Binding FormsNeedToConfirm}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Expander>
+                        <Expander.Header>
+                            <DockPanel>
+                                <StackPanel
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Left"
+                                    Orientation="Horizontal">
+                                    <Label Content="{Binding Teacher.User.FullName}" />
+                                    <Label Content="-" />
+                                    <Label Content="{Binding GradeSheet.Course.Class.ClassName}" />
+                                    <Label Content="-" />
+                                    <Label Content="{Binding GradeSheet.Course.Subject.SubjectName}" />
+                                </StackPanel>
+                                <TextBlock
+                                    Margin="10"
+                                    VerticalAlignment="Center"
+                                    Classes="theme-text-heading size-xs accent"
+                                    DockPanel.Dock="Right">
+                                    Chờ xác nhận
+                                </TextBlock>
+                            </DockPanel>
+                        </Expander.Header>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="5*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox
+                                Grid.ColumnSpan="1"
+                                Margin="10"
+                                VerticalContentAlignment="Top"
+                                AcceptsReturn="True"
+                                Classes="theme-outline"
+                                IsReadOnly="True"
+                                ScrollViewer.IsScrollChainingEnabled="False"
+                                Text="{Binding Reason}"
+                                TextWrapping="Wrap"
+                                UseFloatingWatermark="True"
+                                Watermark="Lý do" />
+                            <StackPanel Grid.Column="1">
+                                <Button
+                                    Width="120"
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
+                                    Chấp nhận
+                                </Button>
+                                <Button
+                                    Width="120"
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid danger"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
+                                    CommandParameter="{Binding}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
+                                    Từ chối
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
 </UserControl>

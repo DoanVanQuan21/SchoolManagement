@@ -1,0 +1,53 @@
+<UserControl
+    x:Class="SchoolManagement.Shell.Views.MobileViews.SettingView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.Shell.ViewModels"
+    x:DataType="vm:CommonMenuViewModel"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Button
+            Grid.Row="0"
+            HorizontalContentAlignment="Left"
+            Classes="theme-outline accent"
+            Command="{Binding ChangeThemeCommand}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource ThemeDarkLightGeometry}" DockPanel.Dock="Left" />
+                    <Label Margin="10,0,0,0" Content="Màu giao diện" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button
+            Grid.Row="1"
+            HorizontalContentAlignment="Left"
+            Classes="theme-outline accent"
+            Command="{Binding SettingAccountCommand}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource SettingGeometry}" DockPanel.Dock="Left" />
+                    <Label Margin="10,0,0,0" Content="Tài khoản" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button
+            Grid.Row="2"
+            HorizontalContentAlignment="Left"
+            Classes="theme-outline accent"
+            Command="{Binding LogoutCommand}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource LogoutGeometry}" DockPanel.Dock="Left" />
+                    <Label Margin="10,0,0,0" Content="Đăng xuất" />
+                </StackPanel>
+            </Button.Content>
+        </Button>
+    </Grid>
+</UserControl>

@@ -16,11 +16,13 @@ namespace SchoolManagement.Core.avalonia
 {
     public abstract class BaseRegionViewModel : BindableBase
     {
+        protected const int DEFAULT_ROW = 20;
         protected readonly string _dialogIdentifier = "MainDialogHost";
         protected readonly IEventAggregator EventAggregator;
+        protected int page = 1;
         private readonly IAppManager _appManager;
         private bool isLogin = false;
-
+        private bool isMobilePlatform;
         public BaseRegionViewModel()
         {
             _appManager = Ioc.Resolve<IAppManager>();
@@ -28,6 +30,8 @@ namespace SchoolManagement.Core.avalonia
             NotificationManager = Ioc.Resolve<INotificationManager>();
             RegisterCommand();
             SubcribeEvent();
+            AppRegion.Title = Title;
+            CheckPlatform();
         }
 
         public AppRegion AppRegion { get => _appManager.AppRegion; }
@@ -36,6 +40,7 @@ namespace SchoolManagement.Core.avalonia
         public bool IsLogin
         { get => isLogin; set { SetProperty(ref isLogin, value); } }
 
+        public bool IsMobilePlatform { get => isMobilePlatform; set => SetProperty(ref isMobilePlatform, value); }
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
@@ -94,6 +99,11 @@ namespace SchoolManagement.Core.avalonia
             }
         }
 
+        protected void CloseDialog()
+        {
+            DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
+        }
+
         protected void DefaultView()
         {
             //TODO
@@ -119,6 +129,11 @@ namespace SchoolManagement.Core.avalonia
             IsLogin = isLogin;
         }
 
+        protected virtual async Task ShowDialogHost(object content)
+        {
+            await DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier);
+        }
+
         protected virtual void SubcribeEvent()
         { }
 
@@ -126,17 +141,6 @@ namespace SchoolManagement.Core.avalonia
         {
             RootContext.UpdateCurrentUser(user);
         }
-
-        protected virtual async Task ShowDialogHost(object content)
-        {
-            await DialogHostAvalonia.DialogHost.Show(content, _dialogIdentifier);
-        }
-
-        protected void CloseDialog()
-        {
-            DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
-        }
-
         private void SetRole()
         {
             if (RootContext.CurrentUser.Role == "student")
@@ -144,8 +148,21 @@ namespace SchoolManagement.Core.avalonia
                 RootContext.Role = Role.Student;
                 return;
             }
-            RootContext.Role = Role.Teacher;
-
+            if (RootContext.CurrentUser.Role == "teacher")
+            {
+                RootContext.Role = Role.Teacher;
+                return;
+            }
+            RootContext.Role = Role.Admin;
+        }
+        private void CheckPlatform()
+        {
+            if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())
+            {
+                IsMobilePlatform = true;
+                return;
+            }
+            IsMobilePlatform = false;
         }
     }
 }

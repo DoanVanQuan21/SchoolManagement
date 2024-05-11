@@ -22,6 +22,7 @@
 
     public class ImagePath
     {
+        public static readonly string DefaultUserImage = "avares://SchoolManagement.UI/Assets/Images/default_user_image.png";
     }
 
     public enum Role
@@ -64,6 +65,12 @@
         DISCONNECTED,
     }
 
+    public class Semester
+    {
+        public string Value { get; set; } = "Kỳ 1";
+        public static List<Semester> Semesters = new() { new() { Value = "Kỳ 1" }, new() { Value = "Kỳ 2" } };
+    }
+
     public class FolderPath
     {
         public static string CONFIGURATION => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Path.Combine("management", "configurations"));
@@ -81,6 +88,17 @@
         BTBOX
     }
 
+    public enum AceptFormStatus
+    {
+        Accept,
+        Cancel,
+        Waitting
+    }
+    public enum CommonStatus
+    {
+        Closed,
+        Active
+    }
     public enum Theme
     {
         Light = 0,
@@ -92,6 +110,7 @@
         STRING,
         BYTE
     }
+
     public class Ranked
     {
         public static string Excellent = "Giỏi";

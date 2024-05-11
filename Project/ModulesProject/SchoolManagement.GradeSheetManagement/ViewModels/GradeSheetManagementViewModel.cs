@@ -2,10 +2,13 @@
 using Avalonia.Platform.Storage;
 using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.Core.Services;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.GradeSheetManagement.Views.Dialogs;
 using SchoolManagement.UI.Dialogs;
@@ -17,34 +20,37 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 {
     internal class GradeSheetManagementViewModel : BaseRegionViewModel
     {
-        private readonly IClassService _classService;
-        private readonly ICourseService _courseService;
         private readonly IExcelService _excelService;
+        private readonly ITeacherService _teacherService;
+        private readonly ICourseService _courseService;
         private readonly IGradeSheetService _gradeSheetService;
         private readonly IStudentService _studentService;
-        private readonly ITeacherService _teacherService;
         private readonly IUserService _userService;
+        private readonly IEditGradeSheetFormService _editGradeSheetFormService;
         private Class _class;
+        private Date currentDate;
         private bool dataLoaded = false;
         private GradeSheet gradeSheet;
         private ObservableCollection<GradeSheet> gradeSheets;
         private bool isExportCompleted = false;
         private Teacher? teacher;
+        private Semester semester;
 
         public GradeSheetManagementViewModel()
         {
-            _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
-            _courseService = Ioc.Resolve<ICourseService>();
-            _classService = Ioc.Resolve<IClassService>();
-            _teacherService = Ioc.Resolve<ITeacherService>();
             _excelService = Ioc.Resolve<IExcelService>();
+            _teacherService = Ioc.Resolve<ITeacherService>();
+            _courseService = Ioc.Resolve<ICourseService>();
+            _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
             _studentService = Ioc.Resolve<IStudentService>();
             _userService = Ioc.Resolve<IUserService>();
-
+            _editGradeSheetFormService = Ioc.Resolve<IEditGradeSheetFormService>();
             User = RootContext.CurrentUser;
             Class = new();
+            Classes = new();
             GradeSheets = new();
-            GetClassIDsOfCourse();
+            Dates = new();
+            InitDates();
         }
 
         public Class Class
@@ -57,12 +63,22 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         }
 
         public ObservableCollection<Class> Classes { get; set; }
-        public ICommand ClickedDownloadFile { get; set; }
-        public ICommand ClickedUpdateCommand { get; set; }
         public ICommand ClickedAddGradeSheet { get; set; }
+        public ICommand ClickedDownloadFile { get; set; }
+        public ICommand ClickedFinishCommand { get; set; }
+        public ICommand ClickedSendRequestEditCommand { get; set; }
+        public ICommand ClickedUpdateCommand { get; set; }
+        public List<Semester> Semesters => Semester.Semesters;
+
+        public Date CurrentDate
+        { get => currentDate; set { SetProperty(ref currentDate, value);  } }
+
+        public Semester Semester { get => semester; set { SetProperty(ref semester, value); GetClassByDate(); } }
 
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
+
+        public ObservableCollection<Date> Dates { get; set; }
 
         public GradeSheet GradeSheet
         { get => gradeSheet; set { SetProperty(ref gradeSheet, value); } }
@@ -78,6 +94,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             ClickedUpdateCommand = new DelegateCommand(OnUpdate);
             ClickedAddGradeSheet = new DelegateCommand(OnAddGradeSheet);
             ClickedDownloadFile = new DelegateCommand(OnDownloadFile);
+            ClickedFinishCommand = new DelegateCommand(OnFinish);
+            ClickedSendRequestEditCommand = new DelegateCommand(OnSend);
             base.RegisterCommand();
         }
 
@@ -86,13 +104,6 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             EventAggregator.GetEvent<UpdateGradeSheetEvent>().Subscribe(OnUpdatedAsync);
 
             base.SubcribeEvent();
-        }
-
-        private void OnUpdatedAsync(GradeSheet sheet)
-        {
-            var gradesheet = GradeSheets.FirstOrDefault(gs => gs.GradeSheetId == sheet.GradeSheetId);
-            gradesheet = sheet;
-            gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
         }
 
         private async Task ExportFile(string filePath)
@@ -113,33 +124,41 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
         }
 
-        private async void GetClassIDsOfCourse()
+        private async void GetClassByDate()
         {
-            Classes = new();
-            teacher = await _teacherService.GetTeacherInfoAsync(User.UserId);
+            Classes.Clear();
+            GradeSheets.Clear();
+            Semester ??= new();
+            teacher = await _teacherService.GetTeacherByUserID(User.UserId);
             if (teacher == null)
             {
                 //TODO
                 //ADD MESSAGE
                 return;
             }
-            var classIDs = await _courseService.GetClassIDsAsync(teacher.TeacherId);
-            var classes = await _classService.GetAllClassesByIDAsync(classIDs);
-            if (classes == null)
+            var courses = await _courseService.GetCourseOfTeacherByYear(teacher.TeacherId, CurrentDate.Year,Semester.Value);
+            if (courses?.Any() == false)
             {
-                //TODO
-                //ADD MESSAGE
+                NotificationManager.ShowWarning("Không có lớp nào!.");
+                Class = new();
+                return;
+            }
+            var classes = courses.Select(c => c.Class);
+            if (classes?.Any() == false)
+            {
+                NotificationManager.ShowWarning("Không có lớp nào!.");
+                Class = new();
+
                 return;
             }
             Classes.AddRange(classes);
-            Class = Classes.First();
         }
 
         private async Task<string> GetFullName(object? value)
         {
             try
             {
-                var student = await _studentService.GetStudentByStudentIDAsync((int)value);
+                var student = await _studentService.GetStudentByStudentID((int)value);
                 Debug.WriteLine(student.User?.ToString());
                 var fullName = _userService.GetFullname(student.UserId);
                 return fullName;
@@ -157,15 +176,19 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return;
             }
-            await Task.Delay(1000);
-            var grades = await _gradeSheetService.GetGradeSheetsAsync(teacher.SubjectId, Class.ClassId);
-            if (grades == null)
-            {
-                return;
-            }
             GradeSheets?.Clear();
-            GradeSheets?.AddRange(grades);
-            await Task.Delay(1000);
+
+            var courses = await _courseService.GetCourses(teacher.TeacherId, teacher.SubjectId, Class.ClassId, CurrentDate.Year);
+            foreach (var course in courses)
+            {
+                var grade = await _gradeSheetService.GetGradeSheetOfSubjectByClass(course.CourseId);
+                if (grade == null)
+                {
+                    continue;
+                }
+                GradeSheets?.AddRange(grade);
+                await Task.Delay(10);
+            }
             DataLoaded = true;
         }
 
@@ -173,7 +196,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         {
             try
             {
-                var student = await _studentService.GetStudentByStudentIDAsync(studentId);
+                var student = await _studentService.GetStudentByStudentID(studentId);
                 Debug.WriteLine(student?.User?.ToString());
                 return student?.StudentCode;
             }
@@ -181,6 +204,31 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 return "NaN";
             }
+        }
+
+        private async void InitDates()
+        {
+            Dates = new();
+            var startYear = User.StartDate.Year;
+            var now = DateTime.Now.Year;
+            for (int i = startYear; i <= now; i++)
+            {
+                Dates.Add(new Date()
+                {
+                    Year = i,
+                });
+                await Task.Delay(100);
+            }
+        }
+
+        private async void OnAddGradeSheet()
+        {
+            var uploadView = new UploadGradeSheets();
+            uploadView.GradeSheetViewModel.Classes = Classes;
+            uploadView.GradeSheetViewModel.Semester = Semester;
+            uploadView.GradeSheetViewModel.CurrentDate = CurrentDate;
+            
+            await ShowDialogHost(uploadView);
         }
 
         private async void OnDownloadFile()
@@ -203,6 +251,50 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             await Task.WhenAll(progressDialog, download);
         }
 
+        private async void OnFinish()
+        {
+            var missingGrades = await _gradeSheetService.FinishEditGradeSheet(GradeSheets);
+            if (missingGrades?.Count <= 0)
+            {
+                NotificationManager.ShowSuccess("Đã cập nhật thành công!.");
+                return;
+            }
+            NotificationManager.ShowSuccess($"Không thể cập nhật bảng điểm của sinh viên {string.Join(',', missingGrades.Select(g => g.Student?.User?.FullName))}");
+        }
+
+        private async void OnSend()
+        {
+            var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
+            if (teacher == null)
+            {
+                NotificationManager.ShowWarning("Có lỗi sảy ra!.");
+                return;
+            }
+            var form = new EditGradeSheetForm()
+            {
+                Status = AceptFormStatus.Waitting.ToString(),
+                GradeSheetId = GradeSheet.GradeSheetId,
+                TeacherId = teacher.TeacherId,
+            };
+            var requestView = new RequestEditGradeSheetView();
+            requestView.ViewModel.EditGradeSheetForm = form;
+            requestView.SetSendRequestEvent(SendRequest);
+            await ShowDialogHost(requestView);
+        }
+
+        private async void SendRequest(EditGradeSheetForm form)
+        {
+            form.Time = DateTime.Now;
+            var addOK = await _editGradeSheetFormService.AddForm(form);
+            CloseDialog();
+            if (addOK)
+            {
+                NotificationManager.ShowSuccess("Yêu cầu sửa đã được gửi đi!.");
+                return;
+            }
+            NotificationManager.ShowWarning("Yêu cầu sửa gửi đi thất bại!.");
+        }
+
         private async void OnUpdate()
         {
             var editView = new EditGradeSheetView();
@@ -210,11 +302,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             await ShowDialogHost(editView);
         }
 
-        private async void OnAddGradeSheet()
+        private void OnUpdatedAsync(GradeSheet sheet)
         {
-            var uploadView = new UploadGradeSheets();
-            uploadView.GradeSheetViewModel.Classes = Classes;
-            await ShowDialogHost(uploadView);
+            var gradesheet = GradeSheets.FirstOrDefault(gs => gs.GradeSheetId == sheet.GradeSheetId);
+            gradesheet = sheet;
+            gradeSheet.Ranked = GradeSheet.GetRanked(gradeSheet);
         }
     }
 }

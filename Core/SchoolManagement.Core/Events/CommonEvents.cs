@@ -9,5 +9,11 @@ namespace SchoolManagement.Core.Events
 
     public class LogoutSuccessEvent : PubSubEvent
     { }
-    public class UpdateGradeSheetEvent : PubSubEvent<GradeSheet> { }
+
+    public class UpdateGradeSheetEvent : PubSubEvent<GradeSheet>
+    { }
+
+    public class RequestRefreshPageEvent : PubSubEvent
+    {
+    }
 }

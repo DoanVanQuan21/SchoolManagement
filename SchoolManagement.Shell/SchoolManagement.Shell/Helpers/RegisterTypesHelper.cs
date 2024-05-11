@@ -31,6 +31,7 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IExcelService, ExcelService>();
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
             containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
+            containerRegistry.RegisterSingleton<IBlobContainerService, BlobContainerService>();
         }
 
         public static void RegisterTypesModuleAuth(IContainerRegistry containerRegistry)
@@ -46,11 +47,14 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<ISchoolManagementSevice, SchoolManagementService>();
             containerRegistry.RegisterSingleton<IUserService, UserService>();
             containerRegistry.RegisterSingleton<IGradeSheetService, GradeSheetService>();
+            containerRegistry.RegisterSingleton<IDepartmentService, DepartmentService>();
+            containerRegistry.RegisterSingleton<IEducationProgramService, EducationProgramService>();
             containerRegistry.RegisterSingleton<ISubjectService, SubjectService>();
             containerRegistry.RegisterSingleton<ICourseService, CourseService>();
             containerRegistry.RegisterSingleton<IClassService, ClassService>();
             containerRegistry.RegisterSingleton<ITeacherService, TeacherService>();
             containerRegistry.RegisterSingleton<IStudentService, StudentService>();
+            containerRegistry.RegisterSingleton<IEditGradeSheetFormService, EditGradeSheetFormService>();
         }
 
         public static void RegisterTypesModuleMainProject(IContainerRegistry containerRegistry)

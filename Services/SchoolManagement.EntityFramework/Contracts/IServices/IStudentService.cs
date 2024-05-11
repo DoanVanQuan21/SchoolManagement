@@ -5,17 +5,17 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
 {
     public interface IStudentService
     {
-        Student? GetStudent(int studentID);
+        Task<Student?> GetStudentByStudentID(int studentID);
 
-        Student? GetStudent(string studentCode);
+        Task<Student?> GetStudentAndGradeSheets(int userID);
+
         Task<Student?> GetStudentByUserID(int userID);
+        Task<bool> AddStudent(Student student);
 
-        Task<Student?> GetStudentByStudentCodeAsync(string studentCode);
+        Task<int> GetStudentByStudentCode(string studentCode);
 
-        Task<Student?> GetStudentByStudentIDAsync(int studentID);
+        Task<ObservableCollection<Student>> GetStudentOfClassByYear(int classID, int year);
 
-        Task<int> GetStudentIDByStudentCodeAsync(string studentCode);
-
-        Task<ObservableCollection<Student>> GetStudentsByClass(int classID);
+        Task<ObservableCollection<Student>> GetStudentsBySize(int size, int page);
     }
 }

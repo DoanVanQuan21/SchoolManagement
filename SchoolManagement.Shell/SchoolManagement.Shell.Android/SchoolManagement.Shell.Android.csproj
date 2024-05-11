@@ -18,10 +18,12 @@
 
   <ItemGroup>
     <PackageReference Include="ActiproSoftware.Controls.Avalonia" Version="23.1.3" />
+    <PackageReference Include="AsyncImageLoader.Avalonia" Version="3.2.1" />
     <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.0.10.1" />
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.0.10.1" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.19.1" />
     <PackageReference Include="ClosedXML" Version="0.102.2" />
     <PackageReference Include="Deadpikle.AvaloniaProgressRing" Version="0.10.6" />
     <PackageReference Include="Material.Icons.Avalonia" Version="2.1.0" />
@@ -39,8 +41,18 @@
     <ProjectReference Include="..\..\Modules\SchoolManagement.Auth\SchoolManagement.Auth.csproj" />
     <ProjectReference Include="..\..\Modules\SchoolManagement.Database\SchoolManagement.Database.csproj" />
     <ProjectReference Include="..\..\Project\Management.InternalShared\Management.InternalShared.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.AccountManagement\SchoolManagement.AccountManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.ClassManagement\SchoolManagement.ClassManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.CourseManagement\SchoolManagement.CourseManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.DepartmentManagement\SchoolManagement.DepartmentManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.EducationProgramManagement\SchoolManagement.EducationProgramManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.GradeSheetManagement\SchoolManagement.GradeSheetManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.LessonManagement\SchoolManagement.LessonManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.ScheduleManagement\SchoolManagement.ScheduleManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.StudentManagement\SchoolManagement.StudentManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SubjectManagement\SchoolManagement.SubjectManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.TeacherManagement\SchoolManagement.TeacherManagement.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
     <ProjectReference Include="..\..\Services\DialogHost\DialogHost.Avalonia\DialogHost.Avalonia.csproj" />
     <ProjectReference Include="..\SchoolManagement.Shell\SchoolManagement.Shell.csproj" />

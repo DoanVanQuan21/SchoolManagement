@@ -1,7 +1,10 @@
-﻿using Prism.Mvvm;
+﻿using Avalonia.Media.Imaging;
+using Prism.Mvvm;
 using SchoolManagement.Core.Constants;
+using SchoolManagement.Core.Helpers;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
@@ -10,7 +13,7 @@ public partial class User : BindableBase
     private string? firstName;
     private string? lastName;
     private string? gender;
-    private DateTime? dateOfBirth;
+    private DateTime? dateOfBirth = DateTime.Now;
     private string? phoneNumber;
     private string? address;
     private string? email;
@@ -19,10 +22,13 @@ public partial class User : BindableBase
     private string? password;
     private string? role;
     private byte? activeStatus;
-    private DateTime? startDate;
-    private DateTime? endDate;
+    private DateTime startDate = DateTime.Now;
+    private DateTime? endDate = DateTime.Now;
     private Role userRole;
+    private Bitmap imageBitmap;
+    private bool? lockAccount;
 
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Browsable(false)]
     public int UserId { get; set; }
 
@@ -34,6 +40,7 @@ public partial class User : BindableBase
     public string? LastName
     { get => lastName; set { SetProperty(ref lastName, value); } }
 
+    [Browsable(false)]
     public string FullName => $"{FirstName} {LastName}";
 
     [DisplayName("Giới tính")]
@@ -87,7 +94,7 @@ public partial class User : BindableBase
 
     [DisplayName("Ngày bắt đầu")]
     [Browsable(false)]
-    public DateTime? StartDate
+    public DateTime StartDate
     { get => startDate; set { SetProperty(ref startDate, value); } }
 
     [DisplayName("Ngày kết thúc")]
@@ -95,9 +102,17 @@ public partial class User : BindableBase
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }
 
+    [Browsable(false)]
+    public bool? LockAccount { get => lockAccount; set => SetProperty(ref lockAccount, value); }
+
     [NotMapped]
+    [DisplayName("Role")]
     public Role UserRole
-    { get => userRole; set { SetProperty(ref userRole, value); } }
+    { get => userRole; set { SetProperty(ref userRole, value); UpdateRole(); } }
+
+    [Browsable(false)]
+    [NotMapped]
+    public Bitmap ImageBitmap { get => imageBitmap; set => SetProperty(ref imageBitmap, value); }
 
     [Browsable(false)]
     public virtual ICollection<Student> Students { get; set; } = new List<Student>();
@@ -107,6 +122,30 @@ public partial class User : BindableBase
 
     public User()
     {
+        UpdateImage();
+    }
+
+    public void UpdateRole()
+    {
+        Role = UserRole.ToString().ToLower();
+    }
+
+    public async void UpdateImage()
+    {
+        try
+        {
+            ImageBitmap = await ImageHelper.LoadFromWeb(new Uri(Image));
+            if (ImageBitmap == null)
+            {
+                ImageBitmap = await ImageHelper.LoadImageFromResourse(ImagePath.DefaultUserImage);
+                return;
+            }
+        }
+        catch (Exception e)
+        {
+            ImageBitmap = await ImageHelper.LoadImageFromResourse(ImagePath.DefaultUserImage);
+            Debug.WriteLine(e);
+        }
     }
 
     public User(User user)
@@ -130,5 +169,6 @@ public partial class User : BindableBase
         ActiveStatus = user.ActiveStatus;
         StartDate = user.StartDate;
         EndDate = user.EndDate;
+        UpdateImage();
     }
 }

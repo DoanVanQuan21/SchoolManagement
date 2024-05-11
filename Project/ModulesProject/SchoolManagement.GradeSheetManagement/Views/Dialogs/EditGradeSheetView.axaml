@@ -7,79 +7,85 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.GradeSheetManagement.ViewModels"
-    MinWidth="750"
-    MaxWidth="900"
-    MaxHeight="600"
+    MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
     x:DataType="vm:EditGradeSheetViewModel"
     mc:Ignorable="d">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*" />
-            <ColumnDefinition Width="7*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="8*" />
-            <RowDefinition Height="70" />
-        </Grid.RowDefinitions>
-        <Label
-            Grid.ColumnSpan="2"
-            Classes="title"
-            Content="{Binding Title}" />
-        <ScrollViewer Grid.Row="1" Grid.Column="1">
-            <cc:PropertyGrid SelectedObject="{Binding GradeSheet}" Template="{StaticResource PropertyGridTemplate}" />
-        </ScrollViewer>
-        <StackPanel
-            Grid.Row="1"
-            Grid.Column="0"
-            Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Họ và tên:" />
-                <Label Content="{Binding GradeSheet.Student.User.FullName}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Mã học sinh:" />
-                <Label Content="{Binding GradeSheet.Student.StudentCode}" />
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Label Content="Lớp:" />
-                <Label Content="{Binding GradeSheet.Class.ClassName}" />
-            </StackPanel>
-
-        </StackPanel>
-        <Border
-            Grid.Row="2"
-            Grid.ColumnSpan="2"
-            Background="{actipro:ThemeResource Container1BorderBrush}" />
-        <Button
-            Grid.Row="2"
-            Grid.Column="0"
-            Width="120"
-            Height="40"
-            HorizontalAlignment="Center"
-            Classes="theme-solid accent"
-            Command="{Binding ClickedExit}">
-            <Button.Content>
+    <ScrollViewer>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="7*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="9*" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.ColumnSpan="2"
+                Classes="title"
+                Content="{Binding Title}" />
+            <ScrollViewer Grid.Row="1" Grid.Column="1">
+                <cc:PropertyGrid SelectedObject="{Binding GradeSheet}" Template="{StaticResource PropertyGridTemplate}" />
+            </ScrollViewer>
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="10">
                 <StackPanel Orientation="Horizontal">
-                    <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="Họ và tên:" />
+                    <Label Content="{Binding GradeSheet.Student.User.FullName}" />
                 </StackPanel>
-            </Button.Content>
-        </Button>
-        <Button
-            Grid.Row="2"
-            Grid.Column="1"
-            Width="120"
-            Height="40"
-            HorizontalAlignment="Center"
-            Classes="theme-solid accent"
-            Command="{Binding ClickedUpdate}">
-            <Button.Content>
                 <StackPanel Orientation="Horizontal">
-                    <PathIcon Data="{StaticResource EditGeometry}" />
-                    <Label>Cập nhật</Label>
+                    <Label Content="Mã học sinh:" />
+                    <Label Content="{Binding GradeSheet.Student.StudentCode}" />
                 </StackPanel>
-            </Button.Content>
-        </Button>
-    </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Lớp:" />
+                    <Label Content="{Binding GradeSheet.Class.ClassName}" />
+                </StackPanel>
+                <Viewbox>
+                    <Image
+                        Width="200"
+                        Height="200"
+                        Source="{Binding GradeSheet.Student.User.Image}"
+                        Stretch="Uniform" />
+                </Viewbox>
+            </StackPanel>
+            <Border
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Background="{actipro:ThemeResource Container1BorderBrush}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Width="120"
+                Height="40"
+                HorizontalAlignment="Center"
+                Classes="theme-solid accent"
+                Command="{Binding ClickedExit}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <PathIcon Data="{StaticResource ArrowExitGeometry}" />
+                        <Label>Thoát</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="120"
+                Height="40"
+                HorizontalAlignment="Center"
+                Classes="theme-solid accent"
+                Command="{Binding ClickedUpdate}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <PathIcon Data="{StaticResource EditGeometry}" />
+                        <Label>Cập nhật</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

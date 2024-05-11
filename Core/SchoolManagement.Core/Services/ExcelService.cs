@@ -1,5 +1,4 @@
-﻿using ActiproSoftware.Extensions;
-using ClosedXML.Excel;
+﻿using ClosedXML.Excel;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -67,7 +66,6 @@ namespace SchoolManagement.Core.Services
                     gradeSheet = (GradeSheet)GetRow<GradeSheet>(row, col, totalCol);
 
                     gradeSheet.StudentId = studentID;
-                    gradeSheet.ClassId = classID;
                     gradeSheets.Add(gradeSheet);
                     row++;
                     col = 3;
@@ -147,8 +145,8 @@ namespace SchoolManagement.Core.Services
             while (col < totalCol)
             {
                 worksheet.Cell(row, col).Value.TryGetText(out string value);
-                _ = float.TryParse(value,out var result);
-                
+                _ = double.TryParse(value, out var result);
+
                 properties[index++].SetValue(obj, result);
                 col++;
             }
