@@ -13,20 +13,23 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
         }
 
-        public async Task<bool> Accepted(EditGradeSheetForm form)
+        public Task<bool> Accepted(EditGradeSheetForm form)
         {
-            if (form == null)
-            {
-                return false;
-            }
-            var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
-            if (f == null)
-            {
-                return false;
-            }
-            f.Status = AceptFormStatus.Accept.ToString();
-            await _context.SaveChangesAsync();
-            return true;
+            return Task.Factory.StartNew(() => {
+
+                if (form == null)
+                {
+                    return false;
+                }
+                var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+                if (f == null)
+                {
+                    return false;
+                }
+                f.Status = AceptFormStatus.Accept.ToString();
+                _context.SaveChanges();
+                return true;
+            });
         }
 
         public Task<bool> UnAccepted(EditGradeSheetForm form)

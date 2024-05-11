@@ -9,6 +9,7 @@ namespace SchoolManagement.EntityFramework.Services
     public class ClassService : IClassService
     {
         private ISchoolManagementSevice _schoolManagementSevice;
+
         public ClassService()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
@@ -46,6 +47,11 @@ namespace SchoolManagement.EntityFramework.Services
             {
                 return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
             });
+        }
+
+        public async Task<ObservableCollection<Class>> GetClasses()
+        {
+            return await _schoolManagementSevice.ClassRepository.GetAllAsync();
         }
 
         public async Task<ObservableCollection<Class>> GetClassesBySize(int size, int page)

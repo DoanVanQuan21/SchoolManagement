@@ -84,8 +84,9 @@ namespace SchoolManagement.AccountManagement.ViewModels
                 NotificationManager.ShowWarning("Thêm tài khoản không thành công!.");
                 return;
             }
-            await GetAccounts();
+            CloseDialog();  
             NotificationManager.ShowSuccess($"Thêm tài khoản thành công!.");
+            await GetAccounts();
         }
 
         private async Task GetAccounts()

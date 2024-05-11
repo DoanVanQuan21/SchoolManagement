@@ -10,13 +10,16 @@ using SchoolManagement.ClassManagement.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
+using SchoolManagement.CourseManagement.Views;
 using SchoolManagement.GradeSheetManagement.Views;
 using SchoolManagement.MainProject.Views;
 using SchoolManagement.SettingAccount.Views;
 using SchoolManagement.Shell.Helpers;
 using SchoolManagement.Shell.Services.Contracts;
 using SchoolManagement.Shell.Views;
+using SchoolManagement.StudentManagement.Views;
 using SchoolManagement.SubjectManagement.Views;
+using SchoolManagement.TeacherManagement.Views;
 using SchoolManagement.UI.Geometry;
 using System;
 using System.Diagnostics;
@@ -95,9 +98,12 @@ namespace SchoolManagement.Shell
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý điểm", Geometry = GeometryString.ClipboardTextEditorGeometry, Type = typeof(GradeSheetManagementView), Roles = "teacher" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm thành phần", Geometry = GeometryString.ClipboardDataBarGeometry, Type = typeof(ComponentGradeSheetView), Roles = "student" });
             RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Điểm tổng kết", Geometry = GeometryString.ClipboardDataBarGeometry, Type = typeof(SemesterAverageView), Roles = "student" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý tài khoản", Geometry = GeometryString.PeopleTeamGeometry, Type = typeof(AccountManagementView), Roles = "teacher" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý môn học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(SubjectManagementView), Roles = "teacher" });
-            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý lớp học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(ClassManagementView), Roles = "teacher" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý tài khoản", Geometry = GeometryString.PeopleTeamGeometry, Type = typeof(AccountManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý môn học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(SubjectManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý lớp học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(ClassManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý khóa học", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(CourseManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý học sinh", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(StudentManagementView), Roles = "admin" });
+            RootContext.DesktopAppMenus.Add(new AppMenu() { Label = "Quản lý giáo viên", Geometry = GeometryString.AccountsManagerGeometry, Type = typeof(TeacherManagementView), Roles = "admin" });
         }
     }
 }

@@ -94,7 +94,11 @@
         Cancel,
         Waitting
     }
-
+    public enum CommonStatus
+    {
+        Closed,
+        Active
+    }
     public enum Theme
     {
         Light = 0,

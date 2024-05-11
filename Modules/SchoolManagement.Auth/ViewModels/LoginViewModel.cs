@@ -59,11 +59,12 @@ namespace SchoolManagement.Auth.ViewModels
                 return;
             }
             var (isLogin, user) = _userService.Login(User);
-            if (user != null)
+            if (user == null)
             {
-                RootContext.CurrentUser = user;
+                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
             }
-            if (user.LockAccount==true)
+            RootContext.CurrentUser = user;
+            if (user.LockAccount == true)
             {
                 NotificationManager.ShowWarning("Tài khoản của bạn đã bị khóa!.");
                 return;

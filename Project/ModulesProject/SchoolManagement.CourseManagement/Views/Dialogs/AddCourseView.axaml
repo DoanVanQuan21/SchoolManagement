@@ -1,0 +1,163 @@
+<UserControl
+    x:Class="SchoolManagement.CourseManagement.Views.Dialogs.AddCourseView"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:SchoolManagement.CourseManagement.ViewModels"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    x:DataType="vm:AddCourseViewModel"
+    mc:Ignorable="d">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="5*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.ColumnSpan="2"
+            HorizontalAlignment="Center"
+            Classes="title"
+            Content="{Binding Title}" />
+
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="0"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Dates}"
+            PlaceholderText="Chọn năm học"
+            SelectedValue="{Binding CurrentDate}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Year}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Semesters}"
+            PlaceholderText="Chọn học kỳ"
+            SelectedValue="{Binding CurrentSemester}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding Value}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="2"
+            Grid.Column="0"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Classes}"
+            PlaceholderText="Chọn lớp học"
+            SelectedValue="{Binding CurrentClass}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="2"
+            Grid.Column="1"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Subjects}"
+            PlaceholderText="Chọn môn học"
+            SelectedValue="{Binding CurrentSubject}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding SubjectName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="3"
+            Grid.Column="0"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding Teachers}"
+            PlaceholderText="Chọn giáo viên"
+            SelectedValue="{Binding CurrentTeacher}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding User.FullName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox
+            Grid.Row="3"
+            Grid.Column="1"
+            Height="35"
+            Margin="10"
+            VerticalContentAlignment="Center"
+            Classes="theme-outline accent"
+            ItemsSource="{Binding EducationPrograms}"
+            PlaceholderText="Chọn chương trình"
+            SelectedValue="{Binding CurrentEducationProgram}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock VerticalAlignment="Center" Text="{Binding EducationName}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ScrollViewer Grid.Row="4" Grid.ColumnSpan="2">
+            <cc:PropertyGrid
+                Column="Two"
+                SelectedObject="{Binding Course}"
+                Template="{StaticResource PropertyGridTemplate}" />
+        </ScrollViewer>
+        <Border
+            Grid.Row="5"
+            Grid.ColumnSpan="2"
+            Background="{actipro:ThemeResource Container1BorderBrush}" />
+        <Button
+            Grid.Row="5"
+            Grid.Column="0"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedExit}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <PathIcon Data="{StaticResource ArrowExitGeometry}" />
+                    <Label>Thoát</Label>
+                </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button
+            Grid.Row="5"
+            Grid.Column="1"
+            Width="100"
+            Height="40"
+            Classes="accent"
+            Command="{Binding ClickedOK}"
+            Content="OK" />
+    </Grid>
+</UserControl>

@@ -49,21 +49,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DialogHost", "DialogHost", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DialogHost.Avalonia", "Services\DialogHost\DialogHost.Avalonia\DialogHost.Avalonia.csproj", "{B802BF62-1DC8-4668-BF48-71F3DF1788CA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.AccountManagement", "Project\ModulesProject\SchoolManagement.AccountManagement\SchoolManagement.AccountManagement.csproj", "{B38C15F3-64A3-4401-9ADE-8CEC0AB78A65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.AccountManagement", "Project\ModulesProject\SchoolManagement.AccountManagement\SchoolManagement.AccountManagement.csproj", "{B38C15F3-64A3-4401-9ADE-8CEC0AB78A65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.ClassManagement", "Project\ModulesProject\SchoolManagement.ClassManagement\SchoolManagement.ClassManagement.csproj", "{D118BE4C-C814-4A32-9580-A32B5A530600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.ClassManagement", "Project\ModulesProject\SchoolManagement.ClassManagement\SchoolManagement.ClassManagement.csproj", "{D118BE4C-C814-4A32-9580-A32B5A530600}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.CourseManagement", "Project\ModulesProject\SchoolManagement.CourseManagement\SchoolManagement.CourseManagement.csproj", "{9E8404AB-898C-4F6C-B20D-73C343C6585D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.CourseManagement", "Project\ModulesProject\SchoolManagement.CourseManagement\SchoolManagement.CourseManagement.csproj", "{9E8404AB-898C-4F6C-B20D-73C343C6585D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.DepartmentManagement", "Project\ModulesProject\SchoolManagement.DepartmentManagement\SchoolManagement.DepartmentManagement.csproj", "{E01A3F1C-F6A1-4C80-8A13-BE206963ABD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.DepartmentManagement", "Project\ModulesProject\SchoolManagement.DepartmentManagement\SchoolManagement.DepartmentManagement.csproj", "{E01A3F1C-F6A1-4C80-8A13-BE206963ABD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.SubjectManagement", "Project\ModulesProject\SchoolManagement.SubjectManagement\SchoolManagement.SubjectManagement.csproj", "{44EE1344-AF85-4C37-9393-472CAC01C2C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.SubjectManagement", "Project\ModulesProject\SchoolManagement.SubjectManagement\SchoolManagement.SubjectManagement.csproj", "{44EE1344-AF85-4C37-9393-472CAC01C2C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.ScheduleManagement", "Project\ModulesProject\SchoolManagement.ScheduleManagement\SchoolManagement.ScheduleManagement.csproj", "{3359C57F-0C1E-42EF-A7EF-DD9937E955C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.ScheduleManagement", "Project\ModulesProject\SchoolManagement.ScheduleManagement\SchoolManagement.ScheduleManagement.csproj", "{3359C57F-0C1E-42EF-A7EF-DD9937E955C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.EducationProgramManagement", "Project\ModulesProject\SchoolManagement.EducationProgramManagement\SchoolManagement.EducationProgramManagement.csproj", "{3E1A821D-7D53-4228-A30B-3E55C3FECAE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.EducationProgramManagement", "Project\ModulesProject\SchoolManagement.EducationProgramManagement\SchoolManagement.EducationProgramManagement.csproj", "{3E1A821D-7D53-4228-A30B-3E55C3FECAE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.LessonManagement", "Project\ModulesProject\SchoolManagement.LessonManagement\SchoolManagement.LessonManagement.csproj", "{BDA02E45-9657-4E93-B404-6BD66F8BEC5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SchoolManagement.LessonManagement", "Project\ModulesProject\SchoolManagement.LessonManagement\SchoolManagement.LessonManagement.csproj", "{BDA02E45-9657-4E93-B404-6BD66F8BEC5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.StudentManagement", "Project\ModulesProject\SchoolManagement.StudentManagement\SchoolManagement.StudentManagement.csproj", "{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolManagement.TeacherManagement", "Project\ModulesProject\SchoolManagement.TeacherManagement\SchoolManagement.TeacherManagement.csproj", "{C39E1652-C5EE-4CF0-B995-0274A7106129}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,6 +179,14 @@ Global
 		{BDA02E45-9657-4E93-B404-6BD66F8BEC5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA02E45-9657-4E93-B404-6BD66F8BEC5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA02E45-9657-4E93-B404-6BD66F8BEC5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C39E1652-C5EE-4CF0-B995-0274A7106129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C39E1652-C5EE-4CF0-B995-0274A7106129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C39E1652-C5EE-4CF0-B995-0274A7106129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C39E1652-C5EE-4CF0-B995-0274A7106129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -202,6 +214,8 @@ Global
 		{3359C57F-0C1E-42EF-A7EF-DD9937E955C4} = {1630DD87-584A-473B-B345-5F6B471F780D}
 		{3E1A821D-7D53-4228-A30B-3E55C3FECAE3} = {1630DD87-584A-473B-B345-5F6B471F780D}
 		{BDA02E45-9657-4E93-B404-6BD66F8BEC5A} = {1630DD87-584A-473B-B345-5F6B471F780D}
+		{E8A7687B-EEBF-4DD8-9E9A-AE401FA6C9ED} = {1630DD87-584A-473B-B345-5F6B471F780D}
+		{C39E1652-C5EE-4CF0-B995-0274A7106129} = {1630DD87-584A-473B-B345-5F6B471F780D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E2AA702-FAE0-4992-9E4C-3FD7CB556392}

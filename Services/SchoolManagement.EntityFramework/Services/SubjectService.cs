@@ -9,6 +9,7 @@ namespace SchoolManagement.EntityFramework.Services
     public class SubjectService : ISubjectService
     {
         private ISchoolManagementSevice _schoolManagementSevice;
+
         public SubjectService()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
@@ -16,14 +17,20 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<Subject?> GetSubject(int subjectID)
         {
-            return Task.Factory.StartNew(() => { 
-                return _schoolManagementSevice.SubjectRepository.FirstOrDefault(s=>s.SubjectId == subjectID);
+            return Task.Factory.StartNew(() =>
+            {
+                return _schoolManagementSevice.SubjectRepository.FirstOrDefault(s => s.SubjectId == subjectID);
             });
         }
 
         public async Task<Subject?> GetSubjectByID(int id)
         {
             return await _schoolManagementSevice.SubjectRepository.GetSubjectByID(id);
+        }
+
+        public Task<ObservableCollection<Subject>> GetSubjects()
+        {
+            return _schoolManagementSevice.SubjectRepository.GetAllAsync();
         }
 
         public async Task<ObservableCollection<Subject>> GetSubjectsBySize(int size, int page)

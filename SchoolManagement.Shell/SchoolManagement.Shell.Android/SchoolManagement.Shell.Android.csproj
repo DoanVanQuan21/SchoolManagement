@@ -50,7 +50,9 @@
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.LessonManagement\SchoolManagement.LessonManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.ScheduleManagement\SchoolManagement.ScheduleManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SettingAccount\SchoolManagement.SettingAccount.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.StudentManagement\SchoolManagement.StudentManagement.csproj" />
     <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.SubjectManagement\SchoolManagement.SubjectManagement.csproj" />
+    <ProjectReference Include="..\..\Project\ModulesProject\SchoolManagement.TeacherManagement\SchoolManagement.TeacherManagement.csproj" />
     <ProjectReference Include="..\..\Project\SchoolManagement.MainProject\SchoolManagement.MainProject.csproj" />
     <ProjectReference Include="..\..\Services\DialogHost\DialogHost.Avalonia\DialogHost.Avalonia.csproj" />
     <ProjectReference Include="..\SchoolManagement.Shell\SchoolManagement.Shell.csproj" />

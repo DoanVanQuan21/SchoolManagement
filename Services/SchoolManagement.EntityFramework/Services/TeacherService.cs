@@ -56,5 +56,26 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return await _schoolManagementSevice.TeacherRepository.GetAllAsync();
         }
+
+        public async Task<ObservableCollection<Teacher>> GetTeachersBySize(int size, int page)
+        {
+            return await _schoolManagementSevice.TeacherRepository.GetRecordBySize(size, page);
+        }
+
+        public async Task<ObservableCollection<Teacher>> GetTeachersBySubjectID(int subjectID)
+        {
+            var teachers = new ObservableCollection<Teacher>();
+            var ts = _schoolManagementSevice.TeacherRepository.Where(t => t.SubjectId == subjectID);
+            if (ts?.Any() == false)
+            {
+                return teachers;
+            }
+            foreach (var t in ts)
+            {
+                t.User = await _userService.GetUserAsync(t.UserId);
+            }
+            teachers.AddRange(ts);
+            return teachers;
+        }
     }
 }

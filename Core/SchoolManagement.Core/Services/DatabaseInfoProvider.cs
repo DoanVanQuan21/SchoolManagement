@@ -10,13 +10,34 @@ namespace SchoolManagement.Core.Services
     {
         private readonly IAppManager _appManager;
         private readonly INotificationManager _notificationManager;
-        public ServerInfor ServerInfor { get; set; }
-
         public DatabaseInfoProvider()
         {
             _appManager = Ioc.Resolve<IAppManager>();
             _notificationManager = Ioc.Resolve<INotificationManager>();
             InitServerInfor();
+        }
+
+        public ServerInfor ServerInfor { get; set; }
+        public string GetIpV4Address()
+        {
+            var hostname = GetHostName();
+            var addresses = Dns.GetHostByName(hostname).AddressList;
+            if (addresses == null)
+            {
+                return string.Empty;
+            }
+            var ipV4 = "";
+            if (addresses.Length <= 0)
+            {
+                return string.Empty;
+            }
+            var lastIndex = addresses.Length - 1;
+            return addresses[lastIndex].ToString();
+        }
+
+        private string GetHostName()
+        {
+            return Dns.GetHostName();
         }
 
         private void InitServerInfor()
@@ -37,7 +58,7 @@ namespace SchoolManagement.Core.Services
             {
                 ServerInfor = new()
                 {
-                    ServerName = "192.168.1.103",
+                    ServerName = " 204.0.33.136",
                     User = "mobileplatform",
                     Password = "123",
                 };
@@ -50,7 +71,7 @@ namespace SchoolManagement.Core.Services
                 {
                     ServerInfor = new()
                     {
-                        ServerName = "192.168.1.103",
+                        ServerName = " 204.0.33.136",
                         User = "mobileplatform",
                         Password = "123",
                     };
@@ -78,28 +99,6 @@ namespace SchoolManagement.Core.Services
             //    Password = "admin@123",
             //};
             _appManager.BootSetting.ServerInfor = ServerInfor;
-        }
-
-        private string GetHostName()
-        {
-            return Dns.GetHostName();
-        }
-
-        public string GetIpV4Address()
-        {
-            var hostname = GetHostName();
-            var addresses = Dns.GetHostByName(hostname).AddressList;
-            if (addresses == null)
-            {
-                return string.Empty;
-            }
-            var ipV4 = "";
-            if (addresses.Length <= 0)
-            {
-                return string.Empty;
-            }
-            var lastIndex = addresses.Length - 1;
-            return addresses[lastIndex].ToString();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<bool> AddClass(Class _class);
         Task<bool> DeleteClass(int classID);
         Task<ObservableCollection<Class>> GetAllClassesByID(IList<int> ids);
+        Task<ObservableCollection<Class>> GetClasses();
         Task<Class> GetClassByID(int classID);
         Task<ObservableCollection<Class>> GetClassesBySize(int size, int page);
     }

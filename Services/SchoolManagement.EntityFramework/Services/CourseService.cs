@@ -11,6 +11,7 @@ namespace SchoolManagement.EntityFramework.Services
         private readonly IClassService _classService;
         private ISchoolManagementSevice _schoolManagementSevice;
         private readonly ISubjectService _subjectService;
+
         public CourseService() : base()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
@@ -66,6 +67,50 @@ namespace SchoolManagement.EntityFramework.Services
                 && c.ClassId == classID
                 && c.StartDate.Year == year && c.Semester == semester);
                 return course;
+            });
+        }
+
+        public Task<ObservableCollection<Course>> GetCourses(int year, string semester, int classId)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var courses = new ObservableCollection<Course>();
+                var actualCourses = _schoolManagementSevice.CourseRepository.Where(c => c.ClassId == classId && c.StartDate.Year == year && c.Semester == semester);
+                if (actualCourses?.Any() == false)
+                {
+                    return courses;
+                }
+                courses.AddRange(actualCourses);
+                return courses;
+            });
+        }
+
+        public Task<List<int>> GetSubjectIDs(int classID,int year, string semester)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var ids= new List<int>();
+                var courses = _schoolManagementSevice.CourseRepository.Where(c => c.ClassId == classID && c.StartDate.Year == year && c.Semester == semester);
+                if( courses?.Any() == false)
+                {
+                    return ids;
+                }
+                var actualIds = courses.Select(c => c.SubjectId);
+                ids.AddRange(actualIds);
+                return ids;
+            });
+        }
+
+        public Task<bool> AddCourse(Course course)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if(course == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.CourseRepository.Add(course);
+                return true;
             });
         }
     }

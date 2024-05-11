@@ -14,7 +14,8 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         ObservableCollection<User> GetAllStudentsByCourse(int classID, int subjectID);
 
         ObservableCollection<User> GetTeacherByDepartment(int departmentID);
-
+        Task<ObservableCollection<User>> GetAccountOfStudents();
+        Task<ObservableCollection<User>> GetAccountOfTeachers();
         (bool, User) Login(User user);
 
         bool RegisterAccount(User user);

@@ -39,15 +39,15 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox
-            Grid.Row="0"
-            Grid.Column="1"
+            Grid.Row="1"
+            Grid.Column="0"
             Height="35"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Semesters}"
             PlaceholderText="Chọn học kỳ"
-            SelectedValue="{Binding Semester}">
+            SelectedValue="{Binding CurrentSemester}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock VerticalAlignment="Center" Text="{Binding Value}" />
@@ -55,69 +55,36 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <ComboBox
-            Grid.Row="1"
-            Grid.Column="0"
+            Grid.Row="0"
+            Grid.Column="1"
             Height="35"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
             PlaceholderText="Chọn lớp học"
-            SelectedValue="{Binding Class}">
+            SelectedValue="{Binding CurrentClass}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
                 </DataTemplate>
             </ComboBox.ItemTemplate>
         </ComboBox>
-        <ComboBox
+        <Button
             Grid.Row="1"
             Grid.Column="1"
             Height="35"
-            Margin="10"
-            VerticalContentAlignment="Center"
-            Classes="theme-outline accent"
-            ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn môn học"
-            SelectedValue="{Binding Class}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox
-            Grid.Row="2"
-            Grid.Column="0"
-            Height="35"
-            Margin="10"
-            VerticalContentAlignment="Center"
-            Classes="theme-outline accent"
-            ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn giáo viên"
-            SelectedValue="{Binding Class}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
-        <ComboBox
-            Grid.Row="2"
-            Grid.Column="1"
-            Height="35"
-            Margin="10"
-            VerticalContentAlignment="Center"
-            Classes="theme-outline accent"
-            ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn chương trình"
-            SelectedValue="{Binding Class}">
-            <ComboBox.ItemTemplate>
-                <DataTemplate>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding ClassName}" />
-                </DataTemplate>
-            </ComboBox.ItemTemplate>
-        </ComboBox>
+            HorizontalAlignment="Left"
+            Classes="accent"
+            Command="{Binding ClickedAddCommand}">
+            <Button.Content>
+                <DockPanel>
+                    <PathIcon Data="{StaticResource AddGeometry}" />
+                    <Label>Thêm mới</Label>
+                </DockPanel>
+            </Button.Content>
+        </Button>
+
         <Grid Grid.Row="3" Grid.ColumnSpan="3">
             <progRing:ProgressRing
                 Grid.Row="1"
@@ -140,55 +107,46 @@
                 HeadersVisibility="All"
                 IsReadOnly="True"
                 IsVisible="{Binding DataLoaded}"
-                ItemsSource="{Binding GradeSheets, Mode=TwoWay}"
-                SelectedItem="{Binding GradeSheet}">
+                ItemsSource="{Binding Coureses, Mode=TwoWay}"
+                SelectedItem="{Binding SelectedCourse}">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding Student.User.FullName}"
-                        Header="Họ và tên" />
+                        Binding="{Binding Subject.SubjectName}"
+                        Header="Môn" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding FirstRegularScore}"
-                        Header="TX1" />
+                        Binding="{Binding Teacher.User.FullName}"
+                        Header="Giáo viên" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding SecondRegularScore}"
-                        Header="TX2" />
+                        Binding="{Binding EducationProgram.EducationName}"
+                        Header="Chương trình đào tạo" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding ThirdRegularScore}"
-                        Header="TX3" />
+                        Binding="{Binding StartDate}"
+                        Header="Thời gian bắt đầu" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding FourRegularScore}"
-                        Header="TX4" />
+                        Binding="{Binding EndDate}"
+                        Header="Thời gian kết thúc" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding MidtermScore}"
-                        Header="Giữa kỳ" />
+                        Binding="{Binding Semester}"
+                        Header="Học kỳ" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
-                        Binding="{Binding FinalScore}"
-                        Header="Cuối kỳ" />
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="150"
-                        Binding="{Binding SemesterAverage}"
-                        Header="Điểm TB" />
-                    <DataGridTextColumn
-                        Width="*"
-                        MinWidth="150"
-                        Binding="{Binding Ranked}"
-                        Header="Xếp loại" />
+                        Binding="{Binding Status}"
+                        Header="Trạng thái" />
+
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
@@ -205,26 +163,11 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}"
-                                    IsEnabled="{Binding !Lock}">
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUpdateCommand}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
                                             <Label>Cập nhật</Label>
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                                <Button
-                                    Width="120"
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedSendRequestEditCommand}">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource SendGeometry}" />
-                                            <Label>Yêu cầu sửa</Label>
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

@@ -28,6 +28,36 @@ namespace SchoolManagement.EntityFramework.Services
             });
         }
 
+        public Task<ObservableCollection<User>> GetAccountOfStudents()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var accounts = new ObservableCollection<User>();
+                var accountOfStudents = _schoolManagementSevice.UserRepository.Where(s => s.Role == "student" && s.LockAccount == false);
+                if (accountOfStudents?.Any() == false)
+                {
+                    return accounts;
+                }
+                accounts.AddRange(accountOfStudents);
+                return accounts;
+            });
+        }
+
+        public Task<ObservableCollection<User>> GetAccountOfTeachers()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var accounts = new ObservableCollection<User>();
+                var accountOfTeachers = _schoolManagementSevice.UserRepository.Where(s => s.Role == "teacher" && s.LockAccount == false);
+                if (accountOfTeachers?.Any() == false)
+                {
+                    return accounts;
+                }
+                accounts.AddRange(accountOfTeachers);
+                return accounts;
+            });
+        }
+
         public async Task<ObservableCollection<User>> GetAccounts()
         {
             return await _schoolManagementSevice.UserRepository.GetAllAsync();

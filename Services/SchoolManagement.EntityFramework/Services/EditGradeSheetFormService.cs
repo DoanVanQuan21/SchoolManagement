@@ -15,6 +15,7 @@ namespace SchoolManagement.EntityFramework.Services
         public EditGradeSheetFormService()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
+
             _gradeSheetService = Ioc.Resolve<IGradeSheetService>();
             _teacherService = Ioc.Resolve<ITeacherService>();
         }

@@ -10,16 +10,29 @@ namespace SchoolManagement.EntityFramework.Services
     {
         private readonly ISchoolManagementSevice _schoolManagementSevice;
         private readonly IUserService _userService;
+
         public StudentService()
         {
             _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
             _userService = Ioc.Resolve<IUserService>();
         }
 
+        public Task<bool> AddStudent(Student student)
+        {
+            return Task.Factory.StartNew(() => {
+                if (student == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.StudentRepository.Add(student);
+                return true;
+            });
+        }
+
         public async Task<Student?> GetStudentAndGradeSheets(int userID)
         {
             var student = await GetStudentByUserID(userID);
-            if(student == null)
+            if (student == null)
             {
                 return student;
             }
@@ -32,7 +45,7 @@ namespace SchoolManagement.EntityFramework.Services
             return Task.Factory.StartNew(() =>
             {
                 var student = _schoolManagementSevice.StudentRepository.FirstOrDefault(s => s.StudentCode == studentCode);
-                if(student == null)
+                if (student == null)
                 {
                     return 0;
                 }
@@ -69,6 +82,11 @@ namespace SchoolManagement.EntityFramework.Services
                 students.Add(student);
             }
             return students;
+        }
+
+        public async Task<ObservableCollection<Student>> GetStudentsBySize(int size, int page)
+        {
+            return await _schoolManagementSevice.StudentRepository.GetRecordBySize(size, page);
         }
     }
 }
