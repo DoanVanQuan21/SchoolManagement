@@ -1,8 +1,10 @@
 ﻿using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
+using System;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
@@ -10,6 +12,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
     public class SemesterAverageViewModel : BaseRegionViewModel
     {
         private const int DEFAULT_NUMBER_SEMESTER = 2;
+        private const double MIN_GOOD_SCORE = 5.0;
+        private const double MIN_EXCELLENT_SCORE = 8.0;
+        private const double MIN_ALL_GRADESHEET_EXCELLENT_SCORE = 6.5;
+        private const int NUMBER_OF_RANKED = 4;
         private Date currentDate;
         private SemesterAverage semesterAverage;
 
@@ -91,6 +97,8 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                     }
                     var count = 0;
                     double totalGrade = 0;
+                    var ranked = Ranked.Excellent;
+                    var semesterAvers = new List<double>();
                     foreach (var grade in student.GradeSheets)
                     {
                         if (grade.Course == null)
@@ -101,19 +109,101 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                         {
                             continue;
                         }
+                        var semesAver = (double)grade.SemesterAverage;
                         count++;
-                        totalGrade += (double)grade.SemesterAverage;
+                        totalGrade += semesAver;
+                        semesterAvers.Add(semesAver);
                     }
-                    if (count <= 0)
+                    if (count <= 8)
                     {
                         SetDefaultSemesterAverage(sem);
                         continue;
                     }
-                    sem.TotalSubject = count;
-                    sem.Average = totalGrade / count;
+                    if (IsExcellentRanked(semesterAvers))
+                    {
+                        SetSemester(Ranked.Excellent, count, totalGrade / count, sem);
+                        countSemester++;
+                        continue;
+                    }
+                    if (IsGoodRanked(semesterAvers))
+                    {
+                        SetSemester(Ranked.Good, count, totalGrade / count, sem);
+                        countSemester++;
+                        continue;
+                    }
+                    if (IsAverageRanked(semesterAvers))
+                    {
+                        SetSemester(Ranked.Average, count, totalGrade / count, sem);
+                        countSemester++;
+                        continue;
+                    }
+                    SetSemester(Ranked.BelowAverage, count, totalGrade / count, sem);
                     countSemester++;
+                    continue;
                 }
             });
+        }
+        private void SetSemester(string rank,int totalSubject, double average,SemesterAverage sem)
+        {
+            sem.TotalSubject = totalSubject;
+            sem.Rank = rank;
+            sem.Average = average;
+        }
+        private bool IsGoodRanked(List<double> semesterAvers)
+        {
+            var isAboveFive = semesterAvers.Any(s => s < 5.0);
+            if (isAboveFive)
+            {
+                return false;
+            }
+            var aboveSixPointFives = semesterAvers.Where(s => s >= 6.5);
+            if (aboveSixPointFives?.Any() == false)
+            {
+                return false;
+            }
+            if (aboveSixPointFives?.Count() < 6)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsExcellentRanked(List<double> semesterAvers)
+        {
+            var isAboveSixPointFives = semesterAvers.Any(s => s < 6.5);
+            if (isAboveSixPointFives)
+            {
+                return false;
+            }
+            var aboveEights = semesterAvers.Where(s => s >= 8);
+            if (aboveEights?.Any() == false)
+            {
+                return false;
+            }
+            if (aboveEights?.Count() < 6)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool IsAverageRanked(List<double> semesterAvers)
+        {
+            var isAboveThreePointFive = semesterAvers.Any(s => s < 3.5);
+            if (isAboveThreePointFive)
+            {
+                return false;
+            }
+            var aboveEights = semesterAvers.Where(s => s >= 5);
+            if (aboveEights?.Any() == false)
+            {
+                return false;
+            }
+            if (aboveEights?.Count() < 6)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void CalculateFinnalSchoolYear()

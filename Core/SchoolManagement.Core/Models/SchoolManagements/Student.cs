@@ -19,6 +19,7 @@ public partial class Student : BindableBase
     public int UserId
     { get => userId; set { SetProperty(ref userId, value); } }
 
+    [Browsable(false)]
     [DisplayName("Mã học sinh")]
     public string? StudentCode
     { get => studentCode; set { SetProperty(ref studentCode, value); } }

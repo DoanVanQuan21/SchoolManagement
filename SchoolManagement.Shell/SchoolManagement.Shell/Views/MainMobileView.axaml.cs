@@ -21,7 +21,7 @@ namespace SchoolManagement.Shell.Views
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
         {
-            viewModel.NotificationManager.InitNotification(this, Avalonia.Controls.Notifications.NotificationPosition.TopRight, 1);
+            viewModel.NotificationManager.InitNotification(this, Avalonia.Controls.Notifications.NotificationPosition.BottomLeft, 1);
             base.OnAttachedToVisualTree(e);
         }
 

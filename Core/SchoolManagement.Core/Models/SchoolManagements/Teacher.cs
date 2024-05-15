@@ -35,6 +35,7 @@ namespace SchoolManagement.Core.Models.SchoolManagements
         [Browsable(false)]
         public int UserId { get => userId; set => SetProperty(ref userId, value); }
 
+        [Browsable(false)]
         [DisplayName("Mã giáo viên")]
         public string? TeacherCode { get => teacherCode; set => SetProperty(ref teacherCode, value); }
         [Browsable(false)]

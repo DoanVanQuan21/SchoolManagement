@@ -23,6 +23,10 @@ namespace SchoolManagement.EntityFramework.Services
                 {
                     return false;
                 }
+                user.Username = user.FullName.ToLower();
+                user.Password = $"{user.FullName}@{DateTime.Now.Year}";
+                user.StartDate = DateTime.Now;
+                user.LockAccount = false;
                 _schoolManagementSevice.UserRepository.Add(user);
                 return true;
             });
@@ -30,17 +34,7 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<ObservableCollection<User>> GetAccountOfStudents()
         {
-            return Task.Factory.StartNew(() =>
-            {
-                var accounts = new ObservableCollection<User>();
-                var accountOfStudents = _schoolManagementSevice.UserRepository.Where(s => s.Role == "student" && s.LockAccount == false);
-                if (accountOfStudents?.Any() == false)
-                {
-                    return accounts;
-                }
-                accounts.AddRange(accountOfStudents);
-                return accounts;
-            });
+            return _schoolManagementSevice.UserRepository.GetAccountOfStudent();
         }
 
         public Task<ObservableCollection<User>> GetAccountOfTeachers()

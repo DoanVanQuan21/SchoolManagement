@@ -17,8 +17,8 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="2*" />
-            <RowDefinition Height="8*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
         </Grid.RowDefinitions>
 
         <Button
@@ -162,8 +162,8 @@
                                     Command="{Binding ElementName=Container, Path=DataContext.ClickedResetPasswordCommand}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource EditGeometry}" />
-                                            <Label>Đổi mật khẩu</Label>
+                                            <PathIcon Data="{StaticResource ArrowResetGeometry}" />
+                                            <Label>Reset mật khẩu</Label>
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

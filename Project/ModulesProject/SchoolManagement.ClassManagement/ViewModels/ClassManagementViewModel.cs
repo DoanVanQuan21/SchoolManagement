@@ -16,7 +16,6 @@ namespace SchoolManagement.ClassManagement.ViewModels
         private readonly IClassService _classService;
         private readonly ITeacherService _teacherService;
         private readonly IUserService _userService;
-        private readonly ConfirmDeleteClassView _confirmDeleteClassView;
         public override string Title => "Quản lý lớp học";
 
         public override User User { get; protected set; }
@@ -27,7 +26,6 @@ namespace SchoolManagement.ClassManagement.ViewModels
             _teacherService = Ioc.Resolve<ITeacherService>();
             _userService = Ioc.Resolve<IUserService>();
             User = RootContext.CurrentUser;
-            _confirmDeleteClassView = new();
             Classes = new();
             Teachers = new();
             GetClasses().GetAwaiter();
@@ -55,6 +53,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
 
         private async void OnDelete()
         {
+            var _confirmDeleteClassView = new ConfirmDeleteClassView();
             _confirmDeleteClassView.SetOnOkClicked(DeleteClass);
             await ShowDialogHost(_confirmDeleteClassView);
         }

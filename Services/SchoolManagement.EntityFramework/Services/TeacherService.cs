@@ -25,6 +25,15 @@ namespace SchoolManagement.EntityFramework.Services
                 {
                     return false;
                 }
+                var teachers = _schoolManagementSevice.TeacherRepository.GetAll();
+                if (teachers?.Any() == false)
+                {
+                    teacher.TeacherCode = $"GV{DateTime.Now.Year}1";
+                    _schoolManagementSevice.TeacherRepository.Add(teacher);
+                    return true;
+                }
+                var lastTeacher = teachers.LastOrDefault();
+                teacher.TeacherCode = $"GV{DateTime.Now.Year}{(lastTeacher == null ? 1 : (lastTeacher.TeacherId + 1))}";
                 _schoolManagementSevice.TeacherRepository.Add(teacher);
                 return true;
             });

@@ -32,6 +32,7 @@ namespace SchoolManagement.Core.avalonia
             SubcribeEvent();
             AppRegion.Title = Title;
             CheckPlatform();
+            CloseDialog();
         }
 
         public AppRegion AppRegion { get => _appManager.AppRegion; }
@@ -101,7 +102,19 @@ namespace SchoolManagement.Core.avalonia
 
         protected void CloseDialog()
         {
-            DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
+            try
+            {
+                if (!DialogHostAvalonia.DialogHost.IsDialogOpen(_dialogIdentifier))
+                {
+                    return;
+                }
+                DialogHostAvalonia.DialogHost.Close(_dialogIdentifier);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
         }
 
         protected void DefaultView()

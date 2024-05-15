@@ -29,8 +29,9 @@ public partial class Class : BindableBase
     [DisplayName("Số lượng học sinh")]
     public int? NumberOfStudent
     { get => numberOfStudent; set { SetProperty(ref numberOfStudent, value); } }
+    [Browsable(false)]
 
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
-
+    [Browsable(false)]
     public virtual Teacher Teacher { get; set; } = null!;
 }

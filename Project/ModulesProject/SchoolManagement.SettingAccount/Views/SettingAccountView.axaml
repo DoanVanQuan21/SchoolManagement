@@ -79,19 +79,38 @@
             VerticalAlignment="Stretch">
             <cc:PropertyGrid SelectedObject="{Binding User}" Template="{StaticResource PropertyGridTemplate}" />
         </ScrollViewer>
-        <Button
+
+        <StackPanel
             Grid.Row="2"
-            Width="120"
-            Height="40"
             HorizontalAlignment="Center"
-            Classes="theme-solid accent"
-            Command="{Binding ClickedUpdateInformation}">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <PathIcon Data="{StaticResource EditGeometry}" />
-                    <Label>Cập nhật</Label>
-                </StackPanel>
-            </Button.Content>
-        </Button>
+            Orientation="Horizontal">
+            <Button
+                Grid.Row="2"
+                Width="120"
+                Height="40"
+                HorizontalAlignment="Center"
+                Classes="theme-solid accent"
+                Command="{Binding ClickedUpdateInformation}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <PathIcon Data="{StaticResource EditGeometry}" />
+                        <Label>Cập nhật</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                Grid.Row="2"
+                Width="120"
+                Height="40"
+                HorizontalAlignment="Center"
+                Classes="theme-solid accent">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>Đổi mật khẩu</Label>
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+        </StackPanel>
+
     </Grid>
 </UserControl>

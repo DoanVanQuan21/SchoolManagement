@@ -11,7 +11,7 @@ namespace SchoolManagement.Core.Models.Common
 
         public string Semester { get => semester; set => SetProperty(ref semester, value); }
         public int TotalSubject { get => totalSubject; set => SetProperty(ref totalSubject, value); }
-        public double Average { get => average; set { SetProperty(ref average, value); SetRanked(); } }
+        public double Average { get => average; set { SetProperty(ref average, value); } }
         public string Rank { get => rank; set => SetProperty(ref rank, value); }
         public SemesterAverage()
         {
@@ -21,7 +21,6 @@ namespace SchoolManagement.Core.Models.Common
         {
             TotalSubject = totalSubject;
             Average = aver;
-            SetRanked();
         }
         
         public static List<SemesterAverage> SemesterAverages = new() { 

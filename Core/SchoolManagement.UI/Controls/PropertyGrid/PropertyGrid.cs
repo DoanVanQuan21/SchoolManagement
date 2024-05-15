@@ -5,8 +5,6 @@ using Avalonia.Data;
 using Avalonia.Layout;
 using Avalonia.Styling;
 using DynamicData;
-using SchoolManagement.Core.Context;
-using SchoolManagement.Core.Models.Common;
 using SchoolManagement.UI.Helpers;
 using System.ComponentModel;
 using System.Reflection;
@@ -88,7 +86,8 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
                 {
                     ItemsSource = Enum.GetValues(type),
                     Margin = new Thickness(10),
-                    Classes = { Accent }
+                    Classes = { Accent },
+                    SelectedIndex = 1,
                 };
             }
 

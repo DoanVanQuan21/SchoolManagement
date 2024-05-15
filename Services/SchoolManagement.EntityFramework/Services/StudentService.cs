@@ -19,11 +19,21 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<bool> AddStudent(Student student)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
                 if (student == null)
                 {
                     return false;
                 }
+                var students = _schoolManagementSevice.StudentRepository.GetAll();
+                if (students?.Any() == false)
+                {
+                    student.StudentCode = $"ST{DateTime.Now.Year}1";
+                    _schoolManagementSevice.StudentRepository.Add(student);
+                    return true;
+                }
+                var st = students.LastOrDefault();
+                student.StudentCode = $"ST{DateTime.Now.Year}{(st == null ? 1 : st.StudentId)}";
                 _schoolManagementSevice.StudentRepository.Add(student);
                 return true;
             });

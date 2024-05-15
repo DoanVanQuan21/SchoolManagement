@@ -161,12 +161,25 @@
                                     Height="40"
                                     Margin="10"
                                     HorizontalAlignment="Center"
-                                    Classes="theme-solid danger"
+                                    Classes="theme-solid accent"
                                     Command="{Binding ElementName=Container, Path=DataContext.ClickedDeleteCommand}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label>Xóa</Label>
+                                            <PathIcon Data="{StaticResource PeopleAddGeometry}" />
+                                            <Label>Thêm học sinh</Label>
+                                        </StackPanel>
+                                    </Button.Content>
+                                </Button>
+                                <Button
+                                    Height="40"
+                                    Margin="10"
+                                    HorizontalAlignment="Center"
+                                    Classes="theme-solid accent"
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedDeleteCommand}">
+                                    <Button.Content>
+                                        <StackPanel Orientation="Horizontal">
+                                            <PathIcon Data="{StaticResource UserAddGeometry}" />
+                                            <Label>Chọn chủ nhiệm</Label>
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

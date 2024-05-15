@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.StudentManagement.ViewModels"
+    MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     x:DataType="vm:AddStudentViewModel"
@@ -30,7 +31,7 @@
             Content="{Binding Title}" />
         <ComboBox
             Grid.Row="1"
-            Grid.Column="0"
+            Grid.ColumnSpan="2"
             Height="35"
             Margin="10"
             VerticalContentAlignment="Center"

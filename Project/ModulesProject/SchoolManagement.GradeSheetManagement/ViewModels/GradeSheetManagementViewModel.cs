@@ -233,6 +233,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         private async void OnDownloadFile()
         {
+            if (Class == null)
+            {
+                NotificationManager.ShowWarning("Bạn chưa chọn lớp học!");
+                return;
+            }
             var topLevel = TopLevel.GetTopLevel(AppRegion.MainView);
             var file = await topLevel.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
             {
