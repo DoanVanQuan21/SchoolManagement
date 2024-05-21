@@ -1,7 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
-using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
@@ -26,7 +25,7 @@ namespace SchoolManagement.MainProject.ViewModels
             GetFormWaitting();
         }
 
-        public override string Title => "Trang chủ";
+        public override string Title => Util.GetResourseString("Home_Label");
 
         public override User User { get; protected set; }
         public ObservableCollection<EditGradeSheetForm> FormsNeedToConfirm { get; set; }
@@ -39,12 +38,12 @@ namespace SchoolManagement.MainProject.ViewModels
             }
             FormsNeedToConfirm.Clear();
             var forms = new ObservableCollection<EditGradeSheetForm>();
-            
+
             if (User.Role == "admin")
             {
                 forms = await _editFormService.GetFormWaitting();
                 FormsNeedToConfirm.AddRange(forms);
-               
+
                 return;
             }
             var teacher = await _teacherService.GetTeacherByUserID(User.UserId);

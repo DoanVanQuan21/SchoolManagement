@@ -33,6 +33,7 @@
             Grid.Row="1"
             Margin="10,0,0,0"
             ItemsSource="{Binding Classes}"
+            PlaceholderText="{DynamicResource SelectClass_Label}"
             SelectedValue="{Binding Class}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -45,6 +46,7 @@
             Grid.Column="1"
             Margin="10,0,10,0"
             ItemsSource="{Binding Students}"
+            PlaceholderText="{DynamicResource SelectStudent_Label}"
             SelectedValue="{Binding Student}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -77,7 +79,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <PathIcon Data="{StaticResource AddGeometry}" />
-                        <Label>Thêm</Label>
+                        <Label Content="{DynamicResource Add_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>
@@ -188,7 +190,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel_Label}" />
                 </StackPanel>
             </Button.Content>
         </Button>

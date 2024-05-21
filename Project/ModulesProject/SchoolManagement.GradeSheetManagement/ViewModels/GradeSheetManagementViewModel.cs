@@ -87,7 +87,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public ObservableCollection<GradeSheet> GradeSheets
         { get => gradeSheets; set { SetProperty(ref gradeSheets, value); } }
 
-        public override string Title => "Quản lý điểm";
+        public override string Title => Util.GetResourseString("GradeManagement_Label");
         public override User User { get; protected set; }
 
         protected override void RegisterCommand()

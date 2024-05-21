@@ -30,7 +30,7 @@
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
-                    <Label>Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}" />
                 </DockPanel>
             </Button.Content>
         </Button>
@@ -153,7 +153,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
-                                            <Label>Cập nhật</Label>
+                                            <Label Content="{DynamicResource Edit_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -166,7 +166,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource PeopleAddGeometry}" />
-                                            <Label>Thêm học sinh</Label>
+                                            <Label Content="{DynamicResource AddStudent_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -179,7 +179,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource UserAddGeometry}" />
-                                            <Label>Chọn chủ nhiệm</Label>
+                                            <Label Content="{DynamicResource SelectionHomeroom_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

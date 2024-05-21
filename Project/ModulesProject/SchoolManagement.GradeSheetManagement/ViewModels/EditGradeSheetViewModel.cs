@@ -30,7 +30,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 SetProperty(ref gradeSheet, value); 
             } }
 
-        public override string Title => "Sửa bảng điểm";
+        public override string Title => Util.GetResourseString("EditGradeSheet_Label");
 
         public override User User { get; protected set; }
 

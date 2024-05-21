@@ -5,6 +5,7 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
@@ -33,7 +34,7 @@ namespace SchoolManagement.Auth.ViewModels
         public string LogoPath
         { get => logoPath; set { SetProperty(ref logoPath, value); } }
 
-        public override string Title => "Đăng nhập";
+        public override string Title => Util.GetResourseString("Login_Label");
 
         public override User User { get; protected set; }
 
@@ -62,16 +63,15 @@ namespace SchoolManagement.Auth.ViewModels
             if (user == null)
             {
                 EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+                return;
             }
             RootContext.CurrentUser = user;
             if (user.LockAccount == true)
             {
-                NotificationManager.ShowWarning("Tài khoản của bạn đã bị khóa!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AccountLocked_Message"));
                 return;
             }
             EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
-            //var box = MessageBoxManager.GetMessageBoxStandard("Notify", "Hello", ButtonEnum.OkCancel);
-            //await box.ShowAsPopupAsync(Container);
         }
 
         private void OnRegister()

@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
@@ -10,7 +11,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
     {
         private EditGradeSheetForm editGradeSheetForm;
 
-        public override string Title => "Đơn yêu cầu sửa điểm";
+        public override string Title => Util.GetResourseString("RequestEditGradeSheetForm_Label");
 
         public override User User { get; protected set; }
 

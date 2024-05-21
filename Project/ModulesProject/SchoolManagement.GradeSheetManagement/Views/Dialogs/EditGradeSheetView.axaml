@@ -33,15 +33,18 @@
                 Grid.Column="0"
                 Margin="10">
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Họ và tên:" />
+                    <Label Content="{DynamicResource Fullname_Label}" />
+                    <Label Content=":" />
                     <Label Content="{Binding GradeSheet.Student.User.FullName}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Mã học sinh:" />
+                    <Label Content="{DynamicResource StudentCode_Label}" />
+                    <Label Content=":" />
                     <Label Content="{Binding GradeSheet.Student.StudentCode}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Lớp:" />
+                    <Label Content="{DynamicResource ClassName_Label}" />
+                    <Label Content=":" />
                     <Label Content="{Binding GradeSheet.Class.ClassName}" />
                 </StackPanel>
                 <Viewbox>
@@ -67,7 +70,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                        <Label>Thoát</Label>
+                        <Label Content="{DynamicResource Cancel_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>
@@ -82,7 +85,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <PathIcon Data="{StaticResource EditGeometry}" />
-                        <Label>Cập nhật</Label>
+                        <Label Content="{DynamicResource Edit_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>

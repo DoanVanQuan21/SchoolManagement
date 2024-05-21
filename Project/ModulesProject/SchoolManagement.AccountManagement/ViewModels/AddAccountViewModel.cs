@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
@@ -24,7 +25,7 @@ namespace SchoolManagement.AccountManagement.ViewModels
         public ICommand ClickedOK { get; set; }
         public bool IsStudent { get => isStudent; set => SetProperty(ref isStudent, value); }
         public User NewUser { get => newUser; set => SetProperty(ref newUser, value); }
-        public override string Title => "Thêm tài khoản";
+        public override string Title => Util.GetResourseString("AddAccount_Label");
 
         public override User User { get; protected set; }
 

@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -31,15 +32,16 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             Subjects = new();
             Teacher = new();
             Init().GetAwaiter();
-
         }
+
         private async Task Init()
         {
             await GetAccountOfTeachers();
             await GetDepartments();
             await GetSubjects();
         }
-        public override string Title => "Thêm giáo viên";
+
+        public override string Title => Util.GetResourseString("AddTeacher_Label");
 
         public override User User { get; protected set; }
         public ObservableCollection<User> Users { get; set; }
@@ -48,7 +50,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
         public User CurrentUser { get => currentUser; set => SetProperty(ref currentUser, value); }
         public Department CurrentDepartment { get => currentDepartment; set => SetProperty(ref currentDepartment, value); }
         public Subject CurrentSubject { get => currentSubject; set => SetProperty(ref currentSubject, value); }
-        public Action<Teacher, User, Department,Subject> AddTeacherAction { get; set; }
+        public Action<Teacher, User, Department, Subject> AddTeacherAction { get; set; }
         public ICommand ClickedExit { get; set; }
         public ICommand ClickedOK { get; set; }
         public Teacher Teacher { get => teacher; set => SetProperty(ref teacher, value); }
@@ -95,6 +97,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             }
             Departments.AddRange(departments);
         }
+
         private async Task GetSubjects()
         {
             var subjects = await _subjectService.GetSubjects();

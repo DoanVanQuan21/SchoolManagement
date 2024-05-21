@@ -16,7 +16,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private readonly IGradeSheetService _gradeSheetService;
         private Date currentDate;
 
-        public override string Title => "Điểm thành phần";
+        public override string Title => Util.GetResourseString("ViewComponentGrades_Label");
 
         public override User User { get; protected set; }
 

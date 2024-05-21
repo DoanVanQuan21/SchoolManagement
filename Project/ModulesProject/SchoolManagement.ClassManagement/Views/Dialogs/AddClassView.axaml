@@ -34,21 +34,6 @@
                     DockPanel.Dock="Top"
                     SelectedObject="{Binding Class}"
                     Template="{StaticResource PropertyGridTemplate}" />
-                <ComboBox
-                    Height="35"
-                    Margin="10,20,10,10"
-                    VerticalAlignment="Bottom"
-                    Classes="theme-outline accent"
-                    DockPanel.Dock="Bottom"
-                    ItemsSource="{Binding Teachers}"
-                    PlaceholderText="Chọn giáo viên chủ nhiệm"
-                    SelectedValue="{Binding Teacher}">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label Content="{Binding User.FullName}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
             </DockPanel>
         </ScrollViewer>
 
@@ -66,7 +51,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel_Label}" />
                 </StackPanel>
             </Button.Content>
         </Button>

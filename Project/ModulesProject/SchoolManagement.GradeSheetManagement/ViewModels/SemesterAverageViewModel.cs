@@ -5,7 +5,6 @@ using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
-using System;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.GradeSheetManagement.ViewModels
@@ -20,7 +19,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         private Date currentDate;
         private SemesterAverage semesterAverage;
 
-        public override string Title => "Trung bình học kỳ";
+        public override string Title => Util.GetResourseString("ViewFinalGrades_Label");
 
         public override User User { get; protected set; }
         private readonly ICourseService _courseService;
@@ -144,12 +143,14 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 }
             });
         }
-        private void SetSemester(string rank,int totalSubject, double average,SemesterAverage sem)
+
+        private void SetSemester(string rank, int totalSubject, double average, SemesterAverage sem)
         {
             sem.TotalSubject = totalSubject;
             sem.Rank = rank;
             sem.Average = average;
         }
+
         private bool IsGoodRanked(List<double> semesterAvers)
         {
             var isAboveFive = semesterAvers.Any(s => s < 5.0);

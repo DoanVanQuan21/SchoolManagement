@@ -28,7 +28,7 @@ namespace SchoolManagement.SettingAccount.ViewModels
 
         public ICommand ClickedUpdateInformation { get; set; }
         public ICommand ClickedChangeImage { get; set; }    
-        public override string Title => "Tài khoản";
+        public override string Title => Util.GetResourseString("AccountSettings_Label");
         public Bitmap? Image { get => image; set => SetProperty(ref image,value); }
         public override User User
         { get => user; protected set { SetProperty(ref user, value); } }

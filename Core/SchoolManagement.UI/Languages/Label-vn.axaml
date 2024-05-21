@@ -13,17 +13,70 @@
     <system:String x:Key="StudentManagement_Label">Quản lý học sinh</system:String>
     <system:String x:Key="TeacherManagement_Label">Quản lý giáo viên</system:String>
     <system:String x:Key="AccountManagement_Label">Quản lý tài khoản</system:String>
+    <system:String x:Key="SubjectManagement_Label">Quản lý môn học</system:String>
+    <system:String x:Key="CommonSettings_Label">Cài đặt chung</system:String>
 
     <system:String x:Key="WaittingConfirm_Label">Chờ xác nhận</system:String>
     <system:String x:Key="Accept_Label">Chấp nhận</system:String>
 
+    <system:String x:Key="Reason_Label">Lý do</system:String>
     <system:String x:Key="Refuse_Label">Từ chối</system:String>
     <system:String x:Key="Cancel_Label">Thoát</system:String>
+    <system:String x:Key="Add_Label">Thêm mới</system:String>
+    <system:String x:Key="Edit_Label">Cập nhật</system:String>
+    <system:String x:Key="Delete_Label">Xóa</system:String>
+    <system:String x:Key="Finish_Label">Hoàn thành</system:String>
+    <system:String x:Key="RequestEditGradeSheet_Label">Yêu cầu sửa điểm</system:String>
+    <system:String x:Key="LockAccount_Label">Khóa tài khoản</system:String>
+    <system:String x:Key="UnlockAccount_Label">Mở khóa tài khoản</system:String>
+    <system:String x:Key="ResetPassword_Label">Đặt lại mật khẩu</system:String>
+
+
+
+
+    <system:String x:Key="StudentCode_Label">Mã học sinh</system:String>
+    <system:String x:Key="ClassName_Label">Tên lớp</system:String>
     <system:String x:Key="Username_Label">Tên đăng nhập</system:String>
     <system:String x:Key="Password_Label">Mật khẩu</system:String>
     <system:String x:Key="FirstName_Label">Họ đệm</system:String>
     <system:String x:Key="LastName_Label">Tên</system:String>
+    <system:String x:Key="Fullname_Label">Họ và tên</system:String>
     <system:String x:Key="Login_Label">Đăng nhập</system:String>
     <system:String x:Key="ForgotPassword_Label">Quên mật khẩu?</system:String>
+    <system:String x:Key="ChangePassword_Label">Đổi mật khẩu</system:String>
     <system:String x:Key="Register_Label">Đăng ký</system:String>
+    <system:String x:Key="RegisterAccount_Label">Đăng ký tài khoản</system:String>
+    <system:String x:Key="ConfigDatabase_Label">Cấu hình cơ sở dữ liệu</system:String>
+    <system:String x:Key="SelectionDatabase_Label">Chọn cơ sở dữ liệu</system:String>
+
+    <system:String x:Key="SelectionHomeroom_Label">Chọn giáo viên chủ nhiệm</system:String>
+    <system:String x:Key="SelectAcademicYear_Label">Chọn năm học</system:String>
+    <system:String x:Key="SelectSemester_Label">Chọn học kỳ</system:String>
+    <system:String x:Key="SelectClass_Label">Chọn lớp học</system:String>
+    <system:String x:Key="SelectSubject_Label">Chọn môn học</system:String>
+    <system:String x:Key="SelectCurriculum_Label">Chọn chương trình</system:String>
+    <system:String x:Key="SelectTeacher_Label">Chọn giáo viên</system:String>
+    <system:String x:Key="SelectStudent_Label">Chọn học sinh</system:String>
+    <system:String x:Key="SelectImage_Label">Chọn hình ảnh</system:String>
+    <system:String x:Key="SelectAccount_Label">Chọn tài khoản</system:String>
+
+
+    <system:String x:Key="AddAccount_Label">Thêm tài khoản</system:String>
+    <system:String x:Key="AddClass_Label">Thêm lớp học</system:String>
+    <system:String x:Key="AddCourse_Label">Thêm khóa học</system:String>
+    <system:String x:Key="AddStudent_Label">Thêm học sinh</system:String>
+    <system:String x:Key="AddTeacher_Label">Thêm giáo viên</system:String>
+    <system:String x:Key="AddGradeSheet_Label">Thêm bảng điểm</system:String>
+    <system:String x:Key="AddDepartment_Label">Thêm phòng ban</system:String>
+
+
+    <system:String x:Key="EditGradeSheet_Label">Sửa bảng điểm</system:String>
+
+    <system:String x:Key="RequestEditGradeSheetForm_Label">Đơn yêu cầu sửa điểm</system:String>
+
+
+
+    <system:String x:Key="ConfirmDeleteClass_Label">Bạn có muốn xóa lớp học này không?</system:String>
+
+
 </ResourceDictionary>

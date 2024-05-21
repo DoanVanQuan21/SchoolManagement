@@ -30,7 +30,7 @@
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
-                    <Label>Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}" />
                 </DockPanel>
             </Button.Content>
         </Button>
@@ -162,7 +162,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label>Xóa</Label>
+                                            <Label Content="{DynamicResource Delete_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

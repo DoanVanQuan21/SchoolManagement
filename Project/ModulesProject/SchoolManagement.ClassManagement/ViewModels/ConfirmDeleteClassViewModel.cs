@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
@@ -7,7 +8,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
 {
     public class ConfirmDeleteClassViewModel : BaseRegionViewModel
     {
-        public override string Title => "Bạn có muốn xóa lớp học này không?";
+        public override string Title => Util.GetResourseString("ConfirmDeleteClass_Label");
 
         public override User User { get; protected set; }
 

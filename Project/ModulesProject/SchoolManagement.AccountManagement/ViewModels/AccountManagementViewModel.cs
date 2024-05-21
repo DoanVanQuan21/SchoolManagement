@@ -36,7 +36,7 @@ namespace SchoolManagement.AccountManagement.ViewModels
         public ICommand ClickedAddCommand { get; set; }
         public bool DataLoaded { get => dataLoaded; set => SetProperty(ref dataLoaded, value); }
         public User SelectedUser { get => selectedUser; set => SetProperty(ref selectedUser, value); }
-        public override string Title => "Quản lý tài khoản";
+        public override string Title => Util.GetResourseString("AccountManagement_Label");
 
         public override User User { get; protected set; }
         public ObservableCollection<User> Users { get; protected set; }

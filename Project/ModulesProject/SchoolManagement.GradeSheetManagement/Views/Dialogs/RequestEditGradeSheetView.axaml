@@ -37,7 +37,7 @@
             Text="{Binding EditGradeSheetForm.Reason}"
             TextWrapping="Wrap"
             UseFloatingWatermark="True"
-            Watermark="Lý do" />
+            Watermark="{DynamicResource Reason_Label}" />
 
         <Border
             Grid.Row="4"
@@ -53,7 +53,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel}" />
                 </StackPanel>
             </Button.Content>
         </Button>

@@ -31,7 +31,7 @@ namespace SchoolManagement.SubjectManagement.ViewModels
         public bool DataLoaded { get => dataLoaded; set => SetProperty(ref dataLoaded, value); }
         public Subject SelectedSubject { get => selectedSubject; set => SetProperty(ref selectedSubject, value); }
         public ObservableCollection<Subject> Subjects { get; set; }
-        public override string Title => "Quản lý môn học";
+        public override string Title => Util.GetResourseString("SubjectManagement_Label");
 
         public override User User { get; protected set; }
 

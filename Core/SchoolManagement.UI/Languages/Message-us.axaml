@@ -4,7 +4,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <!--  Add Resources Here  -->
     <system:String x:Key="LoginFail_Message">
-        Login fail, check your information, please!.
+        Login failed, check your information, please!.
     </system:String>
     <system:String x:Key="LoginSuccess_Message">
         Login success!.

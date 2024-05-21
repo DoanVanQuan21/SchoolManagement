@@ -39,9 +39,8 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     Classes="theme-text-heading size-xs accent"
-                                    DockPanel.Dock="Right">
-                                    Chờ xác nhận
-                                </TextBlock>
+                                    DockPanel.Dock="Right"
+                                    Text="{DynamicResource WaittingConfirm_Label}" />
                             </DockPanel>
                         </Expander.Header>
                         <Grid>

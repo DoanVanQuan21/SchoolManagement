@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -25,7 +26,7 @@ namespace SchoolManagement.StudentManagement.ViewModels
             GetAccountOfStudent();
         }
 
-        public override string Title => "Thêm học sinh";
+        public override string Title => Util.GetResourseString("AddStudent_Label");
 
         public override User User { get; protected set; }
         public ObservableCollection<User> Users { get; set; }

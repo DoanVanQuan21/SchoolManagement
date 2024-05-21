@@ -29,7 +29,7 @@ namespace SchoolManagement.StudentManagement.ViewModels
         public ICommand ClickedAddCommand { get; set; }
         public ICommand ClickedNextCommand { get; set; }
         public ICommand ClickedPreviousCommand { get; set; }
-        public override string Title => "Quản lý học sinh";
+        public override string Title => Util.GetResourseString("StudentManagement_Label");
         public override User User { get; protected set; }
         private ObservableCollection<Student> Students { get; set; }
 

@@ -29,7 +29,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
         public ICommand ClickedNextCommand { get; set; }
         public ICommand ClickedPreviousCommand { get; set; }
         public bool DataLoaded { get => dataLoaded; set => SetProperty(ref dataLoaded, value); }
-        public override string Title => "Quản lý giáo viên";
+        public override string Title => Util.GetResourseString("TeacherManagement_Label");
         public override User User { get; protected set; }
         private ObservableCollection<Teacher> Teachers { get; set; }
 
@@ -85,6 +85,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             addTeacherView.SetAddTeacherEvent(AddTeacher);
             await ShowDialogHost(addTeacherView);
         }
+
         private async void OnNext()
         {
             page++;

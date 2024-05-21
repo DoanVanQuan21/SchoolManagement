@@ -27,7 +27,7 @@
             VerticalAlignment="Stretch"
             Classes="accent"
             Command="{Binding ClickedChangeImage}"
-            ToolTip.Tip="Chọn hình ảnh">
+            ToolTip.Tip="{DynamicResource SelectImage_Label}">
             <Button.Styles>
                 <Style Selector="Button:pointerover">
                     <Setter Property="Cursor" Value="Hand" />
@@ -50,26 +50,6 @@
                             </Image.Clip>
                         </Image>
                     </Border>
-                    <!--
-                    <Grid>
-                        <Ellipse
-                            x:Name="ellipse"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch" />
-                        <Image
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            Source="avares://SchoolManagement.UI/Assets/Images/dvquan.jpg"
-                            Stretch="Fill">
-                            <Image.Clip>
-                                <EllipseGeometry
-                                    Center="{Binding Path=Bounds.Center, ElementName=ellipse}"
-                                    RadiusX="60"
-                                    RadiusY="60" />
-                            </Image.Clip>
-                        </Image>
-                    </Grid>
-					-->
                 </ControlTemplate>
             </Button.Template>
         </Button>
@@ -94,7 +74,7 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <PathIcon Data="{StaticResource EditGeometry}" />
-                        <Label>Cập nhật</Label>
+                        <Label Content="{DynamicResource Edit_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>
@@ -106,7 +86,7 @@
                 Classes="theme-solid accent">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
-                        <Label>Đổi mật khẩu</Label>
+                        <Label Content="{DynamicResource ChangePassword_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>

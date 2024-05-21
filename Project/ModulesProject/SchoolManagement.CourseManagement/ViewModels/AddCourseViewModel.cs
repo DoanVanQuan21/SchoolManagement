@@ -75,7 +75,7 @@ namespace SchoolManagement.CourseManagement.ViewModels
         public List<Semester> Semesters => Semester.Semesters;
         public ObservableCollection<Subject> Subjects { get; set; }
         public ObservableCollection<Teacher> Teachers { get; set; }
-        public override string Title => "Thêm khóa học";
+        public override string Title => Util.GetResourseString("AddCourse_Label");
 
         public override User User { get; protected set; }
 

@@ -37,7 +37,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Users}"
-            PlaceholderText="Chọn tài khoản"
+            PlaceholderText="{DynamicResource SelectAccount_Label}"
             SelectedValue="{Binding CurrentUser}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -67,7 +67,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel_Label}" />
                 </StackPanel>
             </Button.Content>
         </Button>

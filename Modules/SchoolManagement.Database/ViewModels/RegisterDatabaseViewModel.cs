@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
@@ -15,10 +16,11 @@ namespace SchoolManagement.Database.ViewModels
             User = new();
         }
 
-        public override string Title => "Cấu hình database";
+        public override string Title => Util.GetResourseString("ConfigDatabase_Label");
 
         public override User User { get; protected set; }
         public ICommand ClickedOKCommand { get; set; }
+
         protected override void RegisterCommand()
         {
             ClickedOKCommand = new DelegateCommand(OnOK);

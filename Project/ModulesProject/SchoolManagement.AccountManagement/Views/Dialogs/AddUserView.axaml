@@ -48,7 +48,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel_Label}" />
                 </StackPanel>
             </Button.Content>
         </Button>

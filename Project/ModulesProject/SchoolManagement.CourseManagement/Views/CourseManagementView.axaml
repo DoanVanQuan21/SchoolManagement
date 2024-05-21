@@ -25,12 +25,12 @@
         <ComboBox
             Grid.Row="0"
             Grid.Column="0"
-            Height="35"
+            Height="40"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Dates}"
-            PlaceholderText="Chọn năm học"
+            PlaceholderText="{DynamicResource SelectCurriculum_Label}"
             SelectedValue="{Binding CurrentDate}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -41,12 +41,12 @@
         <ComboBox
             Grid.Row="1"
             Grid.Column="0"
-            Height="35"
+            Height="40"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Semesters}"
-            PlaceholderText="Chọn học kỳ"
+            PlaceholderText="{DynamicResource SelectSemester_Label}"
             SelectedValue="{Binding CurrentSemester}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -57,12 +57,12 @@
         <ComboBox
             Grid.Row="0"
             Grid.Column="1"
-            Height="35"
+            Height="40"
             Margin="10"
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn lớp học"
+            PlaceholderText="{DynamicResource SelectClass_Label}"
             SelectedValue="{Binding CurrentClass}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -73,14 +73,15 @@
         <Button
             Grid.Row="1"
             Grid.Column="1"
-            Height="35"
+            Height="40"
             HorizontalAlignment="Left"
+            VerticalContentAlignment="Center"
             Classes="accent"
             Command="{Binding ClickedAddCommand}">
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" />
-                    <Label>Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}" />
                 </DockPanel>
             </Button.Content>
         </Button>
@@ -167,7 +168,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
-                                            <Label>Cập nhật</Label>
+                                            <Label Content="{DynamicResource Edit_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

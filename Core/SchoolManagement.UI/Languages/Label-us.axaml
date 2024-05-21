@@ -12,17 +12,67 @@
     <system:String x:Key="StudentManagement_Label">Student management</system:String>
     <system:String x:Key="TeacherManagement_Label">Teacher management</system:String>
     <system:String x:Key="AccountManagement_Label">Account management</system:String>
+    <system:String x:Key="SubjectManagement_Label">Subject management</system:String>
+    <system:String x:Key="CommonSettings_Label">Common settings</system:String>
+
     <!--  Add Resources Here  -->
     <system:String x:Key="WaittingConfirm_Label">Waitting</system:String>
     <system:String x:Key="Accept_Label">Accept</system:String>
 
+    <system:String x:Key="Reason_Label">Reason</system:String>
     <system:String x:Key="Refuse_Label">Refuse</system:String>
     <system:String x:Key="Cancel_Label">Cancel</system:String>
+    <system:String x:Key="Add_Label">Add</system:String>
+    <system:String x:Key="Edit_Label">Edit</system:String>
+    <system:String x:Key="Delete_Label">Delete</system:String>
+    <system:String x:Key="Finish_Label">Finish</system:String>
+    <system:String x:Key="RequestEditGradeSheet_Label">Request edit grade sheet</system:String>
+    <system:String x:Key="LockAccount_Label">Lock account</system:String>
+    <system:String x:Key="UnlockAccount_Label">Unlock account</system:String>
+    <system:String x:Key="ResetPassword_Label">Reset password</system:String>
+    <system:String x:Key="SelectionHomeroom_Label">Select homeroom teacher</system:String>
+
+    <system:String x:Key="SelectAcademicYear_Label">Select academic year</system:String>
+    <system:String x:Key="SelectSemester_Label">Select semester</system:String>
+    <system:String x:Key="SelectClass_Label">Select class</system:String>
+    <system:String x:Key="SelectSubject_Label">Select subject</system:String>
+    <system:String x:Key="SelectCurriculum_Label">Select curriculum</system:String>
+    <system:String x:Key="SelectTeacher_Label">Select teacher</system:String>
+    <system:String x:Key="SelectStudent_Label">Select student</system:String>
+    <system:String x:Key="SelectImage_Label">Select image</system:String>
+    <system:String x:Key="SelectAccount_Label">Select account</system:String>
+
+
+    <system:String x:Key="StudentCode_Label">Student code</system:String>
+    <system:String x:Key="ClassName_Label">Class name</system:String>
     <system:String x:Key="Username_Label">Username</system:String>
     <system:String x:Key="Password_Label">Password</system:String>
     <system:String x:Key="FirstName_Label">Surname</system:String>
     <system:String x:Key="LastName_Label">Name</system:String>
+    <system:String x:Key="Fullname_Label">Fullname</system:String>
     <system:String x:Key="Login_Label">Sign in</system:String>
     <system:String x:Key="ForgotPassword_Label">Forgot password?</system:String>
+    <system:String x:Key="ChangePassword_Label">Change password</system:String>
     <system:String x:Key="Register_Label">Register</system:String>
+    <system:String x:Key="RegisterAccount_Label">Register account</system:String>
+    <system:String x:Key="ConfigDatabase_Label">Config database</system:String>
+    <system:String x:Key="SelectionDatabase_Label">Select database</system:String>
+
+
+    <system:String x:Key="AddAccount_Label">Add account</system:String>
+    <system:String x:Key="AddClass_Label">Add class</system:String>
+    <system:String x:Key="AddCourse_Label">Add course</system:String>
+    <system:String x:Key="AddStudent_Label">Add student</system:String>
+    <system:String x:Key="AddTeacher_Label">Add teacher</system:String>
+    <system:String x:Key="AddGradeSheet_Label">Add grade sheet</system:String>
+    <system:String x:Key="AddDepartment_Label">Add department</system:String>
+
+    <system:String x:Key="EditGradeSheet_Label">Edit grade sheet</system:String>
+
+    <system:String x:Key="RequestEditGradeSheetForm_Label">Request edit grade sheet</system:String>
+
+
+    <system:String x:Key="ConfirmDeleteClass_Label">Do you want to delete this class?</system:String>
+
+
 </ResourceDictionary>

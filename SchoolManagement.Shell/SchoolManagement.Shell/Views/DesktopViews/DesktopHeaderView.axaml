@@ -23,6 +23,7 @@
             IsVisible="{Binding IsDesktopPlatform}"
             SearchCommand="{Binding SearchTextCommand, ConverterParameter={Binding}}"
             Template="{StaticResource SearchBarTemplate}" />
+
         <StackPanel
             Grid.Column="1"
             Margin="5,0,5,0"
@@ -30,10 +31,19 @@
             VerticalAlignment="Center"
             Orientation="Horizontal">
             <ComboBox
+                VerticalAlignment="Center"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
                 BorderThickness="0"
                 Classes="theme-outline accent"
-                ItemsSource="{Binding Languages, Converter={StaticResource EnumToItemsSourceConverter}}"
-                SelectionChanged="ComboBox_SelectionChanged" />
+                ItemsSource="{Binding Languages}"
+                SelectedValue="{Binding CurrentLanguage}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding LanguageName}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
             <Button Classes="theme-subtle accent" Command="{Binding RequestRefreshPageCommand}">
                 <Button.Content>
                     <PathIcon Data="{StaticResource ArrowClockWiseGeometry}" />

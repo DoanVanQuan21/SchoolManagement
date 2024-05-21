@@ -17,7 +17,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
         private readonly IClassService _classService;
         private readonly ITeacherService _teacherService;
         private readonly IUserService _userService;
-        public override string Title => "Quản lý lớp học";
+        public override string Title => Util.GetResourseString("ClassManagement_Label");
 
         public override User User { get; protected set; }
 
@@ -64,7 +64,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             var deleteOK = await _classService.DeleteClass(SelectedClass.ClassId);
             if (!deleteOK)
             {
-                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("DeleteClassError_Message"),SelectedClass.ClassName));
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("DeleteClassError_Message"), SelectedClass.ClassName));
                 return;
             }
             NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("DeleteClassSuccess_Message"), SelectedClass.ClassName));
@@ -89,7 +89,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             var isAdded = await _classService.AddClass(_class);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("AddClassError_Message"),_class.ClassName));
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("AddClassError_Message"), _class.ClassName));
                 return;
             }
             NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("AddClassSuccess_Message"), _class.ClassName));

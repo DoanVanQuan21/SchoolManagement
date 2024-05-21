@@ -30,7 +30,7 @@
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
-                    <Label>Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}">Thêm mới</Label>
                 </DockPanel>
             </Button.Content>
         </Button>
@@ -163,7 +163,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource ArrowResetGeometry}" />
-                                            <Label>Reset mật khẩu</Label>
+                                            <Label Content="{DynamicResource ResetPassword_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -178,7 +178,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource LockClosedGeometry}" />
-                                            <Label>Khóa tài khoản</Label>
+                                            <Label Content="{DynamicResource LockAccount_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -193,7 +193,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource LockOpenGeometry}" />
-                                            <Label>Mở khóa</Label>
+                                            <Label Content="{DynamicResource UnlockAccount_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

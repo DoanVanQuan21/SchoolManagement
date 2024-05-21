@@ -10,6 +10,7 @@ namespace SchoolManagement.Core.Services
     {
         private readonly IAppManager _appManager;
         private readonly INotificationManager _notificationManager;
+
         public DatabaseInfoProvider()
         {
             _appManager = Ioc.Resolve<IAppManager>();
@@ -18,6 +19,7 @@ namespace SchoolManagement.Core.Services
         }
 
         public ServerInfor ServerInfor { get; set; }
+
         public string GetIpV4Address()
         {
             var hostname = GetHostName();
@@ -58,7 +60,7 @@ namespace SchoolManagement.Core.Services
             {
                 ServerInfor = new()
                 {
-                    ServerName = " 192.168.1.100",
+                    ServerName = "192.168.1.101",
                     User = "mobileplatform",
                     Password = "123",
                 };
@@ -71,7 +73,7 @@ namespace SchoolManagement.Core.Services
                 {
                     ServerInfor = new()
                     {
-                        ServerName = " 192.168.1.100",
+                        ServerName = "192.168.1.101",
                         User = "mobileplatform",
                         Password = "123",
                     };

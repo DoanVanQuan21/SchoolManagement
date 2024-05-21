@@ -55,7 +55,7 @@ namespace SchoolManagement.CourseManagement.ViewModels
         public ObservableCollection<Date> Dates { get; set; }
         public Course SelectedCourse { get => selectedCourse; set => SetProperty(ref selectedCourse, value); }
         public List<Semester> Semesters => Semester.Semesters;
-        public override string Title => "Quản lý khóa học";
+        public override string Title => Util.GetResourseString("CourseManagement_Label");
 
         public override User User { get; protected set; }
 

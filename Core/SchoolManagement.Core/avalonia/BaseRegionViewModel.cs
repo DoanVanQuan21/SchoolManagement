@@ -10,6 +10,7 @@ using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Models;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
+using System.Collections.ObjectModel;
 using INotificationManager = SchoolManagement.Core.Contracts.INotificationManager;
 
 namespace SchoolManagement.Core.avalonia
@@ -23,6 +24,7 @@ namespace SchoolManagement.Core.avalonia
         private readonly IAppManager _appManager;
         private bool isLogin = false;
         private bool isMobilePlatform;
+
         public BaseRegionViewModel()
         {
             _appManager = Ioc.Resolve<IAppManager>();
@@ -45,6 +47,8 @@ namespace SchoolManagement.Core.avalonia
         public INotificationManager NotificationManager { get; private set; }
         public abstract string Title { get; }
         public abstract User User { get; protected set; }
+        public ObservableCollection<Language> Languages => RootContext.Languages;
+
         public void PreviewMainView()
         {
             var mainView = TryPopMainView();
@@ -114,7 +118,6 @@ namespace SchoolManagement.Core.avalonia
             {
                 return;
             }
-            
         }
 
         protected void DefaultView()
@@ -154,6 +157,7 @@ namespace SchoolManagement.Core.avalonia
         {
             RootContext.UpdateCurrentUser(user);
         }
+
         private void SetRole()
         {
             if (RootContext.CurrentUser.Role == "student")
@@ -168,6 +172,7 @@ namespace SchoolManagement.Core.avalonia
             }
             RootContext.Role = Role.Admin;
         }
+
         private void CheckPlatform()
         {
             if (OperatingSystem.IsAndroid() || OperatingSystem.IsIOS())

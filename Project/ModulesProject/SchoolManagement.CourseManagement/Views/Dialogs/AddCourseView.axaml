@@ -39,7 +39,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Dates}"
-            PlaceholderText="Chọn năm học"
+            PlaceholderText="{DynamicResource SelectAcademicYear_Label}"
             SelectedValue="{Binding CurrentDate}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -55,7 +55,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Semesters}"
-            PlaceholderText="Chọn học kỳ"
+            PlaceholderText="{DynamicResource SelectSemester_Label}"
             SelectedValue="{Binding CurrentSemester}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -71,7 +71,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn lớp học"
+            PlaceholderText="{DynamicResource SelectClass_Label}"
             SelectedValue="{Binding CurrentClass}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -87,7 +87,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Subjects}"
-            PlaceholderText="Chọn môn học"
+            PlaceholderText="{DynamicResource SelectSubject_Label}"
             SelectedValue="{Binding CurrentSubject}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -103,7 +103,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Teachers}"
-            PlaceholderText="Chọn giáo viên"
+            PlaceholderText="{DynamicResource SelectTeacher_Label}"
             SelectedValue="{Binding CurrentTeacher}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -119,7 +119,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding EducationPrograms}"
-            PlaceholderText="Chọn chương trình"
+            PlaceholderText="{DynamicResource SelectCurriculum_Label}"
             SelectedValue="{Binding CurrentEducationProgram}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -147,7 +147,7 @@
             <Button.Content>
                 <StackPanel Orientation="Horizontal">
                     <PathIcon Data="{StaticResource ArrowExitGeometry}" />
-                    <Label>Thoát</Label>
+                    <Label Content="{DynamicResource Cancel_Label}" />
                 </StackPanel>
             </Button.Content>
         </Button>

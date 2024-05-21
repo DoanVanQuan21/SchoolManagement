@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using System.Windows.Input;
 
@@ -14,7 +15,7 @@ namespace SchoolManagement.Auth.ViewModels
 
         public ICommand ClickedPreviewMainViewCommand { get; set; }
         public ICommand ClickedRegisterAccountCommand { get; set; }
-        public override string Title => "Register Account";
+        public override string Title => Util.GetResourseString("RegisterAccount_Label");
 
         public override User User { get; protected set; }
 

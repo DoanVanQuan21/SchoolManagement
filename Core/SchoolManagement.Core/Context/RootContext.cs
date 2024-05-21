@@ -12,6 +12,18 @@ namespace SchoolManagement.Core.Context
         public static ObservableCollection<AppMenu> DesktopAppMenus = new();
         public static Dictionary<Type,string> MenuLabels = new();
         public static ObservableCollection<AppMenu> MobileAppMenus = new();
+        public static ObservableCollection<Language> Languages = new() { 
+            new Language()
+            {
+                LanguageName = "English",
+                LanguageType = Constants.Languages.English_US,
+            },
+             new Language()
+            {
+                LanguageName = "Việt Nam",
+                LanguageType = Constants.Languages.VietNam_VN,
+            }
+        };
         public static IApplicationLifetime ApplicationLifetime { get; set; }
         public static Stack<Type> PreviewMainViews = new();
         public static User CurrentUser { get; set; } = new User();

@@ -4,12 +4,16 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Prism.DryIoc;
+using Prism.Events;
 using Prism.Ioc;
 using SchoolManagement.AccountManagement.Views;
 using SchoolManagement.ClassManagement.Views;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Events;
 using SchoolManagement.Core.Helpers;
+using SchoolManagement.Core.Managers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.CourseManagement.Views;
 using SchoolManagement.GradeSheetManagement.Views;
@@ -69,9 +73,27 @@ namespace SchoolManagement.Shell
         protected override void OnInitialized()
         {
             base.OnInitialized();
+            UpdateLanguage();
             InitMenu();
         }
 
+        private void UpdateLanguage()
+        {
+            var lang = Ioc.Resolve<IAppManager>().BootSetting.CurrentLanguage;
+            if (lang == null)
+            {
+                Ioc.Resolve<INotificationManager>().ShowWarning(Util.GetResourseString("ChangeLanguageError_Message"));
+                return;
+            }
+            var isChanged = LanguageHelper.ChangeLanguage(lang.LanguageType);
+            if (!isChanged)
+            {
+                Ioc.Resolve<INotificationManager>().ShowWarning(Util.GetResourseString("ChangeLanguageError_Message"));
+                return;
+            }
+            Ioc.Resolve<INotificationManager>().ShowSuccess(Util.GetResourseString("ChangeLanguageSuccess_Message"));
+            return;
+        }
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             RegisterTypesHelper.RegisterTypes(containerRegistry);

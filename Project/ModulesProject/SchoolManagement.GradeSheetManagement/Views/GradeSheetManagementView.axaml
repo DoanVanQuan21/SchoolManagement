@@ -43,7 +43,10 @@
                     </MenuItem>
                 </MenuItem>
             </Menu>
-            <Button Classes="accent" Command="{Binding ClickedFinishCommand}">Hoàn thành</Button>
+            <Button
+                Classes="accent"
+                Command="{Binding ClickedFinishCommand}"
+                Content="{DynamicResource Finish_Label}" />
         </StackPanel>
         <ComboBox
             Grid.Row="0"
@@ -53,7 +56,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Dates}"
-            PlaceholderText="Chọn năm học"
+            PlaceholderText="{DynamicResource SelectAcademicYear_Label}"
             SelectedValue="{Binding CurrentDate}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -69,7 +72,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Semesters}"
-            PlaceholderText="Chọn học kỳ"
+            PlaceholderText="{DynamicResource SelectSemester_Label}"
             SelectedValue="{Binding Semester}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -85,7 +88,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Classes}"
-            PlaceholderText="Chọn lớp học"
+            PlaceholderText="{DynamicResource SelectClass_Label}"
             SelectedValue="{Binding Class}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -186,7 +189,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
-                                            <Label>Cập nhật</Label>
+                                            <Label Content="{DynamicResource Edit_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -200,7 +203,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource SendGeometry}" />
-                                            <Label>Yêu cầu sửa</Label>
+                                            <Label Content="{DynamicResource RequestEditGradeSheet_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>

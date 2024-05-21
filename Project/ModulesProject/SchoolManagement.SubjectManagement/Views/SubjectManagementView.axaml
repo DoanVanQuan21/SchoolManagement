@@ -30,13 +30,14 @@
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
-                    <Label>Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}" />
                 </DockPanel>
             </Button.Content>
         </Button>
         <StackPanel
             Grid.Row="0"
             Grid.Column="1"
+            HorizontalAlignment="Right"
             Orientation="Horizontal">
             <Button
                 Height="40"
@@ -147,7 +148,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource EditGeometry}" />
-                                            <Label>Cập nhật</Label>
+                                            <Label Content="{DynamicResource Edit_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
@@ -160,7 +161,7 @@
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label>Xóa</Label>
+                                            <Label Content="{DynamicResource Delete_Label}" />
                                         </StackPanel>
                                     </Button.Content>
                                 </Button>
