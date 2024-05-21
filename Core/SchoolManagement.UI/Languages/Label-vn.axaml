@@ -33,6 +33,13 @@
 
 
 
+    <system:String x:Key="Success_Label">Thành công</system:String>
+    <system:String x:Key="Infor_Label">Thông tin</system:String>
+    <system:String x:Key="Warning_Label">Cảnh báo</system:String>
+    <system:String x:Key="Error_Label">Lỗi</system:String>
+
+
+
 
     <system:String x:Key="StudentCode_Label">Mã học sinh</system:String>
     <system:String x:Key="ClassName_Label">Tên lớp</system:String>

@@ -15,14 +15,16 @@ namespace SchoolManagement.Shell.Views.DesktopViews;
 
 public partial class DesktopHeaderView : UserControl
 {
-    private readonly INotificationManager _notificationManager;
-    private readonly IAppManager _appManager;
-
+    private CommonMenuViewModel _menuViewModel;
     public DesktopHeaderView()
     {
         InitializeComponent();
-        _appManager = Ioc.Resolve<IAppManager>();
-        _notificationManager = Ioc.Resolve<INotificationManager>();
-        DataContext = Ioc.Resolve<CommonMenuViewModel>();
+        _menuViewModel = Ioc.Resolve<CommonMenuViewModel>();
+        DataContext = _menuViewModel;
+    }
+
+    private void ComboBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
+    {
+        _menuViewModel.ChangeLanguageCommand.Execute(null);
     }
 }

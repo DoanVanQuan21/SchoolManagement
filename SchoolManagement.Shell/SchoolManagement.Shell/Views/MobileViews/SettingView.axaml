@@ -55,7 +55,8 @@
             Margin="10"
             Classes="theme-outline accent"
             ItemsSource="{Binding Languages}"
-            SelectedValue="{Binding CurrentLanguage}">
+            SelectedValue="{Binding CurrentLanguage}"
+            SelectionChanged="ComboBox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
                     <Label Content="{Binding LanguageName}" />

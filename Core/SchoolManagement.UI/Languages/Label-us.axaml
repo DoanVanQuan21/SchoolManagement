@@ -43,6 +43,12 @@
     <system:String x:Key="SelectAccount_Label">Select account</system:String>
 
 
+    <system:String x:Key="Success_Label">Success</system:String>
+    <system:String x:Key="Infor_Label">Information</system:String>
+    <system:String x:Key="Warning_Label">Warning</system:String>
+    <system:String x:Key="Error_Label">Error</system:String>
+
+
     <system:String x:Key="StudentCode_Label">Student code</system:String>
     <system:String x:Key="ClassName_Label">Class name</system:String>
     <system:String x:Key="Username_Label">Username</system:String>
