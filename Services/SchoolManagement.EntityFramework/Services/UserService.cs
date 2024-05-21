@@ -1,18 +1,13 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
-        private ISchoolManagementSevice _schoolManagementSevice;
-
         public UserService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public Task<bool> AddUser(User user)

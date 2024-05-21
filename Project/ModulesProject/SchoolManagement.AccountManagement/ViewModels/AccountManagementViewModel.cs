@@ -2,6 +2,7 @@
 using SchoolManagement.AccountManagement.Views.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -56,16 +57,16 @@ namespace SchoolManagement.AccountManagement.ViewModels
             var user = (obj as User);
             if (user == null)
             {
-                NotificationManager.ShowWarning("Không lấy được thông tin tài khoản cần khóa!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("UnableGetAccountInfoLocked_Message"));
                 return;
             }
             var isLocked = await _userService.UnLockAccount(user);
             if (!isLocked)
             {
-                NotificationManager.ShowWarning($"Mở khóa tài khoản của {user.FullName} thất bại!.");
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UnlockAccountError_Message"),user.FullName));
                 return;
             }
-            NotificationManager.ShowSuccess($"Mở khóa tài khoản của {user.FullName} thành công!.");
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("UnlockAccountSuccess_Message"), user.FullName));
             user.LockAccount = false;
         }
 
@@ -81,11 +82,11 @@ namespace SchoolManagement.AccountManagement.ViewModels
             var isAdded = await _userService.AddUser(user);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning("Thêm tài khoản không thành công!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AddAccountError_Message"));
                 return;
             }
             CloseDialog();  
-            NotificationManager.ShowSuccess($"Thêm tài khoản thành công!.");
+            NotificationManager.ShowSuccess(Util.GetResourseString("AddAccountSuccess_Message"));
             await GetAccounts();
         }
 
@@ -96,7 +97,7 @@ namespace SchoolManagement.AccountManagement.ViewModels
             if (users?.Any() == false)
             {
                 DataLoaded = true;
-                NotificationManager.ShowWarning("Không có tài khoản nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AccountsEmpty_Message"));
                 return;
             }
             Users.Clear();
@@ -110,16 +111,16 @@ namespace SchoolManagement.AccountManagement.ViewModels
             var user = (obj as User);
             if (user == null)
             {
-                NotificationManager.ShowWarning("Không lấy được thông tin tài khoản cần khóa!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("GetAccountInfoToLockFailed_Message"));
                 return;
             }
             var isLocked = await _userService.LockAccount(user);
             if(!isLocked)
             {
-                NotificationManager.ShowWarning($"Khóa tài khoản của {user.FullName} thất bại!.");
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LockAccountError_Message"),user.FullName));
                 return;
             }
-            NotificationManager.ShowSuccess($"Khóa tài khoản của {user.FullName} thành công!.");
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("LockAccountSuccess_Message"), user.FullName));
 
         }
 

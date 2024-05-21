@@ -8,7 +8,7 @@ namespace SchoolManagement.EntityFramework.Repositories
     public abstract class GenerateRepository<T> : IGenerateRepository<T> where T : class
     {
         protected readonly ObservableCollection<T> _allItems;
-        protected readonly SchoolManagementContext _context;
+        protected SchoolManagementContext _context;
 
         protected GenerateRepository(SchoolManagementContext context)
         {
@@ -16,7 +16,10 @@ namespace SchoolManagement.EntityFramework.Repositories
             _context.SavingChanges += _context_SavingChanges;
             _allItems = new();
         }
-
+        public void RefreshContext(SchoolManagementContext context)
+        {
+            _context = context;
+        }
         private void _context_SavingChanges(object? sender, Microsoft.EntityFrameworkCore.SavingChangesEventArgs e)
         {
             var t = 0;

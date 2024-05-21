@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.StudentManagement.Views.Dialogs;
@@ -45,7 +46,7 @@ namespace SchoolManagement.StudentManagement.ViewModels
             var students = await _studentService.GetStudentsBySize(DEFAULT_ROW, page);
             if (students?.Any() == false)
             {
-                NotificationManager.ShowWarning("Không có sinh viên nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("StudentsEmpty_Message"));
                 return;
             }
             foreach (var student in students)
@@ -68,17 +69,17 @@ namespace SchoolManagement.StudentManagement.ViewModels
         {
             if (user == null || student == null)
             {
-                NotificationManager.ShowWarning("Thông không hợp lệ!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
             student.UserId = user.UserId;
             var isAdded = await _studentService.AddStudent(student);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning("Thêm học sinh thất bại!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AddStudentError_Message"));
                 return;
             }
-            NotificationManager.ShowWarning("Thêm học sinh thành công!.");
+            NotificationManager.ShowWarning(Util.GetResourseString("AddStudentSuccess_Message"));
             CloseDialog();
             await GetStudents();
         }

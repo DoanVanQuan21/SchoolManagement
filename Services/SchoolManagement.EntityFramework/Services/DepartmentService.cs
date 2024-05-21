@@ -1,18 +1,15 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class DepartmentService : IDepartmentService
+    public class DepartmentService : BaseService, IDepartmentService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
-        public DepartmentService()
+        public DepartmentService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
+
         public async Task<ObservableCollection<Department>> GetDepartments()
         {
             return await _schoolManagementSevice.DepartmentRepository.GetAllAsync();

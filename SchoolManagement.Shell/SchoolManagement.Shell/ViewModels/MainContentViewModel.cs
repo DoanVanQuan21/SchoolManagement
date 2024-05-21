@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Shell.Views.MobileViews;
@@ -51,6 +52,20 @@ namespace SchoolManagement.Shell.ViewModels
         protected override void SubcribeEvent()
         {
             EventAggregator.GetEvent<RequestRefreshPageEvent>().Subscribe(OnRefresh);
+            EventAggregator.GetEvent<ChangeLangEvent>().Subscribe(OnChangeLanguage);
+        }
+
+        private void OnChangeLanguage()
+        {
+            if (RootContext.MenuLabels.Count < 0)
+            {
+                NotificationManager.ShowWarning(Util.GetResourseString("ChangeLanguageError_Message"));
+                return;
+            }
+            foreach (var menu in AppMenus)
+            {
+                menu.Label = Util.GetResourseString(RootContext.MenuLabels[menu.Type]);
+            }
         }
 
         private void AddMenus(ObservableCollection<AppMenu> appMenus)
@@ -98,7 +113,7 @@ namespace SchoolManagement.Shell.ViewModels
             var selectedPage = obj as AppMenu;
             if (selectedPage == null)
             {
-                NotificationManager.ShowError("Không tải được nội dung!");
+                NotificationManager.ShowError(Util.GetResourseString("DatabaseFailed_Message"));
                 return;
             }
             SetMainPage(selectedPage.View);

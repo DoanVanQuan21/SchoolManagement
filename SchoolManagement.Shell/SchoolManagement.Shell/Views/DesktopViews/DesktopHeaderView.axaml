@@ -29,6 +29,11 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Center"
             Orientation="Horizontal">
+            <ComboBox
+                BorderThickness="0"
+                Classes="theme-outline accent"
+                ItemsSource="{Binding Languages, Converter={StaticResource EnumToItemsSourceConverter}}"
+                SelectionChanged="ComboBox_SelectionChanged" />
             <Button Classes="theme-subtle accent" Command="{Binding RequestRefreshPageCommand}">
                 <Button.Content>
                     <PathIcon Data="{StaticResource ArrowClockWiseGeometry}" />

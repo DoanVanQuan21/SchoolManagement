@@ -2,7 +2,7 @@
 
 namespace SchoolManagement.EntityFramework.Contracts
 {
-    public interface ISchoolManagementSevice
+    public interface ISchoolManagementSevice : IDisposable
     {
         UserRepository UserRepository { get; }
         GradeSheetRepository GradeSheetRepository { get; }
@@ -15,5 +15,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         StudentAssignmentRepository StudentAssignmentRepository { get; }
         DepartmentRepository DepartmentRepository { get; }
         EducationProgramRepository EducationProgramRepository { get; }
+        void Refresh();
     }
 }

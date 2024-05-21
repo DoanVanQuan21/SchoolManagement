@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.Shell.ViewModels;
 
 namespace SchoolManagement.Shell.Views
@@ -10,11 +11,14 @@ namespace SchoolManagement.Shell.Views
     {
         private MainViewModel viewModel;
         private readonly IAppManager _appManager;
+        private readonly ISchoolManagementSevice _schoolManagementSevice;
 
         public MainDesktopView()
         {
             InitializeComponent();
             _appManager = Ioc.Resolve<IAppManager>();
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
+
             viewModel = Ioc.Resolve<MainViewModel>();
             DataContext = viewModel;
         }
@@ -27,6 +31,7 @@ namespace SchoolManagement.Shell.Views
         private void Window_Closing(object? sender, Avalonia.Controls.WindowClosingEventArgs e)
         {
             _appManager.Save();
+            _schoolManagementSevice?.Dispose();
         }
     }
 }

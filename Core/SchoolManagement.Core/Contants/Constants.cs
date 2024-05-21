@@ -7,7 +7,10 @@
         public static readonly string DESKTOP_Q183429 = "Data Source=DESKTOP-Q183429\\SQLEXPRESS;Initial Catalog=SchoolManager;Integrated Security=True";
         public static readonly string ADMIN = "Data Source=ADMIN;Initial Catalog=SchoolManagement;Integrated Security=True;Trust Server Certificate=True";
     }
-
+    public enum Languages {
+        English_US,
+        VietNam_VN
+    }
     public class IconPath
     {
         public static readonly string DashboardIcon = "pack://application:,,,/Management.Shared;component/Assets/Resources/Images/Icons/dashboard_icon_yell.png";

@@ -16,4 +16,8 @@ namespace SchoolManagement.Core.Events
     public class RequestRefreshPageEvent : PubSubEvent
     {
     }
+
+    public class ChangeLangEvent : PubSubEvent
+    {
+    }
 }

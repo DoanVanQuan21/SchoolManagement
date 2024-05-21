@@ -1,4 +1,28 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- Add Resources Here -->
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <system:String x:Key="Home_Label">Home</system:String>
+    <system:String x:Key="AccountSettings_Label">Account settings</system:String>
+    <system:String x:Key="GradeManagement_Label">Grade management</system:String>
+    <system:String x:Key="ViewComponentGrades_Label">View component grades</system:String>
+    <system:String x:Key="ViewFinalGrades_Label">View final grades</system:String>
+    <system:String x:Key="ClassManagement_Label">Class management</system:String>
+    <system:String x:Key="CourseManagement_Label">Course management</system:String>
+    <system:String x:Key="StudentManagement_Label">Student management</system:String>
+    <system:String x:Key="TeacherManagement_Label">Teacher management</system:String>
+    <system:String x:Key="AccountManagement_Label">Account management</system:String>
+    <!--  Add Resources Here  -->
+    <system:String x:Key="WaittingConfirm_Label">Waitting</system:String>
+    <system:String x:Key="Accept_Label">Accept</system:String>
+
+    <system:String x:Key="Refuse_Label">Refuse</system:String>
+    <system:String x:Key="Cancel_Label">Cancel</system:String>
+    <system:String x:Key="Username_Label">Username</system:String>
+    <system:String x:Key="Password_Label">Password</system:String>
+    <system:String x:Key="FirstName_Label">Surname</system:String>
+    <system:String x:Key="LastName_Label">Name</system:String>
+    <system:String x:Key="Login_Label">Sign in</system:String>
+    <system:String x:Key="ForgotPassword_Label">Forgot password?</system:String>
+    <system:String x:Key="Register_Label">Register</system:String>
 </ResourceDictionary>

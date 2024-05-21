@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -52,7 +53,7 @@ namespace SchoolManagement.SubjectManagement.ViewModels
             {
                 DataLoaded = true;
 
-                NotificationManager.ShowWarning("Không có môn học nào");
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
             Subjects.Clear();

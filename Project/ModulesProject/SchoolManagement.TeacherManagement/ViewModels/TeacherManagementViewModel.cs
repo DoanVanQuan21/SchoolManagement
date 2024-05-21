@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using SchoolManagement.TeacherManagement.Views.Dialogs;
@@ -43,7 +44,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
         {
             if (department == null || subject == null || user == null || teacher == null)
             {
-                NotificationManager.ShowWarning("Thông không hợp lệ!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
             teacher.UserId = user.UserId;
@@ -52,10 +53,10 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             var isAdded = await _teacherService.AddTeacher(teacher);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning("Thêm giáo viên thất bại!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AddTeacherError_Message"));
                 return;
             }
-            NotificationManager.ShowWarning("Thêm giáo viên thành công!.");
+            NotificationManager.ShowWarning(Util.GetResourseString("AddTeacherSuccess_Message"));
             CloseDialog();
             await GetTeachers();
         }
@@ -66,7 +67,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             var teachers = await _teacherService.GetTeachersBySize(DEFAULT_ROW, page);
             if (teachers?.Any() == false)
             {
-                NotificationManager.ShowWarning("Không có giáo viên nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("TeachersEmpty_Message"));
                 return;
             }
             foreach (var teacher in teachers)

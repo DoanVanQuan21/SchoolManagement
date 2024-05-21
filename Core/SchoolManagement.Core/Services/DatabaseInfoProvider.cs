@@ -90,7 +90,7 @@ namespace SchoolManagement.Core.Services
             {
                 ServerName = ipV4Address,
                 User = "schoolmanagement",
-                Password = "123",
+                Password = "admin",
             };
             //ServerInfor = new()
             //{

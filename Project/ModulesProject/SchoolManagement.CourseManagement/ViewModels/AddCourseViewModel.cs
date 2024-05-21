@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
@@ -174,7 +175,7 @@ namespace SchoolManagement.CourseManagement.ViewModels
         {
             if (CurrentDate == null || CurrentSemester == null || CurrentClass == null || CurrentSubject == null || CurrentTeacher == null || CurrentEducationProgram == null)
             {
-                NotificationManager.ShowWarning("Thông tin không hợp lệ!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
             Course.ClassId = CurrentClass.ClassId;

@@ -1,5 +1,6 @@
 ﻿using Avalonia.Styling;
 using Prism.Mvvm;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Models.Common;
 
 namespace SchoolManagement.Core.Models
@@ -9,6 +10,7 @@ namespace SchoolManagement.Core.Models
         private ThemeVariant currentTheme = ThemeVariant.Light;
         private ServerInfor serverInfor;
         private string? version;
+        private Languages currentLanguage = Languages.VietNam_VN;
 
         public BootSetting()
         {
@@ -19,6 +21,7 @@ namespace SchoolManagement.Core.Models
         public ThemeVariant CurrentTheme
         { get => currentTheme; set { SetProperty(ref currentTheme, value); } }
 
+        public Languages CurrentLanguage { get => currentLanguage; set => SetProperty(ref currentLanguage, value); }
         public Guid ID { get; set; }
 
         public ServerInfor ServerInfor

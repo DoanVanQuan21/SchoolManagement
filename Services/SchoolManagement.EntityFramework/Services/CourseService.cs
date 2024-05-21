@@ -1,20 +1,17 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class CourseService : ICourseService
+    public class CourseService : BaseService, ICourseService
     {
         private readonly IClassService _classService;
-        private ISchoolManagementSevice _schoolManagementSevice;
         private readonly ISubjectService _subjectService;
 
         public CourseService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
             _classService = Ioc.Resolve<IClassService>();
             _subjectService = Ioc.Resolve<ISubjectService>();
         }
@@ -85,13 +82,13 @@ namespace SchoolManagement.EntityFramework.Services
             });
         }
 
-        public Task<List<int>> GetSubjectIDs(int classID,int year, string semester)
+        public Task<List<int>> GetSubjectIDs(int classID, int year, string semester)
         {
             return Task.Factory.StartNew(() =>
             {
-                var ids= new List<int>();
+                var ids = new List<int>();
                 var courses = _schoolManagementSevice.CourseRepository.Where(c => c.ClassId == classID && c.StartDate.Year == year && c.Semester == semester);
-                if( courses?.Any() == false)
+                if (courses?.Any() == false)
                 {
                     return ids;
                 }
@@ -105,7 +102,7 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return Task.Factory.StartNew(() =>
             {
-                if(course == null)
+                if (course == null)
                 {
                     return false;
                 }

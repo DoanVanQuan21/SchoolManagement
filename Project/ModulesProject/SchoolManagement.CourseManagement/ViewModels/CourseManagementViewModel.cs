@@ -77,17 +77,17 @@ namespace SchoolManagement.CourseManagement.ViewModels
         {
             if (course == null)
             {
-                NotificationManager.ShowError("Có lỗi xảy ra!.");
+                NotificationManager.ShowError(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
             var isAdded = await _courseService.AddCourse(course);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning("Thêm khóa học thất bại!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("AddCourseError_Message"));
                 return;
             }
             CloseDialog();
-            NotificationManager.ShowWarning("Thêm khóa học thành công!.");
+            NotificationManager.ShowWarning(Util.GetResourseString("AddCourseSuccess_Message"));
             return;
         }
 
@@ -106,7 +106,7 @@ namespace SchoolManagement.CourseManagement.ViewModels
         {
             if (CurrentDate == null || CurrentClass == null || CurrentSemester == null)
             {
-                NotificationManager.ShowWarning("Bạn chưa chọn năm học hoặc lớp học!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("HaveNotSelectedSchoolYear_Message"));
                 return;
             }
             DataLoaded = false;
@@ -114,7 +114,7 @@ namespace SchoolManagement.CourseManagement.ViewModels
             var courses = await _courseService.GetCourses(CurrentDate.Year, CurrentSemester.Value, CurrentClass.ClassId);
             if (courses?.Any() == false)
             {
-                NotificationManager.ShowWarning("Không có khóa học nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("CoursesEmpty_Message"));
                 return;
             }
             foreach (var course in courses)

@@ -1,8 +1,10 @@
-﻿using SchoolManagement.Core.avalonia;
+﻿using DocumentFormat.OpenXml.Office2016.Excel;
+using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Repositories.SchoolManagement;
+using System.Threading;
 
 namespace SchoolManagement.EntityFramework.Services
 {
@@ -10,10 +12,12 @@ namespace SchoolManagement.EntityFramework.Services
     {
         private readonly IDatabaseInfoProvider _databaseInfoProvider;
         private SchoolManagementContext schoolManagementContext;
+        private CancellationTokenSource _cancellationTokenSource;
 
         public SchoolManagementService()
         {
             _databaseInfoProvider = Ioc.Resolve<IDatabaseInfoProvider>();
+            _cancellationTokenSource = new();
             InitConnectionDatabase();
         }
 
@@ -52,6 +56,42 @@ namespace SchoolManagement.EntityFramework.Services
             StudentAssignmentRepository = new StudentAssignmentRepository(schoolManagementContext);
             DepartmentRepository = new DepartmentRepository(schoolManagementContext);
             EducationProgramRepository = new EducationProgramRepository(schoolManagementContext);
+        }
+        public void Refresh()
+        {
+            if (string.IsNullOrEmpty(_databaseInfoProvider.ServerInfor.ConnectionString))
+            {
+                //TODO
+                return;
+            }
+            schoolManagementContext = new SchoolManagementContext(_databaseInfoProvider.ServerInfor.ConnectionString);
+            UserRepository.RefreshContext(schoolManagementContext);
+            GradeSheetRepository.RefreshContext(schoolManagementContext);
+            CourseRepository.RefreshContext(schoolManagementContext);
+            ClassRepository.RefreshContext(schoolManagementContext);
+            TeacherRepository.RefreshContext(schoolManagementContext);
+            StudentRepository.RefreshContext(schoolManagementContext);
+            SubjectRepository.RefreshContext(schoolManagementContext);
+            EditGradeSheetFormRepository.RefreshContext(schoolManagementContext);
+            StudentAssignmentRepository.RefreshContext(schoolManagementContext);
+            DepartmentRepository.RefreshContext(schoolManagementContext);
+            EducationProgramRepository.RefreshContext(schoolManagementContext);
+        }
+        private void InitConnection()
+        {
+            Task.Factory.StartNew(async () => {
+                while (!_cancellationTokenSource.IsCancellationRequested)
+                {
+                    Refresh();
+                    await Task.Delay(3000);
+                }
+            }, _cancellationTokenSource.Token);
+        }
+       
+        public void Dispose()
+        {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
         }
     }
 }

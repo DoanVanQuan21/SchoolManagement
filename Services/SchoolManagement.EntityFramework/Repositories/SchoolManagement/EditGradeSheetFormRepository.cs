@@ -1,4 +1,7 @@
-﻿using SchoolManagement.Core.Constants;
+﻿using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Vml.Office;
+using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IRepositories;
 using System.Collections.ObjectModel;
@@ -13,23 +16,21 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
         }
 
-        public Task<bool> Accepted(EditGradeSheetForm form)
+        public async Task<bool> Accepted(EditGradeSheetForm form)
         {
-            return Task.Factory.StartNew(() => {
-
-                if (form == null)
-                {
-                    return false;
-                }
-                var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
-                if (f == null)
-                {
-                    return false;
-                }
-                f.Status = AceptFormStatus.Accept.ToString();
-                _context.SaveChanges();
-                return true;
-            });
+            if (form == null)
+            {
+                return false;
+            }
+            var f = _context.EditGradeSheetForms.FirstOrDefault(e => e.EditGradeSheetFormId == form.EditGradeSheetFormId);
+            if (f == null)
+            {
+                return false;
+            }
+            f.Status = AceptFormStatus.Accept.ToString();
+            _context.Entry(f).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            return true;
         }
 
         public Task<bool> UnAccepted(EditGradeSheetForm form)
@@ -72,7 +73,6 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return Task.Factory.StartNew(() =>
             {
                 _forms.Clear();
-                var t = GetAll();
                 var forms = Where(f => f.Status == AceptFormStatus.Waitting.ToString() && f.TeacherId == teacherID);
                 if (forms?.Any() == false)
                 {

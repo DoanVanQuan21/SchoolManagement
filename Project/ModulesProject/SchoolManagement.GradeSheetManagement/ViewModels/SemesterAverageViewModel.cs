@@ -1,6 +1,7 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
@@ -72,7 +73,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var student = await _studentService.GetStudentAndGradeSheets(User.UserId);
             if (student == null)
             {
-                NotificationManager.ShowWarning("Có lỗi xảy ra, hãy kiểm tra lại thông tin!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("DatabaseFailed_Message"));
                 return;
             }
             if (student.GradeSheets?.Any() == false)

@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Windows.Input;
@@ -51,11 +52,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             if (!isUpdated)
             {
                 CloseDialog();
-                NotificationManager.ShowError("Cập nhật bảng điểm không thành công!");
+                NotificationManager.ShowWarning(Util.GetResourseString("UpdateGradeSheetFailed_Message"));
                 return;
             }
             CloseDialog();
-            NotificationManager.ShowSuccess("Cập nhật bảng điểm thành công!");
+            NotificationManager.ShowSuccess(Util.GetResourseString("UpdateGradeSheetSuccess_Message"));
             EventAggregator.GetEvent<UpdateGradeSheetEvent>().Publish(GradeSheet);
         }
     }

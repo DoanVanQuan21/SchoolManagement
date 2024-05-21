@@ -1,18 +1,13 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class SubjectService : ISubjectService
+    public class SubjectService : BaseService, ISubjectService
     {
-        private ISchoolManagementSevice _schoolManagementSevice;
-
-        public SubjectService()
+        public SubjectService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public Task<Subject?> GetSubject(int subjectID)

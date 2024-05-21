@@ -39,4 +39,149 @@
     <system:String x:Key="NoneGradeSheet_Message">
         There are no grade sheet!.
     </system:String>
+    <system:String x:Key="AccountLocked_Message">
+        This account has been locked!.
+    </system:String>
+    <system:String x:Key="UnableGetAccountInfoLocked_Message">
+        Unable to get account information that needs to be locked!.
+    </system:String>
+    <system:String x:Key="UpdateSuccess_Message">
+        Update successful!.
+    </system:String>
+    <system:String x:Key="UpdateError_Message">
+        Update failed!.
+    </system:String>
+    <system:String x:Key="UnlockAccountSuccess_Message">
+        Unlock account {0} successfully!.
+    </system:String>
+    <system:String x:Key="UnlockAccountError_Message">
+        Unlock account {0} failed!.
+    </system:String>
+    <system:String x:Key="LockAccountSuccess_Message">
+        Lock account {0} successfully!.
+    </system:String>
+    <system:String x:Key="LockAccountError_Message">
+        Lock account {0} failed!.
+    </system:String>
+    <system:String x:Key="AddAccountSuccess_Message">
+        Add account successfully!.
+    </system:String>
+    <system:String x:Key="AddAccountError_Message">
+        Add account failed!.
+    </system:String>
+    <system:String x:Key="AccountsEmpty_Message">
+        There are no account!.
+    </system:String>
+    <system:String x:Key="GetAccountInfoToLockFailed_Message">
+        Unable to get account information that needs to be locked!.
+    </system:String>
+    <system:String x:Key="DeleteClassSuccess_Message">
+        Delete class {0} successfully!.
+    </system:String>
+    <system:String x:Key="DeleteClassError_Message">
+        Delete class {0} failed!.
+    </system:String>
+    <system:String x:Key="AddClassSuccess_Message">
+        Add class {0} successfully!.
+    </system:String>
+    <system:String x:Key="AddClassError_Message">
+        Add class {0} failed!.
+    </system:String>
+    <system:String x:Key="AddCourseSuccess_Message">
+        Add course successfully!.
+    </system:String>
+    <system:String x:Key="AddCourseError_Message">
+        Add course failed!.
+    </system:String>
+    <system:String x:Key="RecordsEmpty_Message">
+        There are no record!.
+    </system:String>
+    <system:String x:Key="InvalidInfor_Message">
+        Invalid information!.
+    </system:String>
+    <system:String x:Key="HaveNotSelectedSchoolYear_Message">
+        You have not selected a school year or class!.
+    </system:String>
+    <system:String x:Key="CoursesEmpty_Message">
+        There are no courses available!.
+    </system:String>
+    <system:String x:Key="GradeSheetEmpty_Message">
+        There are no grade sheet available!.
+    </system:String>
+    <system:String x:Key="ClassroomsEmpty_Message">
+        There are no classroom available!.
+    </system:String>
+    <system:String x:Key="NoClassroomSelected_Message">
+        No classroom selected!.
+    </system:String>
+    <system:String x:Key="LoadGradeFileError_Message">
+        Unable to load grade file for class {0}!.
+    </system:String>
+    <system:String x:Key="LoadGradeFileSuccess_Message">
+        Load grade file for class {0} successfully!.
+    </system:String>
+    <system:String x:Key="LoadGradeSheetError_Message">
+        Load grade sheet failed!.
+    </system:String>
+    <system:String x:Key="LoadGradeSheetSuccess_Message">
+        Load grade sheet successfully!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetError_Message">
+        Unable to update student transcripts {0}!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetFailed_Message">
+        Update grade sheet failed!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetSuccess_Message">
+        Update grade sheet successfully!.
+    </system:String>
+
+    <system:String x:Key="DatabaseFailed_Message">
+        Cannot connect to database!.
+    </system:String>
+    <system:String x:Key="RequestEditGradeSheetSuccess_Message">
+        Request to correct transcript has been sent successfully!.
+    </system:String>
+    <system:String x:Key="RequestEditGradeSheetError_Message">
+        Request to correct transcript has been sent failed!.
+    </system:String>
+    <system:String x:Key="StudentsEmpty_Message">
+        There are no student available!.
+    </system:String>
+    <system:String x:Key="AddStudentSuccess_Message">
+        Add student successfully!.
+    </system:String>
+    <system:String x:Key="AddStudentError_Message">
+        Add student failed!.
+    </system:String>
+    <system:String x:Key="NoFileSelected_Message">
+        No files selected!.
+    </system:String>
+    <system:String x:Key="SubjectsEmpty_Message">
+        There are no subject available!.
+    </system:String>
+    <system:String x:Key="TeachersEmpty_Message">
+        There are no teacher available!.
+    </system:String>
+    <system:String x:Key="AddTeacherSuccess_Message">
+        Add teacher successfully!.
+    </system:String>
+    <system:String x:Key="AddTeacherError_Message">
+        Add teacher failed!.
+    </system:String>
+    <system:String x:Key="UnableConfirmEditGradeSheetForm_Message">
+        Unable to confirm score correction application!.
+    </system:String>
+    <system:String x:Key="UnLockEditGradeSheetSuccess_Message">
+        Unlock edit grade sheet successfully!.
+    </system:String>
+    <system:String x:Key="UnLockEditGradeSheetError_Message">
+        Unlock edit grade sheet failed!.
+    </system:String>
+    <system:String x:Key="ChangeLanguageSuccess_Message">
+        Change language successfully!.
+    </system:String>
+    <system:String x:Key="ChangeLanguageError_Message">
+        Change language failed!.
+    </system:String>
 </ResourceDictionary>

@@ -2,6 +2,7 @@
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -71,17 +72,17 @@ namespace SchoolManagement.MainProject.ViewModels
             var isAccepted = await _editFormService.Accepted(editForm);
             if (!isAccepted)
             {
-                NotificationManager.ShowWarning("Không thể xác nhận đơn sửa điểm!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("UnableConfirmEditGradeSheetForm_Message"));
                 return;
             }
             var isUnLocked = await _gradeSheetService.UnLock(editForm.GradeSheetId);
             if (!isUnLocked)
             {
-                NotificationManager.ShowWarning("Không thể mở khóa sửa bảng điểm!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("UnLockEditGradeSheetError_Message"));
                 return;
             }
             FormsNeedToConfirm.Remove(editForm);
-            NotificationManager.ShowSuccess("Bảng điểm đã được mở khóa!.");
+            NotificationManager.ShowSuccess(Util.GetResourseString("UnLockEditGradeSheetSuccess_Message"));
             return;
         }
 

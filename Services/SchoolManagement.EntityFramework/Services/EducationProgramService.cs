@@ -1,18 +1,13 @@
-﻿using SchoolManagement.Core.avalonia;
-using SchoolManagement.Core.Models.SchoolManagements;
-using SchoolManagement.EntityFramework.Contracts;
+﻿using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
 
 namespace SchoolManagement.EntityFramework.Services
 {
-    public class EducationProgramService : IEducationProgramService
+    public class EducationProgramService : BaseService, IEducationProgramService
     {
-        private readonly ISchoolManagementSevice _schoolManagementSevice;
-
-        public EducationProgramService()
+        public EducationProgramService() : base()
         {
-            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
         }
 
         public async Task<ObservableCollection<EducationProgram>> GetEdicationPrograms()
@@ -22,10 +17,11 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<ObservableCollection<EducationProgram>> GetEdicationPrograms(string status)
         {
-            return Task.Factory.StartNew(() => {
-                var educationPrograms= new ObservableCollection<EducationProgram>();
-                var eds = _schoolManagementSevice.EducationProgramRepository.Where(e=>e.Status == status);
-                if(eds?.Any()==false)
+            return Task.Factory.StartNew(() =>
+            {
+                var educationPrograms = new ObservableCollection<EducationProgram>();
+                var eds = _schoolManagementSevice.EducationProgramRepository.Where(e => e.Status == status);
+                if (eds?.Any() == false)
                 {
                     return educationPrograms;
                 }
@@ -36,8 +32,8 @@ namespace SchoolManagement.EntityFramework.Services
 
         public Task<EducationProgram?> GetEducationProgram(int educationID)
         {
-            return Task.Factory.StartNew(() => {
-
+            return Task.Factory.StartNew(() =>
+            {
                 return _schoolManagementSevice.EducationProgramRepository.FirstOrDefault(e => e.EducationProgramId == educationID);
             });
         }

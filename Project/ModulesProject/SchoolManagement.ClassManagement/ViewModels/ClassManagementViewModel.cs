@@ -2,6 +2,7 @@
 using SchoolManagement.ClassManagement.Views.Dialogs;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
 using System.Collections.ObjectModel;
@@ -63,10 +64,10 @@ namespace SchoolManagement.ClassManagement.ViewModels
             var deleteOK = await _classService.DeleteClass(SelectedClass.ClassId);
             if (!deleteOK)
             {
-                NotificationManager.ShowWarning($"Xóa lớp {SelectedClass.ClassName} thất bại!.");
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("DeleteClassError_Message"),SelectedClass.ClassName));
                 return;
             }
-            NotificationManager.ShowSuccess($"Xóa lớp {SelectedClass.ClassName} Thành công!.");
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("DeleteClassSuccess_Message"), SelectedClass.ClassName));
             CloseDialog();
             await GetClasses();
         }
@@ -88,10 +89,10 @@ namespace SchoolManagement.ClassManagement.ViewModels
             var isAdded = await _classService.AddClass(_class);
             if (!isAdded)
             {
-                NotificationManager.ShowWarning($"Không thể thêm lớp {_class.ClassName} vào trong database!.");
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("AddClassError_Message"),_class.ClassName));
                 return;
             }
-            NotificationManager.ShowSuccess($"Thêm lớp {_class.ClassName} vào trong database thành công!.");
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("AddClassSuccess_Message"), _class.ClassName));
             CloseDialog();
             await GetClasses();
         }
@@ -115,7 +116,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             if (classes?.Any() == false)
             {
                 DataLoaded = true;
-                NotificationManager.ShowWarning("Không có bản ghi nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("RecordsEmpty_Message"));
                 return;
             }
             Classes.Clear();

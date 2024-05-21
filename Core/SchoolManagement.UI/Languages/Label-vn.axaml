@@ -1,4 +1,29 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!-- Add Resources Here -->
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <!--  Add Resources Here  -->
+    <system:String x:Key="Home_Label">Trang chủ</system:String>
+    <system:String x:Key="AccountSettings_Label">Quản lý tài khoản</system:String>
+    <system:String x:Key="GradeManagement_Label">Quản lý điểm</system:String>
+    <system:String x:Key="ViewComponentGrades_Label">Điểm thành phần</system:String>
+    <system:String x:Key="ViewFinalGrades_Label">Điểm tổng kết</system:String>
+    <system:String x:Key="ClassManagement_Label">Quản lý lớp học</system:String>
+    <system:String x:Key="CourseManagement_Label">Quản lý khóa học</system:String>
+    <system:String x:Key="StudentManagement_Label">Quản lý học sinh</system:String>
+    <system:String x:Key="TeacherManagement_Label">Quản lý giáo viên</system:String>
+    <system:String x:Key="AccountManagement_Label">Quản lý tài khoản</system:String>
+
+    <system:String x:Key="WaittingConfirm_Label">Chờ xác nhận</system:String>
+    <system:String x:Key="Accept_Label">Chấp nhận</system:String>
+
+    <system:String x:Key="Refuse_Label">Từ chối</system:String>
+    <system:String x:Key="Cancel_Label">Thoát</system:String>
+    <system:String x:Key="Username_Label">Tên đăng nhập</system:String>
+    <system:String x:Key="Password_Label">Mật khẩu</system:String>
+    <system:String x:Key="FirstName_Label">Họ đệm</system:String>
+    <system:String x:Key="LastName_Label">Tên</system:String>
+    <system:String x:Key="Login_Label">Đăng nhập</system:String>
+    <system:String x:Key="ForgotPassword_Label">Quên mật khẩu?</system:String>
+    <system:String x:Key="Register_Label">Đăng ký</system:String>
 </ResourceDictionary>

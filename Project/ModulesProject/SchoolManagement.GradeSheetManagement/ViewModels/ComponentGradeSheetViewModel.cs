@@ -1,6 +1,7 @@
 ﻿using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
@@ -70,7 +71,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var grades = await _gradeSheetService.GetGradeSheetsByStudentID(student.StudentId, CurrentDate.Year);
             if (grades?.Any() == false)
             {   
-                NotificationManager.ShowWarning("Không có bảng điểm nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("GradeSheetEmpty_Message"));
                 return;
             }
             GradeSheets.AddRange(grades);

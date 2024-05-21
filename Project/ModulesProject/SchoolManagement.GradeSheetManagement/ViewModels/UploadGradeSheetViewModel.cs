@@ -6,6 +6,7 @@ using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
@@ -132,7 +133,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 var students = await _studentService.GetStudentOfClassByYear(Class.ClassId, DateTime.Now.Year);
                 if (students == null)
                 {
-                    NotificationManager.ShowWarning("Không có học sinh nào!.");
+                    NotificationManager.ShowWarning(Util.GetResourseString("StudentsEmpty_Message"));
                     return;
                 }
                 Students.Clear();
@@ -163,10 +164,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var isOK = await _gradeSheetService.UpdateOrAddRange(GradeSheets);
             if (isOK)
             {
-                NotificationManager.ShowSuccess("Tải bảng điểm thành công!.");
+                NotificationManager.ShowSuccess(Util.GetResourseString("LoadGradeSheetSuccess_Message"));
                 return;
             }
-            NotificationManager.ShowWarning("Tải bảng điểm thất bại!.");
+            NotificationManager.ShowWarning(Util.GetResourseString("LoadGradeSheetError_Message"));
         }
 
         private async void OnUpload()
@@ -183,9 +184,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 });
                 if (files.Count <= 0)
                 {
-                    //TODO
-                    // MULTI LANGUAGE
-                    NotificationManager.ShowWarning("Không có file nào được chọn");
+                    NotificationManager.ShowWarning(Util.GetResourseString("NoFileSelected_Message"));
                     return;
                 }
                 var path = files.First().Path.LocalPath;

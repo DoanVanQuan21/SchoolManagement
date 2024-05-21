@@ -39,4 +39,146 @@
     <system:String x:Key="NoneGradeSheet_Message">
         Không có bản ghi bảng điểm nào!.
     </system:String>
+    <system:String x:Key="AccountLocked_Message">
+        Tài khoản này đã bị khóa!.
+    </system:String>
+    <system:String x:Key="UnableGetAccountInfoLocked_Message">
+        Không lấy được thông tin tài khoản cần khóa!.
+    </system:String>
+    <system:String x:Key="UnlockAccountSuccess_Message">
+        Mở khóa tài khoản {0} thành công!.
+    </system:String>
+    <system:String x:Key="UnlockAccountError_Message">
+        Mở khóa tài khoản {0} thất bại!.
+    </system:String>
+    <system:String x:Key="LockAccountSuccess_Message">
+        Khóa tài khoản {0} thành công!.
+    </system:String>
+    <system:String x:Key="LockAccountError_Message">
+        Khóa tài khoản {0} thất bại!.
+    </system:String>
+    <system:String x:Key="AddAccountSuccess_Message">
+        Thêm tài khoản thành công!.
+    </system:String>
+    <system:String x:Key="AddAccountError_Message">
+        Thêm tài khoản thất bại!.
+    </system:String>
+    <system:String x:Key="GetAccountInfoToLockFailed_Message">
+        Không lấy được thông tin tài khoản cần khóa!.
+    </system:String>
+    <system:String x:Key="DeleteClassSuccess_Message">
+        Xóa lớp học {0} thành công!.
+    </system:String>
+    <system:String x:Key="DeleteClassError_Message">
+        xóa lớp học {0} thất bại!.
+    </system:String>
+    <system:String x:Key="AddClassSuccess_Message">
+        Thêm lớp học {0} thành công!.
+    </system:String>
+    <system:String x:Key="AddClassError_Message">
+        Thêm lớp học {0} thất bại!.
+    </system:String>
+    <system:String x:Key="AddCourseSuccess_Message">
+        Thêm khóa học thành công!.
+    </system:String>
+    <system:String x:Key="AddCourseError_Message">
+        Thêm khóa học thất bại!.
+    </system:String>
+    <system:String x:Key="RecordsEmpty_Message">
+        Không có bản ghi nào!.
+    </system:String>
+    <system:String x:Key="InvalidInfor_Message">
+        Thông tin không hợp lệ!.
+    </system:String>
+    <system:String x:Key="HaveNotSelectedSchoolYear_Message">
+        Bạn chưa chọn năm học hoặc lớp học!.
+    </system:String>
+    <system:String x:Key="CoursesEmpty_Message">
+        Không có khóa học nào!.
+    </system:String>
+    <system:String x:Key="GradeSheetEmpty_Message">
+        Không có bảng điểm nào!.
+    </system:String>
+    <system:String x:Key="ClassroomsEmpty_Message">
+        Không có lớp học nào!.
+    </system:String>
+    <system:String x:Key="NoClassroomSelected_Message">
+        Bạn chưa chọn lớp học!.
+    </system:String>
+    <system:String x:Key="LoadGradeFileError_Message">
+        Không thể tải được file điểm của lớp {0}!.
+    </system:String>
+    <system:String x:Key="LoadGradeFileSuccess_Message">
+        Tải file điểm của lớp {0} thành công!.
+    </system:String>
+    <system:String x:Key="LoadGradeSheetError_Message">
+        Tải bảng điểm thất bại!.
+    </system:String>
+    <system:String x:Key="LoadGradeSheetSuccess_Message">
+        Tải bảng điểm thành công!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetFailed_Message">
+        Cập nhật bảng điểm thất bại!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetSuccess_Message">
+        Cập nhật bảng điểm thành công!.
+    </system:String>
+
+    <system:String x:Key="UpdateSuccess_Message">
+        Cập nhật thành công!.
+    </system:String>
+    <system:String x:Key="UpdateError_Message">
+        Cập nhật thất bại!.
+    </system:String>
+    <system:String x:Key="UpdateGradeSheetError_Message">
+        Không thể cập nhật bảng điểm của sinh viên {0}!.
+    </system:String>
+    <system:String x:Key="DatabaseFailed_Message">
+        Không thể kết nối tới cơ sở dữ liệu!.
+    </system:String>
+    <system:String x:Key="RequestEditGradeSheetSuccess_Message">
+        Yêu cầu sửa bảng điểm đã được gửi đi thành công!.
+    </system:String>
+    <system:String x:Key="RequestEditGradeSheetError_Message">
+        Yêu cầu sửa bảng điểm đã được gửi đi thất bại!.
+    </system:String>
+    <system:String x:Key="StudentsEmpty_Message">
+        Không có học sinh nào!.
+    </system:String>
+    <system:String x:Key="NoFileSelected_Message">
+        Không có tệp tin nào được chọn!.
+    </system:String>
+    <system:String x:Key="AddStudentSuccess_Message">
+        Thêm học sinh thành công!.
+    </system:String>
+    <system:String x:Key="AddStudentError_Message">
+        Thêm học sinh thất bại!.
+    </system:String>
+    <system:String x:Key="SubjectsEmpty_Message">
+        Không có môn học nào!.
+    </system:String>
+    <system:String x:Key="TeachersEmpty_Message">
+        Không có giáo viên nào!.
+    </system:String>
+    <system:String x:Key="AddTeacherSuccess_Message">
+        Thêm giáo viên thành công!.
+    </system:String>
+    <system:String x:Key="AddTeacherError_Message">
+        Thêm giáo viên thất bại!.
+    </system:String>
+    <system:String x:Key="UnableConfirmEditGradeSheetForm_Message">
+        Không thể xác nhận đơn sửa điểm!.
+    </system:String>
+    <system:String x:Key="UnLockEditGradeSheetSuccess_Message">
+        Mở khóa sửa bảng điểm thành công!.
+    </system:String>
+    <system:String x:Key="UnLockEditGradeSheetError_Message">
+        Mở khóa sửa bảng điểm thất bại!.
+    </system:String>
+    <system:String x:Key="ChangeLanguageSuccess_Message">
+        Đổi ngôn ngữ thành công!.
+    </system:String>
+    <system:String x:Key="ChangeLanguageError_Message">
+        Đổi ngôn ngữ thất bại!.
+    </system:String>
 </ResourceDictionary>

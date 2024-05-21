@@ -2,9 +2,12 @@
 using Prism.Commands;
 using SchoolManagement.Auth.Views;
 using SchoolManagement.Core.avalonia;
+using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
 using System;
 using System.Windows.Input;
 
@@ -13,6 +16,7 @@ namespace SchoolManagement.Shell.ViewModels
     public class CommonMenuViewModel : BaseRegionViewModel
     {
         private bool isDesktopPlatform = true;
+        private Languages languages;
 
         public CommonMenuViewModel()
         {
@@ -28,6 +32,9 @@ namespace SchoolManagement.Shell.ViewModels
         public override string Title => "Cài đặt chung";
         public bool IsDesktopPlatform { get => isDesktopPlatform; set => SetProperty(ref isDesktopPlatform, value); }
         public override User User { get; protected set; }
+        public Languages Languages
+        { get => languages; set { if(value == null) { return; }
+                SetProperty(ref languages, value); } }
 
         protected override void RegisterCommand()
         {
@@ -37,9 +44,16 @@ namespace SchoolManagement.Shell.ViewModels
             RequestRefreshPageCommand = new DelegateCommand(OnRefresh);
             base.RegisterCommand();
         }
-
+        
         private void OnRefresh()
         {
+            var service = Ioc.Resolve<ISchoolManagementSevice>();
+            if (service == null)
+            {
+                NotificationManager.ShowError(Util.GetResourseString("DatabaseFailed_Message"));
+                return;
+            }
+            service.Refresh();
             EventAggregator.GetEvent<RequestRefreshPageEvent>().Publish();
         }
 

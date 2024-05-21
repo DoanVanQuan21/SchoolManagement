@@ -6,6 +6,7 @@ using SchoolManagement.Core.Constants;
 using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Events;
+using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.Common;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.Core.Services;
@@ -118,10 +119,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             CloseDialog();
             if (!isExportCompleted)
             {
-                NotificationManager.ShowWarning($"Không thể tải được file điểm của lớp {Class.ClassName}!.");
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LoadGradeFileError_Message"),Class.ClassName));
                 return;
             }
-            NotificationManager.ShowSuccess($"Tải file điểm của lớp {Class.ClassName} thành công!.");
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("LoadGradeFileSuccess_Message"), Class.ClassName));
         }
 
         private async void GetClassByDate()
@@ -139,14 +140,14 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var courses = await _courseService.GetCourseOfTeacherByYear(teacher.TeacherId, CurrentDate.Year,Semester.Value);
             if (courses?.Any() == false)
             {
-                NotificationManager.ShowWarning("Không có lớp nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("ClassroomsEmpty_Message"));
                 Class = new();
                 return;
             }
             var classes = courses.Select(c => c.Class);
             if (classes?.Any() == false)
             {
-                NotificationManager.ShowWarning("Không có lớp nào!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("ClassroomsEmpty_Message"));
                 Class = new();
 
                 return;
@@ -235,7 +236,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         {
             if (Class == null)
             {
-                NotificationManager.ShowWarning("Bạn chưa chọn lớp học!");
+                NotificationManager.ShowWarning(Util.GetResourseString("NoClassroomSelected_Message"));
                 return;
             }
             var topLevel = TopLevel.GetTopLevel(AppRegion.MainView);
@@ -261,10 +262,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var missingGrades = await _gradeSheetService.FinishEditGradeSheet(GradeSheets);
             if (missingGrades?.Count <= 0)
             {
-                NotificationManager.ShowSuccess("Đã cập nhật thành công!.");
+                NotificationManager.ShowSuccess(Util.GetResourseString("UpdateSuccess_Message"));
                 return;
             }
-            NotificationManager.ShowSuccess($"Không thể cập nhật bảng điểm của sinh viên {string.Join(',', missingGrades.Select(g => g.Student?.User?.FullName))}");
+            NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UpdateGradeSheetError_Message"),string.Join(',', missingGrades.Select(g => g.Student?.User?.FullName))));
         }
 
         private async void OnSend()
@@ -272,7 +273,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
             if (teacher == null)
             {
-                NotificationManager.ShowWarning("Có lỗi sảy ra!.");
+                NotificationManager.ShowWarning(Util.GetResourseString("DatabaseFailed_Message"));
                 return;
             }
             var form = new EditGradeSheetForm()
@@ -294,10 +295,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             CloseDialog();
             if (addOK)
             {
-                NotificationManager.ShowSuccess("Yêu cầu sửa đã được gửi đi!.");
+                NotificationManager.ShowSuccess(Util.GetResourseString("RequestEditGradeSheetSuccess_Message"));
                 return;
             }
-            NotificationManager.ShowWarning("Yêu cầu sửa gửi đi thất bại!.");
+            NotificationManager.ShowWarning(Util.GetResourseString("RequestEditGradeSheetError_Message"));
         }
 
         private async void OnUpdate()

@@ -33,6 +33,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="avares://SchoolManagement.UI/CommonResources.axaml" />
                 <ResourceInclude Source="avares://SchoolManagement.UI/Languages/Message-vn.axaml" />
+                <ResourceInclude Source="avares://SchoolManagement.UI/Languages/Label-vn.axaml" />
                 <ResourceInclude Source="avares://Management.InternalShared/Resources/Converters.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
