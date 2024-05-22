@@ -30,5 +30,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<bool> AddUser(User user);
         Task<bool> LockAccount(User user);
         Task<bool> UnLockAccount(User user);
+        Task<bool> ChangePassword(User user);
+        Task<bool> ResetPassword(User user);
     }
 }

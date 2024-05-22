@@ -8,6 +8,7 @@ using Avalonia.Media.Imaging;
 using System.Windows.Input;
 using Avalonia.Controls;
 using SchoolManagement.Core.Contracts;
+using SchoolManagement.SettingAccount.Views.Dialogs;
 
 namespace SchoolManagement.SettingAccount.ViewModels
 {
@@ -27,11 +28,14 @@ namespace SchoolManagement.SettingAccount.ViewModels
         }
 
         public ICommand ClickedUpdateInformation { get; set; }
-        public ICommand ClickedChangeImage { get; set; }    
+        public ICommand ClickedChangeImage { get; set; }
+        public ICommand ClickedChangePassword { get; set; }
         public override string Title => Util.GetResourseString("AccountSettings_Label");
-        public Bitmap? Image { get => image; set => SetProperty(ref image,value); }
+        public Bitmap? Image { get => image; set => SetProperty(ref image, value); }
+
         public override User User
         { get => user; protected set { SetProperty(ref user, value); } }
+
         private async Task LoadImageAsync(Uri uri)
         {
             if (uri == null)
@@ -41,11 +45,33 @@ namespace SchoolManagement.SettingAccount.ViewModels
             }
             Image = await ImageHelper.LoadFromWeb(uri);
         }
+
         protected override void RegisterCommand()
         {
             ClickedUpdateInformation = new DelegateCommand(OnUpdateInfo);
             ClickedChangeImage = new DelegateCommand(OnChangeImage);
+            ClickedChangePassword = new DelegateCommand(OnChangePassword);
             base.RegisterCommand();
+        }
+
+        private async void OnChangePassword()
+        {
+            var changePasswordView = new ChangePasswordView();
+            changePasswordView.SetChangePasswordEvent(ChangePassword);
+            await ShowDialogHost(changePasswordView);
+        }
+
+        private async void ChangePassword(User user)
+        {
+            RootContext.CurrentUser.Password = user.Password;
+            var isChanged = await _userService.ChangePassword(RootContext.CurrentUser);
+            if (!isChanged)
+            {
+                NotificationManager.ShowWarning(Util.GetResourseString("ChangePasswordError_Message"));
+                return;
+            }
+            NotificationManager.ShowSuccess(Util.GetResourseString("ChangePasswordSuccess_Message"));
+            CloseDialog();
         }
 
         private async void OnChangeImage()
@@ -55,9 +81,9 @@ namespace SchoolManagement.SettingAccount.ViewModels
             var files = await topLevel.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions()
             {
                 Title = "Chọn hình ảnh",
-                FileTypeFilter = new[] {ImageHelper.ImageAll}
+                FileTypeFilter = new[] { ImageHelper.ImageAll }
             });
-            if(files == null || files.Count<=0)
+            if (files == null || files.Count <= 0)
             {
                 return;
             }

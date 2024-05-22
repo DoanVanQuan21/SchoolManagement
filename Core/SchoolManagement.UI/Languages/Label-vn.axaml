@@ -4,7 +4,7 @@
     xmlns:system="clr-namespace:System;assembly=System.Runtime">
     <!--  Add Resources Here  -->
     <system:String x:Key="Home_Label">Trang chủ</system:String>
-    <system:String x:Key="AccountSettings_Label">Quản lý tài khoản</system:String>
+    <system:String x:Key="AccountSettings_Label">Cài đặt tài khoản</system:String>
     <system:String x:Key="GradeManagement_Label">Quản lý điểm</system:String>
     <system:String x:Key="ViewComponentGrades_Label">Điểm thành phần</system:String>
     <system:String x:Key="ViewFinalGrades_Label">Điểm tổng kết</system:String>
@@ -39,6 +39,7 @@
     <system:String x:Key="Error_Label">Lỗi</system:String>
 
 
+    <system:String x:Key="ConfirmPassword_Label">Xác nhận mật khẩu</system:String>
 
 
     <system:String x:Key="StudentCode_Label">Mã học sinh</system:String>
@@ -48,7 +49,19 @@
     <system:String x:Key="FirstName_Label">Họ đệm</system:String>
     <system:String x:Key="LastName_Label">Tên</system:String>
     <system:String x:Key="Fullname_Label">Họ và tên</system:String>
+    <system:String x:Key="DateOfBirth_Label">Ngày sinh</system:String>
+    <system:String x:Key="Gender_Label">Giới tính</system:String>
+    <system:String x:Key="PhoneNumber_Label">Số điện thoại</system:String>
+    <system:String x:Key="Address_Label">Địa chỉ</system:String>
+    <system:String x:Key="StartDate_Label">Ngày bắt đầu</system:String>
+    <system:String x:Key="EndDate_Label">Ngày kết thúc</system:String>
+
+
+
     <system:String x:Key="Login_Label">Đăng nhập</system:String>
+    <system:String x:Key="Logout_Label">Đăng xuất</system:String>
+    <system:String x:Key="Setting_Label">Cài đặt</system:String>
+    <system:String x:Key="Theme_Label">Màu giao diện</system:String>
     <system:String x:Key="ForgotPassword_Label">Quên mật khẩu?</system:String>
     <system:String x:Key="ChangePassword_Label">Đổi mật khẩu</system:String>
     <system:String x:Key="Register_Label">Đăng ký</system:String>

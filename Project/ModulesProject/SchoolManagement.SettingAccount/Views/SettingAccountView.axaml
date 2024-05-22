@@ -74,16 +74,16 @@
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <PathIcon Data="{StaticResource EditGeometry}" />
-                        <Label Content="{DynamicResource Edit_Label}" />
+                        <Label Margin="20,0,0,0" Content="{DynamicResource Edit_Label}" />
                     </StackPanel>
                 </Button.Content>
             </Button>
             <Button
                 Grid.Row="2"
-                Width="120"
                 Height="40"
                 HorizontalAlignment="Center"
-                Classes="theme-solid accent">
+                Classes="theme-solid accent"
+                Command="{Binding ClickedChangePassword}">
                 <Button.Content>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="{DynamicResource ChangePassword_Label}" />

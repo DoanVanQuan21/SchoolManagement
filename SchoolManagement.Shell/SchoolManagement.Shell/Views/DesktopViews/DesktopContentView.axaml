@@ -55,7 +55,9 @@
                                     <PathIcon
                                         Width="25"
                                         HorizontalAlignment="Left"
-                                        Data="{Binding Geometry}" />
+                                        Data="{Binding Geometry}"
+                                        ToolTip.ShowDelay="10"
+                                        ToolTip.Tip="{Binding Label}" />
                                     <TextBlock
                                         Padding="10,0,0,0"
                                         HorizontalAlignment="Right"

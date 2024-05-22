@@ -13,7 +13,7 @@ public partial class User : BindableBase
     private string? firstName;
     private string? lastName;
     private string? gender;
-    private DateTime? dateOfBirth = DateTime.Now;
+    private DateTime dateOfBirth = DateTime.Now;
     private string? phoneNumber;
     private string? address;
     private string? email;
@@ -32,23 +32,23 @@ public partial class User : BindableBase
     [Browsable(false)]
     public int UserId { get; set; }
 
-    [DisplayName("Họ đệm")]
+    [DisplayName("FirstName_Label")]
     public string? FirstName
     { get => firstName; set { SetProperty(ref firstName, value); } }
 
-    [DisplayName("Tên")]
+    [DisplayName("LastName_Label")]
     public string? LastName
     { get => lastName; set { SetProperty(ref lastName, value); } }
 
     [Browsable(false)]
     public string FullName => $"{FirstName} {LastName}";
 
-    [DisplayName("Giới tính")]
+    [DisplayName("Gender_Label")]
     public string? Gender
     { get => gender; set { SetProperty(ref gender, value); } }
 
-    [DisplayName("Ngày sinh")]
-    public DateTime? DateOfBirth
+    [DisplayName("DateOfBirth_Label")]
+    public DateTime DateOfBirth
     {
         get => dateOfBirth; set
         {
@@ -60,11 +60,11 @@ public partial class User : BindableBase
         }
     }
 
-    [DisplayName("Số điện thoại")]
+    [DisplayName("PhoneNumber_Label")]
     public string? PhoneNumber
     { get => phoneNumber; set { SetProperty(ref phoneNumber, value); } }
 
-    [DisplayName("Địa chỉ")]
+    [DisplayName("Address_Label")]
     public string? Address
     { get => address; set { SetProperty(ref address, value); } }
 
@@ -92,12 +92,12 @@ public partial class User : BindableBase
     public byte? ActiveStatus
     { get => activeStatus; set { SetProperty(ref activeStatus, value); } }
 
-    [DisplayName("Ngày bắt đầu")]
+    [DisplayName("StartDate_Label")]
     [Browsable(false)]
     public DateTime StartDate
     { get => startDate; set { SetProperty(ref startDate, value); } }
 
-    [DisplayName("Ngày kết thúc")]
+    [DisplayName("EndDate_Label")]
     [Browsable(false)]
     public DateTime? EndDate
     { get => endDate; set { SetProperty(ref endDate, value); } }

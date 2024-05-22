@@ -27,6 +27,11 @@ namespace SchoolManagement.EntityFramework.Services
             });
         }
 
+        public Task<bool> ChangePassword(User user)
+        {
+            return _schoolManagementSevice.UserRepository.ChangePassword(user);
+        }
+
         public Task<ObservableCollection<User>> GetAccountOfStudents()
         {
             return _schoolManagementSevice.UserRepository.GetAccountOfStudent();
@@ -118,6 +123,11 @@ namespace SchoolManagement.EntityFramework.Services
             }
             _schoolManagementSevice.UserRepository.Add(user);
             return true;
+        }
+
+        public async Task<bool> ResetPassword(User user)
+        {
+            return await _schoolManagementSevice.UserRepository.ResetPassword(user);
         }
 
         public async Task<bool> UnLockAccount(User user)

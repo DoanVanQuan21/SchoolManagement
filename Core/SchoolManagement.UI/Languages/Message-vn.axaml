@@ -181,4 +181,30 @@
     <system:String x:Key="ChangeLanguageError_Message">
         Đổi ngôn ngữ thất bại!.
     </system:String>
+
+
+    <system:String x:Key="ConfirmPasswordEmpty_Message">
+        Không được để trống thông tin!.
+    </system:String>
+    <system:String x:Key="PasswordNotEqual_Message">
+        Mật khẩu không khớp!.
+    </system:String>
+    <system:String x:Key="ChangePasswordSuccess_Message">
+        Đổi mật khẩu thành công!.
+    </system:String>
+    <system:String x:Key="ChangePasswordError_Message">
+        Đổi mật khẩu thất bại!.
+    </system:String>
+
+
+
+    <system:String x:Key="ResetPasswordSuccess_Message">
+        Đặt lại mật khẩu của tài khoản {0} thành công!.
+    </system:String>
+    <system:String x:Key="ResetPasswordError_Message">
+        Đặt lại mật khẩu của tài khoản {0} thất bại!.
+    </system:String>
+
+
+
 </ResourceDictionary>

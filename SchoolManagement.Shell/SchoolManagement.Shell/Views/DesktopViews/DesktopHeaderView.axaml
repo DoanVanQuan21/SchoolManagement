@@ -62,17 +62,17 @@
                 </DropDownButton.Content>
                 <DropDownButton.Flyout>
                     <MenuFlyout Placement="RightEdgeAlignedTop">
-                        <MenuItem Command="{Binding LogoutCommand}" Header="Đăng xuất">
+                        <MenuItem Command="{Binding LogoutCommand}" Header="{DynamicResource Logout_Label}">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource LogoutGeometry}" DockPanel.Dock="Left" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Command="{Binding ChangeThemeCommand}" Header="Màu giao diện">
+                        <MenuItem Command="{Binding ChangeThemeCommand}" Header="{DynamicResource Theme_Label}">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource ThemeDarkLightGeometry}" DockPanel.Dock="Left" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Command="{Binding SettingAccountCommand}" Header="Cài đặt">
+                        <MenuItem Command="{Binding SettingAccountCommand}" Header="{DynamicResource Setting_Label}">
                             <MenuItem.Icon>
                                 <PathIcon Data="{StaticResource SettingGeometry}" DockPanel.Dock="Left" />
                             </MenuItem.Icon>

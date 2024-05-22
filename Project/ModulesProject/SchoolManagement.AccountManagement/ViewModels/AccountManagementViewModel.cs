@@ -12,9 +12,9 @@ namespace SchoolManagement.AccountManagement.ViewModels
 {
     internal class AccountManagementViewModel : BaseRegionViewModel
     {
-        private readonly IUserService _userService;
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
+        private readonly IUserService _userService;
         private bool dataLoaded = false;
         private User selectedUser;
 
@@ -28,12 +28,12 @@ namespace SchoolManagement.AccountManagement.ViewModels
             GetAccounts().GetAwaiter();
         }
 
+        public ICommand ClickedAddCommand { get; set; }
         public ICommand ClickedLockAccountCommand { get; set; }
-        public ICommand ClickedUnLockAccountCommand { get; set; }
         public ICommand ClickedNextCommand { get; set; }
         public ICommand ClickedPreviousCommand { get; set; }
         public ICommand ClickedResetPasswordCommand { get; set; }
-        public ICommand ClickedAddCommand { get; set; }
+        public ICommand ClickedUnLockAccountCommand { get; set; }
         public bool DataLoaded { get => dataLoaded; set => SetProperty(ref dataLoaded, value); }
         public User SelectedUser { get => selectedUser; set => SetProperty(ref selectedUser, value); }
         public override string Title => Util.GetResourseString("AccountManagement_Label");
@@ -43,38 +43,13 @@ namespace SchoolManagement.AccountManagement.ViewModels
 
         protected override void RegisterCommand()
         {
-            ClickedResetPasswordCommand = new DelegateCommand(OnResetPassword);
+            ClickedResetPasswordCommand = new DelegateCommand<object>(OnResetPassword);
             ClickedLockAccountCommand = new DelegateCommand<object>(OnLockAccount);
             ClickedUnLockAccountCommand = new DelegateCommand<object>(OnUnLockAccount);
             ClickedNextCommand = new DelegateCommand(OnNext);
             ClickedPreviousCommand = new DelegateCommand(OnPreviousAsync);
             ClickedAddCommand = new DelegateCommand(OnAdd);
             base.RegisterCommand();
-        }
-
-        private async void OnUnLockAccount(object obj)
-        {
-            var user = (obj as User);
-            if (user == null)
-            {
-                NotificationManager.ShowWarning(Util.GetResourseString("UnableGetAccountInfoLocked_Message"));
-                return;
-            }
-            var isLocked = await _userService.UnLockAccount(user);
-            if (!isLocked)
-            {
-                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UnlockAccountError_Message"),user.FullName));
-                return;
-            }
-            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("UnlockAccountSuccess_Message"), user.FullName));
-            user.LockAccount = false;
-        }
-
-        private async void OnAdd()
-        {
-            var addAccountView = new AddUserView();
-            addAccountView.SetAddAccountAction(AddAccount);
-            await ShowDialogHost(addAccountView);
         }
 
         private async void AddAccount(User user)
@@ -85,7 +60,7 @@ namespace SchoolManagement.AccountManagement.ViewModels
                 NotificationManager.ShowWarning(Util.GetResourseString("AddAccountError_Message"));
                 return;
             }
-            CloseDialog();  
+            CloseDialog();
             NotificationManager.ShowSuccess(Util.GetResourseString("AddAccountSuccess_Message"));
             await GetAccounts();
         }
@@ -106,6 +81,13 @@ namespace SchoolManagement.AccountManagement.ViewModels
             DataLoaded = true;
         }
 
+        private async void OnAdd()
+        {
+            var addAccountView = new AddUserView();
+            addAccountView.SetAddAccountAction(AddAccount);
+            await ShowDialogHost(addAccountView);
+        }
+
         private async void OnLockAccount(object obj)
         {
             var user = (obj as User);
@@ -115,13 +97,12 @@ namespace SchoolManagement.AccountManagement.ViewModels
                 return;
             }
             var isLocked = await _userService.LockAccount(user);
-            if(!isLocked)
+            if (!isLocked)
             {
-                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LockAccountError_Message"),user.FullName));
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LockAccountError_Message"), user.FullName));
                 return;
             }
             NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("LockAccountSuccess_Message"), user.FullName));
-
         }
 
         private async void OnNext()
@@ -136,8 +117,40 @@ namespace SchoolManagement.AccountManagement.ViewModels
             await GetAccounts();
         }
 
-        private void OnResetPassword()
+        private async void OnResetPassword(object obj)
         {
+            var user = obj as User;
+            if (user == null)
+            {
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
+                return;
+            }
+            var isReseted = await _userService.ResetPassword(user);
+            if (!isReseted)
+            {
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("ResetPasswordError_Message"),user.FullName));
+                return;
+            }
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("ResetPasswordSuccess_Message"), user.FullName));
+
+        }
+
+        private async void OnUnLockAccount(object obj)
+        {
+            var user = (obj as User);
+            if (user == null)
+            {
+                NotificationManager.ShowWarning(Util.GetResourseString("UnableGetAccountInfoLocked_Message"));
+                return;
+            }
+            var isLocked = await _userService.UnLockAccount(user);
+            if (!isLocked)
+            {
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UnlockAccountError_Message"), user.FullName));
+                return;
+            }
+            NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("UnlockAccountSuccess_Message"), user.FullName));
+            user.LockAccount = false;
         }
     }
 }

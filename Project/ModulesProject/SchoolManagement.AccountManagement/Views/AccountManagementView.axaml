@@ -159,7 +159,8 @@
                                     Margin="10"
                                     HorizontalAlignment="Center"
                                     Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedResetPasswordCommand}">
+                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedResetPasswordCommand}"
+                                    CommandParameter="{Binding}">
                                     <Button.Content>
                                         <StackPanel Orientation="Horizontal">
                                             <PathIcon Data="{StaticResource ArrowResetGeometry}" />

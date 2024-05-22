@@ -184,4 +184,29 @@
     <system:String x:Key="ChangeLanguageError_Message">
         Change language failed!.
     </system:String>
+
+
+    <system:String x:Key="ConfirmPasswordEmpty_Message">
+        Information cannot be left blank!.
+    </system:String>
+    <system:String x:Key="PasswordNotEqual_Message">
+        Password incorrect!.
+    </system:String>
+    <system:String x:Key="ChangePasswordSuccess_Message">
+        Change password successfully!.
+    </system:String>
+    <system:String x:Key="ChangePasswordError_Message">
+        Change password failed!.
+    </system:String>
+
+
+
+    <system:String x:Key="ResetPasswordSuccess_Message">
+        Reset password of the account's {0} successful!.
+    </system:String>
+    <system:String x:Key="ResetPasswordError_Message">
+        Reset password of the account's {0} failed!.
+    </system:String>
+
+
 </ResourceDictionary>

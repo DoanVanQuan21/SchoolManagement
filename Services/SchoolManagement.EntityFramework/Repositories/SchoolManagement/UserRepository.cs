@@ -6,9 +6,39 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
 {
     public class UserRepository : GenerateRepository<User>, IUserRepository<User>
     {
-        
         public UserRepository(SchoolManagementContext context) : base(context)
         {
+        }
+
+        public Task<bool> ChangePassword(User user)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var u = _context.Users.FirstOrDefault(i => i.UserId == user.UserId);
+                if (u == null)
+                {
+                    return false;
+                }
+                u.Password = user.Password;
+                _context.Set<User>().Update(u);
+                _context.SaveChanges();
+                return true;
+            });
+        }
+        public Task<bool> ResetPassword(User user)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var u = _context.Users.FirstOrDefault(i => i.UserId == user.UserId);
+                if (u == null)
+                {
+                    return false;
+                }
+                u.Password = $"{user.DateOfBirth.ToString("ddMMyyyy")}";
+                _context.Set<User>().Update(u);
+                _context.SaveChanges();
+                return true;
+            });
         }
 
         public bool Delete(int id)
@@ -59,10 +89,12 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         {
             return Update(entity);
         }
+
         public Task<bool> LockAccount(User entity)
         {
-            return Task.Factory.StartNew(() => {
-                var user = _context.Users.FirstOrDefault(u=>u.UserId == entity.UserId);
+            return Task.Factory.StartNew(() =>
+            {
+                var user = _context.Users.FirstOrDefault(u => u.UserId == entity.UserId);
                 if (user == null)
                 {
                     return false;
@@ -72,9 +104,11 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return true;
             });
         }
+
         public Task<bool> UnLockAccount(User entity)
         {
-            return Task.Factory.StartNew(() => {
+            return Task.Factory.StartNew(() =>
+            {
                 var user = _context.Users.FirstOrDefault(u => u.UserId == entity.UserId);
                 if (user == null)
                 {
@@ -85,6 +119,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return true;
             });
         }
+
         public Task<ObservableCollection<User>> GetAccountOfStudent()
         {
             return Task.Factory.StartNew(() =>

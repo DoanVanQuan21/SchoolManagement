@@ -49,6 +49,10 @@
     <system:String x:Key="Error_Label">Error</system:String>
 
 
+    <system:String x:Key="ConfirmPassword_Label">Confirm password</system:String>
+
+
+
     <system:String x:Key="StudentCode_Label">Student code</system:String>
     <system:String x:Key="ClassName_Label">Class name</system:String>
     <system:String x:Key="Username_Label">Username</system:String>
@@ -56,7 +60,20 @@
     <system:String x:Key="FirstName_Label">Surname</system:String>
     <system:String x:Key="LastName_Label">Name</system:String>
     <system:String x:Key="Fullname_Label">Fullname</system:String>
+    <system:String x:Key="DateOfBirth_Label">Date of birth</system:String>
+    <system:String x:Key="Gender_Label">Gender</system:String>
+    <system:String x:Key="PhoneNumber_Label">Phone number</system:String>
+    <system:String x:Key="Address_Label">Address</system:String>
+    <system:String x:Key="StartDate_Label">Start date</system:String>
+    <system:String x:Key="EndDate_Label">End date</system:String>
+
+
+
+
     <system:String x:Key="Login_Label">Sign in</system:String>
+    <system:String x:Key="Logout_Label">Log out</system:String>
+    <system:String x:Key="Theme_Label">Theme</system:String>
+    <system:String x:Key="Setting_Label">Settings</system:String>
     <system:String x:Key="ForgotPassword_Label">Forgot password?</system:String>
     <system:String x:Key="ChangePassword_Label">Change password</system:String>
     <system:String x:Key="Register_Label">Register</system:String>
