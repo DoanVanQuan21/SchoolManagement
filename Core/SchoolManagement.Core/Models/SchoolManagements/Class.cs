@@ -31,6 +31,5 @@ public partial class Class : BindableBase
 
     [Browsable(false)]
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
-    [Browsable(false)]
-    public virtual Teacher Teacher { get; set; } = null!;
+
 }

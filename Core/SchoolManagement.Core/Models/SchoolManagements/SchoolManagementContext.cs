@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Models.SchoolManagements;
 
 namespace SchoolManagement.Core.Models.SchoolManagements;
 
 public partial class SchoolManagementContext : DbContext
 {
-    private string _connectionString;
-
+    private readonly string _connectionString;
     public SchoolManagementContext()
     {
     }
-
-    public SchoolManagementContext(string connectionstring)
+    public SchoolManagementContext(string connectionString)
     {
-        _connectionString = connectionstring;
+        _connectionString = connectionString;
     }
-
     public SchoolManagementContext(DbContextOptions<SchoolManagementContext> options)
         : base(options)
     {
@@ -58,23 +56,22 @@ public partial class SchoolManagementContext : DbContext
     {
         modelBuilder.Entity<Class>(entity =>
         {
-            entity.HasKey(e => e.ClassId).HasName("PK__Class__CB1927A05997A484");
+            entity.HasKey(e => e.ClassId).HasName("PK__Class__CB1927A02FCAA1ED");
 
             entity.ToTable("Class");
 
-            entity.Property(e => e.ClassId).ValueGeneratedOnAdd().HasColumnName("ClassID");
+            entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.ClassCode).HasMaxLength(100);
             entity.Property(e => e.ClassName).HasMaxLength(100);
-            entity.Property(e => e.NumberOfStudent).HasColumnName("NumberOfStudent");
         });
 
         modelBuilder.Entity<Course>(entity =>
         {
-            entity.HasKey(e => e.CourseId).HasName("PK__Course__C92D7187388B467F");
+            entity.HasKey(e => e.CourseId).HasName("PK__Course__C92D71878B761C82");
 
             entity.ToTable("Course");
 
-            entity.Property(e => e.CourseId).ValueGeneratedOnAdd().HasColumnName("CourseID");
+            entity.Property(e => e.CourseId).HasColumnName("CourseID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.EndDate).HasColumnType("datetime");
@@ -87,31 +84,31 @@ public partial class SchoolManagementContext : DbContext
             entity.HasOne(d => d.Class).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.ClassId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Course__ClassID__3A81B327");
+                .HasConstraintName("FK__Course__ClassID__398D8EEE");
 
             entity.HasOne(d => d.EducationProgram).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.EducationProgramId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Course__Educatio__3D5E1FD2");
+                .HasConstraintName("FK__Course__Educatio__3C69FB99");
 
             entity.HasOne(d => d.Subject).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.SubjectId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Course__SubjectI__3C69FB99");
+                .HasConstraintName("FK__Course__SubjectI__3B75D760");
 
             entity.HasOne(d => d.Teacher).WithMany(p => p.Courses)
                 .HasForeignKey(d => d.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Course__TeacherI__3B75D760");
+                .HasConstraintName("FK__Course__TeacherI__3A81B327");
         });
 
         modelBuilder.Entity<Department>(entity =>
         {
-            entity.HasKey(e => e.DepartmentId).HasName("PK__Departme__B2079BCD52B94086");
+            entity.HasKey(e => e.DepartmentId).HasName("PK__Departme__B2079BCD113690A9");
 
             entity.ToTable("Department");
 
-            entity.Property(e => e.DepartmentId).ValueGeneratedOnAdd().HasColumnName("DepartmentID");
+            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
             entity.Property(e => e.DepartmentCode).HasMaxLength(20);
             entity.Property(e => e.DepartmentName).HasMaxLength(100);
             entity.Property(e => e.FoundingDate).HasColumnType("datetime");
@@ -120,11 +117,11 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<EditGradeSheetForm>(entity =>
         {
-            entity.HasKey(e => e.EditGradeSheetFormId).HasName("PK__EditGrad__31DF283EF46E6147");
+            entity.HasKey(e => e.EditGradeSheetFormId).HasName("PK__EditGrad__31DF283E44048D36");
 
             entity.ToTable("EditGradeSheetForm");
 
-            entity.Property(e => e.EditGradeSheetFormId).ValueGeneratedOnAdd().HasColumnName("EditGradeSheetFormID");
+            entity.Property(e => e.EditGradeSheetFormId).HasColumnName("EditGradeSheetFormID");
             entity.Property(e => e.GradeSheetId).HasColumnName("GradeSheetID");
             entity.Property(e => e.Reason).HasColumnName("reason");
             entity.Property(e => e.Status).HasMaxLength(100);
@@ -133,21 +130,21 @@ public partial class SchoolManagementContext : DbContext
 
             entity.HasOne(d => d.GradeSheet).WithMany(p => p.EditGradeSheetForms)
                 .HasForeignKey(d => d.GradeSheetId)
-                .HasConstraintName("FK__EditGrade__Grade__49C3F6B7");
+                .HasConstraintName("FK__EditGrade__Grade__47DBAE45");
 
             entity.HasOne(d => d.Teacher).WithMany(p => p.EditGradeSheetForms)
                 .HasForeignKey(d => d.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__EditGrade__Teach__4AB81AF0");
+                .HasConstraintName("FK__EditGrade__Teach__48CFD27E");
         });
 
         modelBuilder.Entity<EducationProgram>(entity =>
         {
-            entity.HasKey(e => e.EducationProgramId).HasName("PK__Educatio__FDEFCDF53EFA5F2B");
+            entity.HasKey(e => e.EducationProgramId).HasName("PK__Educatio__FDEFCDF501C9D36C");
 
             entity.ToTable("EducationProgram");
 
-            entity.Property(e => e.EducationProgramId).ValueGeneratedOnAdd().HasColumnName("EducationProgramID");
+            entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.EducationName).HasMaxLength(100);
             entity.Property(e => e.EducationProgramCode).HasMaxLength(20);
             entity.Property(e => e.Status).HasMaxLength(100);
@@ -155,28 +152,28 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<GradeSheet>(entity =>
         {
-            entity.HasKey(e => e.GradeSheetId).HasName("PK__GradeShe__3D3F12117EF0DF26");
+            entity.HasKey(e => e.GradeSheetId).HasName("PK__GradeShe__3D3F1211A5223DAC");
 
             entity.ToTable("GradeSheet");
 
-            entity.Property(e => e.GradeSheetId).ValueGeneratedOnAdd().HasColumnName("GradeSheetID");
+            entity.Property(e => e.GradeSheetId).HasColumnName("GradeSheetID");
             entity.Property(e => e.CourseId).HasColumnName("CourseID");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
             entity.HasOne(d => d.Course).WithMany(p => p.GradeSheets)
                 .HasForeignKey(d => d.CourseId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GradeShee__Cours__412EB0B6");
+                .HasConstraintName("FK__GradeShee__Cours__3F466844");
 
             entity.HasOne(d => d.Student).WithMany(p => p.GradeSheets)
                 .HasForeignKey(d => d.StudentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__GradeShee__Stude__4222D4EF");
+                .HasConstraintName("FK__GradeShee__Stude__403A8C7D");
         });
 
         modelBuilder.Entity<HomeroomAssignment>(entity =>
         {
-            entity.HasKey(e => new { e.ClassId, e.TeacherId }).HasName("PK__Homeroom__95C602349D6C93E8");
+            entity.HasKey(e => new { e.ClassId, e.TeacherId }).HasName("PK__Homeroom__95C602344B40E136");
 
             entity.ToTable("HomeroomAssignment");
 
@@ -188,11 +185,11 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<Lesson>(entity =>
         {
-            entity.HasKey(e => e.LessonId).HasName("PK__Lesson__B084ACB0F94566A2");
+            entity.HasKey(e => e.LessonId).HasName("PK__Lesson__B084ACB0C2C34A59");
 
             entity.ToTable("Lesson");
 
-            entity.Property(e => e.LessonId).ValueGeneratedOnAdd().HasColumnName("LessonID");
+            entity.Property(e => e.LessonId).HasColumnName("LessonID");
             entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.LessonCode).HasMaxLength(100);
             entity.Property(e => e.LessonName).HasMaxLength(100);
@@ -200,12 +197,12 @@ public partial class SchoolManagementContext : DbContext
 
             entity.HasOne(d => d.EducationProgram).WithMany(p => p.Lessons)
                 .HasForeignKey(d => d.EducationProgramId)
-                .HasConstraintName("FK__Lesson__Educatio__46E78A0C");
+                .HasConstraintName("FK__Lesson__Educatio__44FF419A");
         });
 
         modelBuilder.Entity<Schedule>(entity =>
         {
-            entity.HasKey(e => e.ScheduleId).HasName("PK__Schedule__9C8A5B69E534B0AC");
+            entity.HasKey(e => e.ScheduleId).HasName("PK__Schedule__9C8A5B693FAC1F2A");
 
             entity.ToTable("Schedule");
 
@@ -223,11 +220,11 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<Student>(entity =>
         {
-            entity.HasKey(e => e.StudentId).HasName("PK__Student__32C52A790E4D1FFC");
+            entity.HasKey(e => e.StudentId).HasName("PK__Student__32C52A79B6E206F7");
 
             entity.ToTable("Student");
 
-            entity.Property(e => e.StudentId).ValueGeneratedOnAdd().HasColumnName("StudentID");
+            entity.Property(e => e.StudentId).HasColumnName("StudentID");
             entity.Property(e => e.StudentCode).HasMaxLength(20);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
@@ -238,7 +235,7 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<StudentAssignment>(entity =>
         {
-            entity.HasKey(e => new { e.StudentId, e.ClassId }).HasName("PK__StudentA__2E74B803CCAF8826");
+            entity.HasKey(e => new { e.StudentId, e.ClassId }).HasName("PK__StudentA__2E74B8038C29E732");
 
             entity.ToTable("StudentAssignment");
 
@@ -251,22 +248,22 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<Subject>(entity =>
         {
-            entity.HasKey(e => e.SubjectId).HasName("PK__Subject__AC1BA388F0BF516F");
+            entity.HasKey(e => e.SubjectId).HasName("PK__Subject__AC1BA3887F0594B6");
 
             entity.ToTable("Subject");
 
-            entity.Property(e => e.SubjectId).ValueGeneratedOnAdd().HasColumnName("SubjectID");
+            entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
             entity.Property(e => e.SubjectCode).HasMaxLength(15);
             entity.Property(e => e.SubjectName).HasMaxLength(100);
         });
 
         modelBuilder.Entity<Teacher>(entity =>
         {
-            entity.HasKey(e => e.TeacherId).HasName("PK__Teacher__EDF2594463D94137");
+            entity.HasKey(e => e.TeacherId).HasName("PK__Teacher__EDF25944644BEE67");
 
             entity.ToTable("Teacher");
 
-            entity.Property(e => e.TeacherId).ValueGeneratedOnAdd().HasColumnName("TeacherID");
+            entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
             entity.Property(e => e.AdditionalBenifits).HasMaxLength(100);
             entity.Property(e => e.CurrentHealthStatus).HasMaxLength(100);
             entity.Property(e => e.Degree).HasMaxLength(200);
@@ -301,11 +298,11 @@ public partial class SchoolManagementContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC6BD56276");
+            entity.HasKey(e => e.UserId).HasName("PK__User__1788CCAC1E4AFB13");
 
             entity.ToTable("User");
 
-            entity.Property(e => e.UserId).ValueGeneratedOnAdd().HasColumnName("UserID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(100);

@@ -149,7 +149,6 @@ Create table [Class]
 	[ClassCode] nvarchar(100) NULL,
 	[ClassName] nvarchar(100) NULL,
 	[NumberOfStudent] Integer NULL,
-	[TeacherID] Integer NOT NULL Foreign key ([TeacherID]) REFERENCES Teacher(TeacherID) ON UPDATE no action ON DELETE NO ACTION,
 Primary Key ([ClassID])
 ) 
 go

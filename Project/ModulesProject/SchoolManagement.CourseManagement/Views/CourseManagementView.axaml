@@ -30,7 +30,7 @@
             VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Dates}"
-            PlaceholderText="{DynamicResource SelectCurriculum_Label}"
+            PlaceholderText="{DynamicResource SelectAcademicYear_Label}"
             SelectedValue="{Binding CurrentDate}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

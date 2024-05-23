@@ -32,27 +32,27 @@ namespace SchoolManagement.MainProject.ViewModels
 
         private async void GetFormWaitting()
         {
-            //if (User.Role == "student")
-            //{
-            //    return;
-            //}
-            //FormsNeedToConfirm.Clear();
-            //var forms = new ObservableCollection<EditGradeSheetForm>();
+            if (User.Role == "student")
+            {
+                return;
+            }
+            FormsNeedToConfirm.Clear();
+            var forms = new ObservableCollection<EditGradeSheetForm>();
 
-            //if (User.Role == "admin")
-            //{
-            //    forms = await _editFormService.GetFormWaitting();
-            //    FormsNeedToConfirm.AddRange(forms);
+            if (User.Role == "admin")
+            {
+                forms = await _editFormService.GetFormWaitting();
+                FormsNeedToConfirm.AddRange(forms);
 
-            //    return;
-            //}
-            //var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
-            //if (teacher == null)
-            //{
-            //    return;
-            //}
-            //forms = await _editFormService.GetFormWaittingByTeacherID(teacher.TeacherId);
-            //FormsNeedToConfirm.AddRange(forms);
+                return;
+            }
+            var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
+            if (teacher == null)
+            {
+                return;
+            }
+            forms = await _editFormService.GetFormWaittingByTeacherID(teacher.TeacherId);
+            FormsNeedToConfirm.AddRange(forms);
         }
 
         public ICommand ClickedAcceptEditFormCommand { get; set; }
