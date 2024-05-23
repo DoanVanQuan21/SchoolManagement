@@ -90,27 +90,27 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding User.FullName}"
-                        Header="Họ và tên" />
+                        Header="{DynamicResource Fullname_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding User.Gender}"
-                        Header="Giới tính" />
+                        Header="{DynamicResource Gender_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding User.DateOfBirth}"
-                        Header="Ngày sinh" />
+                        Header="{DynamicResource DateOfBirth_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding User.PhoneNumber}"
-                        Header="Số điện thoại" />
+                        Header="{DynamicResource PhoneNumber_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding User.Address}"
-                        Header="Địa chỉ" />
+                        Header="{DynamicResource Address_Label}" />
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>

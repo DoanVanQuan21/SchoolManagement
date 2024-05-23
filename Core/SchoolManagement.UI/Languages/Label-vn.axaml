@@ -41,20 +41,77 @@
 
     <system:String x:Key="ConfirmPassword_Label">Xác nhận mật khẩu</system:String>
 
+    <!--  Teacher  -->
+    <system:String x:Key="TeacherCode_Label">Mã giáo viên</system:String>
+    <system:String x:Key="Degree_Label">Bằng cấp</system:String>
+    <system:String x:Key="Expertise_Label">Chuyên môn</system:String>
+    <system:String x:Key="University_Label">Trường đại học</system:String>
+    <system:String x:Key="GraduationYear_Label">Năm tốt nghiệp</system:String>
+    <system:String x:Key="Major_Label">Chuyên ngành</system:String>
+    <system:String x:Key="OtherCertifications_Label">Bằng cấp khác</system:String>
+    <system:String x:Key="Position_Label">Vị trí</system:String>
+    <system:String x:Key="Salary_Label">Lương</system:String>
+    <system:String x:Key="AdditionalBenifits_Label">Additional benifits</system:String>
+    <system:String x:Key="CurrentHealthStatus_Label">Tình trạng sức khỏe</system:String>
+    <system:String x:Key="HealthInsuranceInfo_Label">CCCD</system:String>
+    <system:String x:Key="SelfIntroduction_Label">Giới thiệu</system:String>
+    <!--  End teacher  -->
+
+    <!--  Subject  -->
+    <system:String x:Key="SubjectCode_Label">Mã môn học</system:String>
+    <system:String x:Key="SubjectName_Label">Tên môn học</system:String>
+    <system:String x:Key="Image_Label">Hình ảnh</system:String>
+
+    <!--  End subject  -->
+
+
+
+    <!--  GradeSheet  -->
+    <system:String x:Key="FirstRegularScore_Label">Thường xuyên 1</system:String>
+    <system:String x:Key="SecondRegularScore_Label">Thường xuyên 2</system:String>
+    <system:String x:Key="ThirdRegularScore_Label">Thường xuyên 3</system:String>
+    <system:String x:Key="FourRegularScore_Label">Thường xuyên 4</system:String>
+    <system:String x:Key="MidtermScore_Label">Giữa kỳ</system:String>
+    <system:String x:Key="FinalScore_Label">Cuối kỳ</system:String>
+    <system:String x:Key="SemesterAverage_Label">Trung bình học kỳ</system:String>
+    <system:String x:Key="Semester_Label">Học kỳ</system:String>
+    <system:String x:Key="Rank_Label">Xếp loại</system:String>
+    <system:String x:Key="TotalSubject_Label">Tổng số môn</system:String>
+    <system:String x:Key="FinalGrade_Label">Điểm tổng kết</system:String>
+
+    <!--  End Grade sheet  -->
+
+
+    <!--  Class  -->
+    <system:String x:Key="ClassCode_Label">Mã lớp</system:String>
+    <system:String x:Key="ClassName_Label">Tên lớp</system:String>
+    <system:String x:Key="NumberOfStudent_Label">Số lượng học sinh</system:String>
+
+    <!--  End Class  -->
+
+
+
+    <!--  Education program  -->
+    <system:String x:Key="EducationName_Label">Chương trình đào tạo</system:String>
+
+    <!--  End Education program  -->
+
 
     <system:String x:Key="StudentCode_Label">Mã học sinh</system:String>
-    <system:String x:Key="ClassName_Label">Tên lớp</system:String>
     <system:String x:Key="Username_Label">Tên đăng nhập</system:String>
     <system:String x:Key="Password_Label">Mật khẩu</system:String>
     <system:String x:Key="FirstName_Label">Họ đệm</system:String>
     <system:String x:Key="LastName_Label">Tên</system:String>
     <system:String x:Key="Fullname_Label">Họ và tên</system:String>
+    <system:String x:Key="TeacherName_Label">Giáo viên</system:String>
     <system:String x:Key="DateOfBirth_Label">Ngày sinh</system:String>
     <system:String x:Key="Gender_Label">Giới tính</system:String>
     <system:String x:Key="PhoneNumber_Label">Số điện thoại</system:String>
     <system:String x:Key="Address_Label">Địa chỉ</system:String>
     <system:String x:Key="StartDate_Label">Ngày bắt đầu</system:String>
     <system:String x:Key="EndDate_Label">Ngày kết thúc</system:String>
+    <system:String x:Key="Status_Label">Trạng thái</system:String>
+    <system:String x:Key="Email_Label">Email</system:String>
 
 
 

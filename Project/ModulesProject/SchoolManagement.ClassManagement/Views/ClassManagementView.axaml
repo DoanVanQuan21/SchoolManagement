@@ -91,17 +91,17 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding ClassCode}"
-                        Header="Mã lớp" />
+                        Header="{DynamicResource ClassCode_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding ClassName}"
-                        Header="Tên lớp" />
+                        Header="{DynamicResource ClassName_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding NumberOfStudent}"
-                        Header="Số lượng học sinh" />
+                        Header="{DynamicResource NumberOfStudent_Label}" />
 
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>

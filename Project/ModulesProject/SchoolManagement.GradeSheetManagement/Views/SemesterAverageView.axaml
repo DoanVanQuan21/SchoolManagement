@@ -64,11 +64,13 @@
                             </Grid.ColumnDefinitions>
                             <DockPanel Grid.Column="0">
                                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                    <Label>Tổng số môn:</Label>
+                                    <Label Content="{DynamicResource TotalSubject_Label}" />
+                                    <Label>:</Label>
                                     <Label Content="{Binding TotalSubject}" />
                                 </StackPanel>
                                 <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                                    <Label>Điểm tổng kết:</Label>
+                                    <Label Content="{DynamicResource FinalGrade_Label}" />
+                                    <Label>:</Label>
                                     <Label Content="{Binding Average}" />
                                 </StackPanel>
                             </DockPanel>
@@ -76,7 +78,8 @@
                                 Grid.Column="1"
                                 DockPanel.Dock="Bottom"
                                 Orientation="Horizontal">
-                                <Label>Xếp loại:</Label>
+                                <Label Content="{DynamicResource Rank_Label}" />
+                                <Label>:</Label>
                                 <Label Content="{Binding Rank}" />
                             </StackPanel>
 

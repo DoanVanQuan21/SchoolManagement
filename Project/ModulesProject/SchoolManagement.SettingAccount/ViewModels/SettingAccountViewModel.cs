@@ -1,14 +1,14 @@
-﻿using Prism.Commands;
+﻿using Avalonia.Controls;
+using Avalonia.Media.Imaging;
+using Prism.Commands;
 using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Context;
+using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts.IServices;
-using Avalonia.Media.Imaging;
-using System.Windows.Input;
-using Avalonia.Controls;
-using SchoolManagement.Core.Contracts;
 using SchoolManagement.SettingAccount.Views.Dialogs;
+using System.Windows.Input;
 
 namespace SchoolManagement.SettingAccount.ViewModels
 {
@@ -94,16 +94,23 @@ namespace SchoolManagement.SettingAccount.ViewModels
             User.UpdateImage();
         }
 
-        private void OnUpdateInfo()
+        private async void OnUpdateInfo()
         {
-            var isUpdated = _userService.UpdateUserInfor(User);
-            if (!isUpdated)
+            try
             {
-                NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserFail_Message"));
-                return;
+                var isUpdated = await _userService.UpdateUserInfor(User);
+                if (!isUpdated)
+                {
+                    NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserFail_Message"));
+                    return;
+                }
+                UpdateCurrentUser(User);
+                NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserSuccess_Message"));
             }
-            UpdateCurrentUser(User);
-            NotificationManager.ShowSuccess(Util.GetResourseString("UpdateUserSuccess_Message"));
+            catch (Exception ex)
+            {
+                NotificationManager.ShowError(ex.Message, 5);
+            }
         }
     }
 }

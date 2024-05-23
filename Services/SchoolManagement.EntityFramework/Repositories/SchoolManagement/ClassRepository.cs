@@ -13,6 +13,21 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             _classesOfTeacher = new();
         }
 
+        public Task<bool> EditClass(Class _class)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                var c = _context.Classes.FirstOrDefault(i => i.ClassId == _class.ClassId);
+                if (c == null)
+                {
+                    return false;
+                }
+                c.ClassName = _class.ClassName;
+                c.NumberOfStudent = _class.NumberOfStudent;
+                return UpdateEntity(c);
+            });
+        }
+
         public Task<bool> DeleteClass(int classID)
         {
             return Task.Factory.StartNew(() =>

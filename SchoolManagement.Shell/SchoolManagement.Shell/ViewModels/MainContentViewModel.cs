@@ -66,6 +66,10 @@ namespace SchoolManagement.Shell.ViewModels
             {
                 menu.Label = Util.GetResourseString(RootContext.MenuLabels[menu.Type]);
             }
+            foreach (var menu in RootContext.DesktopAppMenus)
+            {
+                menu.Label = Util.GetResourseString(RootContext.MenuLabels[menu.Type]);
+            }
         }
 
         private void AddMenus(ObservableCollection<AppMenu> appMenus)

@@ -20,9 +20,9 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
 
         bool RegisterAccount(User user);
 
-        bool UpdateUserInfor(User user);
+        Task<bool> UpdateUserInfor(User user);
 
-        string GetFullname(int userID);
+        Task<string> GetFullname(int userID);
 
         User? GetUser(int userID);
 

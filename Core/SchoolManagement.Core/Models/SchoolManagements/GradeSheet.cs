@@ -53,36 +53,36 @@ public partial class GradeSheet : BindableBase
 
     [Browsable(false)]
     [IsID(true)]
-    [DisplayName("Họ và tên")]
+    [DisplayName("Fullname_Label")]
     public int StudentId
     { get => studentId; set { SetProperty(ref studentId, value); } }
 
-    [DisplayName("Thường xuyên 1")]
+    [DisplayName("FirstRegularScore_Label")]
     public double? FirstRegularScore
     { get => firstRegularScore; set { SetProperty(ref firstRegularScore, value); } }
 
-    [DisplayName("Thường xuyên 2")]
+    [DisplayName("SecondRegularScore_Label")]
     public double? SecondRegularScore
     { get => secondRegularScore; set { SetProperty(ref secondRegularScore, value); } }
 
-    [DisplayName("Thường xuyên 3")]
+    [DisplayName("ThirdRegularScore_Label")]
     public double? ThirdRegularScore
     { get => thirdRegularScore; set { SetProperty(ref thirdRegularScore, value); } }
 
-    [DisplayName("Thường xuyên 4")]
+    [DisplayName("FourRegularScore_Label")]
     public double? FourRegularScore
     { get => fourRegularScore; set { SetProperty(ref fourRegularScore, value); } }
 
-    [DisplayName("Giữa kỳ")]
+    [DisplayName("MidtermScore_Label")]
     public double? MidtermScore
     { get => midtermScore; set { SetProperty(ref midtermScore, value); } }
 
-    [DisplayName("Cuối kỳ")]
+    [DisplayName("FinalScore_Label")]
     public double? FinalScore
     { get => finalScore; set { SetProperty(ref finalScore, value); } }
 
     [Browsable(false)]
-    [DisplayName("Trung bình TL")]
+    [DisplayName("SemesterAverage_Label")]
     public double? SemesterAverage
     { get => semesterAverage; set { SetProperty(ref semesterAverage, value); } }
 
@@ -96,7 +96,7 @@ public partial class GradeSheet : BindableBase
 
     [Browsable(false)]
     [NotMapped]
-    [DisplayName("Xếp loại")]
+    [DisplayName("Rank_Label")]
     public string? Ranked
     { get => ranked; set { SetProperty(ref ranked, value); } }
 

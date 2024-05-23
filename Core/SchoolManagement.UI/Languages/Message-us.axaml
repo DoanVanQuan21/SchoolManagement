@@ -46,28 +46,28 @@
         Unable to get account information that needs to be locked!.
     </system:String>
     <system:String x:Key="UpdateSuccess_Message">
-        Update successful!.
+        Updated successful!.
     </system:String>
     <system:String x:Key="UpdateError_Message">
-        Update failed!.
+        Updating failed!.
     </system:String>
     <system:String x:Key="UnlockAccountSuccess_Message">
-        Unlock account {0} successfully!.
+        Account unlocked {0} successfully!.
     </system:String>
     <system:String x:Key="UnlockAccountError_Message">
-        Unlock account {0} failed!.
+        Account unlocking {0} failed!.
     </system:String>
     <system:String x:Key="LockAccountSuccess_Message">
-        Lock account {0} successfully!.
+        Account locked {0} successfully!.
     </system:String>
     <system:String x:Key="LockAccountError_Message">
-        Lock account {0} failed!.
+        Account locking {0} failed!.
     </system:String>
     <system:String x:Key="AddAccountSuccess_Message">
-        Add account successfully!.
+        Account added successfully!.
     </system:String>
     <system:String x:Key="AddAccountError_Message">
-        Add account failed!.
+        Account addition failed!.
     </system:String>
     <system:String x:Key="AccountsEmpty_Message">
         There are no account!.
@@ -76,22 +76,28 @@
         Unable to get account information that needs to be locked!.
     </system:String>
     <system:String x:Key="DeleteClassSuccess_Message">
-        Delete class {0} successfully!.
+        Class deleted {0} successfully!.
     </system:String>
     <system:String x:Key="DeleteClassError_Message">
-        Delete class {0} failed!.
+        Class deletion {0} failed!.
     </system:String>
     <system:String x:Key="AddClassSuccess_Message">
-        Add class {0} successfully!.
+        Class added {0} successfully!.
     </system:String>
     <system:String x:Key="AddClassError_Message">
-        Add class {0} failed!.
+        Class addition {0} failed!.
+    </system:String>
+    <system:String x:Key="EditClassSuccess_Message">
+        Class update successful!.
+    </system:String>
+    <system:String x:Key="EditClassError_Message">
+        Class update failed!.
     </system:String>
     <system:String x:Key="AddCourseSuccess_Message">
-        Add course successfully!.
+        Course added successfully!.
     </system:String>
     <system:String x:Key="AddCourseError_Message">
-        Add course failed!.
+        Course addition failed!.
     </system:String>
     <system:String x:Key="RecordsEmpty_Message">
         There are no record!.
@@ -149,10 +155,10 @@
         There are no student available!.
     </system:String>
     <system:String x:Key="AddStudentSuccess_Message">
-        Add student successfully!.
+        Student added successfully!.
     </system:String>
     <system:String x:Key="AddStudentError_Message">
-        Add student failed!.
+        Student addition failed!.
     </system:String>
     <system:String x:Key="NoFileSelected_Message">
         No files selected!.
@@ -164,10 +170,10 @@
         There are no teacher available!.
     </system:String>
     <system:String x:Key="AddTeacherSuccess_Message">
-        Add teacher successfully!.
+        Teacher added successfully!.
     </system:String>
     <system:String x:Key="AddTeacherError_Message">
-        Add teacher failed!.
+        Teacher addition failed!.
     </system:String>
     <system:String x:Key="UnableConfirmEditGradeSheetForm_Message">
         Unable to confirm score correction application!.
@@ -179,10 +185,10 @@
         Unlock edit grade sheet failed!.
     </system:String>
     <system:String x:Key="ChangeLanguageSuccess_Message">
-        Change language successfully!.
+        Language changed successfully!.
     </system:String>
     <system:String x:Key="ChangeLanguageError_Message">
-        Change language failed!.
+        Language change failed!.
     </system:String>
 
 
@@ -193,10 +199,10 @@
         Password incorrect!.
     </system:String>
     <system:String x:Key="ChangePasswordSuccess_Message">
-        Change password successfully!.
+        Password changed successfully!.
     </system:String>
     <system:String x:Key="ChangePasswordError_Message">
-        Change password failed!.
+        Password change failed!.
     </system:String>
 
 

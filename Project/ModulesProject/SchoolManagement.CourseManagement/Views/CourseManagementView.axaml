@@ -116,37 +116,37 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Subject.SubjectName}"
-                        Header="Môn" />
+                        Header="{DynamicResource SubjectName_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Teacher.User.FullName}"
-                        Header="Giáo viên" />
+                        Header="{DynamicResource TeacherName_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding EducationProgram.EducationName}"
-                        Header="Chương trình đào tạo" />
+                        Header="{DynamicResource EducationName_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding StartDate}"
-                        Header="Thời gian bắt đầu" />
+                        Header="{DynamicResource StartDate_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding EndDate}"
-                        Header="Thời gian kết thúc" />
+                        Header="{DynamicResource EndDate_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Semester}"
-                        Header="Học kỳ" />
+                        Header="{DynamicResource Semester_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Status}"
-                        Header="Trạng thái" />
+                        Header="{DynamicResource Status_Label}" />
 
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>

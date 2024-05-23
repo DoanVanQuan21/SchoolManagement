@@ -17,5 +17,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         Task<ObservableCollection<T>> GetRecordBySize(int size, int page);
         IEnumerable<T> Where(Func<T, bool> predicate);
         Task<bool> DeleteRecord(T entity);
+        bool UpdateEntity(T entity);
     }
 }

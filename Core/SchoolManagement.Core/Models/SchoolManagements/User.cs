@@ -68,7 +68,7 @@ public partial class User : BindableBase
     public string? Address
     { get => address; set { SetProperty(ref address, value); } }
 
-    [DisplayName("Email")]
+    [DisplayName("Email_Label")]
     public string? Email
     { get => email; set { SetProperty(ref email, value); } }
 
@@ -106,6 +106,7 @@ public partial class User : BindableBase
     public bool? LockAccount { get => lockAccount; set => SetProperty(ref lockAccount, value); }
 
     [NotMapped]
+    [Browsable(false)]
     [DisplayName("Role")]
     public Role UserRole
     { get => userRole; set { SetProperty(ref userRole, value); UpdateRole(); } }

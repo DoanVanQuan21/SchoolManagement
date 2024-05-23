@@ -75,27 +75,27 @@
                                 <RowDefinition Height="auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Grid.Column="0">
-                                <Label Content="Thường xuyên 1" />
+                                <Label Content="{DynamicResource FirstRegularScore_Label}" />
                                 <Label Content="{Binding FirstRegularScore}" />
                             </StackPanel>
                             <StackPanel Grid.Row="1" Grid.Column="0">
-                                <Label Content="Thường xuyên 2" />
+                                <Label Content="{DynamicResource SecondRegularScore_Label}" />
                                 <Label Content="{Binding SecondRegularScore}" />
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="0">
-                                <Label Content="Thường xuyên 3" />
+                                <Label Content="{DynamicResource ThirdRegularScore_Label}" />
                                 <Label Content="{Binding ThirdRegularScore}" />
                             </StackPanel>
                             <StackPanel Grid.Row="0" Grid.Column="1">
-                                <Label Content="Thường xuyên 4" />
+                                <Label Content="{DynamicResource FourRegularScore_Label}" />
                                 <Label Content="{Binding FourRegularScore}" />
                             </StackPanel>
                             <StackPanel Grid.Row="1" Grid.Column="1">
-                                <Label Content="Giữa kỳ" />
+                                <Label Content="{DynamicResource MidtermScore_Label}" />
                                 <Label Content="{Binding MidtermScore}" />
                             </StackPanel>
                             <StackPanel Grid.Row="2" Grid.Column="1">
-                                <Label Content="Cuối kỳ" />
+                                <Label Content="{DynamicResource FinalScore_Label}" />
                                 <Label Content="{Binding FinalScore}" />
                             </StackPanel>
                         </Grid>

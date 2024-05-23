@@ -1,4 +1,5 @@
-﻿using SchoolManagement.Core.Models.SchoolManagements;
+﻿using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using System.Collections.ObjectModel;
 using System.Reactive.Linq;
@@ -13,16 +14,11 @@ namespace SchoolManagement.EntityFramework.Repositories
         protected GenerateRepository(SchoolManagementContext context)
         {
             _context = context;
-            _context.SavingChanges += _context_SavingChanges;
             _allItems = new();
         }
         public void RefreshContext(SchoolManagementContext context)
         {
             _context = context;
-        }
-        private void _context_SavingChanges(object? sender, Microsoft.EntityFrameworkCore.SavingChangesEventArgs e)
-        {
-            var t = 0;
         }
 
         public void Add(T entity)
@@ -95,11 +91,6 @@ namespace SchoolManagement.EntityFramework.Repositories
                 {
                     return new();
                 }
-                //if (records.Count < size * page)
-                //{
-                //    _allItems.AddRange(records);
-                //    return _allItems;
-                //}
                 var countSkip = size * page - size;
                 _allItems.AddRange(records.Skip(countSkip).Take(size));
                 return _allItems;
@@ -109,6 +100,21 @@ namespace SchoolManagement.EntityFramework.Repositories
         public IEnumerable<T> Where(Func<T, bool> predicate)
         {
             return _context.Set<T>().Where(predicate);
+        }
+
+        public bool UpdateEntity(T entity)
+        {
+            try
+            {
+                _context.Set<T>().Update(entity);
+                _context.Entry(entity).State = EntityState.Modified;
+                _context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

@@ -24,4 +24,17 @@
     <ProjectReference Include="..\..\..\Services\SchoolManagement.EntityFramework\SchoolManagement.EntityFramework.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AvaloniaXaml Update="Views\Dialogs\EditClassView.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\Dialogs\EditClassView.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>EditClassView.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

@@ -75,9 +75,12 @@ namespace SchoolManagement.EntityFramework.Services
             return users;
         }
 
-        public string GetFullname(int userID)
+        public Task<string> GetFullname(int userID)
         {
-            return _schoolManagementSevice.UserRepository.GetFullname(userID);
+            return Task.Factory.StartNew(() =>
+            {
+                return _schoolManagementSevice.UserRepository.GetFullname(userID);
+            });
         }
 
         public ObservableCollection<User> GetTeacherByDepartment(int departmentID)
@@ -138,15 +141,18 @@ namespace SchoolManagement.EntityFramework.Services
             return await _schoolManagementSevice.UserRepository.UnLockAccount(user);
         }
 
-        public bool UpdateUserInfor(User user)
+        public Task<bool> UpdateUserInfor(User user)
         {
-            var userDb = _schoolManagementSevice.UserRepository.FirstOrDefault(u => u.UserId == user.UserId);
-            if (userDb == null)
+            return Task.Factory.StartNew(() =>
             {
-                return false;
-            }
-            _schoolManagementSevice.UserRepository.Update(user);
-            return true;
+                var userDb = _schoolManagementSevice.UserRepository.FirstOrDefault(u => u.UserId == user.UserId);
+                if (userDb == null)
+                {
+                    return false;
+                }
+                _schoolManagementSevice.UserRepository.Update(user);
+                return true;
+            });
         }
     }
 }

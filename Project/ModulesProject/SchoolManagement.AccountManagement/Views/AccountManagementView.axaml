@@ -30,7 +30,7 @@
             <Button.Content>
                 <DockPanel>
                     <PathIcon Data="{StaticResource AddGeometry}" DockPanel.Dock="Left" />
-                    <Label Content="{DynamicResource Add_Label}">Thêm mới</Label>
+                    <Label Content="{DynamicResource Add_Label}" />
                 </DockPanel>
             </Button.Content>
         </Button>
@@ -91,27 +91,27 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding FullName}"
-                        Header="Họ và tên" />
+                        Header="{DynamicResource Fullname_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Gender}"
-                        Header="Giới tính" />
+                        Header="{DynamicResource Gender_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding DateOfBirth}"
-                        Header="Ngày sinh" />
+                        Header="{DynamicResource DateOfBirth_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding PhoneNumber}"
-                        Header="Số điện thoại" />
+                        Header="{DynamicResource PhoneNumber_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Address}"
-                        Header="Địa chỉ" />
+                        Header="{DynamicResource Address_Label}" />
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>

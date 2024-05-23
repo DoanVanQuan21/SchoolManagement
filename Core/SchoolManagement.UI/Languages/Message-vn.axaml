@@ -63,6 +63,7 @@
     <system:String x:Key="AddAccountError_Message">
         Thêm tài khoản thất bại!.
     </system:String>
+
     <system:String x:Key="GetAccountInfoToLockFailed_Message">
         Không lấy được thông tin tài khoản cần khóa!.
     </system:String>
@@ -77,6 +78,12 @@
     </system:String>
     <system:String x:Key="AddClassError_Message">
         Thêm lớp học {0} thất bại!.
+    </system:String>
+    <system:String x:Key="EditClassSuccess_Message">
+        Sửa lớp học thành công!.
+    </system:String>
+    <system:String x:Key="EditClassError_Message">
+        Sửa lớp học thất bại!.
     </system:String>
     <system:String x:Key="AddCourseSuccess_Message">
         Thêm khóa học thành công!.

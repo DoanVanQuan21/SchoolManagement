@@ -127,47 +127,47 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Student.User.FullName}"
-                        Header="Họ và tên" />
+                        Header="{DynamicResource FullName_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding FirstRegularScore}"
-                        Header="TX1" />
+                        Header="{DynamicResource FirstRegularScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding SecondRegularScore}"
-                        Header="TX2" />
+                        Header="{DynamicResource SecondRegularScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding ThirdRegularScore}"
-                        Header="TX3" />
+                        Header="{DynamicResource ThirdRegularScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding FourRegularScore}"
-                        Header="TX4" />
+                        Header="{DynamicResource FourRegularScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding MidtermScore}"
-                        Header="Giữa kỳ" />
+                        Header="{DynamicResource MidtermScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding FinalScore}"
-                        Header="Cuối kỳ" />
+                        Header="{DynamicResource FinalScore_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding SemesterAverage}"
-                        Header="Điểm TB" />
+                        Header="{DynamicResource SemesterAverage_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Ranked}"
-                        Header="Xếp loại" />
+                        Header="{DynamicResource Rank_Label}" />
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>
                     <DataTemplate>
@@ -194,7 +194,6 @@
                                     </Button.Content>
                                 </Button>
                                 <Button
-                                    Width="120"
                                     Height="40"
                                     Margin="10"
                                     HorizontalAlignment="Center"

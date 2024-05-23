@@ -161,7 +161,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             {
                 var student = await _studentService.GetStudentByStudentID((int)value);
                 Debug.WriteLine(student.User?.ToString());
-                var fullName = _userService.GetFullname(student.UserId);
+                var fullName = await _userService.GetFullname(student.UserId);
                 return fullName;
             }
             catch (Exception)

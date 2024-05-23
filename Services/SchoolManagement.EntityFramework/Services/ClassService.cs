@@ -6,7 +6,7 @@ namespace SchoolManagement.EntityFramework.Services
 {
     public class ClassService : BaseService, IClassService
     {
-        public ClassService(): base()
+        public ClassService() : base()
         {
         }
 
@@ -18,6 +18,7 @@ namespace SchoolManagement.EntityFramework.Services
                 {
                     return false;
                 }
+                _class.ClassCode = $"CL{_class.ClassName}{DateTime.Now.Year}";
                 _schoolManagementSevice.ClassRepository.Add(_class);
                 return true;
             });
@@ -26,6 +27,11 @@ namespace SchoolManagement.EntityFramework.Services
         public async Task<bool> DeleteClass(int classID)
         {
             return await _schoolManagementSevice.ClassRepository.DeleteRecord(await GetClassByID(classID));
+        }
+
+        public async Task<bool> EditClass(Class _class)
+        {
+            return await _schoolManagementSevice.ClassRepository.EditClass(_class);
         }
 
         public Task<ObservableCollection<Class>> GetAllClassesByID(IList<int> ids)
@@ -40,6 +46,7 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return Task.Factory.StartNew(() =>
             {
+                var t = _schoolManagementSevice.ClassRepository.GetClassByID(classID);
                 return _schoolManagementSevice.ClassRepository.GetClassByID(classID);
             });
         }

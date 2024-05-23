@@ -69,9 +69,8 @@
                                     Classes="theme-solid accent"
                                     Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
                                     CommandParameter="{Binding}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
-                                    Chấp nhận
-                                </Button>
+                                    Content="{DynamicResource Accept_Label}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
                                 <Button
                                     Width="120"
                                     Height="40"
@@ -80,9 +79,8 @@
                                     Classes="theme-solid danger"
                                     Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
                                     CommandParameter="{Binding}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}">
-                                    Từ chối
-                                </Button>
+                                    Content="{DynamicResource Refuse_Label}"
+                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
                             </StackPanel>
                         </Grid>
                     </Expander>

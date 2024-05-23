@@ -6,6 +6,7 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
     public interface IClassService
     {
         Task<bool> AddClass(Class _class);
+        Task<bool> EditClass(Class _class);
         Task<bool> DeleteClass(int classID);
         Task<ObservableCollection<Class>> GetAllClassesByID(IList<int> ids);
         Task<ObservableCollection<Class>> GetClasses();

@@ -91,12 +91,12 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding SubjectCode}"
-                        Header="Mã môn học" />
+                        Header="{DynamicResource SubjectCode_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding SubjectName}"
-                        Header="Tên môn học" />
+                        Header="{DynamicResource SubjectName_Label}" />
 
                 </DataGrid.Columns>
                 <DataGrid.RowDetailsTemplate>

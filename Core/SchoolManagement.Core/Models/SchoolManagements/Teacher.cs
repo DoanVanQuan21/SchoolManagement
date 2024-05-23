@@ -36,48 +36,55 @@ namespace SchoolManagement.Core.Models.SchoolManagements
         public int UserId { get => userId; set => SetProperty(ref userId, value); }
 
         [Browsable(false)]
-        [DisplayName("Mã giáo viên")]
+        [DisplayName("TeacherCode_Label")]
         public string? TeacherCode { get => teacherCode; set => SetProperty(ref teacherCode, value); }
-        [Browsable(false)]
 
-        [DisplayName("Bằng cấp")]
+        [Browsable(false)]
+        [DisplayName("Degree_Label")]
         public string? Degree { get => degree; set => SetProperty(ref degree, value); }
-        [Browsable(false)]
 
-        [DisplayName("Chuyên môn")]
+        [Browsable(false)]
+        [DisplayName("Expertise_Label")]
         public string? Expertise { get => expertise; set => SetProperty(ref expertise, value); }
-        [Browsable(false)]
 
-        [DisplayName("Trường đại học")]
+        [Browsable(false)]
+        [DisplayName("University_Label")]
         public string? University { get => university; set => SetProperty(ref university, value); }
 
         [Browsable(false)]
-        [DisplayName("Năm tốt nghiệp")]
+        [DisplayName("GraduationYear_Label")]
         public DateTime? GraduationYear { get => graduationYear; set => SetProperty(ref graduationYear, value); }
 
         [Browsable(false)]
-        [DisplayName("Chuyên ngành")]
+        [DisplayName("Major_Label")]
         public string? Major { get => major; set => SetProperty(ref major, value); }
 
         [Browsable(false)]
+        [DisplayName("OtherCertifications_Label")]
         public string? OtherCertifications { get => otherCertifications; set => SetProperty(ref otherCertifications, value); }
 
         [Browsable(false)]
+        [DisplayName("Position_Label")]
         public string? Position { get => position; set => SetProperty(ref position, value); }
 
         [Browsable(false)]
+        [DisplayName("Salary_Label")]
         public decimal? Salary { get => salary; set => SetProperty(ref salary, value); }
 
         [Browsable(false)]
+        [DisplayName("AdditionalBenifits_Label")]
         public string? AdditionalBenifits { get => additionalBenifits; set => SetProperty(ref additionalBenifits, value); }
 
         [Browsable(false)]
+        [DisplayName("CurrentHealthStatus_Label")]
         public string? CurrentHealthStatus { get => currentHealthStatus; set => SetProperty(ref currentHealthStatus, value); }
 
         [Browsable(false)]
+        [DisplayName("HealthInsuranceInfo_Label")]
         public string? HealthInsuranceInfo { get => healthInsuranceInfo; set => SetProperty(ref healthInsuranceInfo, value); }
 
         [Browsable(false)]
+        [DisplayName("SelfIntroduction_Label")]
         public string? SelfIntroduction { get => selfIntroduction; set => SetProperty(ref selfIntroduction, value); }
 
         [Browsable(false)]

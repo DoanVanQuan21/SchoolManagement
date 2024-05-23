@@ -9,11 +9,11 @@ using System.Windows.Input;
 
 namespace SchoolManagement.ClassManagement.ViewModels
 {
-    public class AddClassViewModel : BaseRegionViewModel
+    public class EditClassViewModel : BaseRegionViewModel
     {
         private readonly IClassService _classService;
 
-        public AddClassViewModel()
+        public EditClassViewModel()
         {
             _classService = Ioc.Resolve<IClassService>();
             User = RootContext.CurrentUser;
@@ -23,7 +23,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
 
         public ICommand ClickedExit { get; set; }
         public ICommand ClickedOK { get; set; }
-        public Action<Class> AddClass { get; set; }
+        public Action<Class> EditClass { get; set; }
 
         protected override void RegisterCommand()
         {
@@ -33,9 +33,10 @@ namespace SchoolManagement.ClassManagement.ViewModels
         }
 
         public ObservableCollection<Teacher> Teachers { get; set; }
+
         private void OnOK()
         {
-            AddClass?.Invoke(Class);
+            EditClass?.Invoke(Class);
         }
 
         private void OnExit()

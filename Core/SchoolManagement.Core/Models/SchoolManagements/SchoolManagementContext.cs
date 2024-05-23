@@ -65,12 +65,7 @@ public partial class SchoolManagementContext : DbContext
             entity.Property(e => e.ClassId).ValueGeneratedOnAdd().HasColumnName("ClassID");
             entity.Property(e => e.ClassCode).HasMaxLength(100);
             entity.Property(e => e.ClassName).HasMaxLength(100);
-            entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
-
-            entity.HasOne(d => d.Teacher).WithMany(p => p.Classes)
-                .HasForeignKey(d => d.TeacherId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Class__TeacherID__31EC6D26");
+            entity.Property(e => e.NumberOfStudent).HasColumnName("NumberOfStudent");
         });
 
         modelBuilder.Entity<Course>(entity =>
