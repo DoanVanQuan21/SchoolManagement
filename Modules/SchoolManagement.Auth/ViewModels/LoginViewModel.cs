@@ -51,27 +51,33 @@ namespace SchoolManagement.Auth.ViewModels
             SetMainView(new ForgotPasswordView());
         }
 
-        private void OnLogin()
-
+        private async void OnLogin()
         {
-            if (User == null)
+            try
             {
-                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
-                return;
+                if (User == null)
+                {
+                    EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+                    return;
+                }
+                var (isLogin, user) = await _userService.Login(User);
+                if (user == null)
+                {
+                    EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
+                    return;
+                }
+                RootContext.CurrentUser = user;
+                if (user.LockAccount == true)
+                {
+                    NotificationManager.ShowWarning(Util.GetResourseString("AccountLocked_Message"));
+                    return;
+                }
+                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
             }
-            var (isLogin, user) = _userService.Login(User);
-            if (user == null)
+            catch (Exception ex)
             {
-                EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
-                return;
+                NotificationManager.ShowError($"{Util.GetResourseString("DatabaseFailed_Message")}\n{ex.Message}",5);
             }
-            RootContext.CurrentUser = user;
-            if (user.LockAccount == true)
-            {
-                NotificationManager.ShowWarning(Util.GetResourseString("AccountLocked_Message"));
-                return;
-            }
-            EventAggregator.GetEvent<LoginSuccessEvent>().Publish(isLogin);
         }
 
         private void OnRegister()

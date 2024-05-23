@@ -1,10 +1,8 @@
-﻿using DocumentFormat.OpenXml.Office2016.Excel;
-using SchoolManagement.Core.avalonia;
+﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Repositories.SchoolManagement;
-using System.Threading;
 
 namespace SchoolManagement.EntityFramework.Services
 {
@@ -57,6 +55,7 @@ namespace SchoolManagement.EntityFramework.Services
             DepartmentRepository = new DepartmentRepository(schoolManagementContext);
             EducationProgramRepository = new EducationProgramRepository(schoolManagementContext);
         }
+
         public void Refresh()
         {
             if (string.IsNullOrEmpty(_databaseInfoProvider.ServerInfor.ConnectionString))
@@ -77,9 +76,11 @@ namespace SchoolManagement.EntityFramework.Services
             DepartmentRepository.RefreshContext(schoolManagementContext);
             EducationProgramRepository.RefreshContext(schoolManagementContext);
         }
+
         private void InitConnection()
         {
-            Task.Factory.StartNew(async () => {
+            Task.Factory.StartNew(async () =>
+            {
                 while (!_cancellationTokenSource.IsCancellationRequested)
                 {
                     Refresh();
@@ -87,7 +88,7 @@ namespace SchoolManagement.EntityFramework.Services
                 }
             }, _cancellationTokenSource.Token);
         }
-       
+
         public void Dispose()
         {
             _cancellationTokenSource?.Cancel();
