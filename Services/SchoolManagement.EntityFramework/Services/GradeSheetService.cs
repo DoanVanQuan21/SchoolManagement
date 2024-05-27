@@ -106,5 +106,19 @@ namespace SchoolManagement.EntityFramework.Services
         {
             return await _schoolManagementSevice.GradeSheetRepository.UpdateOrAddRange(gradeSheets);
         }
+
+        public Task<bool> AddGradeSheet(GradeSheet gradeSheet)
+        {
+            return Task.Factory.StartNew(() => {
+                if (gradeSheet == null)
+                {
+                    return false;
+                }
+                gradeSheet.Lock = false;
+                gradeSheet.PromotionDecision = true;
+                _schoolManagementSevice.GradeSheetRepository.Add(gradeSheet);
+                return true;
+            });
+        }
     }
 }

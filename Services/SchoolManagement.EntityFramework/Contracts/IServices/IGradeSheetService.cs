@@ -19,5 +19,6 @@ namespace SchoolManagement.EntityFramework.Contracts.IServices
         Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID);
         Task<ObservableCollection<GradeSheet>> GetGradeSheetsByStudentID(int studentID, int year);
         Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets);  
+        Task<bool> AddGradeSheet(GradeSheet gradeSheet);    
     }
 }

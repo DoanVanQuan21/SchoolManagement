@@ -1,27 +1,29 @@
 ﻿using Avalonia.Styling;
 using Prism.Mvvm;
+using SchoolManagement.Core.Context;
 using SchoolManagement.Core.Models.Common;
 
 namespace SchoolManagement.Core.Models
 {
     public class BootSetting : BindableBase
     {
+        private Language? currentLanguage;
         private ThemeVariant currentTheme = ThemeVariant.Light;
         private ServerInfor serverInfor;
         private string? version;
-        private Language currentLanguage;
 
         public BootSetting()
         {
             ID = Guid.NewGuid();
             Version = "SOFT_VER_1";
-            CurrentLanguage = new();
+            CurrentLanguage = RootContext.Languages.FirstOrDefault();
         }
+
+        public Language? CurrentLanguage { get => currentLanguage; set => SetProperty(ref currentLanguage, value); }
 
         public ThemeVariant CurrentTheme
         { get => currentTheme; set { SetProperty(ref currentTheme, value); } }
 
-        public Language CurrentLanguage { get => currentLanguage; set => SetProperty(ref currentLanguage, value); }
         public Guid ID { get; set; }
 
         public ServerInfor ServerInfor

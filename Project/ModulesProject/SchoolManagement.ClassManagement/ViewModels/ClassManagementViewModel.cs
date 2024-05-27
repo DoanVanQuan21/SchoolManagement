@@ -137,6 +137,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
         private async void OnUpdate()
         {
             var editView = new EditClassView();
+            editView.ViewModel.Class = SelectedClass;
             editView.SetEditClassAction(EditClass);
             await ShowDialogHost(editView);
         }

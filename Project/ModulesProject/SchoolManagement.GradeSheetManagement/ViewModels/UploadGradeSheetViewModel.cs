@@ -161,13 +161,38 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         private async void OnOK()
         {
-            var isOK = await _gradeSheetService.UpdateOrAddRange(GradeSheets);
+            bool isOK = true;
+            if (!IsUploadFile)
+            {
+                isOK = await AddSingleAsync();
+            }
+            else
+            {
+                isOK = await _gradeSheetService.UpdateOrAddRange(GradeSheets);
+            }
             if (isOK)
             {
                 NotificationManager.ShowSuccess(Util.GetResourseString("LoadGradeSheetSuccess_Message"));
                 return;
             }
             NotificationManager.ShowWarning(Util.GetResourseString("LoadGradeSheetError_Message"));
+        }
+
+        private async Task<bool> AddSingleAsync()
+        {
+            var teacher = await _teacherService.GetTeacherByUserID(RootContext.CurrentUser.UserId);
+            if (teacher == null)
+            {
+                return false;
+            }
+            GradeSheet.StudentId = Student.StudentId;
+            var course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
+            if (course == null) 
+            {
+                return false;
+            }
+            GradeSheet.CourseId = course.CourseId;
+            return await _gradeSheetService.AddGradeSheet(GradeSheet);
         }
 
         private async void OnUpload()

@@ -58,12 +58,6 @@ namespace SchoolManagement.Shell.ViewModels
             base.RegisterCommand();
         }
 
-        private void InitLang()
-        {
-            CurrentLanguage.LanguageName = _appManager.BootSetting.CurrentLanguage.LanguageName;
-            CurrentLanguage.LanguageType = _appManager.BootSetting.CurrentLanguage.LanguageType;
-        }
-
         private void OnChangeLang()
         {
             UpdateLanguage(CurrentLanguage);
@@ -116,7 +110,6 @@ namespace SchoolManagement.Shell.ViewModels
                 return;
             }
             NotificationManager.ShowSuccess(Util.GetResourseString("ChangeLanguageSuccess_Message"));
-            _appManager.BootSetting.CurrentLanguage = lang;
             EventAggregator.GetEvent<ChangeLangEvent>().Publish();
             return;
         }
