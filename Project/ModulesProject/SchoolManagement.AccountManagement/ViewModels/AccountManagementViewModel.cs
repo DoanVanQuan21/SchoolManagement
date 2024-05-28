@@ -73,6 +73,7 @@ namespace SchoolManagement.AccountManagement.ViewModels
             {
                 DataLoaded = true;
                 NotificationManager.ShowWarning(Util.GetResourseString("AccountsEmpty_Message"));
+                page--;
                 return;
             }
             Users.Clear();
@@ -113,6 +114,10 @@ namespace SchoolManagement.AccountManagement.ViewModels
 
         private async void OnPreviousAsync()
         {
+            if (page - 1 <= 0)
+            {
+                return;
+            }
             page--;
             await GetAccounts();
         }

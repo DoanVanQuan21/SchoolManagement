@@ -8,26 +8,29 @@ namespace SchoolManagement.Core.Context
 {
     public class RootContext
     {
-        public static Dictionary<string, bool> Modules = new();
         public static ObservableCollection<AppMenu> DesktopAppMenus = new();
-        public static Dictionary<Type,string> MenuLabels = new();
-        public static ObservableCollection<AppMenu> MobileAppMenus = new();
-        public static ObservableCollection<Language> Languages = new() { 
-            new Language()
-            {
-                LanguageName = "English",
-                LanguageType = Constants.Languages.English_US,
-            },
+
+        public static ObservableCollection<Language> Languages = new() {
              new Language()
             {
                 LanguageName = "Việt Nam",
                 LanguageType = Constants.Languages.VietNam_VN,
+            },
+             new Language()
+            {
+                LanguageName = "English",
+                LanguageType = Constants.Languages.English_US,
             }
         };
-        public static IApplicationLifetime ApplicationLifetime { get; set; }
+
+        public static Dictionary<Type, string> MenuLabels = new();
+        public static ObservableCollection<AppMenu> MobileAppMenus = new();
+        public static Dictionary<string, bool> Modules = new();
         public static Stack<Type> PreviewMainViews = new();
+        public static IApplicationLifetime ApplicationLifetime { get; set; }
         public static User CurrentUser { get; set; } = new User();
         public static Role Role { get; set; }
+
         public static bool UpdateCurrentUser(User user)
         {
             if (user == null || RootContext.CurrentUser == null)

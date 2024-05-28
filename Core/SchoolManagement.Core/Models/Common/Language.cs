@@ -10,5 +10,15 @@ namespace SchoolManagement.Core.Models.Common
 
         public string LanguageName { get => languageName; set => SetProperty(ref languageName, value); }
         public Languages LanguageType { get => languageType; set => SetProperty(ref languageType, value); }
+
+        public Language()
+        {
+        }
+
+        public Language(Language lang)
+        {
+            LanguageName = lang.languageName;
+            LanguageType = lang.languageType;
+        }
     }
 }

@@ -116,8 +116,9 @@
                     <DataTemplate>
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="4*" />
+                                <ColumnDefinition Width="4*" />
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <Grid.ColumnDefinitions>
@@ -151,22 +152,7 @@
                                     </Border>
                                 </Viewbox>
                             </Grid>
-                            <WrapPanel Grid.Column="1" Orientation="Horizontal">
-                                <Button
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid danger"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedLockAccountCommand}"
-                                    CommandParameter="{Binding}">
-                                    <Button.Content>
-                                        <StackPanel Orientation="Horizontal">
-                                            <PathIcon Data="{StaticResource DeleteGeometry}" />
-                                            <Label Content="{DynamicResource Delete_Label}" />
-                                        </StackPanel>
-                                    </Button.Content>
-                                </Button>
-                            </WrapPanel>
+
                         </Grid>
                     </DataTemplate>
                 </DataGrid.RowDetailsTemplate>

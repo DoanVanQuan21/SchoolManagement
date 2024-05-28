@@ -4,7 +4,11 @@
     xmlns:local="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI">
     <!--  Add Resources Here  -->
     <ControlTemplate x:Key="PropertyGridTemplate" TargetType="{x:Type local:PropertyGrid}">
-        <ScrollViewer HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
+        <ScrollViewer
+            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+            VerticalAlignment="{TemplateBinding VerticalAlignment}"
+            HorizontalScrollBarVisibility="Hidden"
+            VerticalScrollBarVisibility="Hidden">
             <ContentControl
                 x:Name="PART_ContentControl"
                 HorizontalAlignment="{TemplateBinding HorizontalAlignment}"

@@ -30,6 +30,8 @@
             Grid.Row="1"
             Grid.ColumnSpan="2"
             MaxWidth="500"
+			VerticalScrollBarVisibility="Hidden"
+			HorizontalScrollBarVisibility="Hidden"
             MaxHeight="450"
             Padding="10,0,10,0">
 			<Grid>

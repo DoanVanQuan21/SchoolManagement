@@ -72,9 +72,10 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         public List<Semester> Semesters => Semester.Semesters;
 
         public Date CurrentDate
-        { get => currentDate; set { SetProperty(ref currentDate, value);  } }
+        { get => currentDate; set { SetProperty(ref currentDate, value); } }
 
-        public Semester Semester { get => semester; set { SetProperty(ref semester, value); GetClassByDate(); } }
+        public Semester Semester
+        { get => semester; set { SetProperty(ref semester, value); GetClassByDate(); } }
 
         public bool DataLoaded
         { get => dataLoaded; set { SetProperty(ref dataLoaded, value); } }
@@ -119,7 +120,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             CloseDialog();
             if (!isExportCompleted)
             {
-                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LoadGradeFileError_Message"),Class.ClassName));
+                NotificationManager.ShowWarning(string.Format(Util.GetResourseString("LoadGradeFileError_Message"), Class.ClassName));
                 return;
             }
             NotificationManager.ShowSuccess(string.Format(Util.GetResourseString("LoadGradeFileSuccess_Message"), Class.ClassName));
@@ -131,13 +132,12 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             GradeSheets.Clear();
             Semester ??= new();
             teacher = await _teacherService.GetTeacherByUserID(User.UserId);
-            if (teacher == null)
+            if (teacher == null || CurrentDate == null || Semester == null)
             {
-                //TODO
-                //ADD MESSAGE
+                NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
                 return;
             }
-            var courses = await _courseService.GetCourseOfTeacherByYear(teacher.TeacherId, CurrentDate.Year,Semester.Value);
+            var courses = await _courseService.GetCourseOfTeacherByYear(teacher.TeacherId, CurrentDate.Year, Semester.Value);
             if (courses?.Any() == false)
             {
                 NotificationManager.ShowWarning(Util.GetResourseString("ClassroomsEmpty_Message"));
@@ -228,7 +228,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             uploadView.GradeSheetViewModel.Classes = Classes;
             uploadView.GradeSheetViewModel.Semester = Semester;
             uploadView.GradeSheetViewModel.CurrentDate = CurrentDate;
-            
+
             await ShowDialogHost(uploadView);
         }
 
@@ -265,7 +265,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 NotificationManager.ShowSuccess(Util.GetResourseString("UpdateSuccess_Message"));
                 return;
             }
-            NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UpdateGradeSheetError_Message"),string.Join(',', missingGrades.Select(g => g.Student?.User?.FullName))));
+            NotificationManager.ShowWarning(string.Format(Util.GetResourseString("UpdateGradeSheetError_Message"), string.Join(',', missingGrades.Select(g => g.Student?.User?.FullName))));
         }
 
         private async void OnSend()

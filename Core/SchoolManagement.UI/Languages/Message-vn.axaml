@@ -190,8 +190,9 @@
     </system:String>
 
 
+
     <system:String x:Key="ConfirmPasswordEmpty_Message">
-        Không được để trống thông tin!.
+        Xác nhận mật khẩu không được để trống!.
     </system:String>
     <system:String x:Key="PasswordNotEqual_Message">
         Mật khẩu không khớp!.
@@ -202,7 +203,9 @@
     <system:String x:Key="ChangePasswordError_Message">
         Đổi mật khẩu thất bại!.
     </system:String>
-
+    <system:String x:Key="InforEmpty_Message">
+        Không được để trống thông tin!.
+    </system:String>
 
 
     <system:String x:Key="ResetPasswordSuccess_Message">

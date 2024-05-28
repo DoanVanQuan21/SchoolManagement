@@ -1,4 +1,5 @@
-﻿using ClosedXML.Excel;
+﻿using ActiproSoftware.Extensions;
+using ClosedXML.Excel;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Helpers;
 using SchoolManagement.Core.Models.SchoolManagements;
@@ -144,11 +145,18 @@ namespace SchoolManagement.Core.Services
             int index = 0;
             while (col < totalCol)
             {
-                worksheet.Cell(row, col).Value.TryGetText(out string value);
-                _ = double.TryParse(value, out var result);
-
-                properties[index++].SetValue(obj, result);
-                col++;
+                try
+                {
+                    var value = worksheet.Cell(row, col).Value.GetNumber();
+                    properties[index++].SetValue(obj, value);
+                    col++;
+                }
+                catch (Exception ex)
+                {
+                    properties[index++].SetValue(obj, 0);
+                    col++;
+                }
+               
             }
             return obj;
         }

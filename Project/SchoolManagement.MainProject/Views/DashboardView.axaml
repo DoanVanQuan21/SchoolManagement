@@ -2,6 +2,7 @@
     x:Class="SchoolManagement.MainProject.Views.DashboardView"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:SchoolManagement.MainProject.ViewModels"
@@ -22,68 +23,74 @@
             ItemsSource="{Binding FormsNeedToConfirm}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Expander>
-                        <Expander.Header>
-                            <DockPanel>
-                                <StackPanel
-                                    VerticalAlignment="Center"
-                                    DockPanel.Dock="Left"
-                                    Orientation="Horizontal">
-                                    <Label Content="{Binding Teacher.User.FullName}" />
-                                    <Label Content="-" />
-                                    <Label Content="{Binding GradeSheet.Course.Class.ClassName}" />
-                                    <Label Content="-" />
-                                    <Label Content="{Binding GradeSheet.Course.Subject.SubjectName}" />
+                    <actipro:ShadowChrome
+                        Grid.Row="0"
+                        Elevation="8"
+                        ShadowColor="Black"
+                        ShadowOpacity="0.5">
+                        <Expander>
+                            <Expander.Header>
+                                <DockPanel>
+                                    <StackPanel
+                                        VerticalAlignment="Center"
+                                        DockPanel.Dock="Left"
+                                        Orientation="Horizontal">
+                                        <Label Content="{Binding Teacher.User.FullName}" />
+                                        <Label Content="-" />
+                                        <Label Content="{Binding GradeSheet.Course.Class.ClassName}" />
+                                        <Label Content="-" />
+                                        <Label Content="{Binding GradeSheet.Course.Subject.SubjectName}" />
+                                    </StackPanel>
+                                    <TextBlock
+                                        Margin="10"
+                                        VerticalAlignment="Center"
+                                        Classes="theme-text-heading size-xs accent"
+                                        DockPanel.Dock="Right"
+                                        Text="{DynamicResource WaittingConfirm_Label}" />
+                                </DockPanel>
+                            </Expander.Header>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox
+                                    Grid.ColumnSpan="1"
+                                    Margin="10"
+                                    VerticalContentAlignment="Top"
+                                    AcceptsReturn="True"
+                                    Classes="theme-outline"
+                                    IsReadOnly="True"
+                                    ScrollViewer.IsScrollChainingEnabled="False"
+                                    Text="{Binding Reason}"
+                                    TextWrapping="Wrap"
+                                    UseFloatingWatermark="True"
+                                    Watermark="Lý do" />
+                                <StackPanel Grid.Column="1">
+                                    <Button
+                                        Width="120"
+                                        Height="40"
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        Classes="theme-solid accent"
+                                        Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="{DynamicResource Accept_Label}"
+                                        IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
+                                    <Button
+                                        Width="120"
+                                        Height="40"
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        Classes="theme-solid danger"
+                                        Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="{DynamicResource Refuse_Label}"
+                                        IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
                                 </StackPanel>
-                                <TextBlock
-                                    Margin="10"
-                                    VerticalAlignment="Center"
-                                    Classes="theme-text-heading size-xs accent"
-                                    DockPanel.Dock="Right"
-                                    Text="{DynamicResource WaittingConfirm_Label}" />
-                            </DockPanel>
-                        </Expander.Header>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="5*" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox
-                                Grid.ColumnSpan="1"
-                                Margin="10"
-                                VerticalContentAlignment="Top"
-                                AcceptsReturn="True"
-                                Classes="theme-outline"
-                                IsReadOnly="True"
-                                ScrollViewer.IsScrollChainingEnabled="False"
-                                Text="{Binding Reason}"
-                                TextWrapping="Wrap"
-                                UseFloatingWatermark="True"
-                                Watermark="Lý do" />
-                            <StackPanel Grid.Column="1">
-                                <Button
-                                    Width="120"
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid accent"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedAcceptEditFormCommand}"
-                                    CommandParameter="{Binding}"
-                                    Content="{DynamicResource Accept_Label}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
-                                <Button
-                                    Width="120"
-                                    Height="40"
-                                    Margin="10"
-                                    HorizontalAlignment="Center"
-                                    Classes="theme-solid danger"
-                                    Command="{Binding ElementName=Container, Path=DataContext.ClickedUnAcceptEditFormCommand}"
-                                    CommandParameter="{Binding}"
-                                    Content="{DynamicResource Refuse_Label}"
-                                    IsVisible="{Binding ElementName=Container, Path=DataContext.User.Role, Converter={StaticResource PermissionConverter}, ConverterParameter='admin'}" />
-                            </StackPanel>
-                        </Grid>
-                    </Expander>
+                            </Grid>
+                        </Expander>
+                    </actipro:ShadowChrome>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

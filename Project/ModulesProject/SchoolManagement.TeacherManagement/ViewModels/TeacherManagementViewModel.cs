@@ -56,7 +56,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
                 NotificationManager.ShowWarning(Util.GetResourseString("AddTeacherError_Message"));
                 return;
             }
-            NotificationManager.ShowWarning(Util.GetResourseString("AddTeacherSuccess_Message"));
+            NotificationManager.ShowSuccess(Util.GetResourseString("AddTeacherSuccess_Message"));
             CloseDialog();
             await GetTeachers();
         }
@@ -68,6 +68,7 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             if (teachers?.Any() == false)
             {
                 NotificationManager.ShowWarning(Util.GetResourseString("TeachersEmpty_Message"));
+                page--;
                 return;
             }
             foreach (var teacher in teachers)
@@ -94,6 +95,10 @@ namespace SchoolManagement.TeacherManagement.ViewModels
 
         private async void OnPreviousAsync()
         {
+            if (page - 1 <= 0)
+            {
+                return;
+            }
             page--;
             await GetTeachers();
         }

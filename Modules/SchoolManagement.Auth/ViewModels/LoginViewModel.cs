@@ -60,6 +60,11 @@ namespace SchoolManagement.Auth.ViewModels
                     EventAggregator.GetEvent<LoginSuccessEvent>().Publish(false);
                     return;
                 }
+                if (string.IsNullOrEmpty(User.Username) || string.IsNullOrEmpty(User.Password))
+                {
+                    NotificationManager.ShowWarning(Util.GetResourseString("InforEmpty_Message"));
+                    return;
+                }
                 var (isLogin, user) = await _userService.Login(User);
                 if (user == null)
                 {
@@ -76,7 +81,7 @@ namespace SchoolManagement.Auth.ViewModels
             }
             catch (Exception ex)
             {
-                NotificationManager.ShowError($"{Util.GetResourseString("DatabaseFailed_Message")}\n{ex.Message}",5);
+                NotificationManager.ShowError($"{Util.GetResourseString("DatabaseFailed_Message")}\n{ex.Message}", 5);
             }
         }
 

@@ -12,6 +12,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
     public class EditClassViewModel : BaseRegionViewModel
     {
         private readonly IClassService _classService;
+        private Class @class;
 
         public EditClassViewModel()
         {
@@ -44,7 +45,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             CloseDialog();
         }
 
-        public Class Class { get; set; }
+        public Class Class { get => @class; set => SetProperty(ref @class, value); }
         public override string Title => Util.GetResourseString("AddClass_Label");
 
         public override User User { get; protected set; }

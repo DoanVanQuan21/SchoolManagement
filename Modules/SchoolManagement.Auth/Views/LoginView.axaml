@@ -49,9 +49,9 @@
                 Width="15"
                 HorizontalAlignment="Left"
                 Data="{StaticResource UserKeyGeometry}" />
-			<Label>
-				Mật khẩu
-			</Label>
+            <Label>
+                Mật khẩu
+            </Label>
         </StackPanel>
         <TextBox
             Grid.Row="4"

@@ -99,6 +99,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
             {
                 DataLoaded = true;
                 NotificationManager.ShowWarning(Util.GetResourseString("RecordsEmpty_Message"));
+                page--;
                 return;
             }
             Classes.Clear();
@@ -130,6 +131,10 @@ namespace SchoolManagement.ClassManagement.ViewModels
 
         private async void OnPreviousAsync()
         {
+            if (page - 1 <= 0)
+            {
+                return;
+            }
             page--;
             await GetClasses();
         }
@@ -137,6 +142,7 @@ namespace SchoolManagement.ClassManagement.ViewModels
         private async void OnUpdate()
         {
             var editView = new EditClassView();
+            editView.ViewModel.Class = SelectedClass;
             editView.SetEditClassAction(EditClass);
             await ShowDialogHost(editView);
         }

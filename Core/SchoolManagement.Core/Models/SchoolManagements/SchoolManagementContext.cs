@@ -60,7 +60,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Class");
 
-            entity.Property(e => e.ClassId).HasColumnName("ClassID");
+            entity.Property(e => e.ClassId).ValueGeneratedOnAdd().HasColumnName("ClassID");
             entity.Property(e => e.ClassCode).HasMaxLength(100);
             entity.Property(e => e.ClassName).HasMaxLength(100);
         });
@@ -71,7 +71,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Course");
 
-            entity.Property(e => e.CourseId).HasColumnName("CourseID");
+            entity.Property(e => e.CourseId).ValueGeneratedOnAdd().HasColumnName("CourseID");
             entity.Property(e => e.ClassId).HasColumnName("ClassID");
             entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.EndDate).HasColumnType("datetime");
@@ -108,7 +108,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Department");
 
-            entity.Property(e => e.DepartmentId).HasColumnName("DepartmentID");
+            entity.Property(e => e.DepartmentId).ValueGeneratedOnAdd().HasColumnName("DepartmentID");
             entity.Property(e => e.DepartmentCode).HasMaxLength(20);
             entity.Property(e => e.DepartmentName).HasMaxLength(100);
             entity.Property(e => e.FoundingDate).HasColumnType("datetime");
@@ -121,7 +121,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("EditGradeSheetForm");
 
-            entity.Property(e => e.EditGradeSheetFormId).HasColumnName("EditGradeSheetFormID");
+            entity.Property(e => e.EditGradeSheetFormId).ValueGeneratedOnAdd().HasColumnName("EditGradeSheetFormID");
             entity.Property(e => e.GradeSheetId).HasColumnName("GradeSheetID");
             entity.Property(e => e.Reason).HasColumnName("reason");
             entity.Property(e => e.Status).HasMaxLength(100);
@@ -144,7 +144,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("EducationProgram");
 
-            entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
+            entity.Property(e => e.EducationProgramId).ValueGeneratedOnAdd().HasColumnName("EducationProgramID");
             entity.Property(e => e.EducationName).HasMaxLength(100);
             entity.Property(e => e.EducationProgramCode).HasMaxLength(20);
             entity.Property(e => e.Status).HasMaxLength(100);
@@ -156,7 +156,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("GradeSheet");
 
-            entity.Property(e => e.GradeSheetId).HasColumnName("GradeSheetID");
+            entity.Property(e => e.GradeSheetId).ValueGeneratedOnAdd().HasColumnName("GradeSheetID");
             entity.Property(e => e.CourseId).HasColumnName("CourseID");
             entity.Property(e => e.StudentId).HasColumnName("StudentID");
 
@@ -189,7 +189,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Lesson");
 
-            entity.Property(e => e.LessonId).HasColumnName("LessonID");
+            entity.Property(e => e.LessonId).ValueGeneratedOnAdd().HasColumnName("LessonID");
             entity.Property(e => e.EducationProgramId).HasColumnName("EducationProgramID");
             entity.Property(e => e.LessonCode).HasMaxLength(100);
             entity.Property(e => e.LessonName).HasMaxLength(100);
@@ -224,7 +224,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Student");
 
-            entity.Property(e => e.StudentId).HasColumnName("StudentID");
+            entity.Property(e => e.StudentId).ValueGeneratedOnAdd().HasColumnName("StudentID");
             entity.Property(e => e.StudentCode).HasMaxLength(20);
             entity.Property(e => e.UserId).HasColumnName("UserID");
 
@@ -252,7 +252,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Subject");
 
-            entity.Property(e => e.SubjectId).HasColumnName("SubjectID");
+            entity.Property(e => e.SubjectId).ValueGeneratedOnAdd().HasColumnName("SubjectID");
             entity.Property(e => e.SubjectCode).HasMaxLength(15);
             entity.Property(e => e.SubjectName).HasMaxLength(100);
         });
@@ -263,7 +263,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("Teacher");
 
-            entity.Property(e => e.TeacherId).HasColumnName("TeacherID");
+            entity.Property(e => e.TeacherId).ValueGeneratedOnAdd().HasColumnName("TeacherID");
             entity.Property(e => e.AdditionalBenifits).HasMaxLength(100);
             entity.Property(e => e.CurrentHealthStatus).HasMaxLength(100);
             entity.Property(e => e.Degree).HasMaxLength(200);
@@ -302,7 +302,7 @@ public partial class SchoolManagementContext : DbContext
 
             entity.ToTable("User");
 
-            entity.Property(e => e.UserId).HasColumnName("UserID");
+            entity.Property(e => e.UserId).ValueGeneratedOnAdd().HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.DateOfBirth).HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(100);

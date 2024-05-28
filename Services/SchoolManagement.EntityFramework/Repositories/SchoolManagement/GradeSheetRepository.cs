@@ -112,31 +112,30 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return true;
             });
         }
-        public Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
+        public async Task<bool> UpdateOrAddRange(ObservableCollection<GradeSheet> gradeSheets)
         {
-            return Task.Factory.StartNew(() =>
+            try
             {
-                try
+                foreach (var grade in gradeSheets)
                 {
-                    foreach (var grade in gradeSheets)
+                    var gs = FirstOrDefault(g => g.CourseId == grade.CourseId && g.StudentId == grade.StudentId);
+                    grade.PromotionDecision = true;
+                    grade.Lock = false;
+                    if (gs == null)
                     {
-                        var gs = FirstOrDefault(g => g.CourseId == grade.CourseId && g.StudentId == grade.StudentId);
-                        if (gs == null)
-                        {
-                            Add(grade);
-                            Task.Delay(100);
-                            continue;
-                        }
-                        UpdateByClassIDAndSubjectID(gs,grade);
-                        Task.Delay(100);
+                        Add(grade);
+                        await Task.Delay(100);
+                        continue;
                     }
-                    return true;
+                    await UpdateByClassIDAndSubjectID(gs, grade);
+                    await Task.Delay(100);
                 }
-                catch (Exception)
-                {
-                    return false;
-                }
-            });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
         public Task<bool> UpdateByClassIDAndSubjectID(GradeSheet gradeSheet,GradeSheet newGrade)
         {

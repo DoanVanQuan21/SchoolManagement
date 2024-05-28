@@ -53,9 +53,11 @@
         <ComboBox
             Grid.Row="3"
             Margin="10"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
             Classes="theme-outline accent"
             ItemsSource="{Binding Languages}"
-            SelectedValue="{Binding CurrentLanguage}"
+            SelectedValue="{Binding CurrentLanguage, Mode=TwoWay}"
             SelectionChanged="ComboBox_SelectionChanged">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

@@ -24,51 +24,56 @@
         PaneBackground="Transparent"
         PanePlacement="Left">
         <SplitView.Pane>
-            <Border
+            <actipro:ShadowChrome
                 Margin="10,5,5,5"
-                Background="{actipro:ThemeResource Container3BackgroundBrush}"
-                BorderBrush="Transparent"
-                BorderThickness="1"
-                CornerRadius="10">
-                <StackPanel Margin="0" Spacing="0">
-                    <Button
-                        Margin="0,5,0,5"
-                        HorizontalAlignment="Left"
-                        Background="Transparent"
-                        Classes="theme-subtle"
-                        Command="{Binding ClickNavigationCommand}">
-                        <PathIcon Data="{StaticResource NavigationGeometry}" />
-                    </Button>
-                    <ListBox
-                        x:Name="ListMenu"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        ItemsSource="{Binding AppMenus}"
-                        SelectedValue="{Binding CurrentMenu}"
-                        SelectionChanged="ListBox_SelectionChanged">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel
-                                    Margin="-5,5,0,5"
-                                    Orientation="Horizontal"
-                                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                                    <PathIcon
-                                        Width="25"
-                                        HorizontalAlignment="Left"
-                                        Data="{Binding Geometry}"
-                                        ToolTip.ShowDelay="10"
-                                        ToolTip.Tip="{Binding Label}" />
-                                    <TextBlock
-                                        Padding="10,0,0,0"
-                                        HorizontalAlignment="Right"
-                                        VerticalAlignment="Center"
-                                        Text="{Binding Label}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </StackPanel>
-            </Border>
+                Elevation="8"
+                ShadowColor="Black"
+                ShadowOpacity="0.5">
+                <Border
+                    Background="Transparent"
+                    BorderBrush="Transparent"
+                    CornerRadius="5">
+                    <StackPanel Margin="0" Spacing="0">
+                        <Button
+                            Margin="0,5,0,5"
+                            HorizontalAlignment="Left"
+                            Background="Transparent"
+                            Classes="theme-subtle"
+                            Command="{Binding ClickNavigationCommand}">
+                            <PathIcon Data="{StaticResource NavigationGeometry}" />
+                        </Button>
+                        <ListBox
+							ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            x:Name="ListMenu"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemsSource="{Binding AppMenus}"
+                            SelectedValue="{Binding CurrentMenu}"
+                            SelectionChanged="ListBox_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Margin="-5,5,0,5"
+                                        Orientation="Horizontal"
+                                        ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                        <PathIcon
+                                            Width="25"
+                                            HorizontalAlignment="Left"
+                                            Data="{Binding Geometry}"
+                                            ToolTip.ShowDelay="10"
+                                            ToolTip.Tip="{Binding Label}" />
+                                        <TextBlock
+                                            Padding="10,0,0,0"
+                                            HorizontalAlignment="Right"
+                                            VerticalAlignment="Center"
+                                            Text="{Binding Label}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+            </actipro:ShadowChrome>
         </SplitView.Pane>
         <SplitView.Content>
             <Border Background="Transparent">
@@ -77,30 +82,39 @@
                         <RowDefinition Height="55" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Border
+                    <actipro:ShadowChrome
                         Grid.Row="0"
-                        Margin="5"
-                        Background="{actipro:ThemeResource Container3BackgroundBrush}"
-                        CornerRadius="10">
-                        <local:DesktopHeaderView />
-                    </Border>
-                    <Border
-                        Grid.Row="1"
-                        Margin="5"
-                        Background="{actipro:ThemeResource Container3BackgroundBrush}"
-                        CornerRadius="10">
-                        <dialogHostAvalonia:DialogHost
-                            dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
-                            DialogMargin="16"
-                            Identifier="MainDialogHost">
-                            <ContentControl
-                                Margin="10"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                Content="{Binding AppRegion.MainPage}" />
-                        </dialogHostAvalonia:DialogHost>
+                        Margin="10,5,5,5"
+                        Elevation="4"
+                        ShadowColor="Black"
+                        ShadowOpacity="0.5">
+                        <Border Background="Transparent" CornerRadius="5">
+                            <local:DesktopHeaderView />
+                        </Border>
+                    </actipro:ShadowChrome>
 
-                    </Border>
+                    <actipro:ShadowChrome
+                        Grid.Row="1"
+                        Margin="10,5,5,5"
+                        Elevation="8"
+                        ShadowColor="Black"
+                        ShadowOpacity="0.5">
+                        <Border
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            CornerRadius="5">
+                            <dialogHostAvalonia:DialogHost
+                                dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
+                                DialogMargin="16"
+                                Identifier="MainDialogHost">
+                                <ContentControl
+                                    Margin="10"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Content="{Binding AppRegion.MainPage}" />
+                            </dialogHostAvalonia:DialogHost>
+                        </Border>
+                    </actipro:ShadowChrome>
                 </Grid>
             </Border>
         </SplitView.Content>
