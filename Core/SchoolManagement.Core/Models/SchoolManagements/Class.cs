@@ -10,12 +10,15 @@ public partial class Class : BindableBase
     private string? classCode;
     private string? className;
     private int? numberOfStudent;
+    private int? teacherId;
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Browsable(false)]
     public int ClassId
     { get => classId; set { SetProperty(ref classId, value); } }
-    
+
+    public int? TeacherId { get => teacherId; set => teacherId = value; }
+
     [DisplayName("ClassCode_Label")]
     [Browsable(false)]
     public string? ClassCode
@@ -31,5 +34,4 @@ public partial class Class : BindableBase
 
     [Browsable(false)]
     public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
-
 }

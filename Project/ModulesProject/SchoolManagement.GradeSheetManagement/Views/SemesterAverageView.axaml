@@ -56,35 +56,38 @@
             SelectedValue="{Binding SemesterAverage}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding Semester}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="5*" />
-                            </Grid.ColumnDefinitions>
-                            <DockPanel Grid.Column="0">
-                                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
-                                    <Label Content="{DynamicResource TotalSubject_Label}" />
+                    <actipro:ShadowChrome Elevation="6">
+                        <Expander Header="{Binding Semester}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="5*" />
+                                    <ColumnDefinition Width="5*" />
+                                </Grid.ColumnDefinitions>
+                                <DockPanel Grid.Column="0">
+                                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                                        <Label Content="{DynamicResource TotalSubject_Label}" />
+                                        <Label>:</Label>
+                                        <Label Content="{Binding TotalSubject}" />
+                                    </StackPanel>
+                                    <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+                                        <Label Content="{DynamicResource FinalGrade_Label}" />
+                                        <Label>:</Label>
+                                        <Label Content="{Binding Average}" />
+                                    </StackPanel>
+                                </DockPanel>
+                                <StackPanel
+                                    Grid.Column="1"
+                                    DockPanel.Dock="Bottom"
+                                    Orientation="Horizontal">
+                                    <Label Content="{DynamicResource Rank_Label}" />
                                     <Label>:</Label>
-                                    <Label Content="{Binding TotalSubject}" />
+                                    <Label Content="{Binding Rank}" />
                                 </StackPanel>
-                                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-                                    <Label Content="{DynamicResource FinalGrade_Label}" />
-                                    <Label>:</Label>
-                                    <Label Content="{Binding Average}" />
-                                </StackPanel>
-                            </DockPanel>
-                            <StackPanel
-                                Grid.Column="1"
-                                DockPanel.Dock="Bottom"
-                                Orientation="Horizontal">
-                                <Label Content="{DynamicResource Rank_Label}" />
-                                <Label>:</Label>
-                                <Label Content="{Binding Rank}" />
-                            </StackPanel>
 
-                        </Grid>
-                    </Expander>
+                            </Grid>
+                        </Expander>
+                    </actipro:ShadowChrome>
+
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

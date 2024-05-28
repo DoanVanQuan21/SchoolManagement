@@ -111,14 +111,41 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                         continue;
                     }
                     gs.Ranked = GradeSheet.GetRanked(gs);
-                    gs.Student = await _studentService.GetStudentByStudentID(gs.StudentId);
-                    gs.Course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
-                    if (gs.Course == null)
+                    var student = await _studentService.GetStudentByStudentID(gs.StudentId);
+                    if (student == null)
                     {
                         continue;
                     }
-                    gs.CourseId = gs.Course.CourseId;
+                    var studentOK = await ValidateStudent(student.StudentId);
+                    if (!studentOK)
+                    {
+                        continue;
+                    }
+                    var course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
+                    if (course == null)
+                    {
+                        continue;
+                    }
+                    gs.StudentId = student.StudentId;
+                    gs.CourseId = course.CourseId;
                 }
+            });
+        }
+
+        private Task<bool> ValidateStudent(int studentID)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                if (Students?.Any() == false)
+                {
+                    return false;
+                }
+                var student = Students.FirstOrDefault(s => s.StudentId == studentID);
+                if (student == null)
+                {
+                    return false;
+                }
+                return true;
             });
         }
 
@@ -126,11 +153,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         {
             try
             {
-                if (Class == null)
+                if (Class == null ||CurrentDate==null)
                 {
                     return;
                 }
-                var students = await _studentService.GetStudentOfClassByYear(Class.ClassId, DateTime.Now.Year);
+                var students = await _studentService.GetStudentOfClassByYear(Class.ClassId, CurrentDate.Year);
                 if (students == null)
                 {
                     NotificationManager.ShowWarning(Util.GetResourseString("StudentsEmpty_Message"));
@@ -187,7 +214,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             }
             GradeSheet.StudentId = Student.StudentId;
             var course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
-            if (course == null) 
+            if (course == null)
             {
                 return false;
             }

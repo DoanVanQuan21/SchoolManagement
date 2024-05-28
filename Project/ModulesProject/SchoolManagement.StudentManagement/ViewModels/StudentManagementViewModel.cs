@@ -47,6 +47,7 @@ namespace SchoolManagement.StudentManagement.ViewModels
             if (students?.Any() == false)
             {
                 NotificationManager.ShowWarning(Util.GetResourseString("StudentsEmpty_Message"));
+                page--;
                 return;
             }
             foreach (var student in students)
@@ -92,6 +93,10 @@ namespace SchoolManagement.StudentManagement.ViewModels
 
         private async void OnPreviousAsync()
         {
+            if (page - 1 <= 0)
+            {
+                return;
+            }
             page--;
             await GetStudents();
         }

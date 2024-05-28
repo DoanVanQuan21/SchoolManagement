@@ -1,7 +1,6 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.Common;
-using System.Diagnostics;
 using System.Net;
 
 namespace SchoolManagement.Core.Services
@@ -44,8 +43,6 @@ namespace SchoolManagement.Core.Services
 
         private void InitServerInfor()
         {
-            //TODO
-            //MOBILE PLATFORM
             if (_appManager == null)
             {
                 _notificationManager.ShowError("Configuration cannot be null!");
@@ -60,7 +57,7 @@ namespace SchoolManagement.Core.Services
             {
                 ServerInfor = new()
                 {
-                    ServerName = "192.168.1.103",
+                    ServerName = "192.168.201.104",
                     User = "mobileplatform",
                     Password = "123",
                 };
@@ -73,7 +70,7 @@ namespace SchoolManagement.Core.Services
                 {
                     ServerInfor = new()
                     {
-                        ServerName = "192.168.1.103",
+                        ServerName = "192.168.201.104",
                         User = "mobileplatform",
                         Password = "123",
                     };
@@ -85,7 +82,7 @@ namespace SchoolManagement.Core.Services
             var ipV4Address = GetIpV4Address();
             if (string.IsNullOrEmpty(ipV4Address))
             {
-                Debug.WriteLine("Can not get IPV4 ADDRESS");
+                _notificationManager.ShowError("Can not get IPV4 ADDRESS");
                 return;
             }
             ServerInfor = new()

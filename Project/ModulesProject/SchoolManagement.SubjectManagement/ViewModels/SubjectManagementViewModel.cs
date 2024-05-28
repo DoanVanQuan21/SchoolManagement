@@ -52,8 +52,8 @@ namespace SchoolManagement.SubjectManagement.ViewModels
             if (subjects?.Any() == false)
             {
                 DataLoaded = true;
-
                 NotificationManager.ShowWarning(Util.GetResourseString("InvalidInfor_Message"));
+                page--;
                 return;
             }
             Subjects.Clear();
@@ -78,6 +78,10 @@ namespace SchoolManagement.SubjectManagement.ViewModels
 
         private async void OnPreviousAsync()
         {
+            if (page - 1 <= 0)
+            {
+                return;
+            }
             page--;
             await GetSubjects();
         }

@@ -43,6 +43,7 @@
                             <PathIcon Data="{StaticResource NavigationGeometry}" />
                         </Button>
                         <ListBox
+							ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                             x:Name="ListMenu"
                             Background="Transparent"
                             BorderThickness="0"

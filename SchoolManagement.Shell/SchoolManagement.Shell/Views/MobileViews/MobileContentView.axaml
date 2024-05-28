@@ -17,7 +17,13 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="90" />
         </Grid.RowDefinitions>
-        <Border Grid.Row="0" Background="{actipro:ThemeResource Container2BackgroundBrush}" />
+        <actipro:ShadowChrome
+            Grid.Row="0"
+            Margin="5"
+            Elevation="8"
+            ShadowColor="Black"
+            ShadowOpacity="0.5" />
+        <Border Grid.Row="0" />
         <Label
             Grid.Row="0"
             Margin="10,0,0,0"
@@ -38,7 +44,7 @@
                     Data="{StaticResource SettingGeometry}" />
             </Button.Content>
         </Button>
-        <ScrollViewer Grid.Row="1">
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <dialogHostAvalonia:DialogHost
                 dialogHostAvalonia:DialogHostStyle.CornerRadius="8"
                 DialogMargin="16"
@@ -50,7 +56,13 @@
                     Content="{Binding AppRegion.MainPage}" />
             </dialogHostAvalonia:DialogHost>
         </ScrollViewer>
-        <Border Grid.Row="2" Background="{actipro:ThemeResource Container2BackgroundBrush}">
+        <actipro:ShadowChrome
+            Grid.Row="2"
+            Margin="5"
+            Elevation="8"
+            ShadowColor="Black"
+            ShadowOpacity="0.5" />
+        <Border Grid.Row="2">
 
             <DockPanel>
                 <ListBox
@@ -61,6 +73,7 @@
                     Classes="theme-scroll-overlay"
                     DockPanel.Dock="Left"
                     ItemsSource="{Binding AppMenus}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                     SelectionChanged="ListBox_SelectionChanged">
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
