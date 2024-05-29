@@ -1,0 +1,65 @@
+<ResourceDictionary
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:local="clr-namespace:SchoolManagement.UI.Controls.DialogControl;assembly=SchoolManagement.UI">
+    <ControlTemplate x:Key="DialogControlTemplate" TargetType="{x:Type local:DialogControl}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="5*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                Classes="title"
+                Content="{TemplateBinding Title}" />
+            <ScrollViewer
+                Grid.Row="1"
+                Grid.ColumnSpan="2"
+                HorizontalScrollBarVisibility="Hidden"
+                VerticalScrollBarVisibility="Hidden">
+                <ContentControl
+                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Content="{TemplateBinding Content}" />
+            </ScrollViewer>
+
+            <Border
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Background="{actipro:ThemeResource Container1BorderBrush}" />
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Width="100"
+                Height="40"
+                Classes="accent"
+                Command="{TemplateBinding CancelCommand}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <PathIcon Data="{StaticResource ArrowExitGeometry}" />
+                        <Label Content="{DynamicResource Cancel_Label}" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <Button
+                Grid.Row="2"
+                Grid.Column="1"
+                Width="100"
+                Height="40"
+                Classes="accent"
+                Command="{TemplateBinding OKCommand}"
+                Content="OK" />
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>

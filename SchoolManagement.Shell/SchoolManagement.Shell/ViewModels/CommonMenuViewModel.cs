@@ -58,6 +58,11 @@ namespace SchoolManagement.Shell.ViewModels
             base.RegisterCommand();
         }
 
+        protected override void OnLogginSuccess(bool isLoginSucess)
+        {
+            User = RootContext.CurrentUser;
+        }
+
         private void OnChangeLang()
         {
             UpdateLanguage(CurrentLanguage);

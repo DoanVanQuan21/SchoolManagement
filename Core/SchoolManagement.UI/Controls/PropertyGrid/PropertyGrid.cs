@@ -7,7 +7,6 @@ using Avalonia.Styling;
 using DynamicData;
 using ReactiveUI;
 using SchoolManagement.Core.Helpers;
-using SchoolManagement.UI.Helpers;
 using System.ComponentModel;
 using System.Reflection;
 using PropertyHelper = SchoolManagement.Core.Helpers.PropertyHelper;
@@ -140,7 +139,6 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
                 Margin = new Thickness(10),
                 HorizontalAlignment = HorizontalAlignment.Left,
                 VerticalAlignment = VerticalAlignment.Center,
-                
             };
             return textBlock;
         }
@@ -152,7 +150,7 @@ namespace SchoolManagement.UI.Controls.PropertyGrid
                 Orientation = Orientation.Vertical
             };
             var label = CreateLabelForNameProperty(property);
-            
+
             var inputControl = CreateInputControl(property);
             stackPanel.Children.Add(label);
             stackPanel.Children.Add(inputControl);

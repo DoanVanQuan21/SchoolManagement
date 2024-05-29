@@ -6,6 +6,7 @@
         <ResourceInclude Source="/Geometry/Geometry.axaml" />
         <ResourceInclude Source="/Themes/Styles/SearchBar.axaml" />
         <ResourceInclude Source="/Themes/Styles/PropertyGrid.axaml" />
+        <ResourceInclude Source="/Themes/Styles/DialogControl.axaml" />
         <ResourceInclude Source="/Themes/Based/Size.axaml" />
         <ResourceInclude Source="/Converters/ConverterResource.axaml" />
     </ResourceDictionary.MergedDictionaries>

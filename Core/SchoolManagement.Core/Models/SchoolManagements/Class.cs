@@ -17,6 +17,7 @@ public partial class Class : BindableBase
     public int ClassId
     { get => classId; set { SetProperty(ref classId, value); } }
 
+    [Browsable(false)]
     public int? TeacherId { get => teacherId; set => teacherId = value; }
 
     [DisplayName("ClassCode_Label")]

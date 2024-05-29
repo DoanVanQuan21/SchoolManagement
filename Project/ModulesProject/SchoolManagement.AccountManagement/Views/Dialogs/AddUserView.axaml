@@ -3,14 +3,32 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
-    xmlns:cc="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dialogCC="clr-namespace:SchoolManagement.UI.Controls.DialogControl;assembly=SchoolManagement.UI"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:propCC="clr-namespace:SchoolManagement.UI.Controls.PropertyGrid;assembly=SchoolManagement.UI"
     xmlns:vm="clr-namespace:SchoolManagement.AccountManagement.ViewModels"
     MinWidth="{Binding IsMobilePlatform, Converter={StaticResource MinWidthFollowPlatformConverter}}"
+    MinHeight="{Binding IsMobilePlatform, Converter={StaticResource MinHeightFollowPlatformConverter}, ConverterParameter=300}"
     x:DataType="vm:AddAccountViewModel"
     mc:Ignorable="d">
     <Grid>
+        <dialogCC:DialogControl
+            Title="{Binding Title}"
+            CancelCommand="{Binding ClickedExit}"
+            OKCommand="{Binding ClickedOK}"
+            Template="{StaticResource DialogControlTemplate}">
+            <dialogCC:DialogControl.Content>
+                <propCC:PropertyGrid
+                    x:Name="Prop"
+                    Column="One"
+                    DockPanel.Dock="Top"
+                    SelectedObject="{Binding NewUser}"
+                    Template="{StaticResource PropertyGridTemplate}" />
+            </dialogCC:DialogControl.Content>
+        </dialogCC:DialogControl>
+
+        <!--
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*" />
             <ColumnDefinition Width="5*" />
@@ -64,5 +82,7 @@
             Classes="accent"
             Command="{Binding ClickedOK}"
             Content="OK" />
+		-->
+
     </Grid>
 </UserControl>

@@ -42,7 +42,28 @@ namespace Management.InternalShared.Converters
             throw new NotImplementedException();
         }
     }
+    public class MinHeightFollowPlatformConverter : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            var isMobilePlatform = (bool)value;
+            if (isMobilePlatform)
+            {
+                return 350;
+            }
+            var isParsed = int.TryParse((string)parameter,out var val);
+            if(isParsed)
+            {
+                return val;
+            }
+            return 500;
+        }
 
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class EnumToItemsSourceConverter : IValueConverter
     {
         public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)

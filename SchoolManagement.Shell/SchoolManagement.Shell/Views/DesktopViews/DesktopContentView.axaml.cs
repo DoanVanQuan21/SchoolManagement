@@ -17,30 +17,13 @@ namespace SchoolManagement.Shell.Views.DesktopViews
         {
             InitializeComponent();
             viewModel = Ioc.Resolve<MainContentViewModel>();
-            Ioc.Resolve<IEventAggregator>().GetEvent<RequestRefreshPageEvent>().Subscribe(OnRefresh);
             DataContext = viewModel;
-        }
-        private void OnRefresh()
-        {
-            if (appMenu == null)
-            {
-                return;
-            }
-            foreach (var menu in RootContext.DesktopAppMenus)
-            {
-                if (appMenu.Type == menu.Type)
-                {
-                    viewModel.ClickSelectionPageCommand.Execute(menu);
-                    return;
-                }
-            }
         }
         private void ListBox_SelectionChanged(object? sender, Avalonia.Controls.SelectionChangedEventArgs e)
         {
             try
             {
                 viewModel.ClickSelectionPageCommand.Execute(e.AddedItems[0]);
-                appMenu = e.AddedItems[0] as AppMenu;
             }
             catch (System.Exception ex)
             {
