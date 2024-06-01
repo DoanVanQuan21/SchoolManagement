@@ -24,9 +24,11 @@ public partial class Student : BindableBase
     public string? StudentCode
     { get => studentCode; set { SetProperty(ref studentCode, value); } }
 
+    [NotMapped]
     [Browsable(false)]
     public virtual ICollection<GradeSheet> GradeSheets { get; set; } = new List<GradeSheet>();
 
     [Browsable(false)]
+    [NotMapped]
     public virtual User User { get; set; } = null!;
 }

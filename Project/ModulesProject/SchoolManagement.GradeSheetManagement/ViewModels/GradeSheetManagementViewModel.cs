@@ -259,6 +259,11 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
 
         private async void OnFinish()
         {
+            if(CurrentDate==null || Semester==null || Class == null)
+            {
+                NotificationManager.ShowWarning(Util.GetResourseString("NoClassroomSelected_Message"));
+                return;
+            }
             var missingGrades = await _gradeSheetService.FinishEditGradeSheet(GradeSheets);
             if (missingGrades?.Count <= 0)
             {

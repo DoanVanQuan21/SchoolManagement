@@ -126,6 +126,7 @@
     <system:String x:Key="EndDate_Label">End date</system:String>
     <system:String x:Key="Status_Label">Status</system:String>
     <system:String x:Key="Email_Label">Email</system:String>
+    <system:String x:Key="Role_Label">Role</system:String>
 
 
 

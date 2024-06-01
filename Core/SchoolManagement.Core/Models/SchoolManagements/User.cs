@@ -106,8 +106,7 @@ public partial class User : BindableBase
     public bool? LockAccount { get => lockAccount; set => SetProperty(ref lockAccount, value); }
 
     [NotMapped]
-    [Browsable(false)]
-    [DisplayName("Role")]
+    [DisplayName("Role_Label")]
     public Role UserRole
     { get => userRole; set { SetProperty(ref userRole, value); UpdateRole(); } }
 

@@ -119,25 +119,26 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                         SetDefaultSemesterAverage(sem);
                         continue;
                     }
-                    if (IsExcellentRanked(semesterAvers))
+                    var semesterAver = Math.Round(totalGrade / count, 2);
+                    if (IsExcellentRanked(semesterAvers, semesterAver))
                     {
-                        SetSemester(Ranked.Excellent, count, totalGrade / count, sem);
+                        SetSemester(Ranked.Excellent, count, semesterAver, sem);
                         countSemester++;
                         continue;
                     }
-                    if (IsGoodRanked(semesterAvers))
+                    if (IsGoodRanked(semesterAvers, semesterAver))
                     {
-                        SetSemester(Ranked.Good, count, totalGrade / count, sem);
+                        SetSemester(Ranked.Good, count, semesterAver, sem);
                         countSemester++;
                         continue;
                     }
-                    if (IsAverageRanked(semesterAvers))
+                    if (IsAverageRanked(semesterAvers, semesterAver))
                     {
-                        SetSemester(Ranked.Average, count, totalGrade / count, sem);
+                        SetSemester(Ranked.Average, count, semesterAver, sem);
                         countSemester++;
                         continue;
                     }
-                    SetSemester(Ranked.BelowAverage, count, totalGrade / count, sem);
+                    SetSemester(Ranked.BelowAverage, count, semesterAver, sem);
                     countSemester++;
                     continue;
                 }
@@ -151,8 +152,12 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             sem.Average = average;
         }
 
-        private bool IsGoodRanked(List<double> semesterAvers)
+        private bool IsGoodRanked(List<double> semesterAvers,double semes)
         {
+            if (semes < 6.5)
+            {
+                return false;
+            }
             var isAboveFive = semesterAvers.Any(s => s < 5.0);
             if (isAboveFive)
             {
@@ -170,8 +175,12 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             return true;
         }
 
-        private bool IsExcellentRanked(List<double> semesterAvers)
+        private bool IsExcellentRanked(List<double> semesterAvers, double semes)
         {
+            if (semes < 8.0)
+            {
+                return false;
+            }
             var isAboveSixPointFives = semesterAvers.Any(s => s < 6.5);
             if (isAboveSixPointFives)
             {
@@ -189,8 +198,12 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             return true;
         }
 
-        private bool IsAverageRanked(List<double> semesterAvers)
+        private bool IsAverageRanked(List<double> semesterAvers,double semes)
         {
+            if (semes < 5.0)
+            {
+                return false;
+            }
             var isAboveThreePointFive = semesterAvers.Any(s => s < 3.5);
             if (isAboveThreePointFive)
             {

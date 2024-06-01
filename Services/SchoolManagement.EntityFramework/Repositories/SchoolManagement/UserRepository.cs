@@ -25,6 +25,7 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                 return true;
             });
         }
+
         public Task<bool> ResetPassword(User user)
         {
             return Task.Factory.StartNew(() =>
@@ -88,6 +89,14 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
         public bool UpdateStatus(User entity)
         {
             return Update(entity);
+        }
+
+        public Task<User?> Login(string username, string password)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                return _context.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
+            });
         }
 
         public Task<bool> LockAccount(User entity)

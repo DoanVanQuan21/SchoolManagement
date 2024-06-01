@@ -16,5 +16,6 @@ namespace SchoolManagement.EntityFramework.Contracts
         DepartmentRepository DepartmentRepository { get; }
         EducationProgramRepository EducationProgramRepository { get; }
         void Refresh();
+        Task<string> Connect();
     }
 }

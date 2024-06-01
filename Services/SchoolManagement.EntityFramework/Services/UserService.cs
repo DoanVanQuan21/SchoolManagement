@@ -107,17 +107,14 @@ namespace SchoolManagement.EntityFramework.Services
             return await _schoolManagementSevice.UserRepository.LockAccount(user);
         }
 
-        public Task<(bool, User?)> Login(User user)
+        public async Task<(bool, User?)> Login(User user)
         {
-            return Task.Factory.StartNew(() =>
+            var currentUser = await _schoolManagementSevice.UserRepository.Login(user.Username, user.Password);
+            if (currentUser == null)
             {
-                var currentUser = _schoolManagementSevice.UserRepository.FirstOrDefault(r => r.Username == user.Username && r.Password == user.Password);
-                if (currentUser == null)
-                {
-                    return (false, currentUser);
-                }
-                return (true, currentUser);
-            });
+                return (false, currentUser);
+            }
+            return (true, currentUser);
         }
 
         public bool RegisterAccount(User user)
