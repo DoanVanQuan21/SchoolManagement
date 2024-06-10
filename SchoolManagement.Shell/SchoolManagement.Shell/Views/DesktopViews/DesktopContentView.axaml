@@ -43,12 +43,12 @@
                             <PathIcon Data="{StaticResource NavigationGeometry}" />
                         </Button>
                         <ListBox
-							ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                             x:Name="ListMenu"
                             Background="Transparent"
                             BorderThickness="0"
                             ItemsSource="{Binding AppMenus}"
-                            SelectedValue="{Binding CurrentMenu}"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            SelectedValue="{Binding CurrentMenu, Mode=TwoWay}"
                             SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

@@ -153,12 +153,12 @@ Primary Key ([ClassID])
 ) 
 go
 
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (1, N'CL10A1', N'10A1', 30)
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (2, N'CL10A2', N'10A2', 25)
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (3, N'CL10A3', N'10A3', 28)
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (4, N'CL10A4', N'10A4', 32)
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (5, N'CL10A5', N'10A5', 27)
-INSERT [dbo].[Class] ([TeacherID], [ClassCode], [ClassName], [NumberOfStudent]) VALUES (6, N'CL10A6', N'10A6', 29)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A1', N'10A1', 30)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A2', N'10A2', 25)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A3', N'10A3', 28)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A4', N'10A4', 32)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A5', N'10A5', 27)
+INSERT [dbo].[Class] ([ClassCode], [ClassName], [NumberOfStudent]) VALUES (N'CL10A6', N'10A6', 29)
 
 --start  class--
 
@@ -230,7 +230,7 @@ Create table [Course]
 Primary Key ([CourseID])
 ) 
 go
-
+Select * from Class
 INSERT [dbo].[Course] ([ClassID], [TeacherID], [SubjectID],[EducationProgramID], [StartDate], [EndDate],[Status],[Semester]) VALUES 
 (2, 1, 1,1, CAST(N'2024-04-14T00:00:00.000' AS DateTime), CAST(N'2024-05-14T00:00:00.000' AS DateTime),N'Đang học','ky_1')
 INSERT [dbo].[Course] ([ClassID], [TeacherID], [SubjectID],[EducationProgramID], [StartDate], [EndDate],[Status],[Semester]) VALUES 
@@ -261,53 +261,52 @@ Primary Key ([GradeSheetID])
 ) 
 go
 
- Select * from Course
- Select * from Student
-INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(1,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
-INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(1,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
-INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(1,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
-INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(1,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
-INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(1,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(2,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(7,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(2,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(7,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(2,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(7,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(2,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(7,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(2,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(7,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(3,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(8,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(3,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(8,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(3,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(8,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(3,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(8,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(3,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(8,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+
+INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
+(9,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
+(9,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
+(9,3, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
+(9,4, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
+(9,5, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 
 
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(4,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(10,1, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(4,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(10,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(4,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(10,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(4,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+(10,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
 INSERT [dbo].[GradeSheet] ([CourseID],[StudentID], [FirstRegularScore], [SecondRegularScore], [ThirdRegularScore], [FourRegularScore], [MidtermScore], [FinalScore], [SemesterAverage]) VALUES 
-(4,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
-
+(10,2, 8.1, 8.3, 8.6, 8.5, 8.6, 8.3, 8.4)
+Select * from Course
 
   --end grade sheet
 

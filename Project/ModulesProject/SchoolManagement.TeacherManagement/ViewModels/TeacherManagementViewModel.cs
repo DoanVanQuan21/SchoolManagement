@@ -67,7 +67,8 @@ namespace SchoolManagement.TeacherManagement.ViewModels
             var teachers = await _teacherService.GetTeachersBySize(DEFAULT_ROW, page);
             if (teachers?.Any() == false)
             {
-                NotificationManager.ShowWarning(Util.GetResourseString("TeachersEmpty_Message"));
+                DataLoaded = true;
+                NotificationManager.ShowInfor(Util.GetResourseString("TeachersEmpty_Message"));
                 page--;
                 return;
             }
@@ -97,6 +98,8 @@ namespace SchoolManagement.TeacherManagement.ViewModels
         {
             if (page - 1 <= 0)
             {
+                page = 1;
+                await GetTeachers();
                 return;
             }
             page--;

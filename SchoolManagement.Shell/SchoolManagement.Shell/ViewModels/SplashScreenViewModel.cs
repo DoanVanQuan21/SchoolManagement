@@ -1,5 +1,7 @@
 ﻿using SchoolManagement.Core.avalonia;
 using SchoolManagement.Core.Models.SchoolManagements;
+using SchoolManagement.EntityFramework.Contracts;
+using SchoolManagement.EntityFramework.Services;
 using System.Threading.Tasks;
 
 namespace SchoolManagement.Shell.ViewModels
@@ -9,11 +11,13 @@ namespace SchoolManagement.Shell.ViewModels
         private string imagePath;
         private string loadingText;
         private int processValue = 0;
+        private readonly ISchoolManagementSevice _schoolManagementSevice;
 
         public SplashScreenViewModel()
         {
             ImagePath = ".\\Assets\\resources\\images\\logo.png";
             LoadingText = "Loading...";
+            _schoolManagementSevice = Ioc.Resolve<ISchoolManagementSevice>();
             InitApp().GetAwaiter();
         }
 

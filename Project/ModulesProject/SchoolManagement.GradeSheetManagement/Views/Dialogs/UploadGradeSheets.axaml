@@ -132,7 +132,7 @@
                         Width="*"
                         MinWidth="150"
                         Binding="{Binding Student.User.FullName}"
-                        Header="{DynamicResource FullName_Label}" />
+                        Header="{DynamicResource Fullname_Label}" />
                     <DataGridTextColumn
                         Width="*"
                         MinWidth="150"

@@ -18,7 +18,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         public MainContentViewModel() : base()
         {
-            User = new();
+            User = RootContext.CurrentUser;
             AppMenus = new();
             InitAppMenus();
         }
@@ -44,6 +44,7 @@ namespace SchoolManagement.Shell.ViewModels
 
         protected override void RegisterCommand()
         {
+            base.RegisterCommand();
             ClickNavigationCommand = new DelegateCommand(OnClickNavigation);
             ClickSelectionPageCommand = new DelegateCommand<object>(OnClickSelectionPage);
             ClickedSettingViewCommand = new DelegateCommand<object>(OnSettingView);
@@ -71,7 +72,6 @@ namespace SchoolManagement.Shell.ViewModels
                 menu.Label = Util.GetResourseString(RootContext.MenuLabels[menu.Type]);
             }
         }
-
         private void AddMenus(ObservableCollection<AppMenu> appMenus)
         {
             foreach (var menu in appMenus)
@@ -125,6 +125,18 @@ namespace SchoolManagement.Shell.ViewModels
 
         private void OnRefresh()
         {
+            if (CurrentMenu == null)
+            {
+                return;
+            }
+            foreach (var menu in RootContext.DesktopAppMenus)
+            {
+                if (CurrentMenu.Type == menu.Type)
+                {
+                    OnClickSelectionPage(menu);
+                    return;
+                }
+            }
         }
 
         private void OnSettingView(object obj)

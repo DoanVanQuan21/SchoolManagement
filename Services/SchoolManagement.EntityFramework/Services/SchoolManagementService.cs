@@ -3,6 +3,7 @@ using SchoolManagement.Core.Contracts;
 using SchoolManagement.Core.Models.SchoolManagements;
 using SchoolManagement.EntityFramework.Contracts;
 using SchoolManagement.EntityFramework.Repositories.SchoolManagement;
+using System.Diagnostics;
 
 namespace SchoolManagement.EntityFramework.Services
 {
@@ -93,6 +94,22 @@ namespace SchoolManagement.EntityFramework.Services
         {
             _cancellationTokenSource?.Cancel();
             _cancellationTokenSource?.Dispose();
+        }
+
+        public Task<string> Connect()
+        {
+            return Task.Factory.StartNew(() => {
+                try
+                {
+                    _ =  schoolManagementContext.Users.ToList();
+                    return "Connect to database";
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                    return "Cannot connect to database";
+                }
+            });
         }
     }
 }

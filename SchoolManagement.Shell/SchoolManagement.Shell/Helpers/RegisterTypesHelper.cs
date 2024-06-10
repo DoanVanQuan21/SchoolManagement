@@ -9,6 +9,7 @@ using SchoolManagement.EntityFramework.Services;
 using SchoolManagement.GradeSheetManagement.Views.Dialogs;
 using SchoolManagement.Shell.Services;
 using SchoolManagement.Shell.Services.Contracts;
+using SchoolManagement.Shell.ViewModels;
 
 namespace SchoolManagement.Shell.Helpers
 {
@@ -32,6 +33,9 @@ namespace SchoolManagement.Shell.Helpers
             containerRegistry.RegisterSingleton<IDatabaseInfoProvider, DatabaseInfoProvider>();
             containerRegistry.RegisterSingleton<INotificationManager, NotificationManager>();
             containerRegistry.RegisterSingleton<IBlobContainerService, BlobContainerService>();
+            containerRegistry.RegisterSingleton<MainViewModel>();
+            containerRegistry.RegisterSingleton<MainContentViewModel>();
+            containerRegistry.RegisterSingleton<CommonMenuViewModel>();
         }
 
         public static void RegisterTypesModuleAuth(IContainerRegistry containerRegistry)
@@ -62,7 +66,7 @@ namespace SchoolManagement.Shell.Helpers
         }
 
         public static void RegisterDialog(IContainerRegistry containerRegistry)
-        {
+        { 
             containerRegistry.RegisterDialog<EditGradeSheetView>();
         }
     }

@@ -99,37 +99,38 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             base.RegisterCommand();
         }
 
-        private Task GetFullDetailGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
+        private async Task<List<GradeSheet>> GetFullDetailGradeSheet(ObservableCollection<GradeSheet> gradeSheets)
         {
-            return Task.Factory.StartNew(async () =>
+            var grades = new List<GradeSheet>();
+            foreach (var gs in gradeSheets)
             {
-                foreach (var gs in gradeSheets)
+                var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
+                if (teacher == null)
                 {
-                    var teacher = await _teacherService.GetTeacherByUserID(User.UserId);
-                    if (teacher == null)
-                    {
-                        continue;
-                    }
-                    gs.Ranked = GradeSheet.GetRanked(gs);
-                    var student = await _studentService.GetStudentByStudentID(gs.StudentId);
-                    if (student == null)
-                    {
-                        continue;
-                    }
-                    var studentOK = await ValidateStudent(student.StudentId);
-                    if (!studentOK)
-                    {
-                        continue;
-                    }
-                    var course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
-                    if (course == null)
-                    {
-                        continue;
-                    }
-                    gs.StudentId = student.StudentId;
-                    gs.CourseId = course.CourseId;
+                    continue;
                 }
-            });
+                gs.Ranked = GradeSheet.GetRanked(gs);
+                var student = await _studentService.GetStudentByStudentID(gs.StudentId);
+                if (student == null)
+                {
+                    continue;
+                }
+                var studentOK = await ValidateStudent(student.StudentId);
+                if (!studentOK)
+                {
+                    continue;
+                }
+                var course = await _courseService.GetCourse(teacher.TeacherId, Class.ClassId, CurrentDate.Year, Semester.Value);
+                if (course == null)
+                {
+                    continue;
+                }
+                gs.Student = student;
+                gs.StudentId = student.StudentId;
+                gs.CourseId = course.CourseId;
+                grades.Add(gs);
+            }
+            return grades;
         }
 
         private Task<bool> ValidateStudent(int studentID)
@@ -153,7 +154,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
         {
             try
             {
-                if (Class == null ||CurrentDate==null)
+                if (Class == null || CurrentDate == null)
                 {
                     return;
                 }
@@ -195,6 +196,7 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             }
             else
             {
+                await SetStudentIsDefault();
                 isOK = await _gradeSheetService.UpdateOrAddRange(GradeSheets);
             }
             if (isOK)
@@ -222,6 +224,17 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
             return await _gradeSheetService.AddGradeSheet(GradeSheet);
         }
 
+        private Task SetStudentIsDefault()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                foreach (var grade in GradeSheets)
+                {
+                    grade.Student = null;
+                }
+            });
+        }
+
         private async void OnUpload()
         {
             try
@@ -244,9 +257,9 @@ namespace SchoolManagement.GradeSheetManagement.ViewModels
                 {
                     return await _studentService.GetStudentByStudentCode(studentCode);
                 });
-                await GetFullDetailGradeSheet(gradeSheets);
+                var gradesFull = await GetFullDetailGradeSheet(gradeSheets);
                 GradeSheets.Clear();
-                GradeSheets.AddRange(gradeSheets);
+                GradeSheets.AddRange(gradesFull);
                 DataLoaded = true;
             }
             catch (Exception e)

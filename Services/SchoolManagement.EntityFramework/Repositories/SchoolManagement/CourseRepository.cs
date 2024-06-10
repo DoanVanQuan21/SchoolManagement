@@ -18,11 +18,13 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
             return Task.Factory.StartNew(() =>
             {
                 _courses.Clear();
+
                 var courses = Where(c => c.TeacherId == teacherID && c.StartDate.Year == year && c.Semester == semester);
                 if (courses?.Any() == false)
                 {
                     return _courses;
                 }
+                var t = _context.Courses.ToList();
                 _courses.AddRange(courses);
                 return _courses;
             });

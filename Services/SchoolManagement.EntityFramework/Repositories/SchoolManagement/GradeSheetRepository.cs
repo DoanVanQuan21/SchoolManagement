@@ -123,7 +123,8 @@ namespace SchoolManagement.EntityFramework.Repositories.SchoolManagement
                     grade.Lock = false;
                     if (gs == null)
                     {
-                        Add(grade);
+                        _context.GradeSheets.Add(grade);
+                        _context.SaveChanges();
                         await Task.Delay(100);
                         continue;
                     }
